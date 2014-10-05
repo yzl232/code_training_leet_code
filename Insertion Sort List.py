@@ -25,3 +25,7 @@ class Solution:
             else:
                 curr = curr.next
         return  dummy.next
+        ''''
+        Sort a linked list using insertion sort.
+
+        ''''

@@ -54,15 +54,15 @@ class Bus(Vehicle):
         print 'B'
         
 class ParkingSpot:
-    def __init__(self, level, row, number, size):
+    def __init__(self, level, row, number, spotSize):
         self.level = level
         self.row = row
         self.spotNumber = number
-        self.spotSize = size
+        self.spotSize = spotSize
         self.vehicle = None
     
     def isAvailable(self):
-        return self.vehicle = None
+        return self.vehicle == None
         
     def canFitVehicle(self, vehicle):
         return self.isAvailable() and vehicle.canFitInSpot(self)
@@ -72,13 +72,14 @@ class ParkingSpot:
         self.vehicle = None
         
     def park(self, vehicle):
-        if not self.canFitVehicle: return False
+        if not self.canFitVehicle():
+            return False
+        vehicle.parkInSpot(self)
         self.vehicle = vehicle
-        self.vehicle.parkInSpot(self)
         return True
         
     def printInfo(self):
-        if not self.vehicle：
+        if not self.vehicle:
             if self.spotSize == Motorcycle_size: print 'm'
             elif self.spotSize == Compact_size: print 'c'
             elif self.spotSize == Large_size: print 'l'
@@ -102,14 +103,14 @@ class Level:
             elif i< largeSpots + compactSpots:
                 size = Compact_size
             row = i / self.SPOTS_PER_ROW
-            self.spots.append(ParkingSpot(this, row, i, size))
+            self.spots.append(ParkingSpot(self, row, i, size))
             
     def findAvailableSpots(self, vehicle):
         spotsNeeded = vehicle.spotsNeeded
         lastRow = -1
         spotsFound = 0
         for i in range(len(self.spots)):
-            spot = spots[i]
+            spot = self.spots[i]
             if lastRow != spot.row:  # we only consider spots in the same row. 
                 spotsFound = 0
                 lastRow = spot.row
@@ -125,13 +126,13 @@ class Level:
             return False
         spotNumber = self.findAvailableSpots(vehicle)
         if spotNumber < 0: return False
-        return parkingStartingAtSpot(spotNumber, vehicle)
+        return self.parkingStartingAtSpot(spotNumber, vehicle)
     
     def parkingStartingAtSpot(self, spotNumber, vehicle):
         vehicle.clearSpots()
         success = True
         for i in range(vehicle.spotsNeeded):
-            success &= spots[spotNumber + i].park(vehicle)
+            success = success and spots[spotNumber + i].park(vehicle)
         self.availableSpots -= vehicle.spotsNeeded
         return success
         

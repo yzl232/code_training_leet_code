@@ -8,23 +8,24 @@ class Solution:
     # @param head, a RandomListNode
     # @return a RandomListNode
     def copyRandomList(self, head):
-        if head == None:return None
-        cur = head
-        while cur: # insert additional nodes
-            temp = RandomListNode(cur.label)
-            temp.next = cur.next
-            cur.next = temp
-            cur = temp.next
-        cur = head
-        while cur: # copy random pointers
-            temp = cur.next
-            if cur.random: temp.random = cur.random.next
-            cur = temp.next
-        cur = head
-        newHead = head.next
-        while cur:  # decouple the list
-            temp = cur.next
-            cur.next = temp.next
-            if temp.next: temp.next = temp.next.next
-            cur = cur.next
-        return newHead
+        if not head: return
+        mapNode = {}
+        p = head
+        while p:
+            node = RandomListNode(p.label)
+            mapNode[p] = node
+            p = p.next
+        p = head
+        while p:
+            node = mapNode[p]
+            if p.next: node.next = mapNode[p.next]
+            if p.random: node.random = mapNode[p.random]
+            p = p.next
+        return mapNode[head]
+        
+        
+        '''
+         A linked list is given such that each node contains an additional random pointer which could point to any node in the list or null.
+
+        Return a deep copy of the list.
+        '''

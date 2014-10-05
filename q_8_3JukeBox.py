@@ -14,15 +14,18 @@ class SongSelector:
         self.currentSong = s
     
 class Playlist:
-    def __init__(self, song, q):
+    def __init__(self, song):
         self.song = song
-        self.q = q
-        
+        self.q = []
+
+    def addSong(self, song):
+        self.q.append(song)
+
     def getNextSongToPlay(self):
-        return self.q[0]
+        if len(self.q)>0:
+            return self.q.pop(0)
+        return None
     
-    def queueAddSong(self, song):
-        self.q.add(s)
         
 class JukeBox:
     def __init__(self, cdPlayer, user, cdCollection, ts):

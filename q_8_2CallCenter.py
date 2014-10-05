@@ -11,30 +11,33 @@ LEVELS = 3
 num_respondents = 10
 num_managers = 4
 num_directors = 2
-Responder_NO = 0
-Manager_NO = 1
-Director_NO = 2
+Responder_Rank = 0
+Manager_Rank = 1
+Director_Rank = 2
 
 class CallHandler(Singleton):
     def __init__(self):
-        Singleton.__init(self)
-        self.employeeLevels = []
+        Singleton.__init__()
+        self.employees = []
         self.callQueues = []
         for i in range(levels):
-            self.callQueues.add(deque([]))
-        
+            self.callQueues.append(deque([]))
+
         self.respondents = []
-        for k in range(num_respondents-1):
-            self.respondents.add(Respondent())
-        self.employeeLevels.add(self.respondents)
-        
         self.managers = []
-        self.managers.add(Manager())
-        self.employeeLevels.add(self.managers)
-        
         self.directors = []
-        self.directors.add(Director())
-        self.employeeLevels.add(self.directors)
+        for i in range(num_respondents):
+            self.respondents.append(Responder())
+
+        for i in range(num_managers):
+            self.managers.append(Manager())
+
+        for i in range(num_directors):
+            self.directors.append(Director())
+
+        self.employees.append(self.respondents)
+        self.employees.append(self.managers)
+        self.employees.append(self.directors)
         
     def getHandlerForCall(self, call):
         for level in range(call.rank, LEVELS):
@@ -68,6 +71,7 @@ class CallHandler(Singleton):
             call = q.popleft()
             if call:
                 emp.receiveCall(call)
+                call.setHandler(emp)
                 return True
         return False
             
@@ -76,7 +80,7 @@ class CallHandler(Singleton):
         
 class Call(object):
     def __init__(self, caller):
-        self.rank = Responder_NO
+        self.rank = Responder_Rank
         self.caller = caller
         self.handler = None
     
@@ -87,61 +91,56 @@ class Call(object):
         print message
     
     def incrementRank(self):
-        if self.rank == Responder_NO:
-            self.rank = Manager_NO
-        elif self.rank == Manager_NO:
-            self.rank = Director_NO
+        if self.rank == Responder_Rank:
+            self.rank = Manager_Rank
+        elif self.rank == Manager_Rank:
+            self.rank = Director_Rank
         return self.rank
         
     def disconnect(self):
         print 'thank you for your calling'
         
-class Rank(object):
-    def __init__(self, val):
-        self.Responder = 0
-        self.Manager = 1
-        self.Director = 2
-        self.value = val
 
 class Caller(object):
     def __init__(self, id, name):
         self.id = id
         self.name = name
         
+
 class Employee(object):
     def __init__(self):
         self.currentCall = None
         self.rank = None
-    
+
     def receiveCall(self, call):
-        self.currentCall =call
-        
-    def callCompleted(self):
-        if self.currentCall != None:
-            self.currentCall.disconnect()
-            self.currentCall = None
-        self.assignNewCall()
-    
+        self.currentCall = call
+
+    def isFree(self):
+        return self.currentCall == None
+
     def assignNewCall(self):
         if not self.isFree():
             return False
         return CallHandler.assignCall(self)
-    
-    def isFree(self):
-        return self.currentCall == None
-    
+
+    def callCompleted(self):
+        if self.currentCall != None:
+            self.currentCall.disconnec()
+            self.currentCall = None
+        self.assignNewCall()
+    pass
 
 class Respondent(Employee):
     def __init__(self):
         Employee.__init__(self)
-        self.rank = Responder_NO
+        self.rank = Responder_Rank
 
 class Manager(Employee):
     def __init__(self):
         Employee.__init__(self)
-        self.rank = Manager_NO
+        self.rank = Manager_Rank
         
 class Director(Employee):
     def __init__(self):
         Employee.__init__(self)
-        self.rank = Director_NO
+        self.rank = Director_Rank
