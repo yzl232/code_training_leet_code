@@ -10,6 +10,5 @@ class Solution:
                 results+=s[base]
                 base += zigSize
                 if i>0 and i<nRows-1:
-                    temp = base-2*i
-                    if temp < n: results += s[temp]
+                    if base-2*i< n:results += s[base-2*i]
         return results

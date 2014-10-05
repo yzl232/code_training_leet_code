@@ -10,15 +10,14 @@ class Solution:
         l = len(start)
         for i in dict:
             self.preMap[i] = []
-        candidates =set([])
-        candidates.add(start)
+        candidates =set([start])
         while True:
             if len(candidates) == 0:
                 return []
             if end in candidates:
                 break
             for i in candidates:
-                dict.remove(i)
+                dict.remove(i)   #为甚么放到这里呢？ 想想如果是end, remove掉了， 就影响结果了。
             current = set([])
             for word in candidates:
                 for i in range(l):
@@ -41,3 +40,33 @@ class Solution:
             return
         for it in self.preMap[word]:
             self.buildPath(path+[word], it)
+            
+            
+            
+            
+            '''
+             Given two words (start and end), and a dictionary, find all shortest transformation sequence(s) from start to end, such that:
+
+                Only one letter can be changed at a time
+                Each intermediate word must exist in the dictionary
+
+            For example,
+
+            Given:
+            start = "hit"
+            end = "cog"
+            dict = ["hot","dot","dog","lot","log"]
+
+            Return
+
+              [
+                ["hit","hot","dot","dog","cog"],
+                ["hit","hot","lot","log","cog"]
+              ]
+
+            Note:
+
+                All words have the same length.
+                All words contain only lowercase alphabetic characters.
+            
+            '''

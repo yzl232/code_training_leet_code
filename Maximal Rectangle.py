@@ -1,4 +1,5 @@
-class Solution:  #http://www.cnblogs.com/lichen782/p/leetcode_Largest_Rectangle_in_Histogram.html
+#Given a 2D binary matrix filled with 0's and 1's, find the largest rectangle containing all ones and return its area. 
+class Solution:
     # @param matrix, a list of lists of 1 length string
     # @return an integer
     def maximalRectangle(self, matrix):
@@ -11,24 +12,22 @@ class Solution:  #http://www.cnblogs.com/lichen782/p/leetcode_Largest_Rectangle_
         for i in range(m):
             for j in range(n):
                 if matrix[i][j] == '1':
-                    height[i][j] = height[i-1][j]+1 if i>0 else 1
+                    height[i][j] = 1 if i == 0 else height[i-1][j] + 1    # use dp
         for i in range(m):
-            maxArea = max(maxArea, self.largestRectangleArea(height[i]))
-        return maxArea
-    
+            maxArea =max(maxArea, self.largestRectangleArea(height[i]))
+        return  maxArea
+            
+                    
+        
     def largestRectangleArea(self, height):
         stack = []
+        i = 0; m = 0
         height.append(0)
-        i = 0
-        ret = 0
-        while i<len(height):
-            if len(stack)==0 or  height[stack[-1]] < height[i]:
+        while i < len(height):
+            if len(stack) == 0 or height[i] >= height[stack[-1]]:
                 stack.append(i)
                 i+=1
             else:
-                temp = stack.pop()   # keep poping while top of the stack is greater or the stack is empty
-                if len(stack) !=0:
-                    ret = max(height[temp]*(i-1-stack[-1]), ret) # the rightmost one as the boundry:  i-1
-                else:# with every poped one as the smallest one
-                    ret = max(height[temp] * i, ret)
-        return ret
+                temp = stack.pop()# keep poping while top of the stack is greater or the stack is empty
+                m = max(m, height[temp] * i) if len(stack) == 0 else max(m, height[temp] * (i - 1 - stack[-1]))  # the rightmost one as the boundry:  i-1
+        return  m      # with every poped one as the smallest one

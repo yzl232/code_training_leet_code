@@ -2,7 +2,7 @@ class Solution:
     # @param s, a string
     # @return an integer
     #  a little complicated:
-    #   One = ( s[i-1] == '0' )
+    #   One = ( s[i-1] != '0' )
     # TWO = ( s[i-2:i] >= '10' and s[i-2:i] <= '26' )
     # if ONE and TWO: dp[i-1] + dp[i-2]
     # elif ONE: dp[i-1]
@@ -18,10 +18,27 @@ class Solution:
             two = ('10'<= s[i-2: i] <='26')
             if one and two: 
                 dp[i] = dp[i-1] + dp[i-2]
-            elif one:
+            elif one and (not two):
                 dp[i] = dp[i-1]
-            elif two:
+            elif two and (not one):
                 dp[i] = dp[i-2]
-            else:
+            elif (not one) and (not two):
                 dp[i] = 0
         return dp[n]
+        
+    '''
+     A message containing letters from A-Z is being encoded to numbers using the following mapping:
+
+    'A' -> 1
+    'B' -> 2
+    ...
+    'Z' -> 26
+
+    Given an encoded message containing digits, determine the total number of ways to decode it.
+
+    For example,
+    Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
+
+    The number of ways decoding "12" is 2.
+    
+    '''

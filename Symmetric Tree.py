@@ -17,3 +17,26 @@ class Solution:
         if not left or not right: return False
         if left.val != right.val: return False
         return self.check(left.left, right.right) and self.check(left.right, right.left)
+        
+'''
+Given a binary tree, check whether it is a mirror of itself (ie, symmetric around its center).
+
+For example, this binary tree is symmetric:
+
+    1
+   / \
+  2   2
+ / \ / \
+3  4 4  3
+
+But the following is not:
+
+    1
+   / \
+  2   2
+   \   \
+   3    3
+
+Note:
+Bonus points if you could solve it both recursively and iteratively. 
+'''

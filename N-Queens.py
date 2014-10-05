@@ -20,7 +20,7 @@ class Solution:    # a little similar to Sudoku question
                 if board[k] == i:
                     valid = False
                     break
-                if abs(board[k] - i) == currQueenNum - k:
+                if abs(board[k] - i) == abs(currQueenNum - k):
                     valid = False
                     break
             if valid:

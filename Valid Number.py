@@ -27,3 +27,48 @@ class Solution:
             if state==-1: return False
             else: i+=1
         return state == 1 or state == 4 or state == 7 or state == 8
+        
+        
+class Solution1:
+    # @param s, a string
+    # @return a boolean
+    # example  ===     -123.E+5     ====
+    def isNumber(self, s):
+        s+='#'
+        while s[0] ==' ':
+            s = s[1:]
+        if s[0] == '+' or s[0] == '-': s = s[1:]
+        n1 = 0
+        while'0'<=s[0]<='9':
+                n1+=1
+                s = s[1:]
+        if s[0] == '.': s = s[1:]
+        n2 = 0
+        while'0'<=s[0]<='9':
+                n2+=1
+                s = s[1:]
+        if n1==0 and n2==0: return False
+        if s[0] == 'e' or s[0] == 'E':
+            s = s[1:]
+            if s[0] == '+' or s[0] == '-': s = s[1:]
+            n3 = 0 
+            while '0'<=s[0]<='9':
+                n3+=1
+                s = s[1:]
+            if n3 == 0: return False
+        while s[0] == ' ': s = s[1:]
+        return s == '#'
+        
+'''
+Validate if a given string is numeric.
+
+Some examples:
+"0" => true
+" 0.1 " => true
+"abc" => false
+"1 a" => false
+"2e10" => true
+
+Note: It is intended for the problem statement to be ambiguous. You should gather all requirements up front before implementing one. 
+
+'''

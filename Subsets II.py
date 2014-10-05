@@ -2,13 +2,35 @@ class Solution:
     # @param num, a list of integer
     # @return a list of lists of integer
     def subsetsWithDup(self, s):
-        s.sort()
         result = [[]]
-        preSet = []
-        for i in range(len(s)):
-            old = result[:] if i==0 or s[i]!= s[i-1] else preSet[:]
-            preSet = []
+        s.sort()
+        for i in s:
+            old = result[:]
             for j in old:
-                result.append(j+[s[i]])
-                preSet.append(j+[s[i]])
-        return  result
+                temp = j+[i]
+                if temp in result: continue
+                result.append(j+[i])
+        return result
+        
+        '''
+        
+         Given a collection of integers that might contain duplicates, S, return all possible subsets.
+
+        Note:
+
+            Elements in a subset must be in non-descending order.
+            The solution set must not contain duplicate subsets.
+
+        For example,
+        If S = [1,2,2], a solution is:
+
+        [
+          [2],
+          [1],
+          [1,2,2],
+          [2,2],
+          [1,2],
+          []
+        ]
+        
+        '''

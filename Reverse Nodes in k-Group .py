@@ -23,8 +23,6 @@ class Solution:
                 cur = cur.next
         return dummy.next
 
-
-
     def reverse(self, pre, right):      # exclusively
         last = pre.next; cur = last.next
         while cur != right:
@@ -33,4 +31,3 @@ class Solution:
             pre.next = cur
             cur = last.next
         return last
-        

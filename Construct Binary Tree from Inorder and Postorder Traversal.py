@@ -16,3 +16,11 @@ class Solution:
         root.left = self.buildTree(inorder[:rootPos], postorder[:rootPos])
         root.right = self.buildTree(inorder[rootPos+1:], postorder[rootPos:-1])
         return  root
+        
+        '''
+        Given inorder and postorder traversal of a tree, construct the binary tree.
+
+        Note:
+        You may assume that duplicates do not exist in the tree.
+        
+        '''

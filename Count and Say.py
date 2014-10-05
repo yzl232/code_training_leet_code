@@ -3,15 +3,17 @@ class Solution:
     def countAndSay(self, n):
         s = '1'
         for i in range(n-1):
-            prev = newS = ''
-            num = 0
-            for cur in s:
-                if prev != '' and prev != cur:  # if prev == '', do not update.
-                    newS += str(num) + prev  # finish counting the prev ch, update
+            newS = ''
+            pre = s[0]
+            num = 1
+            for j in range(1, len(s)):
+                cur = s[j]
+                if cur == pre:
+                    num+=1                    
+                else:
+                    newS+= str(num) + pre# finish counting the prev ch, update
                     num = 1
-                else:      
-                    num+=1
-                prev = cur 
-            newS += str(num) + prev  # string ends, update 
+                    pre = cur
+            newS += str(num) + pre # string ends, update 
             s = newS
         return s

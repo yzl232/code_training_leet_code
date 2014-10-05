@@ -19,3 +19,12 @@ class Solution:
         root.right = self.buildTree(preorder[1+left_count:], inorder[1+left_count:])
         
         return root
+        
+        
+        '''
+        Given preorder and inorder traversal of a tree, construct the binary tree.
+
+        Note:
+        You may assume that duplicates do not exist in the tree.
+        
+        '''

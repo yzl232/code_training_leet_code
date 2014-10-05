@@ -8,30 +8,26 @@ class Solution:
     # @param a list of ListNode
     # @return a ListNode
     def mergeKLists(self, lists):
-        if len(lists)==0:
-            return None
+        if len(lists) ==0 : return None
         while len(lists)>1:
-            nextLists = []
-            for i in range(0,len(lists)-1,2):
-                nextLists.append(self.mergeLists(lists[i],lists[i+1]))
-            if len(lists)%2==1:
-                nextLists.append(lists[len(lists)-1])
-            lists = nextLists
+            newlists = []
+            for i in range(0, len(lists)-1, 2):
+                newlists.append(self.mergeTwoLists(lists[i], lists[i+1]))
+            if len(lists)%2==1: newlists.append(lists[-1])
+            lists = newlists
         return lists[0]
-        
-    def mergeLists(self, list1, list2):
+            
+    def mergeTwoLists(self, l1, l2):
         dummy = ListNode(0)
-        list = dummy
-        while list1 != None and list2 != None:
-            if list1.val < list2.val:
-                list.next = list1
-                list1 = list1.next
+        prev = dummy
+        while l1 and l2:
+            if l1.val > l2.val:
+                prev.next = l2
+                l2=l2.next
             else:
-                list.next = list2
-                list2 = list2.next
-            list = list.next
-        if list1 == None:
-            list.next = list2
-        else:
-            list.next = list1
+                prev.next = l1
+                l1 = l1.next
+            prev = prev.next
+        if l1:prev.next = l1
+        elif l2:prev.next = l2
         return dummy.next

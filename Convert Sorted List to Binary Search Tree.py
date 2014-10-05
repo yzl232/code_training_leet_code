@@ -29,3 +29,6 @@ class Solution:
         root.left = self.createBST(num, start, mid-1)
         root.right = self.createBST(num, mid+1, end)
         return root
+        
+        #Given a singly linked list where elements are sorted in ascending order, convert it to a height balanced BST.
+

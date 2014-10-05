@@ -19,3 +19,5 @@ class Solution:
         root.left = self.dfs(num, start, mid-1)
         root.right = self.dfs(num, mid+1, end)
         return root
+        
+        #Given an array where elements are sorted in ascending order, convert it to a height balanced BST.

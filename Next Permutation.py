@@ -13,4 +13,4 @@ class Solution:
                 temp = num[i:]
                 temp.sort()
                 return num[:i] + temp
-        return num[::-1]
+        return num[::-1] 

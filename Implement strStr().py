@@ -5,12 +5,10 @@ class Solution:
     def strStr(self, haystack, needle):
         # Hanlde two special cases.
         if needle == "":        return haystack
-        if haystack == "":      return None
-        
+        if haystack == "":      return None   
         lenHaystack = len(haystack)
         lenNeedle = len(needle)
-        begin = 0
-        
+        begin = 0  
         # Compare each substring as long as their length
         # is >= the length of needle
         while lenHaystack - begin >= lenNeedle:
@@ -20,8 +18,6 @@ class Solution:
                     break
             else:
                 # Completely the same
-                return haystack[begin:]
-            
+                return haystack[begin:]   
             begin += 1
-        
         return None

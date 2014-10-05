@@ -1,25 +1,20 @@
-class Solution: #DP
+class Solution:
     # @return a string
     def longestPalindrome(self, s):  # http://blog.csdn.net/feliciafay/article/details/16984031
         n = len(s)
-        begin = 0
+        start = 0
         end = 0
         dp = [[False for i in range(n)] for j in range(n)]
-        for i in range(n):
-            dp[i][i] = True
-        for i in range(n-1):
-            if s[i] == s[i+1]:
-                dp[i][i+1] = True
-                begin = i
-                end = i+2
-        for length in range(3, n+1):
-            for i in range(0, n-length+1):
-                j = i + length - 1
-                if s[i] == s[j] and dp[i+1][j-1]:
+        maxL = -1
+        for j in range(n):
+            for i in range(j+1):
+                if s[i] == s[j] and (j-i<=1 or dp[i+1][j-1]):
                     dp[i][j] = True
-                    begin = i
-                    end = j+1
-        return  s[begin:end]
+                    if j-i>maxL:
+                        start = i
+                        end = j+1
+                        maxL = j-i
+        return  s[start: end]
 
 
 
