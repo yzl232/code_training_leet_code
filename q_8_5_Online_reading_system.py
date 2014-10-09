@@ -42,16 +42,15 @@ class UserManager:
         user = User(id, details, accountType)
         self.users[id] = user
         return user
-    
-    def removeUser(self, user):
-        if user.userId not in self.users: return False
-        self.users.pop(user.userId)
-        return True
+
     
     def removeUserUsingID(self, id):
         if id not in self.users: return False
         self.users.pop(id)
         return True
+        
+    def removeUser(self, user):
+        return self.removeUserUsingID()
         
     def find(self, id):
         if id in self.users:
@@ -59,9 +58,9 @@ class UserManager:
         
 class Display:
     def __init__(self, activeUser = None, pageNumber = 0, activeBook = None):
-        self.activeUser = None
-        self.pageNumber = 0
-        self.activeBook = None
+        self.activeUser = activeUser
+        self.pageNumber = pageNumber
+        self.activeBook = NactiveBookone
         
     def displayUser(self, user):
         self.activeUser = user
@@ -88,11 +87,11 @@ class Display:
         
     def turnPageForward(self):
         self.pageNumber+=1
-        self.refreshPage
+        self.refreshPage()
         
     def turnPageBackward(self):
         self.pageNumber-=1
-        self.refreshPage    
+        self.refreshPage()    
         
         
 
