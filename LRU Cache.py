@@ -1,41 +1,58 @@
+'''
+ Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and set.
+
+get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
+set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
+'''
+class ListNode:
+    def __init__(self, key, val):
+        self.val = val
+        self.key = key
+        self.next = None
+        self.prev = None
+
+class LinkedList:
+    def __init__(self):
+        self.head = None
+        self.tail = None
+
+    def insert(self, node):
+        if self.head is None:
+            self.head = node
+        else:
+            self.tail.next = node
+            node.prev = self.tail
+        self.tail = node
+
+    def delete(self, node):
+        if node.prev:     node.prev.next = node.next
+        else:       self.head = node.next
+        if node.next:         node.next.prev = node.prev
+        else:        self.tail = node.prev
+
 class LRUCache:
-
-    # @param capacity, an integer
     def __init__(self, capacity):
-        self.numItems = 0
+        self.cache = LinkedList()
+        self.d = {}
         self.capacity = capacity
-        self.d = collections.OrderedDict() 
 
-    # @return an integer
+    def _insert(self, key, val):
+        node = ListNode(key, val)
+        self.cache.insert(node)
+        self.d[key] = node
+
     def get(self, key):
-        try:
-            temp = self.d[key]
-            del self.d[key]
-            self.d[key] = temp
-            return temp
-        except:
-            return -1
-            
+        if key in self.d:
+            val = self.d[key].val
+            self.cache.delete(self.d[key])
+            self._insert(key, val)
+            return val
+        return -1
 
-    # @param key, an integer
-    # @param value, an integer
-    # @return nothing
-    def set(self, key, value):
-        try:
-            del self.d[key]
-            self.d[key] = value
-            
-        except:
-            if self.numItems == self.capacity:
-                self.d.popitem(last = False)
-                self.d[key] = value
-            else:
-                self.d[key] = value
-                self.numItems +=1
-            
-            ''''
-             Design and implement a data structure for Least Recently Used (LRU) cache. It should support the following operations: get and set.
-
-            get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
-            set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
-            ''''
+    def set(self, key, val):
+        if key in self.d:
+            self.cache.delete(self.d[key])
+        elif len(self.d) == self.capacity:
+            del self.d[self.cache.head.key] #注意这 里的先后顺序。。。先DEL然后再removelast#######################
+            self.cache.delete(self.cache.head)
+        self._insert(key, val)

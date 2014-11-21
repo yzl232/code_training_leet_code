@@ -1,10 +1,14 @@
+'''
+How would you design the data structures for a very large social network (Facebook, LinkedIn, etc)? Describe how you would design an algorithm to show the connec- tion, or path, between two people (e g , Me -> Bob -> Susan -> Jason -> You)
+'''
+
 class Server:
     def __init__(self, machines = []):
         self.machines = machines
 
 
 class Machines:
-    def __init__(self, persons = [], machineID):
+    def __init__(self, machineID, persons = []):
         self.persons = persons
         self.machineID = machineID
 

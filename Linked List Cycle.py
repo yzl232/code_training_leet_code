@@ -4,6 +4,13 @@
 #         self.val = x
 #         self.next = None
 
+'''
+ Given a linked list, determine if it has a cycle in it.
+
+Follow up:
+Can you solve it without using extra space?
+'''
+
 class Solution:
     # @param head, a ListNode
     # @return a boolean
@@ -14,10 +21,3 @@ class Solution:
             slow = slow.next
             if fast == slow:return True
         return False
-        
-'''
- Given a linked list, determine if it has a cycle in it.
-
-Follow up:
-Can you solve it without using extra space? 
-'''

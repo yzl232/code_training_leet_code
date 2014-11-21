@@ -1,3 +1,23 @@
+
+'''
+Given a binary tree, return the preorder traversal of its nodes' values.
+
+For example:
+Given binary tree {1,#,2,3},
+
+   1
+    \
+     2
+    /
+   3
+
+return [1,2,3].
+
+Note: Recursive solution is trivial, could you do it iteratively?
+'''
+
+
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -22,25 +42,9 @@ class Solution:
                 stack.append(cur.left)
         return result
         
-        
+
+
 '''
-Given a binary tree, return the preorder traversal of its nodes' values.
-
-For example:
-Given binary tree {1,#,2,3},
-
-   1
-    \
-     2
-    /
-   3
-
-return [1,2,3].
-
-Note: Recursive solution is trivial, could you do it iteratively?
-'''
-
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -62,3 +66,4 @@ class Solution:
         self.result.append(root.val)
         self.dfs(root.left)
         self.dfs(root.right)
+'''

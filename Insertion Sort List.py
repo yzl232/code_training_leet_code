@@ -1,3 +1,5 @@
+#Sort a linked list using insertion sort.
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -25,7 +27,3 @@ class Solution:
             else:
                 curr = curr.next
         return  dummy.next
-        ''''
-        Sort a linked list using insertion sort.
-
-        ''''

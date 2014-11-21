@@ -1,25 +1,36 @@
+'''
+Given an index k, return the kth row of the Pascal's triangle.
+
+For example, given k = 3,
+Return [1,3,3,1].
+
+Note:
+Could you optimize your algorithm to use only O(k) extra space?
+
+
+'''
+class Solution:
+    # @return a list of integers
+    def getRow(self, rowIndex):
+        result = [1]
+        for i in range(rowIndex):
+            preNum = 1
+            for j in range(1, i+1):  #第一个1不用更新。从1开始
+                preNum, result[j] = result[j], result[j]+preNum
+            result+=[1]
+        return result
+'''
 class Solution:
     # @return a list of integers
     def getRow(self, numRows):
-        result = []
-        for i in range(numRows+1):
-            result.append([1]*(i+1))
-        for i in range(numRows+1):
-            if i == 0: continue
-            temp = [0] + result[i-1] + [0]
-            for j in range(i+1):
-                result[i][j] = temp[j] + temp[j+1]
-        return  result[-1]
+        result = [[1]]
+        for i in range(numRows):
+            oldRow = result[-1]
+            newRow = []
+            for j in range(len(oldRow)-1):
+                newRow.append(oldRow[j]+oldRow[j+1])
+            result.append([1]+newRow+[1])
+        return result[-1]
+'''
         
         
-        '''
-        Given an index k, return the kth row of the Pascal's triangle.
-
-        For example, given k = 3,
-        Return [1,3,3,1].
-
-        Note:
-        Could you optimize your algorithm to use only O(k) extra space?
-
-        
-        '''

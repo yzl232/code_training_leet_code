@@ -4,26 +4,21 @@
 Follow up:
 Can you solve it without using extra space? 
 '''
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
-class Solution:
+class Solution:  #http://fisherlei.blogspot.com/2013/11/leetcode-linked-list-cycle-ii-solution.html  X和K的关系是基于Y互补的。等于说，两个指针相遇以后，再往下走X步就回到Cycle的起点了
     # @param head, a ListNode
     # @return a list node
     def detectCycle(self, head):
-        if head == None:return
         fast = slow = head
-        hasCycle = False
-        while fast != None and fast.next != None:
+        while fast and fast.next :
             fast = fast.next.next
             slow = slow.next
-            if fast == slow:
-                hasCycle = True
-                break
-        if not hasCycle:return
+            if fast == slow:   break
+        if not fast or not fast.next: return
         fast = head
         while fast!= slow:
             fast = fast.next

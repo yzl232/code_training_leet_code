@@ -1,3 +1,4 @@
+#Divide two integers without using multiplication, division and mod operator.
 class Solution:
     # @return an integer
     def divide(self, dividend, divisor):  # obvious we can only use plus/minus operation 

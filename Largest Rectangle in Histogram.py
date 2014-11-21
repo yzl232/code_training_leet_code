@@ -26,8 +26,6 @@ class Solution:
                 i+=1
             else:
                 temp = stack.pop()
-                if len(stack) !=0:
-                    ret = max(height[temp]*(i-1-stack[-1]), ret)
-                else:
-                    ret = max(height[temp] * i, ret)
+                if len(stack) !=0:  ret = max(height[temp]*(i-1-stack[-1]), ret)
+                else:  ret = max(height[temp] * i, ret)
         return ret

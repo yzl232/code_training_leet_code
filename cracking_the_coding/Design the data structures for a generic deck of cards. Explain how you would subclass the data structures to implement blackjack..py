@@ -1,10 +1,5 @@
-"""This module contains code from
-Think Python by Allen B. Downey
-http://thinkpython.com
-
-Copyright 2012 Allen B. Downey
-License: GNU GPLv3 http://www.gnu.org/licenses/gpl.html
-
+"""
+Design the data structures for a generic deck of cards. Explain how you would subclass the data structures to implement blackjack.
 """
 
 import random

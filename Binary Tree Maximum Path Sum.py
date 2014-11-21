@@ -1,3 +1,19 @@
+'''
+ Given a binary tree, find the maximum path sum.
+
+The path may start and end at any node in the tree.
+
+For example:
+Given the below binary tree,
+
+       1
+      / \
+     2   3
+
+Return 6.
+'''
+
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -19,19 +35,3 @@ class Solution:
         vRight = self.dfs(root.right)
         self.maxSum = max(self.maxSum, vLeft+vRight+root.val)
         return max(root.val+vLeft, root.val+vRight, 0)  #pass value up   # since (vLeft+vRight+root.val) can not be passed up,  it is updated before return..       since vLeft, vRight >=0, we do not need to add a single root.val here
-        
-        '''
-         Given a binary tree, find the maximum path sum.
-
-        The path may start and end at any node in the tree.
-
-        For example:
-        Given the below binary tree,
-
-               1
-              / \
-             2   3
-
-        Return 6.
-        
-        '''

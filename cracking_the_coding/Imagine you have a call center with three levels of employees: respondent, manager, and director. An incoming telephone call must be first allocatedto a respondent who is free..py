@@ -1,3 +1,7 @@
+'''
+Imagine you have a call center with three levels of employees: respondent, manager, and director. An incoming telephone call must be first allocatedto a respondent who is free.
+'''
+
 from collections import deque
 
 class Singleton(object):

@@ -1,4 +1,9 @@
-from collections import queue
+'''
+Design a musicaljukebox using object-oriented principles
+'''
+
+
+from collections import deque
 
 class Song:
     def __init__(self, songName):

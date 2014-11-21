@@ -31,14 +31,7 @@ class Piece:
         
     def flip(self):
         self.color = 0-self.color
-    
-class Location:
-    def __init__(self, row, col):
-        self.row = row
-        self.col = col
-    
-    def isSameAs(self, row, col):
-        return self.row == row and self.col == col
+
         
 class Game(Singleton):
     def __init__(self, player1, player2):
@@ -54,17 +47,18 @@ initial board has a grid like the following in the center:
 class Board:
     def __init__(self, rows, cols):
         self.board = [[None for i in range(cols)] for j in range(rows)]
-        middleRow = len(board)/2
-        middleCol = len(board[0])/2
-        board[middleRow][middleCol] = Piece(White)
-        board[middleRow+1][middleCol] = Piece(Black)
-        board[middleRow][middleCol+1] = Piece(Black)
-        board[middleRow+1][middleCol+1] = Piece(White)
+        middleRow = len(self.board)/2
+        middleCol = len(self.board[0])/2
+        self.board[middleRow][middleCol] = Piece(White)
+        self.board[middleRow+1][middleCol] = Piece(Black)
+        self.board[middleRow][middleCol+1] = Piece(Black)
+        self.board[middleRow+1][middleCol+1] = Piece(White)
         self.blackCount = 2
         self.whiteCount = 2
         
     def placeColor(self, row, col, color):
-        if board[row][col]: return False
+        if self.board[row][col]: return False
+        self.board[row][col] = Piece(color)
     
     
 '''
@@ -82,13 +76,13 @@ class Board:
         if row <0 or row > len(self.board) or col<0 or col>len(self.board[0]):
             return -1
         #Found same color - return nothing flipped
-        if board[row][col].color == color: return 0
+        if self.board[row][col].color == color: return 0
         
-        flipped = self.flipSection(self, row+r, col+c, color, d)
+        flipped = self.flipSection( row+r, col+c, color, d)
         
         if flipped < 0: return -1
         
-        board[row][col].flip()
+        self.board[row][col].flip()
         return flipped+1
         
     def getScoreForColor(self, color):
@@ -98,17 +92,17 @@ class Board:
     def updateScore(self, newColor, newPieces):  # newpiece = fliped + 1
         if newColor == Black:
             self.whiteCount -= newPieces-1
-            self.BlackCount += newPieces
-        elif newColor == Black:
-            self.BlackCount -= newPieces-1
+            self.blackCount += newPieces
+        elif newColor == While:
+            self.blackCount -= newPieces-1
             self.whiteCount += newPieces
     
     def printBoard(self):
-        for pieces in board:
+        for pieces in self.board:
             for p in pieces:
                 if p == None: print '_'
-                elif p.color = White: print 'W'
-                else: print 'B'
+                elif p.color == White: print 'W'
+                elif: print 'B'
             print '\n'    
      
     

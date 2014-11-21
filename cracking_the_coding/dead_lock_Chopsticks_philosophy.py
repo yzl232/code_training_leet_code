@@ -1,4 +1,3 @@
-import time
 import threading
 class Chopstick:
     def __init__(self):
@@ -11,9 +10,11 @@ class Chopstick:
         self.myLock.release()
 
     def canBePickedUp(self):
-        self.myLock._is_owned()
+        return self.myLock._is_owned()
+
 class Philosopher(threading.Thread):
-    def __init__(self, leftChop, rightChop, bites=0):
+    def __init__(self, pid, leftChop, rightChop, bites=0):
+        self.id = pid
         self.left = leftChop
         self.right = rightChop
         self.bites = bites

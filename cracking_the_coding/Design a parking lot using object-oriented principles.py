@@ -96,7 +96,7 @@ class Level:
         largeSpots = numberSpots/4
         bikeSpots = numberSpots/4
         compactSpots = numberSpots - largeSpots - bikeSpots
-        for i in range(numerSpots):
+        for i in range(numberSpots):
             size = Motorcycle_size
             if i < largeSpots:
                 size = Large_size
@@ -114,7 +114,7 @@ class Level:
             if lastRow != spot.row:  # we only consider spots in the same row. 
                 spotsFound = 0
                 lastRow = spot.row
-            if spot.canFitVehicle(vehicle)):
+            if spot.canFitVehicle(vehicle):
                 spotsFound +=1
             else: spotsFound = 1
             if spotsFound == spotsNeeded:
@@ -132,7 +132,7 @@ class Level:
         vehicle.clearSpots()
         success = True
         for i in range(vehicle.spotsNeeded):
-            success = success and spots[spotNumber + i].park(vehicle)
+            success = success and self.spots[spotNumber + i].park(vehicle)
         self.availableSpots -= vehicle.spotsNeeded
         return success
         

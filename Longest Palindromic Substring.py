@@ -1,3 +1,7 @@
+'''
+Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
+'''
+
 class Solution:
     # @return a string
     def longestPalindrome(self, s):  # http://blog.csdn.net/feliciafay/article/details/16984031
@@ -14,11 +18,10 @@ class Solution:
                         start = i
                         end = j+1
                         maxL = j-i
-        return  s[start: end]
+        return  s[start: end]#如出一辙 https://oj.leetcode.com/submissions/detail/13147843/
 
 
-
-
+'''
 class Solution:   # O(n) solution
     # @return a string
     def longestPalindrome(self, s):  # http://leetcode.com/2011/11/longest-palindromic-substring-part-ii.html
@@ -53,3 +56,4 @@ class Solution:   # O(n) solution
             ret += '#'+s[i]
         ret +='#$'
         return ret
+'''

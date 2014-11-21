@@ -1,3 +1,10 @@
+'''
+Given a sorted array of n integers that has been rotated an unknown number of times, write code to find an element in the array. You may assume that the array was originally sorted in increasing order
+
+这道题目不用写代码的
+
+'''
+
 def generateNewNum(filePath):
     f = open(filePath, 'r')
     lines = f.readlines()
@@ -44,7 +51,7 @@ def generateNewNum2(filePath):
         nums= line.split()
         for n in nums:
             num = int(n)
-            if num >= targetBlockID*blockSize and num < (targetBlockID+1)*blockSize
+            if num >= targetBlockID*blockSize and num < (targetBlockID+1)*blockSize:
                 d[num] = 1
     f.close()
     for i in range(targetBlockID*blockSize, (targetBlockID+1)*blockSize):

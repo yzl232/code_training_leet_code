@@ -1,3 +1,32 @@
+'''
+ Given a binary tree, flatten it to a linked list in-place.
+
+For example,
+Given
+
+         1
+        / \
+       2   5
+      / \   \
+     3   4   6
+
+The flattened tree should look like:
+
+   1
+    \
+     2
+      \
+       3
+        \
+         4
+          \
+           5
+            \
+             6
+
+
+
+'''
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -12,6 +41,7 @@ class Solution:
         if not root: return
         left = root.left
         right = root.right
+
         if left:
             root.right = left
             root.left = None
@@ -20,32 +50,10 @@ class Solution:
                 rightMost = rightMost.right
             rightMost.right = right
         self.flatten(root.right)
-        '''
-         Given a binary tree, flatten it to a linked list in-place.
-
-        For example,
-        Given
-
-                 1
-                / \
-               2   5
-              / \   \
-             3   4   6
-
-        The flattened tree should look like:
-
-           1
-            \
-             2
-              \
-               3
-                \
-                 4
-                  \
-                   5
-                    \
-                     6
-
-        
-        
-        '''
+'''
+flatten:     每次处理一个节点。 然后recursion
+每次有三步：
+1       左节点制空 root.left = None
+2 root.right= left
+3   rightMost.right = right
+'''

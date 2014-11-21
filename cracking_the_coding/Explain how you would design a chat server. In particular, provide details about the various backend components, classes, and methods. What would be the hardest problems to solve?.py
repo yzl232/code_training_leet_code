@@ -1,3 +1,9 @@
+'''
+Explain how you would design a chat server. In particular, provide details about
+the various backend components, classes, and methods. What would be the
+hardest problems to solve?
+'''
+
 import time
 
 class Singleton(object):
@@ -7,7 +13,7 @@ class Singleton(object):
             cls._instance = orig.__new__(cls, *args, **kw)  #call the original __new__ method
         return cls._instance
         
-ISOTIMEFORMAT=’%Y-%m-%d %X’
+ISOTIMEFORMAT='%Y-%m-%d %X'
 
 Rejected = -2
 Accepted = 2
@@ -32,14 +38,15 @@ class User:
         self.fullName = fullName
         self.privateChats = {}
         self.status = None
-        self.groupChats = []
-        self.receivedAddRequests = {}
-        self.sentAddRequests = {}
+        self.groupChats = {}
+        self.receivedAddRequests = []
+        self.sentAddRequests = []
         self.contacts = {}
         
     def sendMessageToUser(self, toUser, content):
+        global IDGenerater
         if toUser.id not in self.privateChats: 
-            NumberGenerater+=1
+            IDGenerater+=1
             private_chat = PrivateChat(IDGenerater, self, toUser)
             self.privateChats[toUser.id] = private_chat
         private_chat = self.privateChats[toUser.id]
@@ -75,10 +82,10 @@ class User:
         UserManager.addUser(self,accountName)
         
     def addGroupConversation(self, conversation):
-        self.groupChats.add(conversation)
+        self.groupChats.append(conversation)
     
     def addPrivateConversation(self, conversation):
-        otherUser = conversation.getOtherParticipant(this)
+        otherUser = PrivateChat.getOtherParticipant(self)
         self.privateChats[otherUser.id] = conversation
             
 class Conversation:
@@ -89,10 +96,10 @@ class Conversation:
     
 class GroupChat(Conversation):
     def removeParticipant(self, user):
-        self.participants.pop(user)
+        self.participants.remove(user)
         
     def addParticipant(self, user):
-        self.participants.add(user)
+        self.participants.append(user)
         
 class PrivateChat(Conversation):
     def __init__(self, id, user1, user2):
@@ -111,12 +118,12 @@ class UserStatus:
         self.message = message
         
 class Message:
-    def __init__(self, content, date = time.strftime(ISOTIMEFORMAT, time.localtime()):
+    def __init__(self, content, date = time.strftime(ISOTIMEFORMAT)):
         self.content = content
         self.date = date
         
 class AddRequest:
-    def __init__(self, fromUser, toUser, date = time.strftime(ISOTIMEFORMAT,  time.localtime()):
+    def __init__(self, fromUser, toUser, date = time.strftime(ISOTIMEFORMAT)):
         self.fromUser = fromUser
         self.toUser = toUser
         self.date = date
@@ -139,24 +146,24 @@ class UserManager(Singleton):
         fromUser.sentAddRequest(req)
         
     def approveAddRequest(self, req):
-        req.status = req.Accepted
+        req.status = Accepted
         fromUser = req.fromUser
         toUser = req.toUser
         fromUser.addContact(toUser)
         toUser.addContact(fromUser)
     
     def rejectAddRequest(self, req):
-        req.status = req.Accepted
+        req.status = Rejected
         fromUser = req.fromUser
         toUser = req.toUser
-		fromUser.removeAddRequest(req);
-		toUser.removeAddRequest(req);		
+        fromUser.removeAddRequest(req)
+        toUser.removeAddRequest(req)
         
     def userSignedOn(self, accountName):
+        if accountName not in self.usersByAccountName: return
         user = self.usersByAccountName[accountName]
-        if user:
-            user.status = Available
-            self.onlineUsers[user.id] = user
+        user.status = Available
+        self.onlineUsers[user.id] = user
     
     def userSignedOff(self, accountName):
         user = self.usersByAccountName[accountName]
@@ -164,8 +171,3 @@ class UserManager(Singleton):
             user.status = Offline
             self.onlineUsers.pop(user.id)    
 
-
-        
-
-    
-        

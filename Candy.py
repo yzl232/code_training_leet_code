@@ -1,27 +1,25 @@
+'''
+ There are N children standing in a line. Each child is assigned a rating value.
+
+You are giving candies to these children subjected to the following requirements:
+
+    Each child must have at least one candy.
+    Children with a higher rating get more candies than their neighbors.
+
+What is the minimum candies you must give?
+
+'''
+
 class Solution:
     # @param ratings, a list of integer
     # @return an integer
-    def candy(self, ratings):   #自己举出特例就可以看懂解法了
-        length = len(ratings)
-        candy = [1 for i in range(length)]
-        for i in range(length-1):   # right neighbour
-            if ratings[i+1] > ratings[i] and candy[i+1] <= candy[i]:
-                candy[i+1] = candy[i] + 1
-        for i in range(length-1, 0, -1):  # left neighbour
-            if ratings[i-1] > ratings[i] and candy[i-1] <= candy[i]:
-                candy[i-1] = candy[i]+1
-        #print candy  
+    def candy(self, ratings):
+        candy = [1 for i in range(len(ratings))]
+        for i in range(1, len(ratings)):
+            if ratings[i]>ratings[i-1]:      candy[i] = max(candy[i-1]+1, candy[i])
+        for i in range(len(ratings)-2, -1, -1):
+            if ratings[i]>ratings[i+1]:     candy[i] = max(candy[i+1]+1, candy[i])
         return sum(candy)
+        #从左到右算一遍，ratings递增时candy也递增，否则都只给一块糖。
+#再从右到左修正一遍：如果左比右rating高但却没有拿更多的糖，修正。
         
-        
-        '''
-         There are N children standing in a line. Each child is assigned a rating value.
-
-        You are giving candies to these children subjected to the following requirements:
-
-            Each child must have at least one candy.
-            Children with a higher rating get more candies than their neighbors.
-
-        What is the minimum candies you must give?
-        
-        '''
