@@ -1,3 +1,16 @@
+'''
+ Reverse a linked list from position m to n. Do it in-place and in one-pass.
+
+For example:
+Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+
+return 1->4->3->2->5->NULL.
+
+Note:
+Given m, n satisfy the following condition:
+1 ≤ m ≤ n ≤ length of list.
+
+'''
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -15,7 +28,7 @@ class Solution:
         dummy.next = head
         pre = dummy
 
-        
+
         for i in range(1, m):
             pre = pre.next
         last = pre.next
@@ -26,18 +39,4 @@ class Solution:
             pre.next = cur
             cur = last.next
         return dummy.next
-            
-            
-        '''
-         Reverse a linked list from position m to n. Do it in-place and in one-pass.
 
-        For example:
-        Given 1->2->3->4->5->NULL, m = 2 and n = 4,
-
-        return 1->4->3->2->5->NULL.
-
-        Note:
-        Given m, n satisfy the following condition:
-        1 ≤ m ≤ n ≤ length of list.
-        
-        '''

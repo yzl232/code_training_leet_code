@@ -1,3 +1,15 @@
+
+            
+''''
+
+ Given a singly linked list L: L0→L1→…→Ln-1→Ln,
+reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
+
+You must do this in-place without altering the nodes' values.
+
+For example,
+Given {1,2,3,4}, reorder it to {1,4,2,3}. 
+''''
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -15,7 +27,7 @@ class Solution:
             slow = slow.next
         head2 = slow.next
         slow.next = None
-        
+
         dummy = ListNode(0)
         pre = dummy; dummy.next = head2; last = head2
         cur = head2.next
@@ -25,26 +37,13 @@ class Solution:
             pre.next = cur
             cur = last.next
         head2 = pre.next
-        
+
         p1 = head; p2 = head2
         while p2 and p1:
             temp1 =p1.next
             temp2 = p2.next
             p1.next = p2
             p2.next = temp1
-            
+
             p1 = temp1
             p2 = temp2
-            
-            
-            
-''''
-
- Given a singly linked list L: L0→L1→…→Ln-1→Ln,
-reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
-
-You must do this in-place without altering the nodes' values.
-
-For example,
-Given {1,2,3,4}, reorder it to {1,4,2,3}. 
-''''

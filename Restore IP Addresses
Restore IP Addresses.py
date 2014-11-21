@@ -1,3 +1,11 @@
+'''
+Given a string containing only digits, restore it by returning all possible valid IP address combinations.
+
+For example:
+Given "25525511135",
+
+return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
+'''
 class Solution:
     # @param s, a string
     # @return a list of strings
@@ -18,12 +26,3 @@ class Solution:
                 cur = s[:i]
                 if int(cur) <= 255 and str(int(cur)) == cur:
                     self.getIP(currIP + cur + '.',  s[i:], currIndex+1)
-                    
-        '''
-        Given a string containing only digits, restore it by returning all possible valid IP address combinations.
-
-        For example:
-        Given "25525511135",
-
-        return ["255.255.11.135", "255.255.111.35"]. (Order does not matter)
-        '''
