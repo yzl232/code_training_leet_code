@@ -1,3 +1,8 @@
+'''
+Determine if a Sudoku is valid, according to: Sudoku Puzzles - The Rules.
+
+The Sudoku board could be partially filled, where empty cells are filled with the character '.'.
+'''
 class Solution:
     # @param board, a 9x9 2D array
     # @return a boolean

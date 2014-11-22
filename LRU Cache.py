@@ -17,12 +17,12 @@ class LinkedList:
         self.tail = None
 
     def insert(self, node):
-        if self.head is None:
-            self.head = node
+        if self.tail is None:
+            self.tail = node
         else:
-            self.tail.next = node
-            node.prev = self.tail
-        self.tail = node
+            self.head.prev = node
+            node.next = self.head
+        self.head = node
 
     def delete(self, node):
         if node.prev:     node.prev.next = node.next
@@ -53,6 +53,6 @@ class LRUCache:
         if key in self.d:
             self.cache.delete(self.d[key])
         elif len(self.d) == self.capacity:
-            del self.d[self.cache.head.key] #注意这 里的先后顺序。。。先DEL然后再removelast#######################
-            self.cache.delete(self.cache.head)
+            del self.d[self.cache.tail.key]   #注意这 里的先后顺序。。。先DEL然后再removelast#######################
+            self.cache.delete(self.cache.tail)
         self._insert(key, val)
