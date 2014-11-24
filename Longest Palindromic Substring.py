@@ -2,23 +2,21 @@
 Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
 '''
 
-class Solution:
+class Solution:  #优势在于space可以为O(1)
     # @return a string
-    def longestPalindrome(self, s):  # http://blog.csdn.net/feliciafay/article/details/16984031
-        n = len(s)
-        start = 0
-        end = 0
-        dp = [[False for i in range(n)] for j in range(n)]
-        maxL = -1
-        for j in range(n):
-            for i in range(j+1):
-                if s[i] == s[j] and (j-i<=1 or dp[i+1][j-1]):
-                    dp[i][j] = True
-                    if j-i>maxL:
-                        start = i
-                        end = j+1
-                        maxL = j-i
-        return  s[start: end]#如出一辙 https://oj.leetcode.com/submissions/detail/13147843/
+    def expand(self, s, l, r):
+        while l >= 0 and r < len(s) and s[l] == s[r]:
+            l -= 1; r += 1
+        return  (l+1, r-1, r-l-1)  #start, end length
+    def longestPalindrome(self, s):
+        ret =(0, 0, 1)
+        for i in range(len(s)):
+            r1 = self.expand(s, i, i)  #odd
+            if r1[-1]>ret[-1]: ret = r1
+            r2 = self.expand(s, i, i + 1)  #even
+            if r2[-1]>ret[-1]: ret = r2
+        return s[ret[0]:ret[1]+1]
+
 
 
 '''
@@ -56,4 +54,26 @@ class Solution:   # O(n) solution
             ret += '#'+s[i]
         ret +='#$'
         return ret
+
+
+
+dp解法
+
+class Solution:
+    # @return a string
+    def longestPalindrome(self, s):  # http://blog.csdn.net/feliciafay/article/details/16984031
+        n = len(s)
+        start = 0
+        end = 0
+        dp = [[False for i in range(n)] for j in range(n)]
+        maxL = -1
+        for j in range(n):
+            for i in range(j, -1, -1):
+                if s[i] == s[j] and (j-i<=1 or dp[i+1][j-1]):
+                    dp[i][j] = True
+                    if j-i>maxL:
+                        start = i
+                        end = j+1
+                        maxL = j-i
+        return  s[start: end]#如出一辙 https://oj.leetcode.com/submissions/detail/13147843/
 '''
