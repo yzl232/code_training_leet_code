@@ -13,7 +13,7 @@
 #         self.next = None
 
 
-#这里是按照list的顺序来 inorder  然后self.head = self.head.next 之前array是preorder
+#这里是按照list的顺序来 inorder,   left =dfs,  然后root.left = left , root.right = dfs 然后self.head = self.head.next 之前array是preorder或者inorder都可以。  list只能从左到右， 所以必须inorder. array 任意access。所以无所谓
 class Solution:
     head = None
     def sortedListToBST(self, head):

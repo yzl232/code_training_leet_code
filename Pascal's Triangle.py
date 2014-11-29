@@ -26,5 +26,4 @@ class Solution:
             temp =[0]+ result[i-1] + [0]
             for j in range(i+1):
                 result[i][j] = temp[j] + temp[j+1]
-        return result               
-        
+        return result

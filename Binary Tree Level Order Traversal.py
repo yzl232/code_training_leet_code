@@ -25,6 +25,7 @@ return its level order traversal as:
 #         self.val = x
 #         self.left = None
 #         self.right = None
+
 class Solution:
     def levelOrder(self, root):
         if not root: return []

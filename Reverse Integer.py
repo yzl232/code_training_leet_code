@@ -28,4 +28,4 @@ class Solution:
         while x > 0:
             result = result * 10 + x % 10
             x /= 10
-        return sign * result
+        return sign * result#和palindrome integer类似。
