@@ -17,13 +17,14 @@ class Solution:
     def nextPermutation(self, num):
         n = len(num)
         for i in range(n-1, 0, -1):
-            if num[i] > num[i-1]:
-                small = i
-                for j in range(i+1, n):
-                    if num[j] < num[small] and num[j] > num[i-1]:
-                        small = j
-                num[small], num[i-1] = num[i-1], num[small]
-                temp = num[i:]
-                temp.sort()
-                return num[:i] + temp
-        return num[::-1] 
+            if num[i]>num[i-1]:
+                for j in range(n-1, i-1, -1):
+                    if num[j]>num[i-1]: break
+                num[j], num[i-1] = num[i-1], num[j]
+                l = i; r = n-1
+                while l<r:
+                    num[l], num[r] = num[r], num[l]
+                    l+=1; r-=1
+                return num
+        num.reverse()
+        return num     #是O(n)的

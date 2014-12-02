@@ -7,7 +7,7 @@ and [3,4,-1,1] return 2.
 
 Your algorithm should run in O(n) time and uses constant space.
 '''
-class Solution:
+class Solution: #如果是所有数在0-n，那就用求和相减就可以做。  geeksforgeeks。 这里没有
     # @param A, a list of integers
     # @return an integer  # naive thought:  用hashtable. 然后从1到N看是否在hashtable中。 O(n) space and time
     def firstMissingPositive(self, a):
