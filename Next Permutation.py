@@ -15,7 +15,7 @@ class Solution:
     # @param num, a list of integer
     # @return a list of integer
     def nextPermutation(self, num):
-        n = len(num)
+        n = len(num) #举个例子就容易写。 687432   =》  找到 6， 和7交换。  =》786432=>723468
         for i in range(n-1, 0, -1):
             if num[i]>num[i-1]:
                 for j in range(n-1, i-1, -1):
@@ -27,4 +27,4 @@ class Solution:
                     l+=1; r-=1
                 return num
         num.reverse()
-        return num     #是O(n)的
+        return num     #是O(n)的 #http://blog.csdn.net/m6830098/article/details/17291259
