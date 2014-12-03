@@ -3,7 +3,7 @@ Given a string containing just the characters '(', ')', '{', '}', '[' and ']', d
 
 The brackets must close in the correct order, "()" and "()[]{}" are all valid but "(]" and "([)]" are not.
 '''
-
+#facebook考过。  先说
 class Solution:
     # @return a boolean
     def isValid(self, s):

@@ -18,7 +18,6 @@ class Solution:
         for digit in result:
             sum = carry + digit
             carry = sum / 10
-            total = [str(sum%10)]+total  #也append的反面  total.insert(0, str(sum % 10))
-        while len(total) > 1 and total[0] == "0":
-            del total[0]
-        return ''.join(total)
+            total.append(str(sum%10)) #也append的反面  total.insert(0, str(sum % 10))
+        while len(total) > 1 and total[-1] == "0": total.pop()
+        return ''.join(total[::-1])
