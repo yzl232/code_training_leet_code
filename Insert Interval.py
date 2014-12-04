@@ -23,16 +23,13 @@ class Solution:
     # @param intervals, a list of Intervals
     # @param newInterval, a Interval
     # @return a list of Interval
-    def insert(self, intervals, newInterval):
-        new = []
-        temp = newInterval
+    def insert(self, intervals, t):
+        ret = []
         for i in intervals:
-            if temp.start > i.end:
-                new.append(i)
-            elif i.start > temp.end:
-                new.append(temp)
-                temp = i
-            else:
-                temp = Interval(min(temp.start, i.start), max(temp.end, i.end))
-        new.append(temp)
-        return new
+            if t.start > i.end:  ret.append(i)
+            elif i.start > t.end:
+                ret.append(t)
+                t = i
+            else:   t = Interval(min(t.start, i.start), max(t.end, i.end))
+        ret.append(t)
+        return ret

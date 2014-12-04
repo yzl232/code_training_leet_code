@@ -17,13 +17,13 @@ class Solution:
     # @param intervals, a list of Interval
     # @return a list of Interval
     def merge(self, arr):
-        if len(arr) == 0:   return arr
+        if len(arr)==0: return
         arr.sort(key = lambda x: x.start)
         ret = [arr[0]]
         for i in range(1, len(arr)):
-            cur, pre = arr[i], ret[-1]
-            if cur.start <= pre.end:  pre.end = max(pre.end, cur.end)
-            else:   ret.append(cur)
+            cur, pre = arr[i], arr[i-1]
+            if cur.start<=pre.end:  pre.end = max(pre.end, cur.end)
+            else:  ret.append(cur)
         return ret
 
 
