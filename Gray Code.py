@@ -23,8 +23,4 @@ For now, the judge is able to judge based on one instance of gray code sequence.
 class Solution:
     # @return a list of integers
     def grayCode(self, n):
-        gc = []
-        for i in range(2 ** n):
-            i = (i >> 1) ^ i
-            gc.append(i)
-        return gc
+        return [(i>>1)^i for i in range(2**n)]
