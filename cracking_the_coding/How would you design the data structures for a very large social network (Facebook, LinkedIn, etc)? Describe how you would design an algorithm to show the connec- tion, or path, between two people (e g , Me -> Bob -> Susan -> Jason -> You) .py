@@ -24,7 +24,7 @@ class Person:
         self.info = info
     
     def getFriends(self):
-        return friends
+        return self.friends
         
     def getID(self):
         return self.personID

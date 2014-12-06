@@ -48,8 +48,8 @@ class Directory(Entry):
     def numberOfFiles(self):
         count = 0
         for e in self.contents:
-            if isInstance(e, File): count+=1
-            elif isInstance(e, Directory):
+            if isinstance(e, File): count+=1
+            elif isinstance(e, Directory):
                 count += self.numberOfFiles()
         return count
         

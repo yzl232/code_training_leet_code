@@ -102,8 +102,3 @@ class OnlineReaderSystem:
         self.display = display
         self.activeBook = activeBook
         self.activeUser = activeUser
-        
-        
-    
-        
-    

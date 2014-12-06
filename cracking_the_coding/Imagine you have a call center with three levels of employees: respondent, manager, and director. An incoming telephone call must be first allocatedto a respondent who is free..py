@@ -4,11 +4,10 @@ Imagine you have a call center with three levels of employees: respondent, manag
 
 from collections import deque
 
+
 class Singleton(object):
     def __new__(cls, *args, **kw):  #override new
-        if not hasattr(cls, '_instance'):
-            orig = super(Singleton, cls)  #cls : class
-            cls._instance = orig.__new__(cls, *args, **kw)  #call the original __new__ method
+        if not hasattr(cls, '_instance'):  cls._instance = object.__new__(cls, *args, **kw)  #call the original __new__ method
         return cls._instance
 
 LEVELS = 3
@@ -24,14 +23,14 @@ class CallHandler(Singleton):
         Singleton.__init__()
         self.employees = []
         self.callQueues = []
-        for i in range(levels):
+        for i in range(LEVELS):
             self.callQueues.append(deque([]))
 
         self.respondents = []
         self.managers = []
         self.directors = []
         for i in range(num_respondents):
-            self.respondents.append(Responder())
+            self.respondents.append(Respondent())
 
         for i in range(num_managers):
             self.managers.append(Manager())

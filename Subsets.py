@@ -19,6 +19,7 @@ If S = [1,2,2], a solution is:
 ]
 
 '''
+
 class Solution:
     # @param S, a list of integer
     # @return a list of lists of integer
