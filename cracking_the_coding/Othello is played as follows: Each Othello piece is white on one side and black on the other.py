@@ -23,7 +23,7 @@ class Player:
         self.color = color
         
     def playPiece(self, row, col):
-        return Game.board.placeColor(row, column, self.color)
+        return Game.board.placeColor(row, col, self.color)
         
 class Piece:
     def __init__(self, color):
@@ -61,16 +61,15 @@ class Board:
         self.board[row][col] = Piece(color)
     
     
-'''
  #flips pieces starting at (row, column) and proceeding in * direction d
-'''
+
     def flipSection(self, row, col, color, d):
         r = 0
         c = 0
         if d == Up: r = -1
-        elif d = Down: r = 1
-        elif d = Left: c = -1
-        elif d = Right: c =1
+        elif d == Down: r = 1
+        elif d == Left: c = -1
+        elif d == Right: c =1
         else: return -1
         #DFS
         if row <0 or row > len(self.board) or col<0 or col>len(self.board[0]):
@@ -93,7 +92,7 @@ class Board:
         if newColor == Black:
             self.whiteCount -= newPieces-1
             self.blackCount += newPieces
-        elif newColor == While:
+        elif newColor == White:
             self.blackCount -= newPieces-1
             self.whiteCount += newPieces
     
@@ -102,9 +101,5 @@ class Board:
             for p in pieces:
                 if p == None: print '_'
                 elif p.color == White: print 'W'
-                elif: print 'B'
-            print '\n'    
-     
-    
-
-        
+                else: print 'B'
+            print '\n'

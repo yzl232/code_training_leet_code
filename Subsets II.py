@@ -26,15 +26,10 @@ class Solution:
     # @param num, a list of integer
     # @return a list of lists of integer
     def subsetsWithDup(self, s):
-        result = [[]]
-        s.sort()
+        ret = [[]];  s.sort()
         for i in s:
-            old = result[:]
-            for j in old:
-                temp = j+[i]
-                if temp in result: continue
-                result.append(j+[i])
-        return result
+            ret +=[ j+[i] for j in ret if j+[i] not in ret]
+        return ret
 '''
 class Solution:
     # @param S, a list of integer
