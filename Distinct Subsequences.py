@@ -14,13 +14,12 @@ class Solution:
     # else:  dp[i][j] = dp[i-1][j]
     #  initial:  0 for all    .    dp[i][0] = 1    dp[0][i] = 0 (delete all)   dp[0][0] = 1   注意到当最后的字符串相等的时候，我们可以让S匹配T[-1]或者不匹配TT[-t]
     def numDistinct(self, s, t):
-        lenS = len(s)
-        lenT = len(t)
-        dp = [[0 for j in range(lenT+1)] for i in range(lenS+1)]
-        for i in range(lenS+1):
+        m = len(s);  n = len(t)
+        dp = [[0 for j in range(n+1)] for i in range(m+1)]
+        for i in range(m+1):
             dp[i][0] = 1
-        for i in range(1, lenS+1):
-            for j in range(1, lenT+1):
+        for i in range(1, m+1):
+            for j in range(1, n+1):
                 dp[i][j] = dp[i-1][j-1] + dp[i-1][j] if s[i-1] == t[j-1] else dp[i-1][j]
         return dp[-1][-1]
 
@@ -31,13 +30,10 @@ class Solution:
     # else:  dp[i][j] = dp[i-1][j]
     #  initial:  0 for all    .    dp[i][0] = 1    dp[0][i] = 0 (delete all)   dp[0][0] = 1
     def numDistinct(self, s, t):
-        if t=='': return 1
-        elif s=='': return 0
-        temp = self.numDistinct(s[:-1], t)
-        if s[-1] == t[-1]:
-            return self.numDistinct(s[:-1], t[:-1]) + temp
-        else:
-            return temp
-
+        if not t: return 1
+        if not s: return 0
+        tmp = self.numDistinct(s[1:], t)
+        if s[0]==t[0]: return self.numDistinct(s[1:], t[1:])+tmp
+        else: return tmp
 
 '''

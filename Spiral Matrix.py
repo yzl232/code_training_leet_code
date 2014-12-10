@@ -12,32 +12,23 @@ Given the following matrix:
 
 You should return [1,2,3,6,9,8,7,4,5].
 '''
-
 class Solution:
     # @param matrix, a list of lists of integers
     # @return a list of integers
     def spiralOrder(self, matrix):
-        if matrix == []:  return []
-        m = len(matrix); n = len(matrix[0]); k = 0  
-        results = []
+        if not matrix: return []
+        m, n, k = len(matrix), len(matrix[0]), 0
+        ret = []
         while True:
-            if m==0 or n == 0: return results
-            if (m == 1):
-                for i in range(n):
-                    results.append(matrix[k][i+k])
-                return results
-            if (n == 1):
-                for i in range(m):
-                    results.append(matrix[i+k][k])
-                return results
-            for i in range(n-1):
-                results.append(matrix[k][i+k])
-            for i in range(m-1):
-                results.append(matrix[i+k][k+n-1])
-            for i in range(n-1):
-                results.append(matrix[k+m-1][k+n-1-i])
-            for i in range(m-1):
-                results.append(matrix[k+m-1-i][k])
-            m-=2
-            n-=2
-            k+=1
+            if m==0 or n ==0 : return ret
+            if m==1:
+                for i in range(n):   ret.append(matrix[0+k][i+k])
+                return ret
+            if n==1:
+                for i in range(m):    ret.append(matrix[i+k][ 0+k])  #两两对称。可以加速写
+                return ret
+            for i in range(n-1):    ret.append(matrix[0+k][i+k])       #注意到四个的两两对称，可以检查和加速写
+            for i in range(m-1):    ret.append(matrix[i+k][n-1+k])
+            for i in range(n-1, 0, -1):    ret.append(matrix[m-1+k][i+k])
+            for i in range(m-1, 0, -1):     ret.append(matrix[i+k][0+k])
+            k+=1;   n-=2;    m-=2

@@ -12,30 +12,30 @@ Return a deep copy of the list.
 class Solution:
     # @param head, a RandomListNode
     # @return a RandomListNode
-    def copyRandomList(self, head):
-        if not head: return
+    def copyRandomList(self, h):
+        if not h: return
 
-        cur = head
+        cur = h
         while cur: # insert additional nodes
-            tmp = RandomListNode(cur.label)
-            tmp.next = cur.next
-            cur.next = tmp
-            cur = tmp.next
+            t = RandomListNode(cur.label)
+            t.next = cur.next
+            cur.next = t
+            cur = t.next
 
-        cur = head
+        cur = h
         while cur:      # # copy random pointers
-            temp = cur.next
-            if cur.random: temp.random = cur.random.next
-            cur = temp.next
+            t = cur.next
+            if cur.random: t.random = cur.random.next
+            cur = t.next
 
-        cur = head
-        head2 = head.next
+        cur = h
+        h2 = h.next
         while cur:  # choose next pointers . decouple the list
-            temp = cur.next
-            cur.next = temp.next
-            if temp.next:   temp.next = temp.next.next
+            t = cur.next
+            cur.next = t.next
+            if t.next:   t.next = t.next.next
             cur = cur.next
-        return head2
+        return h2
 '''
 # Definition for singly-linked list with a random pointer.
 # class RandomListNode:
@@ -48,15 +48,15 @@ class Solution:
     # @return a RandomListNode
     def copyRandomList(self, head):
         if not head: return
-        h, p = {}, head
+        d, p = {None: None}, head
         while p:
-            h[p] = RandomListNode(p.label)
+            d[p] = RandomListNode(p.label)
             p = p.next
         p = head
         while p:
-            node = h[p]
-            if p.next:  node.next = h[p.next]
-            if p.random:  node.random = h[p.random]
+            p1 = d[p]
+            p1.next = d[p.next]
+            p1.random = d[p.random]
             p = p.next
-        return h[head]
+        return d[head]
 '''

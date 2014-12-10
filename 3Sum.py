@@ -1,37 +1,17 @@
-'''
-Given an array S of n integers, are there elements a, b, c in S such that a + b + c = 0? Find all unique triplets in the array which gives the sum of zero.
-
-Note:
-
-    Elements in a triplet (a,b,c) must be in non-descending order. (ie, a ≤ b ≤ c)
-    The solution set must not contain duplicate triplets.
-
-    For example, given array S = {-1 0 1 2 -1 -4},
-
-    A solution set is:
-    (-1, 0, 1)
-    (-1, -1, 2)
-'''
-
-
 class Solution:
     # @return a list of lists of length 3, [[val1,val2,val3]]
-    def threeSum(self, num):
-        num.sort()
-        res = set()
-        for i in range(len(num)-2):
-            if i>0 and num[i] == num[i-1]: continue
-            left = i+1; right = len(num)-1; target = 0 - num[i]
-            while left < right:
-                if num[left] + num[right] == target:
-                    res.add((num[i], num[left], num[right]))
-                    left+=1; right -=1
-                elif num[left] + num[right] < target:
-                    left+=1
-                else:
-                    right -=1
-        return [list(i) for i in res]
-        
+    def threeSum(self, arr):  #就是由i控制窗口的2sum
+        arr.sort();    ret = set()
+        for i in range(len(arr)-2):  #i一直作为左边界。 逐渐变小的sliding window
+            if i>0 and arr[i]==arr[i-1]: continue
+            l = i+1; r=len(arr)-1; target = 0-arr[i]
+            while l<r:  
+                if arr[l]+arr[r] == target:
+                    ret.add((arr[i], arr[l], arr[r]))
+                    l+=1; r-=1  #同时变化2个pointer
+                elif arr[l]+ arr[r]<target: l+=1
+                else: r-=1
+        return [list(i) for i in ret]
 '''
 class Solution:
     # @return a list of lists of length 3, [[val1,val2,val3]]
@@ -49,4 +29,5 @@ class Solution:
                     if num[k[0]]>=num[i]:
                         result.add((num[i], k[0], k[1] ))
         return [list(i) for i in result]
+
 '''

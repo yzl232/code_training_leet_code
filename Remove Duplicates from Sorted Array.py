@@ -14,10 +14,9 @@ class Solution:
     # @return an integer
     def removeDuplicates(self, A):
         if not A:return 0
-        slow = 0
-        for fast in range(len(A)):
-            if A[slow] == A[fast]:continue
-            else:
-                slow +=1
-                A[slow] = A[fast]
-        return slow+1
+        slow = 1
+        for fast in range(1, len(A)):
+            if A[fast-1]==A[fast]: continue
+            A[slow] = A[fast]
+            slow+=1
+        return slow

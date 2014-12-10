@@ -24,33 +24,59 @@ Visually, the graph looks like the following:
          \_/
 
 '''
+# Definition for a undirected graph node
+# class UndirectedGraphNode:
+#     def __init__(self, x):
+#         self.label = x
+#         self.neighbors = []
+
+class Solution:
+    # @param node, a undirected graph node
+    # @return a undirected graph node
+    # @DFS
+    def cloneGraph(self, node):
+        self.mapNodes = {}
+        if not node: return
+        return self.dfs(node)
+
+    def dfs(self, nodeA):
+        if nodeA in self.mapNodes:  return self.mapNodes[nodeA]
+        else:
+            nodeB = UndirectedGraphNode(nodeA.label)
+            self.mapNodes[nodeA] = nodeB
+            for neighbor in nodeA.neighbors:
+                nodeB.neighbors.append(self.dfs(neighbor))
+            return nodeB
+
+'''
+BFS稍微复杂一点点
+
 
 # Definition for a undirected graph node
 # class UndirectedGraphNode:
 #     def __init__(self, x):
 #         self.label = x
 #         self.neighbors = []
+
 class Solution:
     # @param node, a undirected graph node
     # @return a undirected graph node
-    def cloneGraph(self, nodeA):
-        self.nodePointers = {}
-        if nodeA == None:
-            return
-        return self.dfs(nodeA)
-        
-    def dfs(self, nodeA):
-        if nodeA in self.nodePointers: 
-            return
-        else:
-            tmp = UndirectedGraphNode(nodeA.label)
-            self.nodePointers[nodeA] = tmp
+    def cloneGraph(self, node):
+        if not node: return
+        nodeB = UndirectedGraphNode(node.label)
+        d, pre = {node: nodeB}, [node]
+        while pre:
+            cur = []
+            for x in pre:
+                for n in x.neighbors:  #每层把它的所有neighbor都加到cur里边去。(如果没在map)
+                    if n in d:  d[x].neighbors.append(d[n])
+                    else:
+                        cur.append(n)
+                        t = UndirectedGraphNode(n.label)
+                        d[x].neighbors.append(t)
+                        d[n] = t
+            pre = cur
+        return nodeB
 
-            for i in nodeA.neighbors:
-                if i in self.nodePointers:
-                    tmp.neighbors.append(self.nodePointers[i])
-                    continue
-                else:
-                    temp_i = self.dfs(i)
-                    tmp.neighbors.append(temp_i)
-            return tmp
+
+'''

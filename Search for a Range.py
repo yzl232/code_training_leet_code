@@ -10,13 +10,12 @@ Given [5, 7, 7, 8, 8, 10] and target value 8,
 return [3, 4].
 '''
 
-
 class Solution:  #那个majority也有用到。
     def leftS(self, arr, x):
         l=0; h = len(arr)-1
         while l<=h:
             m = (l+h)/2
-            if (m==0 or arr[m-1]<x) and arr[m]==x: return m
+            if (m==0 or arr[m-1]!=x) and arr[m]==x: return m
             elif arr[m]<x: l = m+1
             else:  h=m-1    #其他时候，相等的时候，也是在左边
         return -1
@@ -25,10 +24,10 @@ class Solution:  #那个majority也有用到。
         l=0; h = len(arr)-1
         while l<=h:
             m = (l+h)/2
-            if (m==len(arr)-1 or arr[m+1]>x) and arr[m]==x: return m
-            elif arr[m]<=x: l = m+1   #其他时候，相等的时候，也是在右边
-            else:  h=m-1
-        return -1
+            if (m==len(arr)-1 or arr[m+1]!=x) and arr[m]==x: return m
+            elif arr[m]>x:  h=m-1
+            else:   l=m+1
+        return -1  #其他时候，相等的时候，也是在右边
 
     def searchRange(self, arr, x):
         return [self.leftS(arr,x), self.rightS(arr,x)]

@@ -16,7 +16,7 @@ class Solution:
 
     def dfs(self, root):
         if not root: return
-        self.dfs(root.right)
+        self.dfs(root.right) #总共三步。 背下
         self.dfs(root.left)
         root.right = self.head  #右边连上
         root.left = None  #左置空

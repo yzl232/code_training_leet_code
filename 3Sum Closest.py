@@ -6,27 +6,20 @@ Given an array S of n integers, find three integers in S such that the sum is cl
     The sum that is closest to the target is 2. (-1 + 2 + 1 = 2).
 
 '''
-
 class Solution:
     # @return an integer
     def threeSumClosest(self, num, target):
-        num.sort()
-        minDiff = 10**10
-        ret = 0
+        num.sort();    minDiff = 10**10;     ret = 0
         for i in range(len(num)):
-            left = i+1
-            right = len(num) - 1
+            l = i+1;     r = len(num) - 1
             if i>0 and num[i] == num[i-1]: continue
-            while left<right:
-                s = num[i] + num[left] + num[right]
+            while l<r:
+                s = num[i] + num[l] + num[r]
                 diff = abs(target-s)
                 if diff<minDiff:
                     minDiff = diff
                     ret = s
-                if s == target:
-                    return  target
-                elif s<target:
-                    left+=1
-                else:
-                    right -=1
+                if s == target:     return  target
+                elif s<target:     l+=1
+                else:  r -=1
         return ret

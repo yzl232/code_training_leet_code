@@ -10,7 +10,7 @@ class Solution:
     # @return a ListNode
     def mergeTwoLists(self, l1, l2):
         dummy = ListNode(-1); prev = dummy
-        while l1 and l2:
+        while l1 and l2:   #用了pre。  也用了dummy
             if l1.val > l2.val:
                 prev.next = l2
                 l2 = l2.next

@@ -14,16 +14,13 @@ Return
 
 
 '''
-
 class Solution:
     # @return a list of lists of integers
-    def generate(self, numRows):
-        result = []
-        for i in range(numRows):
-            result.append([1]*(i+1))
-        for i in range(numRows):
-            if i==0: continue
-            temp =[0]+ result[i-1] + [0]
-            for j in range(i+1):
-                result[i][j] = temp[j] + temp[j+1]
-        return result
+    def generate(self, n):
+        if n<1: return []
+        ret = [[1]]
+        for i in range(n-1):
+            pre = ret[-1]
+            cur = [pre[j]+pre[j+1] for j in range(len(pre)-1)]
+            ret.append([1]+cur+[1])
+        return ret

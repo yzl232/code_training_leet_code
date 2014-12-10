@@ -11,6 +11,17 @@ Could you optimize your algorithm to use only O(k) extra space?
 '''
 class Solution:
     # @return a list of integers
+    def getRow(self, n):
+        ret = [1]
+        for i in range(n):
+            ret = [1] + [ret[j]+ret[j+1] for j in range(len(ret)-1) ] + [1]
+        return ret
+
+
+
+'''
+class Solution:
+    # @return a list of integers
     def getRow(self, rowIndex):
         result = [1]
         for i in range(rowIndex):
@@ -19,6 +30,8 @@ class Solution:
                 preNum, result[j] = result[j], result[j]+preNum
             result+=[1]
         return result
+'''
+
 '''
 class Solution:
     # @return a list of integers
@@ -32,5 +45,3 @@ class Solution:
             result.append([1]+newRow+[1])
         return result[-1]
 '''
-        
-        

@@ -10,7 +10,6 @@ Have you consider that the string might be empty? This is a good question to ask
 
 For the purpose of this problem, we define empty string as valid palindrome.
 '''
-
 class Solution:
     # @param s, a string
     # @return a boolean

@@ -25,34 +25,35 @@ return its level order traversal as:
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
 class Solution:
     def levelOrder(self, root):
         if not root: return []
-        prev, res = [root], []
-        while prev:
+        pre, ret = [root], []   # 除了pre, cur之外，还用了第三个vals
+        while pre:
             cur, vals = [], []
-            for node in prev:
-                vals.append(node.val)
-                if node.left:  cur.append(node.left)
-                if node.right:  cur.append(node.right)
-            res.append(vals)
-            prev = cur
-        return res
+            for n in pre:
+                vals.append(n.val)
+                if n.left:  cur.append(n.left)
+                if n.right:  cur.append(n.right)
+            ret.append(vals)
+            pre = cur
+        return ret
 '''
+BFS的做法和DFS的做法
 
 class Solution:
     # @param root, a tree node
     # @return a list of lists of integers
     def levelOrder(self, root):
-        self.result = []
-        self.dfs(root, 0)
-        return self.result
+        self.ret = []
+        self.dfs(root, 1)
+        return self.ret
 
-    def dfs(self, root, level):
+    def dfs(self, root, lvl):
         if not root: return
-        if len(self.result) <= level: self.result.append([]) #   否则下面append不了的。 要加上
-        self.result[level].append(root.val) #因为这里level马上要用到。
-        self.dfs(root.left, level+1)
-        self.dfs(root.right, level+1)
+        if len(self.ret) < lvl: self.ret.append([]) #   否则下面append不了的。 要加上
+        self.ret[lvl-1].append(root.val) #因为这里level马上要用到。
+        self.dfs(root.left, lvl+1)
+        self.dfs(root.right, lvl+1)
+
 '''
