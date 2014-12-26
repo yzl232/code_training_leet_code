@@ -6,11 +6,11 @@ class Solution:
         a = abs(a);  b = abs(b)
         ret = 0
         while a >= b:
-            k = 1; tmp = b
-            while a >= tmp+tmp:
-                tmp += tmp
+            k = 1; t = b
+            while a >= t+t:
+                t += t
                 k+=k
             ret += k
-            a -= tmp
+            a -= t
         if sign == -1: return 0-ret
-        return ret   #dividend剩下的部分就是mod的值
+        return max(min(ret, 2147483647 ), -2147483648)  #dividend剩下的部分就是mod的值

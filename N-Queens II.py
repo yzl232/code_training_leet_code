@@ -7,6 +7,23 @@ Now, instead outputting board configurations, return the total number of distinc
 class Solution:
     # @return an integer
     def totalNQueens(self, n):
+        self.ret = 0; self.n = n
+        self.dfs( [],  0)
+        return self.ret
+
+    def dfs(self, cur, rowN):
+        if rowN == self.n:
+            self.ret+=1
+            return
+        for i in range(self.n):
+            if i not in cur and True not in [abs(rowN - j) == abs(i - cur[j]) for j in  range(len(cur)) ]:
+                self.dfs(cur + [i],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
+
+
+'''
+class Solution:
+    # @return an integer
+    def totalNQueens(self, n):
         self.result = 0
         self.n = n
         self.dfs(0, [-1 for i in range(n)])
@@ -29,4 +46,4 @@ class Solution:
                 if valid:
                     board[curNum] = i
                     self.dfs(curNum+1, board)
-        
+'''

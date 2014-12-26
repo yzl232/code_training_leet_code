@@ -15,17 +15,12 @@ class Solution:
     def countAndSay(self, n):
         s = '1'
         for i in range(n-1):
-            newS = ''
-            pre = s[0]
-            num = 1
+            s1='';  pre = s[0];   cnt=1
             for j in range(1, len(s)):
-                cur = s[j]
-                if cur == pre: #核心就在这里。 一样的数字，统计。  不一样，立刻更新输出
-                    num+=1
+                if s[j]==pre: cnt+=1
                 else:
-                    newS+= str(num) + pre# finish counting the prev ch, update
-                    num = 1
-                    pre = cur
-            newS += str(num) + pre # string ends, update
-            s = newS
+                    s1+=str(cnt)+pre
+                    cnt=1;   pre = s[j]
+            s1+=str(cnt)+pre
+            s=s1
         return s

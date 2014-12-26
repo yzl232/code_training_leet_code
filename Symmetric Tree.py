@@ -20,7 +20,6 @@ But the following is not:
 Note:
 Bonus points if you could solve it both recursively and iteratively.
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -31,13 +30,12 @@ Bonus points if you could solve it both recursively and iteratively.
 class Solution:
     # @param root, a tree node
     # @return a boolean
-    def isSymmetric(self, root):
+    def isSymmetric(self, root):  #和same tree一模一样
         if not root: return True
-        return self.check(root.left, root.right)
+        return self.dfs(root.left, root.right)
 
-    def check(self, left, right):
-        if not left and not right: return  True
-        if not left or not right: return False
-        if left.val != right.val: return False
-        return self.check(left.left, right.right) and self.check(left.right, right.left)
-        
+    def dfs(self, l, r):
+        if not l and not r:return True
+        if not l or not r: return False
+        if l.val != r.val: return False
+        return self.dfs(l.left, r.right) and self.dfs(l.right, r.left)

@@ -8,9 +8,9 @@ Your algorithm should have a linear runtime complexity. Could you implement it w
 class Solution:
     # @param A, a list of integer
     # @return an integer
-    def singleNumber(self, A):
-        result = 0
-        for i in A:
-            result ^= i
-        return result
+    def singleNumber(self, arr):
+        ret = 0
+        for x in arr:
+            ret ^= x
+        return ret
         

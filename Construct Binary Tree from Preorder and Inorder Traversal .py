@@ -6,7 +6,6 @@ Note:
 You may assume that duplicates do not exist in the tree.
 
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -18,14 +17,11 @@ class Solution:
     # @param preorder, a list of integers
     # @param inorder, a list of integers
     # @return a tree node
-    def buildTree(self, preorder, inorder):
-        if len(preorder) ==0: return None
-        root_val = preorder[0]
-        root = TreeNode(root_val)
-        left_count = inorder.index(root_val)
-
-        root.left = self.buildTree(preorder[1:1+left_count], inorder[:left_count])
-        root.right = self.buildTree(preorder[1+left_count:], inorder[1+left_count:])
-        
+    def buildTree(self, preorder, inorder): #  #核心在于 1 找rootval。 用pre或者post  2 inorder的index找出root的位置
+        if not preorder: return None
+        rootV = preorder[0]
+        root = TreeNode(rootV)
+        lCnt = inorder.index(rootV)
+        root.left = self.buildTree(preorder[1:lCnt+1], inorder[:lCnt])
+        root.right = self.buildTree(preorder[1+lCnt:], inorder[1+lCnt:])
         return root
-        

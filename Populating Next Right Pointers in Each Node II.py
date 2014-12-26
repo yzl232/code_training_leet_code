@@ -26,7 +26,6 @@ After calling your function, the tree should look like:
 
 
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -41,21 +40,19 @@ class Solution:
     def connect(self, root):
         cur=root
         while cur:
-            firstNextLevel=None     #存第一个next level的node
+            firstN=None     #存第一个next level的node
             prev=None
             while cur:
-                if not firstNextLevel:   #找第一个next level node
-                    firstNextLevel=cur.left if cur.left else cur.right
+                if not firstN:   #找第一个next level node
+                    firstN=cur.left if cur.left else cur.right
                 if cur.left:      #如果有pre， left。连上left
-                    if prev:
-                        prev.next=cur.left
+                    if prev:           prev.next=cur.left
                     prev=cur.left
                 if cur.right:   #如果有pre。有right。梁上
-                    if prev:
-                        prev.next=cur.right
+                    if prev:        prev.next=cur.right
                     prev=cur.right
                 cur=cur.next
-            cur=firstNextLevel
+            cur=firstN
 '''
 level order traversal 可以做  用O(n) space
 
@@ -66,20 +63,17 @@ class Solution:
     # @return nothing
     def connect(self, root):
         if not root: return
-        cur = root.next
-        while cur:
-            if cur.left:
-                cur = cur.left
-                break
-            if cur.right:
-                cur = cur.right
-                break
-            cur = cur.next
-        if root.right:  root.right.next = cur
+        x = self.getNext(root.next)
+        if root.right: root.right.next = x
         if root.left:
-            root.left.next = root.right if root.right else cur
+            root.left.next = root.right if root.right else x
         self.connect(root.right)
         self.connect(root.left)
 
+    def getNext(self, cur):
+        while cur:
+            if cur.left: return cur.left
+            if cur.right:   return cur.right
+            cur = cur.next
 
 '''

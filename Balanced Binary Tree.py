@@ -5,7 +5,6 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 '''
 
 
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -16,16 +15,14 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 class Solution:
     # @return a list of tree node
     def isBalanced(self, root):
-       return False if self.checkHeight(root) == -1 else True
+        return self.checkHeight(root)!=-1
 
     def checkHeight(self, root):
-        if root == None: return 0
-        leftHeight = self.checkHeight(root.left)
-        if leftHeight == -1:return -1
-        rightHeight = self.checkHeight(root.right)
-        if rightHeight == -1: return -1
-        if abs(leftHeight - rightHeight) > 1:return -1
-        return max(leftHeight, rightHeight)+1
+        if not root: return 0
+        lh, rh = self.checkHeight(root.left), self.checkHeight(root.right)
+        if lh==-1 or rh==-1 or abs(lh-rh)>1: return -1
+        return max(lh, rh)+1
+
 '''
 # Definition for a  binary tree node
 # class TreeNode:

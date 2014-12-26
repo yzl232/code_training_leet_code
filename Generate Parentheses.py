@@ -10,15 +10,13 @@ class Solution:
     # @param an integer
     # @return a list of string
     def generateParenthesis(self, n):
-        self.result =[]
+        self.ret =[]
         self.dfs(n, n, '')
-        return self.result
+        return self.ret
 
-    def dfs(self, l, r, tmpResult):
+    def dfs(self, l, r, cur):
         if l == r == 0:
-            self.result.append(tmpResult)
+            self.ret.append(cur)
             return
-        if l>0:
-            self.dfs(l-1, r, tmpResult+'(')
-        if r>l:
-            self.dfs(l, r-1, tmpResult+')')
+        if l>0:    self.dfs(l-1, r, cur+'(')
+        if r>l:    self.dfs(l, r-1, cur+')')

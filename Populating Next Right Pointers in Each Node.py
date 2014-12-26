@@ -42,19 +42,25 @@ After calling your function, the tree should look like:
 #         self.right = None
 #         self.next = None
 #based on level order traversal
+# Definition for a  binary tree node
+# class TreeNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
+#         self.next = None
+#based on level order traversal
 
 class Solution:
     # @param root, a tree node
     # @return nothing
     def connect(self, root):
         leftMost=root
-        while(leftMost):
+        while leftMost:  #每层的最左边
             cur=leftMost
-            while cur:
-                if cur.left:
-                    cur.left.next=cur.right
-                if cur.right and cur.next:
-                    cur.right.next=cur.next.left
+            while cur:  #下一层全部连起来
+                if cur.left:   cur.left.next=cur.right  #和recursion的一模一样的。
+                if cur.next and cur.right :   cur.right.next=cur.next.left
                 cur=cur.next
             leftMost=leftMost.left
 

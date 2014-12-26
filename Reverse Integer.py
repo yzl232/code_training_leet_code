@@ -20,12 +20,12 @@ Test cases had been added to test the overflow behavior
 '''
 class Solution:
     def reverse(self, x):
-        sign = 1
-        result = 0
-        if x < 0:
-            sign = -1
-            x = -x
+        sign = 1 if x>0 else -1
+        ret = 0
+        x = abs(x)
         while x > 0:
-            result = result * 10 + x % 10
-            x /= 10
-        return sign * result#和palindrome integer类似。
+            ret = ret * 10 + x % 10
+            x /= 10  #和palindrome integer类似。 与atoi也类似
+        ret = ret*sign
+        if ret> 2147483647 or ret<  -2147483648: return 0
+        return ret

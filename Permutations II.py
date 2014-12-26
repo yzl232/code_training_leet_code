@@ -11,16 +11,15 @@ class Solution:
     # @return a list of lists of integers
     def permuteUnique(self, num):
         num.sort()
-        self.result = []; 
+        self.ret = [];
         self.dfs( [], num)
-        return self.result
-        
-    def dfs(self, tmpResult, nums):
-        if len(nums) == 0 and tmpResult not in self.result:
-            self.result.append(tmpResult)
+        return self.ret
+
+    def dfs(self, cur, nums):
+        if not nums:
+            self.ret.append(cur)
             return
-        else:
-            for i in range(len(nums)):
-                if i>0 and nums[i] == nums[i-1]: continue
-                tmpNums = nums[:]
-                self.dfs(tmpResult+[tmpNums.pop(i)], tmpNums)
+        for i in range(len(nums)):
+            if i>0 and nums[i] == nums[i-1]: continue
+            t = nums[:]
+            self.dfs(cur+[t.pop(i)], t)

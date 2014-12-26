@@ -25,17 +25,16 @@ class Solution:
     def generateTrees(self, n):
         return self.dfs(1, n)
 
-    def dfs(self, start, end):
-        if start > end: return [None]
-        result = []
-        for rootVal in range(start, end+1):
-            leftList = self.dfs(start, rootVal-1)
-            rightList = self.dfs(rootVal+1, end)
+    def dfs(self, l, h):
+        if l>h: return [None]
+        ret = []
+        for rootV in range(l, h+1):
+            leftList = self.dfs(l, rootV-1)
+            rightList = self.dfs(rootV+1, h)
             for i in leftList:
                 for j in rightList:
-                    root = TreeNode(rootVal)
-                    root.left = i
-                    root.right = j
-                    result.append(root)
-        return result
-        
+                    x = TreeNode(rootV)
+                    x.left ,x.right = i, j
+                    ret.append(x)
+        return ret
+

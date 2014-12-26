@@ -7,24 +7,23 @@
     getMin() -- Retrieve the minimum element in the stack.
 
 '''
-# encoding=utf-8
+
 class MinStack:
     # @param x, an integer
     def __init__(self):
         self.stack1 = []
         self.stack2 = []
+
     # @return an integer
     def push(self, x):
-        self.stack1.append(x)
-        if len(self.stack2) == 0 or x <= self.stack2[-1]:
-            self.stack2.append(x)
+        self.stack1.append(x)  #小于或者等于。才push stack2
+        if not self.stack2 or x <= self.stack2[-1]:   self.stack2.append(x)
 
     # @return nothing
     def pop(self):
         top = self.stack1[-1]
         self.stack1.pop()
-        if top == self.stack2[-1]:
-            self.stack2.pop()
+        if top == self.stack2[-1]:    self.stack2.pop()  #cur与最小值相等。 pop stack2
 
     # @return an integer
     def top(self):

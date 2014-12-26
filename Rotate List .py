@@ -16,16 +16,15 @@ class Solution:
     # @param head, a ListNode
     # @param k, an integer
     # @return a ListNode
-    def rotateRight(self, head, k):
-        if not head or k==0: return head
-        l = 1; p = head
+    def rotateRight(self, h, k):
+        if not h or k==0: return h
+        l = 1; p = h
         while p.next:
             p = p.next
             l+=1
         step = l- k%l
-        p.next = head
-        for i in range(step):
-            p = p.next
-        head = p.next
-        p.next = None
-        return head
+        p.next = h   #连成环
+        for i in range(step):   p = p.next
+        h = p.next
+        p.next = None   #找到，断开
+        return h

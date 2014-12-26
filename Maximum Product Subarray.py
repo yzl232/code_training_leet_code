@@ -8,8 +8,9 @@ class Solution:
     # @param A, a list of integers
     # @return an integer
     def maxProduct(self, A):
-        result = maxN = minN = A[0]
+        ret = maxN = minN = A[0]
         for i in range(1, len(A)):
-            maxN, minN = max(A[i], maxN*A[i], minN*A[i]),  min(A[i], maxN*A[i], minN*A[i])
-            result = max(result, maxN)
-        return result
+            t = (A[i], maxN*A[i], minN*A[i])
+            maxN, minN = max(t), min(t)
+            ret = max(ret, maxN)
+        return ret

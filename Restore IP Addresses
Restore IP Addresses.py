@@ -11,18 +11,15 @@ class Solution:
     # @return a list of strings
     def restoreIpAddresses(self, s):
         self.result = []
-        self.getIP('', s, 0)
+        self.dfs(0, '', s)
         return self.result
 
-    def getIP(self, currIP, s, currIndex):
-        if currIndex == 3:
-            if len(s)>0:
-                if int(s)<=255 and str(int(s)) == s:
-                    self.result.append(currIP + s)
+    def dfs(self, num, cur, s):
+        if num == 4:
+            if s == '':  self.result.append(cur[:-1])
             return
-        else:
-            for i in range(1, 4):
-                if i>len(s): break
-                cur = s[:i]
-                if int(cur) <= 255 and str(int(cur)) == cur:
-                    self.getIP(currIP + cur + '.',  s[i:], currIndex+1)
+        for i in range(1, 4):
+            if len(s)>=i:
+                ip = s[:i]
+                if 0<=int(ip)<=255 and str(int(ip)) == ip:
+                    self.dfs(num+1, cur + ip + '.', s[i:])

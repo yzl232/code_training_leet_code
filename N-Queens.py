@@ -19,6 +19,26 @@ There exist two distinct solutions to the 4-queens puzzle:
 ]
 
 '''
+
+
+
+class Solution:
+    # @return a list of lists of string
+    def solveNQueens(self, n):
+        self.rets = []; self.n = n
+        self.dfs( [],  0)
+        return self.rets
+
+    def dfs(self, cur, rowN):
+        if rowN == self.n:
+            self.rets.append(['.' * i + "Q" + '.' * (self.n - i - 1) for i in cur])
+            return
+        for i in range(self.n):
+            if i not in cur and True not in [abs(rowN - j) == abs(i - cur[j]) for j in  range(len(cur)) ]:
+                self.dfs(cur + [i],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
+
+
+'''
 class Solution:    # a little similar to Sudoku question
     # @return a list of lists of string   # since each line set once, we only need to check each column and each diagnoal
     def solveNQueens(self, n):
@@ -47,3 +67,4 @@ class Solution:    # a little similar to Sudoku question
             if valid:
                 board[currQueenNum] = i
                 self.solve(n, currQueenNum + 1, board)
+'''

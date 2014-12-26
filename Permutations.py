@@ -10,15 +10,14 @@ class Solution:
     # @param num, a list of integer
     # @return a list of lists of integers
     def permute(self, num):
-        self.result = []; 
+        self.ret = []; num.sort()
         self.dfs( [], num)
-        return self.result
+        return self.ret
         
-    def dfs(self, tmpResult, nums):
-        if len(nums) == 0 and tmpResult not in self.result:
-            self.result.append(tmpResult)
+    def dfs(self, cur, nums):
+        if not nums:
+            self.ret.append(cur)
             return
-        else:
-            for i in range(len(nums)):
-                tmpNums = nums[:]
-                self.dfs(tmpResult+[tmpNums.pop(i)], tmpNums)
+        for i in range(len(nums)):
+            t = nums[:]
+            self.dfs(cur+[t.pop(i)], t)

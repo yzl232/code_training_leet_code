@@ -7,23 +7,22 @@ return [1,6],[8,10],[15,18].
 '''
 
 
-
 # Definition for an interval.
 # class Interval:
 #     def __init__(self, s=0, e=0):
 #         self.start = s
 #         self.end = e
-class Solution:
+class Solution: #思路就是排序后，检查前一个有没有重叠。 有就合并
     # @param intervals, a list of Interval
     # @return a list of Interval
     def merge(self, arr):
-        if len(arr)==0: return
+        if len(arr) == 0:   return arr
         arr.sort(key = lambda x: x.start)
         ret = [arr[0]]
         for i in range(1, len(arr)):
-            cur, pre = arr[i], arr[i-1]
-            if cur.start<=pre.end:  pre.end = max(pre.end, cur.end)
-            else:  ret.append(cur)
+            cur, pre = arr[i], ret[-1]
+            if cur.start <= pre.end:  pre.end = max(pre.end, cur.end)   #只要更新pre.end就好。都不用真的插入
+            else:   ret.append(cur)
         return ret
 
 

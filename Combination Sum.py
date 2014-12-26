@@ -14,23 +14,24 @@ A solution set is:
 [7]
 [2, 2, 3]
 '''
+#permutation 一般是  t = c[:].  t.pop(i).   self.dfs
+#combination 一般是  self.dfs(   , c[:])
+#都是 for i in range(c)
 
 class Solution:
     # @param candidates, a list of integers
     # @param target, integer
     # @return a list of lists of integers
-    def combinationSum(self, candidates, target):
-        candidates.sort()
-        self.result = []; self.candidates = candidates
+    def combinationSum(self, c, target):
+        c.sort();       self.ret = []; self.c = c
         self.dfs(0, target, [])
-        return self.result
-        
-    def dfs(self, curNum, target, tmpResult):
+        return self.ret
+
+    def dfs(self, n1, target, cur):
         if target ==0:
-            self.result.append(tmpResult)
+            if cur in self.ret: return
+            self.ret.append(cur)
             return
-        elif target>0:
-            for i in range(curNum, len(self.candidates)):
-                c = self.candidates[i]
-                if target>=c:
-                    self.dfs(i, target-c, tmpResult+[c])
+        for i in range(n1, len(self.c)):
+            x = self.c[i]
+            if target>=x:              self.dfs(i, target-x, cur+[x])

@@ -16,8 +16,6 @@ return [1,2,3].
 Note: Recursive solution is trivial, could you do it iteratively?
 '''
 
-
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -29,23 +27,17 @@ class Solution:
     # @param root, a tree node
     # @return a list of integers
     def preorderTraversal(self, root):
-        if not root: return []
         stack = []
-        result = []
-        stack.append(root)
-        while len(stack)>0:
+        if root: stack.append(root)
+        ret = []
+        while stack:
             cur = stack.pop()
-            result.append(cur.val)
-            if cur.right:
-                stack.append(cur.right)
-            if cur.left:
-                stack.append(cur.left)
-        return result
-        
-
-
-'''
-# Definition for a  binary tree node
+            ret.append(cur.val)
+            if cur.right: stack.append(cur.right)
+            if cur.left: stack.append(cur.left)
+        return ret
+        '''
+        # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
@@ -66,4 +58,4 @@ class Solution:
         self.result.append(root.val)
         self.dfs(root.left)
         self.dfs(root.right)
-'''
+        '''

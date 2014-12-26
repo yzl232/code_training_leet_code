@@ -31,6 +31,7 @@ class Solution:
             ret +=[ j+[i] for j in ret if j+[i] not in ret]
         return ret
 '''
+
 class Solution:
     # @param S, a list of integer
     # @return a list of lists of integer
@@ -41,7 +42,8 @@ class Solution:
         return self.result
 
     def dfs(self, tmp, candidates):
-        if tmp not in self.result: self.result.append(tmp)
+        self.result.append(tmp)
         for i in range(len(candidates)):
+            if i>0 and candidates[i] == candidates[i-1]: continue
             self.dfs(tmp+[candidates[i]], candidates[i+1:])
 '''

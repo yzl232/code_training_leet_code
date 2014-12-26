@@ -14,30 +14,27 @@ Note: It is intended for the problem statement to be ambiguous. You should gathe
 
 class Solution:
     # @param s, a string
-    # @return a boolean
+    # @return a boolean和atoi比较像
     # example  ===     -123.E+5     ====
     def isNumber(self, s):
         s+='#'; i=0
         while s[i] ==' ':     i+=1
-        if s[i] == '+' or s[i] == '-': i+=1
+        if s[i] in ('+', '-'): i+=1
         n1 = 0
         while'0'<=s[i]<='9':
-                n1+=1
-                i+=1
+                n1+=1;  i+=1
         if s[i] == '.': i+=1
         n2 = 0
         while'0'<=s[i]<='9':
-                n2+=1
-                i+=1
-        if n1==0 and n2==0: return False
-        if s[i] == 'e' or s[i] == 'E':
+                n2+=1;  i+=1
+        if n1==n2==0: return False  #e左边不能完全没有数字
+        if s[i] in ('e', 'E'):
             i+=1
-            if s[i] == '+' or s[i] == '-': i+=1
+            if s[i] in ('+', '-'): i+=1
             n3 = 0
             while '0'<=s[i]<='9':
-                n3+=1
-                i+=1
-            if n3 == 0: return False
+                n3+=1;  i+=1
+            if n3 == 0: return False  #如果出现e。不能完全没有数字
         while s[i] == ' ': i+=1
         return s[i] == '#'
 
@@ -103,5 +100,4 @@ class Solution1:
             if n3 == 0: return False
         while s[0] == ' ': s = s[1:]
         return s == '#'
-
 '''

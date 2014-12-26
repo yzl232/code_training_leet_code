@@ -9,15 +9,14 @@ Notes: It is intended for this problem to be specified vaguely (ie, no given inp
 class Solution:
     # @return an integer
     def atoi(self, s):
-        s+='#';  i=0; result =0    # 不用考虑边界'#'
+        s+='#';  i=0    # 不用考虑边界'#'
         while s[i]==' ': i+=1  #s[i]=='',   i+=1 这样子用pointer也很好。
-        sign = 1
-        if s[i]=='+':
-            i+=1
+        sign = 1; ret=0
+        if s[i]=='+':    i+=1
         elif s[i]=='-':
             sign = -1
             i+=1
         while '0'<=s[i]<='9':
-            result =result*10 + ord(s[i])-ord('0')
+            ret =ret*10 + ord(s[i])-ord('0')
             i+=1
-        return max(min(result*sign, 2147483647 ), -2147483648)
+        return max(min(ret*sign, 2147483647 ), -2147483648)

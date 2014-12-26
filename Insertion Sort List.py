@@ -1,5 +1,4 @@
 #Sort a linked list using insertion sort.
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -9,21 +8,16 @@
 class Solution:
     # @param head, a ListNode
     # @return a ListNode
-    def insertionSortList(self, head):  #http://www.cnblogs.com/zuoyuan/p/3700105.html
-        if not head:
-            return head
+    def insertionSortList(self, h):  #http://www.cnblogs.com/zuoyuan/p/3700105.html
+        if not h:  return
         dummy = ListNode(0)
-        dummy.next = head
-        curr = head
-        while curr.next:
-            if curr.next.val < curr.val:  # looking for the first that is less than the former
-                pre = dummy
-                while pre.next.val < curr.next.val: # find the place to do the insertion
-                    pre = pre.next
-                tmp = curr.next    # move curr.next
-                curr.next = tmp.next
-                tmp.next = pre.next
-                pre.next = tmp
-            else:
-                curr = curr.next
+        dummy.next = h;   cur = h
+        while cur.next:  #因为要对找到的这个节点curr.next比较。 所以循环用curr.next
+            if cur.next.val < cur.val:  # looking for the first that is less than the former
+                pre = dummy; t = cur.next  #因为要在找到的这个节点前面插入，用pre.next
+                while pre.next.val < t.val:     pre = pre.next # find the place to do the    insertion
+                cur.next = t.next# move cur.next
+                t.next = pre.next
+                pre.next = t
+            else:   cur = cur.next
         return  dummy.next

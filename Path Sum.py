@@ -26,10 +26,7 @@ class Solution:
     # @param root, a tree node
     # @param sum, an integer
     # @return a boolean
-    def hasPathSum(self, root, sum):
+    def hasPathSum(self, root, s):
         if not root: return False
-        elif not root.left and not root.right and root.val == sum: return True
-        else:
-            return self.hasPathSum(root.left, sum-root.val) or self.hasPathSum(root.right, sum-root.val)
-            
-            
+        if s==root.val and not root.left and not root.right: return True
+        else:  return self.hasPathSum(root.left, s-root.val) or self.hasPathSum(root.right, s-root.val)

@@ -20,40 +20,32 @@ X O X X
 
 
 '''
+
 class Solution:
     # @param board, a 9x9 2D array
     # Capture all regions by modifying the input board in-place.
     # Do not return any value.
     def solve(self, board):
         if board == []: return
-        r = len(board); c = len(board[0])
-        candidates = set([])
-        for i in range(r):
-            if board[i][0] == 'O': candidates.add((i, 0))
-            if board[i][c-1] == 'O': candidates.add((i, c-1))
-        for j in range(c):
-            if board[0][j] == 'O': candidates.add((0, j))
-            if board[r-1][j] == 'O': candidates.add((r-1, j))
-        while len(candidates)>0:
-            current = set([])
-            for can in candidates:
-                i = can[0]; j = can[1]
-                board[i][j] = '#'
-            for can in candidates:
-                i = can[0]; j = can[1]
-                if i>0 and board[i-1][j] == 'O': current.add((i-1, j))
-                if i<r-1 and board[i+1][j] == 'O': current.add((i+1, j))
-                if j>0 and board[i][j-1] == 'O': current.add((i, j-1))
-                if j<c-1 and board[i][j+1] == 'O': current.add((i, j+1))
-            candidates = current
-        for i in range(r):
-            for j in range(c):
+        m = len(board); n = len(board[0])
+        pre = set([])
+        for i in range(m):
+            if board[i][0] == 'O': pre.add((i, 0))
+            if board[i][n-1] == 'O': pre.add((i, n-1))
+        for j in range(n):
+            if board[0][j] == 'O': pre.add((0, j))
+            if board[m-1][j] == 'O': pre.add((m-1, j))
+        while pre:
+            cur = set([])
+            for r, c in pre:  board[r][c] = '#'
+            for i, j in pre:
+                for r, c in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+                    if 0<=r<=m-1 and 0<=c<=n-1 and board[r][c]=='O': cur.add((r, c))
+            pre = cur
+        for i in range(m):
+            for j in range(n):
                 if board[i][j] == 'O': board[i][j] = 'X'
-        for i in range(r):
-            for j in range(c):
                 if board[i][j] == '#': board[i][j] = 'O'
-
-
 '''
 class Solution:
     # @param board, a 9x9 2D array
@@ -61,30 +53,23 @@ class Solution:
     # Do not return any value.
     def solve(self, board):
         if board == []: return
-        r, c, candidates = len(board), len(board[0]), set([])
-        self.r , self.c = r, c
-        for i in range(r):
-            if board[i][0] == 'O': self.dfs(i, 0, board)
-            if board[i][c-1] == 'O':self.dfs(i, c-1, board)
-        for i in range(c):
-            if board[0][i] == 'O': self.dfs(0, i, board)
-            if board[r-1][i] == 'O': self.dfs(r-1, i, board)
+        m, n = len(board), len(board[0])
+        self.m, self.n = m, n
+        for i in range(m):
+            if board[i][0] == 'O': self.dfs(board, i, 0 )
+            if board[i][n-1] == 'O':self.dfs(board, i, n-1)
+        for i in range(n):
+            if board[0][i] == 'O': self.dfs(board, 0, i)
+            if board[m-1][i] == 'O': self.dfs(board ,m-1, i)
+        for i in range(m):
+            for j in range(n):
+                if board[i][j] == 'O': board[i][j] = 'X'
+                if board[i][j] == '#': board[i][j] = 'O'
 
-        for i in range(r):
-            for j in range(c):
-                if board[i][j] == 'O':
-                    board[i][j] = 'X'
-
-        for i in range(r):
-            for j in range(c):
-                if board[i][j] == '#':
-                    board[i][j] = 'O'
-
-    def dfs(self, i, j, board):
+    def dfs(self, board, i, j ):
         board[i][j] = '#'
-        if i>0 and board[i-1][j] == 'O': self.dfs(i-1, j, board)
-        if i<self.r-1 and board[i+1][j] == 'O': self.dfs(i+1, j, board)
-        if j>0 and board[i][j-1] == 'O': self.dfs(i, j-1, board)
-        if j<self.c-1 and board[i][j+1] == 'O': self.dfs(i, j+1, board)
-
+        for d in  [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
+            r = d[0]; c=d[1]
+            if 0<=r<=self.m-1 and 0<=c<=self.n-1:
+                if board[r][c]=='O': self.dfs(board, r, c)
 '''

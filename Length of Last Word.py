@@ -10,6 +10,17 @@ Given s = "Hello World",
 return 5.
 '''
 class Solution:
+    # @param s, a string
+    # @return an integer
+    def lengthOfLastWord(self, s):
+        n = len(s); cnt=0
+        for i in range(n-1, -1, -1):
+            if s[i]!=' ':cnt+=1
+            elif cnt>0: return cnt
+        return cnt
+
+'''
+class Solution:
     def lengthOfLastWord(self, s):
         if not s: return 0
         i = len(s)-1
@@ -17,7 +28,7 @@ class Solution:
         i2 = i
         while i2>=0 and s[i2]!=' ': i2-=1
         return i-i2
-
+'''
 '''
 class Solution:
     def lengthOfLastWord(self, s):

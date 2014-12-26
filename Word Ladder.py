@@ -21,35 +21,25 @@ Note:
     All words contain only lowercase alphabetic characters.
 
 '''
-
 class Solution:
     # @param start, a string
     # @param end, a string
     # @param dict, a set of string
     # @return an integer
     def ladderLength(self, start, end, dict):
+        cnt, pre = 0, [start]
         dict.add(end)
-        wordLen = len(start)
-        candidates = set()
-        candidates.add((start, 1))
-        while True:
-            if len(candidates)==0:  break
-            current = set()
-            for cur in candidates:
-                curWord = cur[0];curLen = cur[1]
-                if curWord == end:return curLen
-                for i in range(wordLen):
-                    part1 = curWord[:i]; part2 = curWord[i+1:] # replace ith char
-                    #print part1, part2
-                    for j in 'abcdefghijklmnopqrstuvwxyz': # BFS
-                        if curWord[i] !=j:
-                            nextWord = part1 + j + part2
-                            #print nextWord
-                            if nextWord == end: return curLen+1
-                            if nextWord in dict:
-                                current.add((nextWord, curLen + 1))
-                                dict.remove(nextWord)
-            candidates = current
+        while pre:
+            cur = []
+            for word in pre:
+                if word == end:     return cnt + 1
+                for i in range(len(word)):
+                    for j in 'abcdefghijklmnopqrstuvwxyz':
+                        t = word[:i] + j + word[i + 1:]
+                        if t in dict:
+                            cur.append(t);  dict.remove(t)
+            cnt += 1
+            pre = cur
         return 0
 '''
 双向bfs会很快

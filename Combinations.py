@@ -15,19 +15,16 @@ If n = 4 and k = 2, a solution is:
 
 '''
 
-
 class Solution:
     # @return a list of lists of integers
     def combine(self, n, k):
-        self.k = k
-        self.n = n
-        self.result = []
-        self.dfs(1, [], 0)
-        return self.result
+        self.n, self.k, self.ret = n, k, []
+        self.dfs(1, [])
+        return self.ret
 
-    def dfs(self, start, curList, count):
-        if count == self.k:
-            self.result.append(curList)
+    def dfs(self, start, cur ):
+        if len(cur) == self.k:
+            self.ret.append(cur)
             return
         for i in range(start, self.n+1):
-            self.dfs(i+1, curList+[i], count+1)  # i+1, but not start +1  .  which means only add the number that is bigger 
+            self.dfs(i+1,  cur+[i])# i+1,  which  means only add the number that is bigger (nums[i+1:]) .  In permutations, we choose all the other numbers except this i.  tempNums.pop()

@@ -19,31 +19,27 @@ Given {1,2,3,4}, reorder it to {1,4,2,3}.
 class Solution:
     # @param head, a ListNode
     # @return nothing
-    def reorderList(self, head):
-        if not head or not head.next or not head.next.next: return
-        slow = fast = head
+    def reorderList(self, h):
+        if not h or not h.next: return
+        fast = slow = h
         while fast and fast.next:
             fast = fast.next.next
             slow = slow.next
-        head2 = slow.next
+        h2 = slow.next
         slow.next = None
+        h2 = self.reverse(h2)
+        while h and h2:
+            t1 = h.next;  t2 = h2.next
+            h.next = h2;   h2.next = t1
+            h = t1;    h2 = t2
 
-        dummy = ListNode(0)
-        pre = dummy; dummy.next = head2; last = head2
-        cur = head2.next
+    def reverse(self, head):
+        if not head: return
+        dummy = ListNode(-1); dummy.next = head
+        pre = dummy; last = head; cur = head.next
         while cur:
             last.next = cur.next
             cur.next = pre.next
             pre.next = cur
             cur = last.next
-        head2 = pre.next
-
-        p1 = head; p2 = head2
-        while p2 and p1:
-            temp1 =p1.next
-            temp2 = p2.next
-            p1.next = p2
-            p2.next = temp1
-
-            p1 = temp1
-            p2 = temp2
+        return dummy.next

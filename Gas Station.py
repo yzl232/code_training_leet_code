@@ -24,5 +24,3 @@ class Solution:
                 left = 0
         if total < 0:       return -1
         return start
-        
-        

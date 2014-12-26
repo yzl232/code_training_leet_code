@@ -17,13 +17,14 @@ class Solution:
     # @param a ListNode
     # @return a ListNode
     def swapPairs(self, head):
-        dummy = ListNode(-1); 
-        pre = dummy; pre.next = head; last = head
-        while last and last.next:
+        dummy = ListNode(0)
+        pre, dummy.next, last = dummy, head, head
+        while last and last.next:  #考虑操纵2个node.这是必须的。
             cur = last.next
             last.next = cur.next
             cur.next = pre.next
             pre.next = cur
-            pre = last
-            last = last.next
+            #以上连环
+            pre = last       #与reverse linkedlist 区别。  不断更新pre, last
+            last = last.next  #普通的逆转，pre和last不会变的。。
         return dummy.next

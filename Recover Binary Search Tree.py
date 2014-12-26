@@ -7,7 +7,6 @@ A solution using O(n) space is pretty straight forward. Could you devise a const
 
 confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -19,7 +18,7 @@ class Solution:
     # @param root, a tree node
     # @return a tree node
     def recoverTree(self, root):
-        self.prev = self.n1= self.n2 = None
+        self.prev = self.n1= self.n2 = None  #pre用来root.val与前面比较
         self.dfs(root)
         self.n1.val, self.n2.val = self.n2.val, self.n1.val
         return root
@@ -27,9 +26,9 @@ class Solution:
     def dfs(self, root):
         if not root: return
         self.dfs(root.left)
-        if self.prev and self.prev.val > root.val:
+        if self.prev and self.prev.val > root.val:  #发现逆序
             self.n2 = root
-            if not self.n1: self.n1 = self.prev
+            if not self.n1: self.n1 = self.prev  #n1只更新第一次
         self.prev = root
         self.dfs(root.right)
 

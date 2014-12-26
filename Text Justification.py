@@ -26,41 +26,52 @@ class Solution:
     # @param words, a list of strings
     # @param L, an integer
     # @return a list of strings
-    def fullJustify(self, words, L):
-        firstWord = 0#考虑情况比较多。 主要是计算单词间的间隔，左边多少个是要多一个空格。 最后一行左对齐就好，间隔就一个空格
-        numWords = 0
-        charactersInLine = 0
-        solution = []
-        for i in range(0, len(words)):
-            if charactersInLine+ len(words[i]) + numWords-1  >= L:  # exceed already, so exclude words[i]
+    def fullJustify(self, words, x):
+        ret = []; i=0
+        while i<len(words):
+            nWordsL=l=0
+            while i+nWordsL<len(words) and l+nWordsL+len(words[i+nWordsL])<=x:
+                l+=len(words[i+nWordsL]);  nWordsL+=1
+            line = words[i]
+            if nWordsL!=1:
+                spaceN, extra = (x-l)/(nWordsL-1), (x-l)%(nWordsL-1)
+                for j in range(nWordsL-1):  #不考虑最后一个单词
+                    if i+nWordsL==len(words): line+=' '   #最后一行
+                    else: line+=' '*(spaceN+ (1 if j<extra  else  0))
+                    line+=words[i+j+1] #上面这四行代码非常精华。解决了最tricky的部分
+            ret.append(line+' '*(x-len(line))) #补全
+            i+=nWordsL
+        return ret
+
+'''
+class Solution:
+    # @param words, a list of strings
+    # @param L, an integer
+    # @return a list of strings
+    def fullJustify(self, words, k):
+        firstWord = 0;  ret = []  #考虑情况比较多。 主要是计算单词间的间隔，左边多少个是要多一个空格。 最后一行左对齐就好，间隔就一个空格
+        numWords = 0; chInLine = 0
+        for i in range(len(words)):
+            if chInLine+ len(words[i]) + numWords-1  >= k:  # exceed already, so exclude words[i]
                 line = []
-                if numWords > 1:  # divided by numWords-1
-                    spaces = (L - charactersInLine) // (numWords-1)
-                    extraSpaces = (L-charactersInLine) % (numWords-1)
+                if  numWords == 1:    line.append(words[firstWord]+' '*(k-len(words[firstWord])))  # fill spaceNum to make the length L #补满
+                elif numWords > 1:  # divided by numWords-1    #因为要除以这么多
+                    spaceNum, extraSpaces = (k - chInLine) / (numWords-1), (k-chInLine) % (numWords-1)
                     for j in range(firstWord, i):
                         line.append(words[j])
-                        if j == i-1:  # last word. Spaces are not needed.
-                            break
-                        for n in range(spaces):
-                            line.append(' ')
-                        if j - firstWord < extraSpaces:  # left part with extra spaces
-                            line.append(' ')
-                elif numWords == 1:
-                    line.append(words[firstWord])
-                    for n in range(len(words[firstWord]), L):
-                        line.append(' ')  # fill spaces to make the length L
-                solution.append(''.join(line))
+                        if j == i-1:   break   # last word. Spaces are not needed.
+                        line.append(' '*spaceNum)
+                        if j - firstWord < extraSpaces: line.append(' ')   # left part with extra spaceNum
+                ret.append(''.join(line))
                 firstWord = i
-                numWords = 0
-                charactersInLine = 0
-            numWords +=1
-            charactersInLine +=len(words[i])
+                numWords = 0;  chInLine = 0
+            numWords +=1;   chInLine +=len(words[i])
         line = []  # last line
-        for j in range(firstWord, len(words)):
+        for j in range(firstWord, len(words)):    #其实和上面的是一回事。
             line.append(words[j])
             if j == len(words) - 1: break
             line.append(' ')
-        for n in range(len(''.join(line)), L):
-            line.append(' ')     # fill spaces to make the length L
-        solution.append(''.join(line))
-        return  solution
+        line.append(' '*(k-len(''.join(line))))     # fill spaceNum to make the length L
+        ret.append(''.join(line))
+        return  ret
+'''

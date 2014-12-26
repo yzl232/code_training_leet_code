@@ -6,7 +6,6 @@ For example,
 Given 1->1->2, return 1->2.
 Given 1->1->2->3->3, return 1->2->3.
 '''
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -20,9 +19,7 @@ class Solution:
         if not head: return
         pre = head; cur = head.next
         while cur:
-            if cur.val == pre.val:
-                pre.next = cur.next
-            else:
-                pre = cur
+            if cur.val == pre.val:   pre.next = cur.next
+            else:     pre = cur
             cur = cur.next
         return head

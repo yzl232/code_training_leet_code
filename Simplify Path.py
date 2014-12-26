@@ -5,14 +5,15 @@ For example,
 path = "/home/", => "/home"
 path = "/a/./b/../../c/", => "/c"
 '''
+
 class Solution:
     # @param path, a string
     # @return a string
     def simplifyPath(self, path):
         stack, tokens = [], path.split("/")
-        for token in tokens:
-            if token != ".." and token != "." and token:   stack.append(token)
-            elif token=='..':
+        for ch in tokens:
+            if ch != ".." and ch != "." and ch:   stack.append(ch)
+            elif ch=='..':
                 if stack: stack.pop()
         return "/" + "/".join(stack)
 

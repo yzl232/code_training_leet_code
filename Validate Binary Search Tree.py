@@ -9,7 +9,6 @@ Assume a BST is defined as follows:
 
 confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on OJ.
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -21,9 +20,9 @@ class Solution:
     # @param root, a tree node
     # @return a boolean
     def isValidBST(self, root):
-        return self.dfs(root, -10**10, 10**100)
-    def dfs(self, root, low, high):
-        if root == None: return True
-        if root.val >= high or root.val <= low:
-            return False
-        return self.dfs(root.left, low, root.val) and self.dfs(root.right, root.val, high)
+        return self.dfs(root, -10**10, 10**10)
+
+    def dfs(self, root, l, h):      #BST一定要注意每次left, right同时要更新相应上下界为root.val。
+        if not root: return True
+        if not (l<root.val<h): return False
+        return self.dfs(root.left, l, root.val) and self.dfs(root.right, root.val, h)

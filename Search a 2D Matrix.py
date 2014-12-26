@@ -16,19 +16,17 @@ Consider the following matrix:
 
 Given target = 3, return true.
 '''
-
 class Solution:
     # @param matrix, a list of lists of integers
     # @param target, an integer
     # @return a boolean
     def searchMatrix(self, matrix, target):
-        m = len(matrix)
-        n = len(matrix[0])
-        left = 0; right = m * n - 1
-        while left <= right:
-            mid = (left + right) / 2
-            value = matrix[mid/n][mid%n]
-            if value == target: return True
-            elif value > target: right = mid-1
-            else: left = mid + 1
+        m = len(matrix);     n = len(matrix[0])
+        l = 0; r = m * n - 1
+        while l <= r:
+            m = (l + r) / 2
+            val = matrix[m/n][m%n]
+            if val == target: return True
+            elif val > target: r = m-1
+            else: l = m + 1
         return False

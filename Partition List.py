@@ -53,19 +53,16 @@ class Solution1:
     # @param x, an integer
     # @return a ListNode
     def partition(self, head, x):
-        left_dummy = ListNode(0); right_dummy = ListNode(0)
-        leftCur = left_dummy; rightCur = right_dummy; cur = head
+        lDummy = ListNode(0); rDummy = ListNode(0)
+        lCur = lDummy; rCur = rDummy; cur = head
         while cur:
             if cur.val < x:
-                leftCur.next = cur
-                leftCur = cur
+                lCur.next = cur
+                lCur = cur
             else:
-                rightCur.next = cur
-                rightCur = cur
+                rCur.next = cur
+                rCur = cur
             cur = cur.next
-        rightCur.next = None
-        leftCur.next = right_dummy.next
-        return left_dummy.next
-        
-        
-        
+        rCur.next = None
+        lCur.next = rDummy.next
+        return lDummy.next

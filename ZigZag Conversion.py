@@ -13,18 +13,16 @@ string convert(string text, int nRows);
 
 convert("PAYPALISHIRING", 3) should return "PAHNAPLSIIGYIR".
 '''
-
 class Solution:
     # @return a string
-    def convert(self, s, nRows):
-        if nRows <=1: return s
-        zigSize = nRows *2 - 2
-        results = ''; n = len(s)
-        for i in range(nRows):
+    def convert(self, s, r):
+        if r <=1: return s
+        zigN = r *2 - 2
+        rets = ''; n = len(s)
+        for i in range(r):
             base = i
             while base < n:
-                results+=s[base]
-                base += zigSize
-                if i>0 and i<nRows-1:
-                    if base-2*i< n:results += s[base-2*i]
-        return results
+                rets+=s[base]
+                base += zigN
+                if i!=0 and i!=r-1 and base-2*i< n:rets += s[base-2*i]
+        return rets

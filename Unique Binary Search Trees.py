@@ -15,9 +15,8 @@ Given n = 3, there are a total of 5 unique BST's.
 class Solution:
     # @return an integer
     def numTrees(self, n):
-        dp = [0 for i in range(n+1)]   # include when there are 0 elements
-        dp[0] = 1
+        dp = [1 for i in range(n+1)]
         for i in range(1, n+1):
-            for leftNum in range(i):
-                dp[i]+= dp[leftNum]*dp[i-1-leftNum]
-        return dp[n]
+            dp[i] = sum(dp[j]*dp[i-1-j] for j in range(i))
+        return dp[-1]
+# number in the left child tree(0~ i-1).  number in the right child tree. 左边的数目是0~n-1  . 因为root总有一个。右边i-l-1个

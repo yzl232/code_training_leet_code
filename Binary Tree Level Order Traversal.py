@@ -30,7 +30,7 @@ class Solution:
         if not root: return []
         pre, ret = [root], []   # 除了pre, cur之外，还用了第三个vals
         while pre:
-            cur, vals = [], []
+            cur, vals = [], []     #必须用array。 因为是有序的。 并且不会有重复
             for n in pre:
                 vals.append(n.val)
                 if n.left:  cur.append(n.left)

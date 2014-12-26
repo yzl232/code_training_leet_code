@@ -15,22 +15,21 @@ Output: 7 -> 0 -> 8
 class Solution:
     # @return a ListNode
     def addTwoNumbers(self, l1, l2):
-        carry = 0; head = ListNode(0); curr = head
+        carry = 0; dummy = ListNode(0); cur = dummy
         while l1 and l2:
-            sum = l1.val + l2.val + carry
-            carry = sum/10
-            curr.next = ListNode(sum%10)
-            l1 = l1.next; l2 = l2.next; curr = curr.next
+            s = l1.val + l2.val + carry
+            carry, s= s/10, s%10
+            cur.next = ListNode(s)
+            l1 = l1.next; l2 = l2.next; cur = cur.next
         while l1:
-            sum = l1.val+ carry
-            carry = sum/10
-            curr.next = ListNode(sum%10)
-            curr = curr.next; l1 = l1.next
+            s = l1.val+ carry
+            carry, s= s/10, s%10
+            cur.next = ListNode(s)
+            cur = cur.next; l1 = l1.next
         while l2:
-            sum = l2.val + carry
-            carry = sum/10
-            curr.next = ListNode(sum%10)
-            curr = curr.next; l2 = l2.next
-        if carry:
-            curr.next = ListNode(1)
-        return head.next
+            s = l2.val + carry
+            carry, s= s/10, s%10
+            cur.next = ListNode(s)
+            cur = cur.next; l2 = l2.next
+        if carry:    cur.next = ListNode(1)
+        return dummy.next

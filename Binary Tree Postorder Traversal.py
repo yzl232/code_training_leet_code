@@ -17,7 +17,6 @@ Note: Recursive solution is trivial, could you do it iteratively?
 
 
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -30,18 +29,14 @@ class Solution:
     # @return a list of integers
     def postorderTraversal(self, root):
         if not root: return []
-        stack = []
-        results = []
-        stack.append(root)
-        while len(stack) > 0:
+        stack = [root]
+        ret = []
+        while stack:
             cur = stack.pop()
-            results.append(cur.val)
+            ret.append(cur.val)
             if cur.left: stack.append(cur.left)
             if cur.right: stack.append(cur.right)
-        return results[::-1]
-        
-
-        
+        return ret[::-1]
         
 '''
 # Definition for a  binary tree node

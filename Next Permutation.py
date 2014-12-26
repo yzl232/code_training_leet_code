@@ -11,20 +11,21 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 3,2,1 → 1,2,3
 1,1,5 → 1,5,1
 '''
+
 class Solution:
     # @param num, a list of integer
     # @return a list of integer
-    def nextPermutation(self, num):
-        n = len(num) #举个例子就容易写。 687432   =》  找到 6， 和7交换。  =》786432=>723468
+    def nextPermutation(self, arr):
+        n = len(arr) #举个例子就容易写。 687432   =》  找到 6， 和7交换。  =》786432=>723468
         for i in range(n-1, 0, -1):
-            if num[i]>num[i-1]:
-                for j in range(n-1, i-1, -1):
-                    if num[j]>num[i-1]: break
-                num[j], num[i-1] = num[i-1], num[j]
+            if arr[i]>arr[i-1]:
+                for j in range(n-1, i-1, -1):  #背过中间四行就好
+                    if arr[j]>arr[i-1]: break
+                arr[j], arr[i-1] = arr[i-1], arr[j]
                 l = i; r = n-1
                 while l<r:
-                    num[l], num[r] = num[r], num[l]
+                    arr[l], arr[r] = arr[r], arr[l]
                     l+=1; r-=1
-                return num
-        num.reverse()
-        return num     #是O(n)的 #http://blog.csdn.net/m6830098/article/details/17291259
+                return arr
+        arr.reverse()
+        return arr     #是O(n)的 #http://blog.csdn.net/m6830098/article/details/17291259

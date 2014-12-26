@@ -11,20 +11,14 @@ class Solution:
     # @param b, a string
     # @return a string
     def addBinary(self, a, b):
-        la = len(a); lb = len(b)
-        if la > lb:
-            b = '0' * (la - lb) + b
-            l = la
-        else:
-            a = '0'*(lb - la) + a
-            l = lb
-        a = a[::-1]; b = b[::-1]
-        solution = ''
-        carry = 0
-        for i in range(l):
-            tmp = ord(a[i]) - ord('0') + ord(b[i]) - ord('0')  + carry
-            solution += str(tmp%2)
-            carry = tmp/2
-        if carry == 1:
-            solution += '1'
-        return  solution[::-1]
+        la, lb = len(a), len(b)
+        l = max(la, lb)
+        if la>lb:  return self.addBinary(b, a)
+        a = '0'*(lb-la)+a
+        carry =0; ret=''
+        for i in range(len(a)-1, -1, -1):
+            s = carry+ord(a[i])-ord('0')+ord(b[i])-ord('0')
+            carry, s = s/2, s%2
+            ret = str(s)+ret
+        if carry==1: ret = '1'+ret
+        return ret
