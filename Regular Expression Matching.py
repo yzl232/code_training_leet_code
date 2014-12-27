@@ -18,6 +18,8 @@ isMatch("aa", ".*") → true
 isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 '''
+
+
 class Solution:
     # @param s, an input string
     # @param p, a pattern string
@@ -56,4 +58,26 @@ class Solution:  #和递归其实没有区别。  一个思路
                 elif p[j-1]=='*':#dp[i][j-1]一次。 dp[i][j-2]   0次。   i-1对应*号。s:      aa   对应 p:  a*
                     dp[i][j]=dp[i][j-1] or dp[i][j-2] or (dp[i-1][j] and (p[j-2] in ('.', s[i-1]))    )
         return dp[-1][-1]  #背下上面这行就搞定了  #当j==1, ==*时候，因为dp[i-1][j]必须False。走不到p[j-2]
+'''
+
+
+'''
+#可以通过的递归版本的另一种写法
+class Solution:
+    # @param s, an input string
+    # @param p, a pattern string
+    # @return a boolean
+    def isMatch(self, s, p):
+        if s and p and p[-1] not in (s[-1], '*', '.'): return False  #这一行是为了通过leetcode.  其实要删掉
+        return self.dfs(s, p)
+
+    def dfs(self, s, p):
+        if not p: return not s
+        if len(p)>=2 and p[1]=='*':
+            i = 0
+            while i< len(s) and  p[0] in ('.', s[i]):  #*号一下子match好多个数
+                if self.dfs(s[i:], p[2:]): return True
+                i+=1
+            return self.dfs(s[i:], p[2:])    #最后为空得时候
+        else: return s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])
 '''
