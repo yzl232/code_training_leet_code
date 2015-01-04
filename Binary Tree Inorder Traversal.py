@@ -26,19 +26,17 @@ class Solution:
     # @param root, a tree node
     # @return a list of integers
     def inorderTraversal(self, root):
-        stack = []
-        result = []
+        stack = [];  ret = []
         cur = root
         while True:
             while cur:
                 stack.append(cur)
                 cur = cur.left
-            if len(stack) == 0: break
-            else:
-                cur = stack.pop()
-                result.append(cur.val)
-                cur = cur.right
-        return result
+            if not stack: break
+            cur = stack.pop()
+            ret.append(cur.val)
+            cur = cur.right
+        return ret
 
 '''
 # Definition for a  binary tree node
@@ -57,9 +55,7 @@ class Solution:
         return self.result
 
     def dfs(self, root):
-        if not root:
-            return
-
+        if not root:       return
         self.dfs(root.left)
         self.result.append(root.val)
         self.dfs(root.right)
