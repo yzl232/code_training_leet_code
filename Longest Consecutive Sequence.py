@@ -23,23 +23,19 @@ class Solution:
                     d[b] = True; b -= 1
                 ret = max(ret, a-b-1)
         return ret
-
-
+#  上面这个简单。  是2 pass
+#  下面这个是one pass. 不过难一些。
 '''
 class Solution:
     # @param num, a list of integer
     # @return an integer
     def longestConsecutive(self, num):
-        d = {x:False for x in num} # False means not visited
-        maxLen = -1
-        for i in d:
-            if d[i] == False:
-                cur = i + 1; len1 = 0
-                while cur in d and d[cur] == False:
-                    len1 += 1; d[cur] = True; cur += 1
-                cur = i - 1; len2 = 0
-                while cur in d and d[cur] == False:
-                    len2 += 1; d[cur] = True; cur -= 1
-                maxLen = max(maxLen, 1 + len1 + len2)
-        return maxLen
+        d={};  ret=0
+        for x in num:
+            if x in d: continue
+            l, r= d.get(x-1, 0), d.get(x+1, 0)
+            ret = max(ret, l+r+1)
+            d[x]=d[x-l]=d[x+r]=l+r+1
+        return ret
+#  https://oj.leetcode.com/discuss/18886/my-really-simple-java-o-n-solution-accepted
 '''

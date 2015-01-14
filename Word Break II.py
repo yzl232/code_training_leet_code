@@ -9,6 +9,8 @@ dict = ["cat", "cats", "and", "sand", "dog"].
 
 A solution is ["cats and dog", "cat sand dog"].
 '''
+
+
 class Solution:
     # @param s, a string
     # @param dict, a set of string
@@ -33,3 +35,5 @@ class Solution:
         self.ret = []; self.dict = dict
         self.dfs(s, '')
         return self.ret
+
+# 可以用trie预处理

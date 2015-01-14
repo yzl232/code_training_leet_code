@@ -6,10 +6,10 @@ Note: You may not slant the container.
 
 class Solution:  #，如果宽度减少，同时左右两侧的板得最小值都得比原来的还要大，才能容纳更多的水
     # @return an integer
-    def maxArea(self, height):  # two point scan
-        l = 0; r = len(height)-1; result = 0
+    def maxArea(self, h):  # two point scan
+        l = 0; r = len(h)-1; ret = 0
         while l<r:
-            result = max(result, min(height[r], height[l])*(r-l))
-            if height[r]>height[l]: l+=1
+            ret = max(ret, min(h[r], h[l])*(r-l))
+            if h[r]>h[l]: l+=1
             else: r-=1
-        return result
+        return ret

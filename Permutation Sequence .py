@@ -15,23 +15,15 @@ Given n and k, return the kth permutation sequence.
 
 Note: Given n will be between 1 and 9 inclusive.
 '''
+
 class Solution:
     # @return a string
     def getPermutation(self, n, k):
-        total = self.factorial(n)
+        total = math.factorial(n)
+        k = k%total-1;  seq = ''
         digits = [str(i) for i in range(1, n+1)]
-        seq = '';  k -= 1
-        while n>0:
-            total = total/n
+        for x in range(n, 0, -1):  #n>0
+            total = total/x
             i, k = k/total, k%total
-            seq += digits[i]
-            digits.pop(i)
-            n-=1
+            seq += digits.pop(i)
         return seq
-
-
-    def factorial(self, n):
-        ret = 1
-        for i in range(1, n+1):
-            ret *= i
-        return ret

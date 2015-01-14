@@ -4,10 +4,11 @@ Given a string, find the length of the longest substring without repeating chara
 class Solution:
     # @return an integer
     def lengthOfLongestSubstring(self, s):
-        maxLen=0;  d = {}; tail = 0
-        for head in range(len(s)):
-            ch = s[head]
-            if ch in d:   tail=max(d[ch] + 1, tail)
-            d[ch] = head
-            maxLen = max(maxLen, head-tail+1)
-        return maxLen
+        ret=0;  d = {}; r = 0
+        for l in range(len(s)):
+            ch = s[l]
+            if ch in d:   r=max(d[ch] + 1, r)
+            d[ch] = l
+            ret = max(ret, l-r+1)
+        return ret
+# 考虑到asicii 256。 可以认为是O(256) space

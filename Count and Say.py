@@ -15,6 +15,23 @@ class Solution:
     def countAndSay(self, n):
         s = '1'
         for i in range(n-1):
+            s1=''; j=0
+            while j<len(s):
+                cnt=1
+                while (j+1)<len(s) and s[j]==s[j+1]:
+                    j+=1;  cnt+=1
+                s1+=str(cnt)+s[j]
+                j+=1
+            s=s1
+        return s
+
+
+'''
+class Solution:
+    # @return a string
+    def countAndSay(self, n):
+        s = '1'
+        for i in range(n-1):
             s1='';  pre = s[0];   cnt=1
             for j in range(1, len(s)):
                 if s[j]==pre: cnt+=1
@@ -24,3 +41,4 @@ class Solution:
             s1+=str(cnt)+pre
             s=s1
         return s
+'''

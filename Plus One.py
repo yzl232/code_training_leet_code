@@ -12,5 +12,6 @@ class Solution:
         for i in range(len(digits)-1, -1, -1):
             s = digits[i] + carry
             digits[i], carry = s%10, s/10
+            if not carry: break
         if carry:    digits = [1] + digits
         return digits

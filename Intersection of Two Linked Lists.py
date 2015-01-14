@@ -21,30 +21,45 @@ Notes:
     Your code should preferably run in O(n) time and use only O(1) memory.
 
 '''
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
 
 class Solution:
     # @param two ListNodes
     # @return the intersected ListNode
-    def getIntersectionNode(self, headA, headB):
-        l1 = self.getCount(headA)
-        l2 = self.getCount(headB)
+    def getIntersectionNode(self, h1, h2):
+        l1 = self.getCnt(h1)
+        l2 = self.getCnt(h2)
         diff = abs(l1-l2)
-        if l1<l2:  headB, headA = headA, headB
-        for i in range(diff):
-            headA = headA.next
-        while headA and headB:
-            if headA==headB: return headA
-            headA = headA.next
-            headB = headB.next
+        if l1<l2:  h2, h1 = h1, h2
+        for i in range(diff):    h1 = h1.next
+        while h1 and h2:
+            if h1==h2: return h1
+            h1 = h1.next;    h2 = h2.next
 
-    def getCount(self, head):
-        count = 0
+    def getCnt(self, head):
+        cnt = 0
         while head:
             head= head.next
-            count+=1
-        return count
+            cnt+=1
+        return cnt
+
+
+
+
+# 第1种方法更快。 第2种更加简洁。  第二种很难写。 第一种很好写。
+'''
+class Solution:
+    # @param two ListNodes
+    # @return the intersected ListNode
+    def getIntersectionNode(self, h1, h2):
+        p1=h1;  p2 =h2
+        if not p1 or not p2: return
+        while p1 and p2 and p1!=p2:
+            p1=p1.next;  p2=p2.next
+            if p1==p2: return p1
+            if not p1: p1=h2
+            if not p2: p2=h1
+        return p1
+
+#  l1, l2.     l1>l2:        l2+(l1-x),   l1+(l2-x)
+# 如果没有相交。 第二次会同时到达null。
+'''

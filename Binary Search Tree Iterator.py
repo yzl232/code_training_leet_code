@@ -25,7 +25,7 @@ class BSTIterator:
 
     # @return a boolean, whether we have a next smallest number
     def hasNext(self):
-        return self.stack
+        return self.stack!=[]
 
     # @return an integer, the next smallest number
     def next(self):

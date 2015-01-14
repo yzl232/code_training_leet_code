@@ -13,6 +13,20 @@ Your algorithm should use only constant space. You may not modify the values in 
 #         self.val = x
 #         self.next = None
 
+# 递归的code更简洁. 不过有stack space
+class Solution:
+    # @param a ListNode
+    # @return a ListNode
+    def swapPairs(self, h):
+        if not h or not h.next: return h
+        n = h.next
+        h.next = self.swapPairs(h.next.next)
+        n.next = h
+        return n
+
+
+
+'''
 class Solution:
     # @param a ListNode
     # @return a ListNode
@@ -28,3 +42,4 @@ class Solution:
             pre = last       #与reverse linkedlist 区别。  不断更新pre, last
             last = last.next  #普通的逆转，pre和last不会变的。。
         return dummy.next
+'''

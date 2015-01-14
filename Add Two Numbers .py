@@ -5,13 +5,28 @@ Input: (2 -> 4 -> 3) + (5 -> 6 -> 4)
 Output: 7 -> 0 -> 8
 '''
 
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
+class Solution:
+    # @return a ListNode
+    def addTwoNumbers(self, l1, l2):
+        carry = 0; dummy = ListNode(0); cur = dummy
+        while l1 or l2:
+            s = carry
+            if l1:
+                s+=l1.val;  l1=l1.next
+            if l2:
+                s+=l2.val; l2=l2.next
+            carry, s= s/10, s%10
+            cur.next = ListNode(s)
+            cur = cur.next
+        if carry:    cur.next = ListNode(1)
+        return dummy.next
 
+'''
 class Solution:
     # @return a ListNode
     def addTwoNumbers(self, l1, l2):
@@ -33,3 +48,4 @@ class Solution:
             cur = cur.next; l2 = l2.next
         if carry:    cur.next = ListNode(1)
         return dummy.next
+'''

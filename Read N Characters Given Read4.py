@@ -9,6 +9,30 @@ By using the read4 API, implement the function int read(char *buf, int n) that r
 Note:
 The read function will only be called once for each test case.
 '''
+
+
+# The read4 API is already defined for you.
+# @param buf, a list of characters
+# @return an integer
+# def read4(buf):
+
+class Solution:
+    # @param buf, Destination buffer (a list of characters)
+    # @param n,   Maximum number of characters to read (an integer)
+    # @return     The number of characters read (an integer)
+    def read(self, buf, n):
+        tmpBuf = [None for i in range(4)];     cnt = 0
+        while n > cnt:#tmp的作用就是判断是不是4096。
+            tmpN = read4(tmpBuf)
+            if tmpN==0: break
+            i=0
+            while cnt<n and i<tmpN:
+                buf[cnt]=tmpBuf[i]
+                i+=1; cnt+=1
+        return cnt
+'''
+
+
 # The read4 API is already defined for you.
 # @param buf, a list of characters
 # @return an integer
@@ -28,3 +52,4 @@ class Solution:
             buf[count:count+byteN]= tmpBuffer[:byteN]  #结束2个指标 : 1 tmp!=4096.   或者n<=count 完成目标是读n个。或者read4k读完了。
             count+=byteN
         return count
+'''

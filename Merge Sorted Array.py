@@ -12,14 +12,14 @@ class Solution:
     # @param n  an integer, length of B
     # @return nothing
     def merge(self, a, m, b, n):
-        i = m-1; j = n-1
+        i = m-1; j = n-1; x=m+n-1
         while i>=0 and j>=0:
             if a[i] > b[j]:
-                a[i+j+1] = a[i]
-                i -=1
+                a[x] = a[i]
+                i -=1; x-=1
             else:
-                a[i+j+1] = b[j]
-                j -=1
+                a[x] = b[j]
+                j -=1; x-=1
         while j>=0:
             a[j] = b[j]
             j-=1

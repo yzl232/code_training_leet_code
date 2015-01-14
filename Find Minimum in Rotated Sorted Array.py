@@ -43,7 +43,7 @@ class Solution:
     # @return an integer   #2345671      7123456
     def findMin(self, a):
         l=0; h=len(a)-1
-        while l<h and a[l]>=a[h]:
+        while l<h and a[l]>=a[h]:   #a[l]<a[h], 那么没有rotate, 直接返回a[l]
             m = (l+h)/2
             if a[m]>a[l]: l=m+1
             elif a[m]<a[l]: h=m

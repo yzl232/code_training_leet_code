@@ -14,13 +14,13 @@ class Solution:
     # @param cost, a list of integers
     # @return an integer
     def canCompleteCircuit(self, gas, cost):
-        left = total = 0
+        tank = total = 0
         n = len(gas);  start = 0
         for i in range(n):
             total += (gas[i] - cost[i])
-            left += (gas[i] - cost[i])
-            if left < 0:
+            tank += (gas[i] - cost[i])
+            if tank < 0:
                 start = i+1
-                left = 0
+                tank = 0
         if total < 0:       return -1
         return start

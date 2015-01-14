@@ -9,14 +9,18 @@ You should return the indices: [0,9].
 (order does not matter).
 '''
 
+
+
+
+
+
 class Solution:
     # @param S, a string
     # @param L, a list of string
     # @return a list of integer
     def findSubstring(self, s, l):
         m = len(s); n = len(l); wLen = len(l[0])
-        ret = []  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
-        tCnt={}
+        ret = []; tCnt={}  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
         for w in l:
             if w not in tCnt: tCnt[w]=0
             tCnt[w]+=1
@@ -55,43 +59,9 @@ class Solution:
                 else:    break
             if listS == []:result.append(start)
         return result
-'''
 
 
 
-
-'''
-class Solution:
-    # @param S, a string
-    # @param L, a list of string
-    # @return a list of integer
-    def findSubstring(self, s, l):  #总复杂度是O(2*n/l*l)=O(n
-        tCntD={}; wordN = len(l[0]); ret = []
-        for w in l:
-            if w not in tCntD: tCntD[w]=0
-            tCntD[w]+=1
-        for i in range(wordN):
-            curD={}; cnt=0; start = i
-            for j in range(i, len(s)-wordN, wordN):
-                w = s[j:j+wordN]
-                if w in tCntD:
-                    if w not in curD: curD[w]=0
-                    curD[w]+=1
-                    if curD[w]<=tCntD[w]: cnt+=1
-                    else:
-                        while curD[w]>tCntD[w]:
-                            t = s[start:start+wordN]
-                            if t in curD:   curD[t]-=1
-                            start+=wordN
-                    if cnt==len(l):
-                        ret.append(start)
-                        t = s[start:start+wordN]
-                        if t in curD: curD[t]-=1
-                        cnt-=1
-                        start+=wordN
-                else:
-                    curD = {}; cnt=0; start = j+wordN
-        return ret
 
 
 

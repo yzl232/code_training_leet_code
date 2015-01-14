@@ -19,7 +19,6 @@ isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 '''
 
-
 class Solution:
     # @param s, an input string
     # @param p, a pattern string
@@ -31,12 +30,11 @@ class Solution:
     def dfs(self, s, p):
         if not p: return not s
         if len(p)>=2 and p[1]=='*':
-            i = -1
-            while i< len(s) and (i<0 or p[0] in ('.', s[i])):  #*号一下子match好多个数
-                i+=1
-                if self.dfs(s[i:], p[2:]): return True
-            return False
+             if self.dfs(s, p[2:]): return True
+             if s and p[0] in ('.', s[0]) and self.dfs(s[1:], p): return True
+             return False
         else: return s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])
+
 
         #http://blog.csdn.net/lifajun90/article/details/10582733
         #different from https://oj.leetcode.com/problems/wildcard-matching/. Since '*' has different meaning here

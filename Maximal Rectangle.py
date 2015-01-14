@@ -16,14 +16,11 @@ class Solution:
         return  ret   # O(n2)    space O(N2)
 
     def largestRectangleArea(self, arr):
-        stack = []
-        i = 0; m = 0
-        arr.append(0)
-        while i < len(arr):
-            if len(stack) == 0 or arr[i] >= arr[stack[-1]]:
-                stack.append(i)
-                i+=1
-            else:
-                t = stack.pop()
-                m = max(m, arr[t] * i) if not stack else max(m, arr[t] * (i - 1 - stack[-1]))
-        return  m
+        arr.append(0); ret = 0;  stack = []    #stack储存递增的
+        for i in range(len(arr)):    #加了一个0，  arr[stack[-1]] < arr[i]不会满足
+            while stack and arr[i] < arr[stack[-1]]:   # 于是到最后i。 不断pop
+                h = arr[stack.pop()]
+                w = i if not stack else i - stack[-1] -1     #空stack相当于 -1
+                ret = max(ret, w*h)
+            stack.append(i)
+        return ret

@@ -18,6 +18,27 @@ class Solution:  #优势在于space可以为O(1)
         return s[ret[0]:ret[1]+1]
 
 
+'''
+class Solution:
+    # @return a string
+    def longestPalindrome(self, s):
+        if len(s)==0:  return 0
+        ret=1
+        start=0
+        for i in range(len(s)):
+            if i-ret >=1 and s[i-ret-1:i+1]==s[i-ret-1:i+1][::-1]:
+                start=i-ret-1
+                ret+=2
+                continue
+            if i-ret >=0 and s[i-ret:i+1]==s[i-ret:i+1][::-1]:
+                start=i-ret
+                ret+=1
+        return s[start:start+ret]
+and there are memory slicing tricks will help to bring these operations to O(1) time. comparing string equality with "==" is O(1), and using slicing to substring and reverse is also O(1)
+
+'''
+
+
 
 '''
 class Solution:   # O(n) solution
