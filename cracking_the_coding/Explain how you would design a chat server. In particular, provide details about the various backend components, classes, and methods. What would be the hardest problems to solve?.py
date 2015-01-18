@@ -101,7 +101,7 @@ class GroupChat(Conversation):
         
 class PrivateChat(Conversation):
     def __init__(self, id, user1, user2):
-        Conversation.__init__(self)
+        Conversation.__init__(self, id)
         self.participants.append(user1)
         self.participants.append(user2)
     

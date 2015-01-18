@@ -1,8 +1,9 @@
+# encoding=utf-8
+
+
 class Singleton(object):
     def __new__(cls, *args, **kw):  #override new
-        if not hasattr(cls, '_instance'):
-            orig = super(Singleton, cls)  #cls : class
-            cls._instance = orig.__new__(cls, *args, **kw)  #call the original __new__ method
+        if not hasattr(cls, '_instance'):  cls._instance = object.__new__(cls, *args, **kw)  #call the original __new__ method
         return cls._instance
 
 
@@ -63,7 +64,7 @@ class Board:
     
  #flips pieces starting at (row, column) and proceeding in * direction d
 
-    def flipSection(self, row, col, color, d):
+    def flipSection(self, i, j, color, d):
         r = 0
         c = 0
         if d == Up: r = -1
@@ -72,16 +73,16 @@ class Board:
         elif d == Right: c =1
         else: return -1
         #DFS
-        if row <0 or row > len(self.board) or col<0 or col>len(self.board[0]):
+        if i <0 or i > len(self.board) or j<0 or j>len(self.board[0]):
             return -1
         #Found same color - return nothing flipped
-        if self.board[row][col].color == color: return 0
+        if self.board[i][j].color == color: return 0
         
-        flipped = self.flipSection( row+r, col+c, color, d)
+        flipped = self.flipSection( i+r, j+c, color, d)
         
         if flipped < 0: return -1
         
-        self.board[row][col].flip()
+        self.board[i][j].flip()
         return flipped+1
         
     def getScoreForColor(self, color):

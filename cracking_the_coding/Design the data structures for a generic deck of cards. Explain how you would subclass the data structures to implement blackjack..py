@@ -3,6 +3,10 @@ Design the data structures for a generic deck of cards. Explain how you would su
 """
 
 import random
+suit_names = ["Clubs", "Diamonds", "Hearts", "Spades"]
+rank_names = [None, "Ace", "2", "3", "4", "5", "6", "7",
+          "8", "9", "10", "Jack", "Queen", "King"]
+
 
 
 class Card(object):
@@ -13,21 +17,17 @@ class Card(object):
       rank: integer 1-13
     """
 
-    suit_names = ["Clubs", "Diamonds", "Hearts", "Spades"]
-    rank_names = [None, "Ace", "2", "3", "4", "5", "6", "7", 
-              "8", "9", "10", "Jack", "Queen", "King"]
+
 
     def __init__(self, suit, rank):
         self.suit = suit
         self.rank = rank
-        self.ranks = [None, "Ace", "2", "3", "4", "5", "6", "7",
-              "8", "9", "10", "Jack", "Queen", "King"]
-        self.suits = ["Clubs", "Diamonds", "Hearts", "Spades"]
+
 
     def __str__(self):
         """Returns a human-readable string representation."""
-        return '%s of %s' % (Card.rank_names[self.rank],
-                             Card.suit_names[self.suit])
+        global  rank_names, suit_names
+        return '%s of %s' % (rank_names[self.rank], suit_names[self.suit])
 
     def __cmp__(self, other):
         """Compares this card to other, first by suit, then rank.

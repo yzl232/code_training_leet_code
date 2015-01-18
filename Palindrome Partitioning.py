@@ -20,7 +20,7 @@ class Solution:
         self.s, self.ret, self.n = s, [], len(s)
         self.dp = [ [False for i in range(self.n)] for j in range(self.n) ]
         for j in range(self.n):
-            for i  in range(j+1): #保证了当i>j时， 仍然是False
+            for i in range(j, -1, -1): # j+1主要是为了保证isPal的正确性
                 if s[i] == s[j] and (j-i<=1 or self.dp[i+1][j-1] == True):     self.dp[i][j] = True
         self.dfs(0, [])
         return self.ret

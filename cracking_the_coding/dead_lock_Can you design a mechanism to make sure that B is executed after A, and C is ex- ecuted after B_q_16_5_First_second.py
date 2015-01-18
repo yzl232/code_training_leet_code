@@ -15,11 +15,11 @@ class Foo(threading.Thread):
 
     def second(self):
         self.lock1.acquire()  # wait until finished with first
-        self.lock1.release()
         #do something here
+        self.lock1.release()
         self.lock2.release()  #  mark finished with second()
 
     def third(self):
         self.lock2.acquire()  # wait until finished with second
-        self.lock2.release()
         #do something here
+        self.lock2.release()

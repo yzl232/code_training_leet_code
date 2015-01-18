@@ -42,7 +42,20 @@ Output: 1
 A simple solution is to traverse the complete array and find minimum. This solution requires \Theta(n) time.
 We can do it in O(Logn) using Binary Search. If we take a closer look at above examples, we can easily figure out following pattern: The minimum element is the only element whose previous element is greater than it. If there is no such element, then there is no rotation and first element is the minimum element. Therefore, we do binary search for an element which is smaller than the previous element.
 '''
-
+class Solution:
+    # @param num, a list of integer
+    # @return an integer   #2345671      7123456
+    def findMin(self, arr):  #与arr[h]比较。因为弯折，arr[h]最小。
+        ret = arr[0]
+        l, h = 0, len(arr)-1  #2345671, 1234567  和arr[l]无法判断，必须arr[h]
+        while l<=h:
+            m = (l+h)/2   #观察最小1的动向。 rotate到右边了。 与h比较
+            ret = min(ret, arr[m])  #与arr[h]比较，同时知道rotate情况。1的情况
+            if arr[m]<arr[h]: h = m
+            elif arr[m] == arr[h]: h-=1
+            else: l=m+1
+        return ret
+'''
 class Solution:
     # @param num, a list of integer
     # @return an integer   #2345671      7123456
@@ -61,3 +74,4 @@ class Solution:
 s = Solution()
 print s.findMin([7 , 2, 3, 4, 5, 6])
 
+'''

@@ -10,16 +10,16 @@ class Solution:
     # @param A, a list of integers    #7123456     2345671
     # @param target, an integer to be searched
     # @return an boolean
-    def search(self, A, target):
-        l , h = 0, len(A)-1
+    def search(self, arr, target):
+        l , h = 0, len(arr)-1
         while l<=h:
             m = (l+h)/2
-            if A[m] == target: return  True
-            elif A[m]>A[l]:
-                if A[l]<=target<=A[m]:  h = m-1
+            if arr[m] == target: return  True
+            elif arr[m]>arr[l]:
+                if arr[l]<=target<=arr[m]:  h = m-1
                 else: l = m+1
-            elif A[m]<A[l]:
-                if A[m]<=target<=A[h]:   l = m+1
+            elif arr[m]<arr[l]:
+                if arr[m]<=target<=arr[h]:   l = m+1
                 else:   h = m-1
             else:    l+=1
         return False

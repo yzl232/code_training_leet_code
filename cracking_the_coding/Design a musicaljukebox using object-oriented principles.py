@@ -27,14 +27,12 @@ class Playlist:
         self.q.append(song)
 
     def getNextSongToPlay(self):
-        if len(self.q)>0:
-            return self.q.pop(0)
-        return None
-    
+        if self.q: return self.q.pop(0)
+
         
 class JukeBox:
     def __init__(self, cdPlayer, user, cdCollection, ts):
-        self.cdplayer = cdplayer
+        self.cdplayer = cdPlayer
         self.user = user
         self.cdCollection = cdCollection
         self.songSelector = ts

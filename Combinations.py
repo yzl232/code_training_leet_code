@@ -28,3 +28,5 @@ class Solution:
             return
         for i in range(start, self.n+1):
             self.dfs(i+1,  cur+[i])# i+1,  which  means only add the number that is bigger (nums[i+1:]) .  In permutations, we choose all the other numbers except this i.  tempNums.pop()
+
+#复杂度是O( choose k from n) = O(c(n, k))

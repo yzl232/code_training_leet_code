@@ -21,3 +21,4 @@ class Solution:
         for i in range(len(nums)):
             t = nums[:]
             self.dfs(cur+[t.pop(i)], t)
+# 注意说复杂度是O(n!)。 因为有n!个结果

@@ -28,6 +28,23 @@ class Solution:
 class Solution:
     # @param prices, a list of integer
     # @return an integer
+    def maxProfit(self, vals):
+        k=2
+        sell=[0]*(k+1)   # hold 0 stocks
+        buy=[-10**10]*(k+1)   #  hold 1 stocks
+        for x in vals:
+            for j in range(1, k+1):
+                sell[j] = max(sell[j], buy[j]+x)  #最多j次交易卖掉了1张股票的最大值。
+                buy[j] = max(buy[j], sell[j-1]-x)    #最多j次交易买了1张股票的最大值。
+        return sell[-1]
+
+# 结合buy, sell stock III来做.   O(n*k)
+# 如果在同一天加减多次。 因为+vals[i], -vals[i]。 所以无效（i不变）
+
+
+class Solution:
+    # @param prices, a list of integer
+    # @return an integer
     def maxProfit(self, arr):
         n=len(arr)
         if not arr: return 0
