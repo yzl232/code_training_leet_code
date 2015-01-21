@@ -11,8 +11,7 @@
 class MinStack:
     # @param x, an integer
     def __init__(self):
-        self.stack1 = []
-        self.stack2 = []
+        self.stack1 = [];  self.stack2 = []
 
     # @return an integer
     def push(self, x):
@@ -21,9 +20,7 @@ class MinStack:
 
     # @return nothing
     def pop(self):
-        top = self.stack1[-1]
-        self.stack1.pop()
-        if top == self.stack2[-1]:    self.stack2.pop()  #cur与最小值相等。 pop stack2
+        if self.stack1.pop() == self.stack2[-1]:    self.stack2.pop()  #cur与最小值相等。 pop stack2
 
     # @return an integer
     def top(self):

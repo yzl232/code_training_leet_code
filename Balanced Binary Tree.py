@@ -12,6 +12,21 @@ For this problem, a height-balanced binary tree is defined as a binary tree in w
 #         self.left = None
 #         self.right = None
 
+
+class Solution:
+    # @return a list of tree node
+    def isBalanced(self, root):
+        self.balanced = True
+        self.dfs(root)
+        return self.balanced
+
+    def dfs(self, root):
+        if not root: return 0
+        lh, rh = self.dfs(root.left), self.dfs(root.right)
+        if abs(lh-rh)>1: self.balanced = False
+        return max(lh, rh)+1
+
+'''
 class Solution:
     # @return a list of tree node
     def isBalanced(self, root):
@@ -23,7 +38,7 @@ class Solution:
         if lh==-1 or rh==-1 or abs(lh-rh)>1: return -1
         return max(lh, rh)+1
 
-'''
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):

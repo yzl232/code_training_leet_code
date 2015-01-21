@@ -17,4 +17,4 @@ class Solution:
             if len(d[i])>=2:ret+=d[i]
         return ret
 
-#如果每个s很长，用array[26]更佳。  如果chr的种类很多，比如asicii 256种，用sort比较好。
+#如果每个s很长，用array[26]或者hash 更佳。  如果chr的种类很多，比如asicii 256种，用sort比较好。

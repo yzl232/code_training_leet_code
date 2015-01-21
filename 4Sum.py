@@ -16,17 +16,18 @@ Note:
 '''
 class Solution:
     # @return a list of lists of length 4, [[val1,val2,val3,val4]]
-    def fourSum(self, num, target):
-        n = len(num);    res = set()
-        d = {};   num.sort()
-        for p in range(n):
-            for q in range(p+1, n):
-                if num[p] + num[q] not in d:       d[ num[p] + num[q] ] = []
-                d[ num[p] + num[q] ].append((p, q))
+    def fourSum(self, arr, target):
+        n = len(arr);    ret = set()
+        d = {};   arr.sort()
+        for i in range(n):
+            for j in range(i+1, n):
+                s = arr[i] + arr[j]
+                if s not in d:   d[ s ] = []
+                d[ s ].append((i, j))
         for i in range(n):
             for j in range(i+1, n - 2):
-                t = target - num[i] - num[j]  #i, j是最左边的。
-                if t in d:
-                    for k in d[t]:  #hashtable是右边的
-                        if k[0] > j:       res.add( (num[i], num[j], num[k[0]], num[k[1]]) )
-        return  [list(i) for i in res]
+                s = target - arr[i] - arr[j]  #i, j是最左边的。
+                if s in d:
+                    for k in d[s]:  #hashtable是右边的
+                        if k[0] > j:       ret.add( (arr[i], arr[j], arr[k[0]], arr[k[1]]) )
+        return  [list(i) for i in ret]
