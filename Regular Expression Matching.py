@@ -33,7 +33,7 @@ class Solution:
              if self.dfs(s, p[2:]): return True
              if s and p[0] in ('.', s[0]) and self.dfs(s[1:], p): return True
              return False
-        else: return s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])
+        return s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])   #和上面某行一样。    这样子就不容易出错。
 
 
         #http://blog.csdn.net/lifajun90/article/details/10582733

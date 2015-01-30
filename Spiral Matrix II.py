@@ -16,20 +16,20 @@ class Solution:
     # @return a list of lists of integer
     def generateMatrix(self, n):
         x = 1; k = 0
-        ret = [[0 for i in range(n)] for j in range(n)]
+        ret = [[0]*n for j in range(n)]
         while True:
             if n==1:
                 ret[0+k][0+k]= x
                 return ret
             if n==0:   return ret
-            for i in range(n-1):
-                ret[0+k][i+k] = x
+            for j in range(n-1):
+                ret[0+k][j+k] = x
                 x+=1
             for i in range(n-1):
                 ret[i+k][n-1+k] = x
                 x+=1
-            for i in range(n-1, 0, -1):
-                ret[n-1+k][i+k] = x
+            for j in range(n-1, 0, -1):
+                ret[n-1+k][j+k] = x
                 x+=1
             for i in range(n-1, 0, -1):
                 ret[i+k][0+k] = x

@@ -13,7 +13,7 @@ class Solution:
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):  #因为第一行，列做标记。 所以从后往前
                 if j==0:
-                    if col0: mtx[i][0]=0
+                    if col0: mtx[i][0]=0  #这里注意 。 j=0 和j!=0要严格分开。
                 elif mtx[i][0] ==0 or mtx[0][j]==0:  mtx[i][j] = 0
 
 # 第一行的corner case也成立。 如果本身为0，当然0.

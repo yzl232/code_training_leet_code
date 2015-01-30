@@ -18,5 +18,5 @@ class Solution:
             i+=1
         while '0'<=s[i]<='9':
             ret =ret*10 + ord(s[i])-ord('0')
-            i+=1
+            i+=1  #先写i+=1  容易忘
         return max(min(ret*sign, 2147483647 ), -2147483648)

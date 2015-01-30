@@ -69,9 +69,9 @@ class Solution:
     # @param root, a tree node
     # @return nothing
     def connect(self, root):
-        if not root: return
+        if not root: return   #自上而下。 preorder。 有逻辑顺序的。
         if root.left:  root.left.next = root.right
         if  root.next and root.right : root.right.next = root.next.left
+        self.connect(root.right)  #先left也可以。 不过II的递归解法必须先right。  保持一致好了。
         self.connect(root.left)
-        self.connect(root.right)
 '''

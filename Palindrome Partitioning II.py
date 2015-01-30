@@ -12,16 +12,16 @@ class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-pal
     # @param s, a string
     # @return an integer
     def minCut(self, s):
-        l = len(s)
-        isPal = [[False for j in range(l)] for i in range(l)]
-        ret = [i for i in range(l)]
-        for j in range(l):
+        n = len(s)
+        dp = [[False]*n for i in range(n)]
+        ret = [i for i in range(n)]
+        for j in range(n):
             for i in range(j, -1, -1): # j+1主要是为了保证isPal的正确性
-                 if s[i] == s[j] and (j - i <= 1 or isPal[i+1][j-1] == True):    # j是递增 ，已经保证了
-                    isPal[i][j] = True
+                 if s[i] == s[j] and (j - i <= 1 or dp[i+1][j-1] == True):    # j是递增 ，已经保证了
+                    dp[i][j] = True
                     if i== 0:         ret[j] = 0         # when i ==0   .  the whole string [0:j] is a palindrome
                     else:       ret[j] = min(ret[i-1]+1, ret[j])    #   i~j pal。 i-1
-        return ret[l-1]
+        return ret[n-1]
 ''' #第一种解法是用DFS。 更定不大好。。 然后是我熟悉的那种。 然后是这个O(n) space的解法.  the following one use O(n2) time and O(n) space.  So it is a better one
 class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-palindrome.html
     # @param s, a string

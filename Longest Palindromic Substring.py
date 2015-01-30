@@ -83,18 +83,12 @@ dp解法
 class Solution:
     # @return a string
     def longestPalindrome(self, s):  # http://blog.csdn.net/feliciafay/article/details/16984031
-        n = len(s)
-        start = 0
-        end = 0
-        dp = [[False for i in range(n)] for j in range(n)]
-        maxL = -1
+        n = len(s); ret=(0, 0, -1)
+        dp = [[False]*n for i in range(n)]
         for j in range(n):
             for i in range(j, -1, -1):
                 if s[i] == s[j] and (j-i<=1 or dp[i+1][j-1]):
                     dp[i][j] = True
-                    if j-i>maxL:
-                        start = i
-                        end = j+1
-                        maxL = j-i
-        return  s[start: end]#如出一辙 https://oj.leetcode.com/submissions/detail/13147843/
+                    if j-i+1>ret[-1]:ret=(i, j, j-i+1)
+        return  s[ret[0]: ret[1]+1]#如出一辙 https://oj.leetcode.com/submissions/detail/13147843/
 '''

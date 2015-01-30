@@ -15,23 +15,22 @@
 
 #这里是按照list的顺序来 inorder,   left =dfs,  然后root.left = left , root.right = dfs 然后self.head = self.head.next 之前array是preorder或者inorder都可以。  list只能从左到右， 所以必须inorder. array 任意access。所以无所谓
 class Solution:
-    head = None
     def sortedListToBST(self, head):
-        current, length = head, 0
-        while current != None:
-            current, length = current.next, length + 1
+        cur, n = head, 0
+        while cur:
+            cur = cur.next
+            n+=1
         self.head = head
-        return self.sortedRecur(0, length - 1)
+        return self.dfs(0, n - 1)
 
-    def sortedRecur(self, start, end):
-        if start > end:
-            return None
+    def dfs(self, start, end):
+        if start > end:    return
         mid = (start + end) / 2
-        left = self.sortedRecur(start, mid - 1)
+        left = self.dfs(start, mid - 1)   #因为是inorder    root压根还没建立起来。。
         root = TreeNode(self.head.val)
         root.left = left
         self.head = self.head.next
-        root.right = self.sortedRecur(mid + 1, end)
+        root.right = self.dfs(mid + 1, end)
         return root
 
 

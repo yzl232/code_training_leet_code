@@ -15,12 +15,12 @@ class Solution:
     # @param s, a string
     # @param dict, a set of string
     # @return a list of strings
-    def check(self, s):
-        dp = [False for i in range(len(s)+1)]
+    def check(self, s):    #这一段用memoization比用dp要好。
+        dp = [False for j in range(len(s)+1)]
         dp[0] = True
-        for i in range(1, len(s)+1):
-            for k in range(i):
-                if dp[k] and s[k:i] in self.dict:    dp[i] = True
+        for j in range(1, len(s)+1):
+            for k in range(j):
+                if dp[k] and s[k:j] in self.dict:    dp[j] = True
         return dp[-1]
 
     def dfs(self, s,  cur):

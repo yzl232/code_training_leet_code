@@ -28,7 +28,7 @@ class Solution:
     def solve(self, board):
         if board == []: return
         m = len(board); n = len(board[0])
-        pre = set([])
+        pre = set()
         for i in range(m):
             if board[i][0] == 'O': pre.add((i, 0))
             if board[i][n-1] == 'O': pre.add((i, n-1))
@@ -36,16 +36,16 @@ class Solution:
             if board[0][j] == 'O': pre.add((0, j))
             if board[m-1][j] == 'O': pre.add((m-1, j))
         while pre:
-            cur = set([])
-            for r, c in pre:  board[r][c] = '#'
+            cur = set()
             for i, j in pre:
+                board[i][j] = '#'
                 for r, c in [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:
                     if 0<=r<=m-1 and 0<=c<=n-1 and board[r][c]=='O': cur.add((r, c))
             pre = cur
         for i in range(m):
             for j in range(n):
                 if board[i][j] == 'O': board[i][j] = 'X'
-                if board[i][j] == '#': board[i][j] = 'O'
+                elif board[i][j] == '#': board[i][j] = 'O'
 '''
 class Solution:
     # @param board, a 9x9 2D array

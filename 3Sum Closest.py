@@ -9,17 +9,15 @@ Given an array S of n integers, find three integers in S such that the sum is cl
 class Solution:
     # @return an integer
     def threeSumClosest(self, num, target):
-        num.sort();    minDiff = 10**10;     ret = 0
+        num.sort();     ret = ( 0, 10**10)
         for i in range(len(num)):
             l = i+1;     r = len(num) - 1
             if i>0 and num[i] == num[i-1]: continue
             while l<r:
                 s = num[i] + num[l] + num[r]
                 diff = abs(target-s)
-                if diff<minDiff:
-                    minDiff = diff
-                    ret = s
+                if diff<ret[-1]: ret=(s, diff)
                 if s == target:     return  target
                 elif s<target:     l+=1
                 else:  r -=1
-        return ret
+        return ret[0]

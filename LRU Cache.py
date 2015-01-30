@@ -8,18 +8,16 @@ class ListNode:
     def __init__(self, key, val):
         self.val = val
         self.key = key
-        self.next = None
-        self.prev = None
+        self.next = self.prev = None
 
 class LinkedList:
     def __init__(self):
-        self.head = None
-        self.tail = None
+        self.head =self.tail = None
 
     def insert(self, node):
-        if self.tail is None:     self.tail = node
+        if not self.tail:     self.tail = node
         else:
-            self.head.prev = node
+            self.head.prev = node   #相互之间，前后逻辑性极强。 可以推导
             node.next = self.head
         self.head = node
 

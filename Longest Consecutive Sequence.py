@@ -14,9 +14,9 @@ class Solution:
     def longestConsecutive(self, num):
         d = {x:False for x in num} # False means not visited
         ret = 0
-        for i in d:
-            if not d[i]:
-                a = i + 1;  b = i - 1
+        for x in d:
+            if not d[x]:
+                a = x + 1;  b = x - 1
                 while a in d and not d[a]:
                     d[a] = True; a += 1
                 while b in d and not d[b]:
@@ -25,6 +25,7 @@ class Solution:
         return ret
 #  上面这个简单。  是2 pass
 #  下面这个是one pass. 不过难一些。
+#区别不大。 还是用原来的吧~~
 '''
 class Solution:
     # @param num, a list of integer

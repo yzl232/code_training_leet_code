@@ -14,11 +14,11 @@ confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution:       #显然要in order
     # @param root, a tree node
     # @return a tree node
     def recoverTree(self, root):
-        self.prev = self.n1= self.n2 = None  #pre用来root.val与前面比较
+        self.pre = self.n1= self.n2 = None  #pre用来root.val与前面比较
         self.dfs(root)
         self.n1.val, self.n2.val = self.n2.val, self.n1.val
         return root
@@ -26,13 +26,38 @@ class Solution:
     def dfs(self, root):
         if not root: return
         self.dfs(root.left)
-        if self.prev and self.prev.val > root.val:  #发现逆序
+        if self.pre and self.pre.val > root.val:  #发现逆序
             self.n2 = root
-            if not self.n1: self.n1 = self.prev  #n1只更新第一次
-        self.prev = root
+            if not self.n1: self.n1 = self.pre  #n1只更新第一次
+        self.pre = root
         self.dfs(root.right)
 
+
 '''
+举简单例子。
+   2
+3     1
+
+
+交换了1， 3.
+
+例如一颗被破坏的二叉查找树如下：
+
+　　　　　　　　4
+
+　　　　　　　/     \
+
+　　            2        6
+
+                /   \    /   \
+
+               1    5  3    7
+
+n1=5, n2=4.    n2=3
+
+第一个逆序。 x比后面大。
+第二个逆序。 x比前面小。
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):

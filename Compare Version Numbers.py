@@ -15,14 +15,15 @@ Here is an example of version numbers ordering:
 
 0.1 < 1.1 < 1.2 < 13.37
 '''
+
+#["1.1", "1.01.0"]
 class Solution:
     # @param a, a string
     # @param b, a string
     # @return a boolean
     def compareVersion(self, v1, v2):
         s1=v1.split('.'); s2=v2.split('.')
-        n = max(len(s1), len(s2))
-        for i in range(n):
+        for i in range(max(len(s1), len(s2))):
             t1=int(s1[i]) if i<len(s1) else 0
             t2= int(s2[i]) if i<len(s2) else 0
             if t1<t2: return -1

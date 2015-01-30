@@ -19,26 +19,24 @@ class Solution:
     # @param L, a list of string
     # @return a list of integer
     def findSubstring(self, s, l):
-        m = len(s); n = len(l); wLen = len(l[0])
-        ret = []; tCnt={}  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
+        wLen = len(l[0]);ret = []; tCnt={}  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
         for w in l:
             if w not in tCnt: tCnt[w]=0
             tCnt[w]+=1
         for i in range(wLen):     #所以总复杂度是O(2*n/l*l)=O(n)
-            fdN=0;  fnd={}; st=i
-            for end in range(wLen+i, len(s)+1, wLen):  #len(s)+1,  end可以到len(s)
-                w = s[end-wLen :end]
+            fdN=0;  fndD={}; l=i
+            for r in range(wLen+i, len(s)+1, wLen):  #len(s)+1,  end可以到len(s)
+                w = s[r-wLen :r]
                 if w not in tCnt: continue
-                if w not in fnd or tCnt[w]>fnd[w]: fdN+=1
-                if w not in fnd: fnd[w]=0
-                fnd[w] +=1
+                if w not in fndD or tCnt[w]>fndD[w]: fdN+=1
+                if w not in fndD: fndD[w]=0
+                fndD[w] +=1
                 if fdN==len(l):
-                    w1 = s[st:st+wLen]
-                    while w1 not in tCnt or fnd[w1] > tCnt[w1]:
-                        if w1 in tCnt: fnd[w1]-=1
-                        st+=wLen
-                        w1 = s[st:st+wLen]
-                    if len(l)==(end-st)/wLen: ret.append(st)
+                    w = s[l:l+wLen]
+                    while w not in tCnt or fndD[w] > tCnt[w]:
+                        if w in tCnt: fndD[w]-=1
+                        l+=wLen;   w = s[l:l+wLen]
+                    if len(l)==(r-l)/wLen: ret.append(l)
         return ret
 
 #比暴力法快N倍

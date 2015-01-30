@@ -1,6 +1,4 @@
-
-            
-''''
+'''
 
  Given a singly linked list L: L0→L1→…→Ln-1→Ln,
 reorder it to: L0→Ln→L1→Ln-1→L2→Ln-2→…
@@ -9,7 +7,7 @@ You must do this in-place without altering the nodes' values.
 
 For example,
 Given {1,2,3,4}, reorder it to {1,4,2,3}. 
-''''
+'''
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -22,7 +20,7 @@ class Solution:
     def reorderList(self, h):
         if not h or not h.next: return
         fast = slow = h
-        while fast and fast.next:
+        while fast and fast.next: # 这里实际上拆成两半不完全对。 不是一半。
             fast = fast.next.next
             slow = slow.next
         h2 = slow.next

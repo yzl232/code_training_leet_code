@@ -13,9 +13,9 @@ A = [3,2,1,0,4], return false.
 class Solution:
     # @param A, a list of integers
     # @return a boolean
-    def canJump(self, A):
-        canReach = 0
-        for i in range(len(A)):
-            if i>canReach: return False
-            canReach = max(canReach, i+A[i])
-            if canReach>=len(A)-1:        return True
+    def canJump(self, arr):
+        canR = 0  # can reach
+        for i in range(len(arr)):
+            if i>canR: return False
+            canR = max(canR, i+arr[i])
+            if canR>=len(arr)-1:        return True

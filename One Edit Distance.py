@@ -3,14 +3,15 @@
 Given two strings S and T, determine if they are both one edit distance apart.
 '''
 
-class Solution: #关键就是背下后面4行
+class Solution: #
     # @param s, a string
     # @param t, a string
     # @return a boolean
-    def isOneEditDistance(self, s, t):  #背下就好
-        for i in range(min(len(s), len(t))):
-                if s[i] != t[i]: return  s[i+1 if len(s)>=len(t) else i :]== t[i+1 if len(t)>=len(s) else i :]
-        return abs(len(s) - len(t)) == 1
+    def isOneEditDistance(self, s, t):  #
+        m=len(s); n=len(t)
+        for i in range(min(m, n)): #只有更短的string才不用跳过到i+1.
+                if s[i] != t[i]: return  s[i if m<n else i+1 :]== t[i  if n<m else i+1 :]
+        return abs(m-n) == 1
 
 
 '''

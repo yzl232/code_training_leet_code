@@ -1,4 +1,31 @@
 # encoding=utf-8
+'''
+ Given a binary tree, flatten it to a linked list in-place.
+
+For example,
+Given
+
+         1
+        / \
+       2   5
+      / \   \
+     3   4   6
+
+The flattened tree should look like:
+
+   1
+    \
+     2
+      \
+       3
+        \
+         4
+          \
+           5
+            \
+             6
+
+'''
 
 # Definition for a  binary tree node
 # class TreeNode:
@@ -9,7 +36,7 @@
 
 class Solution:
     # @param root, a tree node  #注意这道题目不是binary search tree  。  是类似heap
-    # @return nothing, do it in place  #他的顺序是   inorder的顺序。    root, left, right.  
+    # @return nothing, do it in place  #他的顺序是   pre-Order的顺序。    root, left, right.
     def flatten(self, root):  #我们反过来，就是right, left, root
         self.head = None
         self.dfs(root)
@@ -19,8 +46,8 @@ class Solution:
         self.dfs(root.right) #总共三步。 背下
         self.dfs(root.left)
         root.right = self.head  #右边连上
-        root.left = None  #左置空
         self.head = root    #更新head
+        root.left = None  #左置空
 
 
 '''

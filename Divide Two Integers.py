@@ -2,6 +2,7 @@
 class Solution:
     # @return an integer
     def divide(self, a, b):  # obvious we can only use plus/minus operation
+        assert b!=0
         sign = 1 if a^b>=0 else -1
         a = abs(a);  b = abs(b)
         ret = 0

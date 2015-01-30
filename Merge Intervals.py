@@ -16,7 +16,7 @@ class Solution: #思路就是排序后，检查前一个有没有重叠。 有�
     # @param intervals, a list of Interval
     # @return a list of Interval
     def merge(self, arr):
-        if len(arr) == 0:   return arr
+        if not arr: return []
         arr.sort(key = lambda x: x.start)
         ret = [arr[0]]
         for i in range(1, len(arr)):

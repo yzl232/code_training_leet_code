@@ -29,8 +29,7 @@ class Solution:
     # @return a list of integers
     def postorderTraversal(self, root):
         if not root: return []
-        stack = [root]
-        ret = []
+        stack = [root]; ret = []
         while stack:
             cur = stack.pop()
             ret.append(cur.val)

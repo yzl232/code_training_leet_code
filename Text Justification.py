@@ -29,18 +29,18 @@ class Solution:
     def fullJustify(self, words, x):
         ret = []; i=0
         while i<len(words):
-            nWordsL=l=0
-            while i+nWordsL<len(words) and l+nWordsL+len(words[i+nWordsL])<=x:
-                l+=len(words[i+nWordsL]);  nWordsL+=1
-            line = words[i]
-            if nWordsL!=1:
-                spaceN, extra = (x-l)/(nWordsL-1), (x-l)%(nWordsL-1)
-                for j in range(nWordsL-1):  #不考虑最后一个单词
-                    if i+nWordsL==len(words): line+=' '   #最后一行
+            n=l=0      # N words, this line,.    length of line
+            while i+n<len(words) and l+n+len(words[i+n])<=x:   #正好n+1个词。n个空
+                l+=len(words[i+n]);  n+=1
+            line = words[i]        #之前i所在的word[i]是属于没有加上的。
+            if n!=1:
+                spaceN, extra = (x-l)/(n-1), (x-l)%(n-1)
+                for j in range(n-1):  #    #n-1个 。 先空格，后单词。
+                    if i+n==len(words): line+=' '   #最后一行
                     else: line+=' '*(spaceN+ (1 if j<extra  else  0))
-                    line+=words[i+j+1] #上面这四行代码非常精华。解决了最tricky的部分
+                    line+=words[i+1+j] #上面这四行代码非常精华。解决了最tricky的部分
             ret.append(line+' '*(x-len(line))) #补全
-            i+=nWordsL
+            i+=n    #先写这行。容易忘。
         return ret
 
 '''

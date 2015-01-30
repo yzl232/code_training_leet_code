@@ -27,8 +27,8 @@ class Solution:
             if n==1:
                 for i in range(m):    ret.append(matrix[i+k][ 0+k])  #两两对称。可以加速写
                 return ret
-            for i in range(n-1):    ret.append(matrix[0+k][i+k])       #注意到四个的两两对称，可以检查和加速写
-            for i in range(m-1):    ret.append(matrix[i+k][n-1+k])
-            for i in range(n-1, 0, -1):    ret.append(matrix[m-1+k][i+k])
+            for j in range(n-1):    ret.append(matrix[0+k][j+k])       #注意到四个的两两对称，可以检查和加速写     #i，n  第2维度
+            for i in range(m-1):    ret.append(matrix[i+k][n-1+k])  #i, m 第1维度
+            for j in range(n-1, 0, -1):    ret.append(matrix[m-1+k][j+k])   #总有一边是变化的，为i+k。 其他的就好办了
             for i in range(m-1, 0, -1):     ret.append(matrix[i+k][0+k])
-            k+=1;   n-=2;    m-=2
+            k+=1;   n-=2;    m-=2  #先写好这行。 容易忘

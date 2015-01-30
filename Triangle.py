@@ -15,12 +15,25 @@ The minimum path sum from top to bottom is 11 (i.e., 2 + 3 + 5 + 1 = 11).
 Note:
 Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
 '''
+
+
+class Solution:    #可以做到in-place.  #bottom-up更加简单
+    # @param triangle, a list of lists of integers
+    # @return an integer
+    def minimumTotal(self, triangle):
+        for i in range(len(triangle)-2, -1, -1):
+            for j in range(len(triangle[i])):
+                triangle[i][j] += min(triangle[i+1][j], triangle[i+1][j+1])
+        return triangle[0][0]
+
+
+'''
 class Solution:
     # @param triangle, a list of lists of integers
     # @return an integer
     def minimumTotal(self, triangle):
         l = len(triangle)
-        dp = [0 for i in range(l)]
+        dp = [0]*l
         for row in triangle:
             dp1 = dp[:]
             for i in range(len(row)):
@@ -32,3 +45,4 @@ class Solution:
     #We use 2 arrays. dp for the current row, dp1 for the last row.    We scan each position in each row.    O(n2) time ,  O(n) space
     # naive solution,  DFS,  polynomial time and space. ..
     # #use recursion.
+'''

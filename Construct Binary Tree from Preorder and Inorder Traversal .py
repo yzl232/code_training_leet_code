@@ -18,7 +18,7 @@ class Solution:
     # @param inorder, a list of integers
     # @return a tree node
     def buildTree(self, preorder, inorder): #  #核心在于 1 找rootval。 用pre或者post  2 inorder的index找出root的位置
-        if not preorder: return None
+        if not preorder: return None   # #建立tree.    pre order
         rootV = preorder[0]
         root = TreeNode(rootV)
         lCnt = inorder.index(rootV)

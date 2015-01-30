@@ -11,13 +11,12 @@ import heapq
 class Solution:
     # @param a list of ListNode
     # @return a ListNode
-    def mergeKLists(self, lists):
-        h = [(n.val, n) for n in lists if n]
+    def mergeKLists(self, arr):
+        h = [(x.val, x) for x in arr if x]
         heapq.heapify(h)
-        dummy = ListNode(0); curr = dummy
+        dummy = ListNode(0); cur = dummy
         while h:
-            pop = heapq.heappop(h)
-            curr.next = ListNode(pop[0])
-            curr = curr.next; n = pop[1].next
-            if n:  heapq.heappush(h, (n.val, n))
+            val, x = heapq.heappop(h)
+            cur.next = x;  cur = cur.next;
+            if x.next: heapq.heappush(h, (x.next.val, x.next))
         return dummy.next

@@ -24,8 +24,8 @@ class Solution:
         ret = 0
         x = abs(x)
         while x > 0:
-            ret = ret * 10 + x % 10
-            x /= 10  #和palindrome integer类似。 与atoi也类似
+            x, d = x/10, x%10 #和palindrome integer类似。 与atoi也类似
+            ret = ret*10+d
         ret = ret*sign
         if ret> 2147483647 or ret<  -2147483648: return 0
         return ret

@@ -10,16 +10,16 @@ class Solution:
     # @param s, a string
     # @return a list of strings
     def restoreIpAddresses(self, s):
-        self.result = []
+        self.ret = []
         self.dfs(0, '', s)
-        return self.result
+        return self.ret
 
-    def dfs(self, num, cur, s):
-        if num == 4:
-            if s == '':  self.result.append(cur[:-1])
+    def dfs(self, n, cur, s):
+        if n == 4:
+            if s == '':  self.ret.append(cur[:-1])
             return
-        for i in range(1, 4):
+        for i in [1, 2, 3]:
             if len(s)>=i:
                 ip = s[:i]
                 if 0<=int(ip)<=255 and str(int(ip)) == ip:
-                    self.dfs(num+1, cur + ip + '.', s[i:])
+                    self.dfs(n+1, cur + ip + '.', s[i:])

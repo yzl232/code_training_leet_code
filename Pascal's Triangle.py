@@ -1,7 +1,7 @@
 '''
 Given numRows, generate the first numRows of Pascal's triangle.
 
-For example, given numRows = 5,
+For example, given numRows = 5,.
 Return
 
 [

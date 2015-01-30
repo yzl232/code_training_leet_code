@@ -22,8 +22,8 @@ class Solution:
         total = math.factorial(n)
         k = k%total-1;  seq = ''
         digits = [str(i) for i in range(1, n+1)]
-        for x in range(n, 0, -1):  #n>0
-            total = total/x
-            i, k = k/total, k%total
-            seq += digits.pop(i)
+        for i in range(n, 0, -1):  #n>0
+            total = total/i
+            j, k = k/total, k%total
+            seq += digits.pop(j)
         return seq

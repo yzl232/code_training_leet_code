@@ -17,7 +17,7 @@ A solution set is:
 #permutation 一般是  t = c[:].  t.pop(i).   self.dfs
 #combination 一般是  self.dfs(   , c[:])
 #都是 for i in range(c)
-
+# 题目说了，都是正数
 class Solution:
     # @param candidates, a list of integers
     # @param target, integer
@@ -29,9 +29,11 @@ class Solution:
 
     def dfs(self, n1, target, cur):
         if target ==0:
-            if cur in self.ret: return
+            if cur in self.ret: return  #这样反而更合适。 考虑 combiantion sum II的关系。
             self.ret.append(cur)
             return
         for i in range(n1, len(self.c)):
-            x = self.c[i]
-            if target>=x:              self.dfs(i, target-x, cur+[x])
+            c = self.c[i]
+            if target>=c:              self.dfs(i, target-c, cur+[c])
+
+# #if i>0 and self.c[i]==self.c[i-1]: continue   #反正可以无限重复使用。 跳过吧。

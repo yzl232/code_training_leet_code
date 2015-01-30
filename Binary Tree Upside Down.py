@@ -27,18 +27,18 @@ confused what "{1,#,2,3}" means?
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution: #改变结构， 也是类似post-order的形式
     # @param root, a tree node
     # @return root of the upside down tree
     def upsideDownBinaryTree(self, root):
         return self.dfs(root, None)
 
     def dfs(self, p, parent):
-        if not p: return parent
-        root = self.dfs(p.left, p)
+        if not p: return parent   #递归只用到p.left。  到底了， root是parent
+        t = self.dfs(p.left, p)
         p.left = parent.right if parent else None
         p.right = parent
-        return root
+        return t
 '''
 注意观察。
 p.left = parent.right;

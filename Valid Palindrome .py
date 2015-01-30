@@ -10,11 +10,13 @@ Have you consider that the string might be empty? This is a good question to ask
 
 For the purpose of this problem, we define empty string as valid palindrome.
 '''
+
+
 class Solution:
     # @param s, a string
     # @return a boolean
     def isPalindrome(self, s):
-        i=0; j = len(s)-1; s = s.lower()
+        s = s.lower(); i=0; j = len(s)-1
         while i<j:
             while i<j and not ('a'<=s[i]<='z' or '0'<=s[i]<='9'): i+=1
             while i<j and not ('a'<=s[j]<='z' or '0'<=s[j]<='9'): j-=1

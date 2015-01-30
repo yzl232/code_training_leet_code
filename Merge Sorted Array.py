@@ -11,7 +11,7 @@ class Solution:
     # @param B  a list of integers
     # @param n  an integer, length of B
     # @return nothing
-    def merge(self, a, m, b, n):
+    def merge(self, a, m, b, n):  #in place    必须从后往前。   A足够长。  后面是空得。    从前面要用的会被覆盖。
         i = m-1; j = n-1; x=m+n-1
         while i>=0 and j>=0:
             if a[i] > b[j]:
@@ -20,6 +20,4 @@ class Solution:
             else:
                 a[x] = b[j]
                 j -=1; x-=1
-        while j>=0:
-            a[j] = b[j]
-            j-=1
+        a[:j+1] = b[:j+1]

@@ -22,5 +22,5 @@ class Solution:
             if tank < 0:
                 start = i+1
                 tank = 0
-        if total < 0:       return -1
+        if total < 0:       return -1  # total的作用。 判断是不是-1
         return start

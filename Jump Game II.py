@@ -14,15 +14,15 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 class Solution:
     # @param A, a list of integers
     # @return an integer  #比1只多了几行而已
-    def jump(self, A):    
-            jumpNum = 0; lastJumpReach = 0; canReach = 0
-            for i in range(len(A)):
-                if i>canReach: return -1
-                if i > lastJumpReach:
-                    lastJumpReach = canReach
-                    jumpNum += 1
-                canReach = max(canReach, i+A[i])
-            return jumpNum
+    def jump(self, arr):
+            cnt =0;  lastR=canR = 0   # can reach
+            for i in range(len(arr)):
+                if i>canR: return -1
+                if i > lastR:
+                    lastR = canR
+                    cnt += 1
+                canR = max(canR, i+arr[i])
+            return cnt
 '''
 class Solution
     def jumpGameIII(self, A):

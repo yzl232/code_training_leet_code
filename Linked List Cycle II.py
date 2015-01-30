@@ -12,14 +12,14 @@ Can you solve it without using extra space?
 class Solution:  #http://fisherlei.blogspot.com/2013/11/leetcode-linked-list-cycle-ii-solution.html  X和K的关系是基于Y互补的。等于说，两个指针相遇以后，再往下走X步就回到Cycle的起点了
     # @param head, a ListNode
     # @return a list node
-    def detectCycle(self, head):
-        fast = slow = head
+    def detectCycle(self, h):
+        fast = slow = h
         while fast and fast.next :
             fast = fast.next.next
             slow = slow.next
             if fast == slow:   break
-        if not fast or not fast.next: return
-        fast = head
+        if not fast or not fast.next: return  # 不存在交叉
+        fast = h
         while fast!= slow:
             fast = fast.next
             slow = slow.next

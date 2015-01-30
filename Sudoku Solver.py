@@ -28,8 +28,8 @@ class Solution:
 
     def isValid(self, board, i, j):
         for k in range(9):
-            if board[k][j] == board[i][j] and (k!=i): return False
-            if board[i][k] == board[i][j] and (k!=j): return False
+            if board[k][j] == board[i][j] and (k!=i): return False   #valid sudoku全部检查。  这个只是添加了一个元素。 
+            if board[i][k] == board[i][j] and (k!=j): return False  #不需要完全检查
         r=i-i%3; c=j-j%3
         for m in range(r, r+3):
             for n in range(c, c+3):

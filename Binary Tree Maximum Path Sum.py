@@ -12,7 +12,6 @@ Given the below binary tree,
 
 Return 6.
 '''
-
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -23,7 +22,7 @@ Return 6.
 class Solution:
     # @param root, a tree node
     # @return an integer
-    def maxPathSum(self, root):
+    def maxPathSum(self, root):   # post-order
         self.ret = -10**10
         self.dfs(root)
         return self.ret

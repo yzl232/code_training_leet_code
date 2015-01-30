@@ -33,17 +33,17 @@ class Solution:
     # @param root, a tree node
     # @param sum, an integer
     # @return a list of lists of integers
-    def pathSum(self, root, sum):
-        self.result = []
-        self.dfs(root, sum, [])
-        return self.result
+    def pathSum(self, root, s):
+        self.ret = []
+        self.dfs(root, s, [])
+        return self.ret
     
-    def dfs(self, root, sum, cur):
+    def dfs(self, root, s, cur):
         if not root: return
-        if not root.left and not root.right and sum == root.val:
-            self.result.append(cur + [root.val])
+        if not root.left and not root.right and s == root.val:
+            self.ret.append(cur + [root.val])
             return
-        self.dfs(root.left, sum-root.val, cur+[root.val])
-        self.dfs(root.right, sum-root.val, cur+[root.val])
+        self.dfs(root.left, s-root.val, cur+[root.val])
+        self.dfs(root.right, s-root.val, cur+[root.val])
         
         

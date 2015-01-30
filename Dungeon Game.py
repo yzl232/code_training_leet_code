@@ -18,15 +18,15 @@ class Solution:
     # @return a integer
     def calculateMinimumHP(self, mtx):
         m=len(mtx); n=len(mtx[0])
-        dp= [[10**10 for j in range(n+1)] for i in range(m+1)]
-        dp[m][n-1]=dp[m-1][n]=1
+        dp= [[10**10]*(n+1) for i in range(m+1)]
+        dp[m][n-1]=1   #先写 dp[m-1][n-1]=dp[m-1][n-1]=1 . 然后改正加1
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):
-                dp[i][j] =min(dp[i+1][j], dp[i][j+1])  - mtx[i][j]
-                if dp[i][j]<1: dp[i][j]=1
+                dp[i][j] = max(min(dp[i+1][j], dp[i][j+1])  - mtx[i][j],   1)  # if dp[i][j]<1: dp[i][j]=1
         return dp[0][0]
 # 如果把dp的值存到dungeon matrix。 可以做到O(1) extra space
-
+# http://leetcodesolution.blogspot.com/2015/01/leetcode-dungeon-game.html
+# initial health 的解释
 '''
 class Solution:
     # @param dungeon, a list of lists of integers

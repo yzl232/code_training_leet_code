@@ -12,7 +12,7 @@ class Solution:
     def simplifyPath(self, path):
         stack, tokens = [], path.split("/")
         for ch in tokens:
-            if ch != ".." and ch != "." and ch:   stack.append(ch)
+            if ch not in ['', '..', '.']:   stack.append(ch)
             elif ch=='..':
                 if stack: stack.pop()
         return "/" + "/".join(stack)

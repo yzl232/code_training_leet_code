@@ -19,12 +19,28 @@ return its level order traversal as:
 ]
 
 '''
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
 #         self.val = x
 #         self.left = None
 #         self.right = None
+class Solution:
+    def levelOrder(self, root):   # pre = cur这行 容易忘。 先写好这行。
+        if not root: return []
+        pre, ret = [root], [[root.val]]   # 除了pre, cur之外
+        while pre:
+            cur = []     #必须用array。 因为是有序的。 并且不会有重复
+            for n in pre:
+                if n.left:  cur.append(n.left)
+                if n.right:  cur.append(n.right)
+            if cur: ret.append([x.val for x in cur])
+            pre = cur
+        return ret
+
+
+'''
 class Solution:
     def levelOrder(self, root):
         if not root: return []
@@ -38,7 +54,7 @@ class Solution:
             ret.append(vals)
             pre = cur
         return ret
-'''
+
 BFS的做法和DFS的做法
 
 class Solution:

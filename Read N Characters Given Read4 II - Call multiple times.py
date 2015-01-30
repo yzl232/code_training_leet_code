@@ -14,6 +14,10 @@ Note:
 The read function may be called multiple times.
 '''
 
+
+
+
+
 # The read4 API is already defined for you.
 # @param buf, a list of characters
 # @return an integer
@@ -24,19 +28,20 @@ class Solution:
     # @param n,   Maximum number of characters to read (an integer)
     # @return     The number of characters read (an integer)
     def __init__(self):
-        self.p = 0
-        self.bufsize = 0 #If bufsize > 0, that means there is partial data left in buffer
+        self.p = 0   #上次读到哪里了
+        self.bufsize = 0 # tmpBuf存的总量  If bufsize > 0, that means there is partial data left in buffer
         self.tmpBuffer = [None]*4
 
     def read(self, buf, n):
         cnt = 0;
         while cnt<n:      #tmp的作用就是判断是不是4。
-            if self.p==0: self.bufsize=read4(self.tmpBuffer)
-            if self.bufsize==0: break
+            if self.p==self.bufsize:
+                self.bufsize=read4(self.tmpBuffer)
+                self.p =0
+                if self.bufsize==0: break
             while cnt<n and self.p<self.bufsize:
                 buf[cnt]=self.tmpBuffer[self.p]
                 cnt+=1;  self.p+=1
-            if cnt<n:  self.p=0   #读完了本地buffer
         return cnt
 
 

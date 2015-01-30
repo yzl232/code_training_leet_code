@@ -21,7 +21,7 @@ class Solution:
     # @param n,   Maximum number of characters to read (an integer)
     # @return     The number of characters read (an integer)
     def read(self, buf, n):
-        tmpBuf = [None for i in range(4)];     cnt = 0
+        tmpBuf = [None]*4;     cnt = 0
         while n > cnt:#tmp的作用就是判断是不是4096。
             tmpN = read4(tmpBuf)
             if tmpN==0: break

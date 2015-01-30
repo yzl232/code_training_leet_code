@@ -6,6 +6,19 @@ Returns the index of the first occurrence of needle in haystack, or -1 if needle
 Update (2014-11-02):
 The signature of the function had been updated to return the index instead of the pointer. If you still see your function signature returns a char * or String, please click the reload button to reset your code definition.
 '''
+
+
+class Solution:
+    # @param haystack, a string
+    # @param needle, a string
+    # @return a string or None
+    def strStr(self, s, s1):
+        for i in range(len(s)-len(s1)+1):  #举例。   n1=n2=1,
+            if s[i:i+len(s1)] == s1: return i
+        return -1
+
+
+'''
 class Solution:
     # @param haystack, a string
     # @param needle, a string
@@ -20,3 +33,4 @@ class Solution:
             else:    return i
             i += 1
         return -1
+'''

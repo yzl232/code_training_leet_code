@@ -35,18 +35,16 @@ class Solution:
     # @return a undirected graph node
     # @DFS
     def cloneGraph(self, node):
-        self.mapNodes = {}
+        self.d = {}
         if not node: return
         return self.dfs(node)
 
-    def dfs(self, nodeA):
-        if nodeA in self.mapNodes:  return self.mapNodes[nodeA]
-        else:
-            nodeB = UndirectedGraphNode(nodeA.label)
-            self.mapNodes[nodeA] = nodeB
-            for neighbor in nodeA.neighbors:
-                nodeB.neighbors.append(self.dfs(neighbor))
-            return nodeB
+    def dfs(self, x):
+        if x in self.d:  return self.d[x]
+        y = UndirectedGraphNode(x.label)
+        self.d[x] = y
+        for n in x.neighbors:  y.neighbors.append(self.dfs(n))
+        return y
 
 '''
 BFS稍微复杂一点点
@@ -61,22 +59,21 @@ BFS稍微复杂一点点
 class Solution:
     # @param node, a undirected graph node
     # @return a undirected graph node
-    def cloneGraph(self, node):
-        if not node: return
-        nodeB = UndirectedGraphNode(node.label)
-        d, pre = {node: nodeB}, [node]
+    def cloneGraph(self, x):
+        if not x: return
+        y = UndirectedGraphNode(x.label)
+        d, pre = {x: y}, [x]   #d兼具已经visited的作用和map node作用
         while pre:
             cur = []
             for x in pre:
                 for n in x.neighbors:  #每层把它的所有neighbor都加到cur里边去。(如果没在map)
-                    if n in d:  d[x].neighbors.append(d[n])
-                    else:
+                    if n not in d:
                         cur.append(n)
                         t = UndirectedGraphNode(n.label)
-                        d[x].neighbors.append(t)
                         d[n] = t
+                    d[x].neighbors.append(d[n])
             pre = cur
-        return nodeB
+        return y
 
 
 '''

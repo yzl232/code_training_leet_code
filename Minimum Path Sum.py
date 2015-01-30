@@ -11,9 +11,9 @@ class Solution:
     # @return an integer
     def minPathSum(self, grid):   #dp存到原来的grid。  in place
         m = len(grid);  n = len(grid[0])
-        for i in range(1, m):  grid[i][0] = grid[i-1][0] + grid[i][0]
-        for i in range(1, n):   grid[0][i] = grid[0][i-1] + grid[0][i]
+        for i in range(1, m):  grid[i][0] += grid[i-1][0]
+        for j in range(1, n):   grid[0][j] += grid[0][j-1]
         for i in range(1, n):
             for j in range(1, m):
-                grid[j][i] = min(grid[j][i-1], grid[j-1][i])+grid[j][i]
+                grid[j][i] += min(grid[j][i-1], grid[j-1][i])
         return grid[-1][-1]

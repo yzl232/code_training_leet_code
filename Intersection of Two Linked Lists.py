@@ -35,10 +35,10 @@ class Solution:
             if h1==h2: return h1
             h1 = h1.next;    h2 = h2.next
 
-    def getCnt(self, head):
+    def getCnt(self, h):
         cnt = 0
-        while head:
-            head= head.next
+        while h:
+            h= h.next
             cnt+=1
         return cnt
 

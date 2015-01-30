@@ -20,3 +20,19 @@ class Solution:
             ones &= ~threes
             twos &= ~threes  # remove three times
         return ones
+
+'''
+
+class Solution:
+    # @param A, a list of integer
+    # @return an integer
+    def singleNumber(self, arr):
+        cnt = [0]*32
+        ret =0
+        for i in range(32):
+            for x in arr:
+                if (x>>i)&1: cnt[i]+=1
+            if cnt[i]%3!=0: ret|=1<<i
+        return ret
+
+'''

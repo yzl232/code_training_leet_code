@@ -10,12 +10,12 @@ Your function should return length = 5, and A is now [1,1,2,2,3].
 class Solution:
     # @param A a list of integers
     # @return an integer
-    def removeDuplicates(self, A):
-        if len(A)<=2: return len(A)
+    def removeDuplicates(self, arr):
+        if len(arr)<=2: return len(arr)
         slow =1; cnt=1
-        for fast in range(1, len(A)):
-            if A[fast]==A[fast-1] and cnt>=2:  continue
-            if A[fast]!=A[fast-1]: cnt=0
-            A[slow]=A[fast]
+        for fast in range(1, len(arr)):
+            if arr[fast]==arr[fast-1] and cnt>=2:  continue
+            if arr[fast]!=arr[fast-1]: cnt=0
+            arr[slow]=arr[fast]
             cnt+=1; slow+=1
         return slow

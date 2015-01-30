@@ -16,16 +16,20 @@ For example,
 class Solution:
     # @return a string
     def fractionToDecimal(self, a, b):   #不考虑负号只要9行
-        ret = '-' if  a*b<0 else ''
+        ret = '-' if  a*b<0 else ''  #
         a=abs(a); b=abs(b)
-        real, rem = a / b,  a % b
-        ret +=str(real)
-        dec = ''; i=0; d = {}  #hash是无序的，所以加个有序的decimal
-        while rem and rem not in d:
+        intP, rem = a / b,  a % b  #real就是 intPart
+        ret +=str(intP)
+        floatP = ''; i=0; d = {}  #hash是无序的，所以加个有序的decimal
+        while rem and rem not in d:   # i记录的是在floatP中的位置。
             d[rem] = i  #先更新hashmap。再乘以10. hashmap存的是循环开始位置
             rem *= 10  #这一步是核心之一。
             x, rem=rem/b, rem%b
-            dec+=str(x); i+=1
-        if rem==0:    return ret+'.' + dec if dec else ret
+            floatP+=str(x); i+=1
+        if rem==0:    return ret+'.' + floatP if floatP else ret
         i = d[rem]
-        return ret+ '.' +dec[:i]+ '('+dec[i:]+')'
+        return ret+ '.' +floatP[:i]+ '('+floatP[i:]+')'
+'''
+#这道题目主要利用了整数mod的思想
+#利用了hashmap保存mod的余数remainder
+'''

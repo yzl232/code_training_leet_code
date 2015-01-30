@@ -22,16 +22,15 @@ class Solution:
     # @param target, integer
     # @return a list of lists of integers
     def combinationSum2(self, c, target):
-        c.sort()
-        self.ret = [];
-        self.dfs(target, [], c)
+        c.sort();     self.ret = []; self.c = c
+        self.dfs(0, target, [])
         return self.ret
 
-    def dfs(self, target, cur,cans):
-        if target<0: return
+    def dfs(self, n1, target, cur):
         if target ==0:
+            if cur in self.ret: return
             self.ret.append(cur)
             return
-        for i in range(len(cans)):
-            x = cans[i]
-            self.dfs(target-x, cur+[x], cans[i+1:]) #不可以重复使用, i:  不是i+1
+        for i in range(n1, len(self.c)):
+            x = self.c[i]   #不能跳过的  if i>0 and self.c[i]==self.c[i-1]: continue
+            if target>=x:   self.dfs(i+1, target-x, cur+[x])

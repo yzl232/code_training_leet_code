@@ -1,9 +1,10 @@
 #Write a function to find the longest common prefix string amongst an array of strings.
 class Solution:
     # @return a string
-    def longestCommonPrefix(self, strs):
-        if not strs: return ''
-        for i in range(len(strs[0])):
-            for j in range(1, len(strs)):
-                if len(strs[j])<i+1 or strs[j][i] != strs[0][i]:    return strs[0][:i]
-        return strs[0]
+    def longestCommonPrefix(self, arr):
+        if not arr: return ''
+        for i in range(len(arr[0])):
+            for s in arr[1:]:
+                if i>len(s)-1 or s[i] != arr[0][i]:    return arr[0][:i]
+        return arr[0]
+# 可以这样子。 先写 if        or s[i]!=arr[0][i]:。   再填充上去。

@@ -14,6 +14,6 @@ class Solution:
         for i in range(len(s)):
             if s[i] == ')' and stack[-1][1] == '(':      #stack存的是没有配好对的括号
                 stack.pop()  # stack[-1] means stack top (right most)
-                ret = max(ret, i-stack[-1][0])   # the length of the valid part
+                ret = max(ret, i-stack[-1][0])   # the length of the valid part   #左边界  # 最后一个配不成对的
             else:  stack.append((i, s[i]))
         return  ret

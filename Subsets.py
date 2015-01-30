@@ -26,8 +26,8 @@ class Solution:
     # @return a list of lists of integer
     def subsets(self, s):
         ret = [[]];  s.sort()
-        for i in s:
-            ret +=[ j+[i] for j in ret]
+        for x in s:
+            ret +=[ y+[x] for y in ret]
         return ret
 '''
 class Solution:

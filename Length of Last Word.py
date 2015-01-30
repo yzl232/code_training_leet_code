@@ -16,8 +16,10 @@ class Solution:
         n = len(s); cnt=0
         for i in range(n-1, -1, -1):
             if s[i]!=' ':cnt+=1
-            elif cnt>0: return cnt
+            elif cnt>0: return cnt  #else用的精妙。
         return cnt
+
+#和reverse words in a string II 比较像
 
 '''
 class Solution:

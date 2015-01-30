@@ -21,3 +21,15 @@ class Solution:
             slow = slow.next
             if fast == slow:return True
         return False
+
+'''
+#和decouple的部分很像。  while条件稍有不同。   因为我们要找h2 前面的node来裂开。
+
+        fast = slow = head  #试验了一下。  必须是   while fast.next and fast.next.next
+        while fast.next and fast.next.next:  #因为要对前面的节点进行裂开操作。 着了是 fast.next and fast.next.next:
+            fast = fast.next.next
+            slow = slow.next
+        head2 = slow.next
+        slow.next = None
+
+'''

@@ -5,7 +5,7 @@ class Solution:
     def isPalindrome(self, x):
         if x<0:return False
         k = 1
-        while x / k >= 10 : k*=10
+        while 10*k<=x : k*=10
         while x >0:
             firstDigit = x/k
             if firstDigit != x % 10:return False

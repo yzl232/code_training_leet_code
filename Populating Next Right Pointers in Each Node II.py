@@ -26,6 +26,28 @@ After calling your function, the tree should look like:
 
 
 '''
+
+
+
+class Solution:
+    # @param root, a tree node
+    # @return nothing
+    def connect(self, root):
+        dummy = TreeNode(0);  cur = root
+        while cur:
+            pre = dummy;  dummy.next = None   # dummy.next就是每层的第一个node,  也就是firstN
+            while cur:  # 想象一下， dummy， pre都是下一层的。  上一层的是cur
+                if cur.left:
+                    pre.next = cur.left  #和下面的区别是dummy避免了pre为空得情况
+                    pre = pre.next
+                if cur.right:
+                    pre.next = cur.right
+                    pre = pre.next
+                cur = cur.next
+            cur = dummy.next
+
+
+'''
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -53,7 +75,7 @@ class Solution:
                     prev=cur.right
                 cur=cur.next
             cur=firstN
-'''
+
 level order traversal 可以做  用O(n) space
 
 这个递归很好， 不考虑recursion stack, 只用O(1) space
@@ -67,7 +89,7 @@ class Solution:
         if root.right: root.right.next = x
         if root.left:
             root.left.next = root.right if root.right else x
-        self.connect(root.right)
+        self.connect(root.right)  #顺序重要.  逻辑上要求右边决定好next.  getNext才有效
         self.connect(root.left)
 
     def getNext(self, cur):

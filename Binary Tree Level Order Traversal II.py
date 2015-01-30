@@ -28,17 +28,16 @@ return its bottom-up level order traversal as:
 #         self.right = None
 class Solution:
     def levelOrderBottom(self, root):
-        if root is None:         return []
-        res, prev = [], [root]
-        while prev:
-            cur, vals = [], []
-            for node in prev:
-                vals.append(node.val)
-                if node.left:      cur.append(node.left)
-                if node.right:       cur.append(node.right)
-            prev = cur
-            res = [vals]+res
-        return res
+        if not root: return []
+        pre, ret = [root], [[root.val]]   # 除了pre, cur之外
+        while pre:
+            cur = []     #必须用array。 因为是有序的。 并且不会有重复
+            for n in pre:
+                if n.left:  cur.append(n.left)
+                if n.right:  cur.append(n.right)
+            if cur: ret.append([x.val for x in cur])
+            pre = cur
+        return ret[::-1]
 '''
 # Definition for a  binary tree node
 # class TreeNode:

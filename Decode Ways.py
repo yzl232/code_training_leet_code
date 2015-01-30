@@ -18,13 +18,12 @@ class Solution:
     # @param s, a string
     # @return an integer
     def numDecodings(self, s):
-        n = len(s)
-        if n==0 or s[0] == '0' : return 0
+        if not s or s[0] == '0' : return 0
         ppre = pre= cur = 1
-        for i in range(1, n):
+        for i in range(1, len(s)):
             cur = 0
             if s[i] != '0':  cur+=pre
-            if '10' <= s[i-1:i+1] <= '26': cur+=ppre
+            if '10' <= s[i-1]+s[i] <= '26': cur+=ppre
             ppre, pre = pre, cur
         return cur
 

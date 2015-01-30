@@ -28,9 +28,9 @@ class Solution:
     def isMatch(self, s, p):
         m = len(s) ; n = len(p)
         j = i = match = 0; star = -1 #i==pPointer.  j==sPointer
-        while i < m:
+        while i < m:  #因为p可以重复变超级长。 所以以i为标准
             if j < n and p[j] == '*':
-                star = j; j +=1; match = i;
+                star = j; j +=1; match = i;          #match 记忆了在s。  star记忆了在p
             elif j < n and (p[j] in ('?', s[i]) ):
                 i+=1; j +=1
             elif star != -1:  # not match, 逐个增加*适配的范围。 看看结果

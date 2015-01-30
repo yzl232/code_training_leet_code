@@ -27,8 +27,8 @@ class Solution:
     # @return a list of lists of integer
     def subsetsWithDup(self, s):
         ret = [[]];  s.sort()
-        for i in s:
-            ret +=[ j+[i] for j in ret if j+[i] not in ret]
+        for x in s:
+            ret +=[ y+[x] for y in ret if y+[x] not in ret]
         return ret
 '''
 

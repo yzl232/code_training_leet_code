@@ -14,7 +14,7 @@ You may not engage in multiple transactions at the same time (ie, you must sell 
 class Solution:
     # @param prices, a list of integer
     # @return an integer
-    def maxProfit(self, arr):
+    def maxProfit(self, arr):  #呈现阶梯状
         b1 = b2 = -10**10  # 四个标记你的资产的量
         s1=s2=0  #不买亏的。max(0, xxx)
         for x in arr:

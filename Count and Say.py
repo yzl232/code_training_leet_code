@@ -18,10 +18,10 @@ class Solution:
             s1=''; j=0
             while j<len(s):
                 cnt=1
-                while (j+1)<len(s) and s[j]==s[j+1]:
-                    j+=1;  cnt+=1
+                while (j+1)<len(s) and s[j]==s[j+1]: #先写容易错的j+1<len(s)
+                    j+=1;  cnt+=1   #先写容易忘的j+=1
                 s1+=str(cnt)+s[j]
-                j+=1
+                j+=1 #先写容易忘的j+=1
             s=s1
         return s
 

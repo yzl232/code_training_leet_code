@@ -1,23 +1,16 @@
-#Sort a linked list using insertion sort.
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
+'''
+Given an integer, convert it to a roman numeral.
 
+Input is guaranteed to be within the range from 1 to 3999.
+'''
 class Solution:
-    # @param head, a ListNode
-    # @return a ListNode
-    def insertionSortList(self, h):  #http://www.cnblogs.com/zuoyuan/p/3700105.html
-        if not h:  return
-        dummy = ListNode(0)
-        dummy.next = h;   cur = h
-        while cur.next:  #因为要对找到的这个节点curr.next比较。 所以循环用curr.next
-            if cur.next.val < cur.val:  # looking for the first that is less than the former
-                pre = dummy; t = cur.next  #因为要在找到的这个节点前面插入，用pre.next
-                while pre.next.val < t.val:     pre = pre.next # find the place to do the    insertion
-                cur.next = t.next# move cur.next
-                t.next = pre.next
-                pre.next = t
-            else:   cur = cur.next
-        return  dummy.next
+    # @return a string
+    def intToRoman(self, n):
+        ret = ""
+        vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        nums = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
+        for i in range(len(vals)):
+            v = vals[i]
+            cnt , n = n/v, n%v
+            ret +=nums[i]*cnt
+        return ret

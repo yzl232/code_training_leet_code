@@ -27,19 +27,17 @@ class Solution:
     # @param dict, a set of string
     # @return an integer
     def ladderLength(self, start, end, dict):
-        cnt, pre = 0, [start]
-        dict.add(end)
+        cnt= 1; pre= [start];    dict.add(end)
         while pre:
             cur = []
             for word in pre:
-                if word == end:     return cnt + 1
+                if word == end:     return cnt
                 for i in range(len(word)):
-                    for j in 'abcdefghijklmnopqrstuvwxyz':
-                        t = word[:i] + j + word[i + 1:]
+                    for x in 'abcdefghijklmnopqrstuvwxyz':
+                        t = word[:i] + x + word[i + 1:]
                         if t in dict:
                             cur.append(t);  dict.remove(t)
-            cnt += 1
-            pre = cur
+            cnt += 1;   pre = cur
         return 0
 '''
 双向bfs会很快

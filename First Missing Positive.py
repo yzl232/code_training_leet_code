@@ -13,10 +13,9 @@ class Solution: #如果是所有数在0-n，那就用求和相减就可以做。
     def firstMissingPositive(self, a):
         n = len(a);  i=0   #理想的情况是1~n的组合.  (这句话是本题的关键)  1<=a[i]<=n   #小于0的忽略。
         while i<n:
-            tmp = a[i]-1  #求index  -1
-            if 0<=tmp<=n-1 and a[i] != a[tmp]: #小于n+1.不然越界。 # 2种都不等于
-                a[i], a[tmp] = a[tmp], a[i]
-            else: i+=1
+            t = a[i]-1  #求index  -1
+            if 0<=t<=n-1 and a[i] != a[t]:   a[i], a[t] = a[t], a[i]  #小于n+1.不然越界。 # 2种都不等于
+            else: i+=1  #注意else
         for i in range(n):
             if a[i] != i+1:     return i+1  #求值 +1
         return n+1

@@ -10,18 +10,18 @@ Given n points on a 2D plane, find the maximum number of points that lie on the 
 class Solution:
     # @param points, a list of Points
     # @return an integer
-    def maxPoints(self, points):
-        n = len(points); ret = -1
+    def maxPoints(self, arr):
+        n = len(arr); ret = 0
         if n<3: return n
         for i in range(n):
-            slope = {'inf': 0};  same = 1
+            d = {'inf': 0};  same = 1
             for j in range(n):
                 if i == j : continue
-                if points[i].x == points[j].x and points[i].y == points[j].y:    same +=1
-                elif points[i].x == points[j].x and points[i].y != points[j].y:   slope['inf']+=1
+                if arr[i].x == arr[j].x and arr[i].y == arr[j].y:    same +=1
+                elif arr[i].x == arr[j].x and arr[i].y != arr[j].y:   d['inf']+=1
                 else:
-                    k = 1.0 *  ( points[i].y - points[j].y) / (points[i].x - points[j].x)
-                    if k not in slope: slope[k]=0
-                    slope[k]+=1
-            ret = max(ret, max(slope.values()) + same)
+                    k = 1.0 *  ( arr[i].y - arr[j].y) / (arr[i].x - arr[j].x)
+                    if k not in d: d[k]=0
+                    d[k]+=1
+            ret = max(ret, same+max(d.values()))
         return  ret

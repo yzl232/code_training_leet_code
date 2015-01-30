@@ -9,12 +9,15 @@ class Solution:
     # @param A, a list of integers
     # @return an integer
     def maxSubArray(self, a):
-        result = maxN = a[0]
+        if not a: raise ValueError
+        ret = maxN = a[0]
         for i in range(1, len(a)):
             maxN = max(maxN + a[i],  a[i])
-            result = max(result, maxN)
-        return result
-''' #  the subarray ends with i th element.    
+            ret = max(ret, maxN)
+        return ret
+'''
+#另外这道题目也可以用原来的array作为dp的array>
+#  the subarray ends with i th element.
      #We should ignore the sum of the previous n-1 elements if A[i] is greater than the s[i-1]+A[i]
      # space O(n), time O(n) We can optimize the space to be O(1)
 

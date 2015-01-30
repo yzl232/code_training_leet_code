@@ -31,11 +31,11 @@ class Solution:
 
     def dfs(self, cur, rowN):
         if rowN == self.n:
-            self.rets.append(['.' * i + "Q" + '.' * (self.n - i - 1) for i in cur])
+            self.rets.append(['.' * c + "Q" + '.' * (self.n - c - 1) for c in cur])
             return
-        for i in range(self.n):
-            if i not in cur and True not in [abs(rowN - j) == abs(i - cur[j]) for j in  range(len(cur)) ]:
-                self.dfs(cur + [i],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
+        for c in range(self.n):
+            if c not in cur and True not in [abs(rowN - r) == abs(c - cur[r]) for r in  range(len(cur)) ]:
+                self.dfs(cur + [c],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
 
 
 '''
