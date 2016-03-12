@@ -28,6 +28,6 @@ class Solution:
             for j in range(i+1, n - 2):
                 s = target - arr[i] - arr[j]  #i, j是最左边的。
                 if s in d:
-                    for k in d[s]:  #hashtable是右边的
-                        if k[0] > j:       ret.add( (arr[i], arr[j], arr[k[0]], arr[k[1]]) )
+                    for x, y in d[s]:  #hashtable是右边的
+                        if x > j:       ret.add( (arr[i], arr[j], arr[x], arr[y]) )
         return  [list(i) for i in ret]

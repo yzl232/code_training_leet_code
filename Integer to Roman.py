@@ -7,7 +7,7 @@ class Solution:
     # @return a string
     def intToRoman(self, n):
         ret = ""
-        vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]
+        vals = [1000, 900, 500, 400, 100, 90, 50, 40, 10, 9, 5, 4, 1]   #9, 5, 4, 1蛮容易记忆
         nums = ["M", "CM", "D", "CD", "C", "XC", "L", "XL", "X", "IX", "V", "IV", "I"]
         for i in range(len(vals)):
             v = vals[i]

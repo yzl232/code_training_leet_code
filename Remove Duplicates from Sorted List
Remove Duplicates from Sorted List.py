@@ -23,3 +23,5 @@ class Solution:
             else:     pre = cur
             cur = cur.next
         return head
+    
+#因为之前有dummy是因为head可能消失, 不一定返回head. 这里可以不需要dummy

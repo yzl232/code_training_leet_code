@@ -7,8 +7,8 @@ Input is guaranteed to be within the range from 1 to 3999..
 class Solution:
     # @return an integer
     def romanToInt(self, s):
-        one = {"I":1, "V":5, "X":10, "L":50, "C":100, "M":1000, "D":500}
-        two = {"IV":4, "IX":9, "XL": 40, "XC":90, "CD":400, "CM":900}
+        one = {"I":1, "V":5, "X":10, "L":50, "C":100, "M":1000, "D":500}    # 1,  5蛮容易记忆
+        two = {"IV":4, "IX":9, "XL": 40, "XC":90, "CD":400, "CM":900}   #  9,  4  容易记忆.
         i = 0
         ret = 0
         while i<len(s):
