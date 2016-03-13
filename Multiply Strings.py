@@ -10,14 +10,14 @@ class Solution:
     # @return a string
     def multiply(self, a, b):
         a, b = a[::-1], b[::-1]
-        ret = [0]*(len(a) + len(b))
+        total = [0]*(len(a) + len(b))
         for i in range(len(a)):
             for j in range(len(b)):
-                ret[i + j] += int(a[i]) * int(b[j])
-        carry, total = 0, []
-        for x in ret:
+                total[i + j] += int(a[i]) * int(b[j])
+        carry, ret = 0, []
+        for x in total:
             x+=carry
             carry, s = x/10, x%10
-            total.append(str(s))     #也append的反面  total.insert(0, str(s % 10))
-        while len(total) >= 2 and total[-1] == "0": total.pop()
-        return ''.join(total[::-1])
+            ret.append(str(s))     #也append的反面  ret.insert(0, str(s % 10))
+        while len(ret) >= 2 and ret[-1] == "0": ret.pop()
+        return ''.join(ret[::-1])
