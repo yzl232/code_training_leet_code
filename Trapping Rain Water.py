@@ -5,7 +5,7 @@ class Solution:
         l = 0
         r = len(arr) - 1
         ret = maxL = maxR = 0
-        while l<r:
+        while l<=r:    # 不取等号是因为最后L, R 相等时候, 必定是最高的那根支撑 .  取不取等号无所谓, 必行为0
             maxL = max(maxL, arr[l])
             maxR = max(maxR, arr[r])
             if maxL <= maxR:
@@ -17,7 +17,6 @@ class Solution:
         return ret
 # one    pa s s     O(1) space
 #l, r这个东西很管用。 哪个更大，l, r就不会动了。
-#l, r必定有一个等于最大的maxL或者maxR。 
 
 #极端情况   想象比如arr[r]很大。 那么r根本就不动。   最大的一个根本不动。
 
