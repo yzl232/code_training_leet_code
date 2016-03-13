@@ -15,11 +15,11 @@ class Solution:
     # @param A, a list of integers
     # @return an integer  #比1只多了几行而已
     def jump(self, arr):
-            cnt =0;  lastR=canR = 0   # can reach
+            cnt =0;  lastCanR=canR = 0   # can reach
             for i in range(len(arr)):
                 if i>canR: return -1
-                if i > lastR:
-                    lastR = canR
+                if i > lastCanR:
+                    lastCanR = canR
                     cnt += 1
                 canR = max(canR, i+arr[i])
             return cnt
