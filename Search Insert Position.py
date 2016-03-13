@@ -13,11 +13,11 @@ class Solution:
     # @param A, a list of integers
     # @param target, an integer to be inserted
     # @return integer
-    def searchInsert(self, A, target):
-        left = 0; right = len(A) - 1
-        while left <= right:
-            mid = (left + right) / 2
-            if A[mid] == target: return mid
-            elif A[mid] < target: left = mid + 1
-            else: right = mid - 1
-        return mid if target < A[mid] else mid + 1  
+    def searchInsert(self, arr, target):
+        l = 0; h = len(arr) - 1
+        while l <= h:
+            m = (l + h) / 2
+            if arr[m] == target: return m
+            elif arr[m] < target: l = m + 1
+            else: h = m - 1
+        return m if target < arr[m] else m + 1  
