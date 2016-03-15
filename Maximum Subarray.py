@@ -10,10 +10,10 @@ class Solution:
     # @return an integer
     def maxSubArray(self, a):
         if not a: raise ValueError
-        ret = maxN = a[0]
+        ret = maxI = a[0]  # 包含a[i]的max subarray sum
         for i in range(1, len(a)):
-            maxN = max(maxN + a[i],  a[i])
-            ret = max(ret, maxN)
+            maxI = max(maxI + a[i],  a[i])
+            ret = max(ret, maxI)
         return ret
 '''
 #另外这道题目也可以用原来的array作为dp的array>

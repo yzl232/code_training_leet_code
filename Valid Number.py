@@ -36,7 +36,7 @@ class Solution:
                 n3+=1;  i+=1
             if n3 == 0: return False  #如果出现e。不能完全没有数字
         while s[i] == ' ': i+=1
-        return s[i] == '#'
+        return s[i:] == '#'
 
 
 '''
