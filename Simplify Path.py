@@ -18,6 +18,11 @@ class Solution:
         return "/" + "/".join(stack)
 
 '''
+>>> '/'.join(["apple"])
+'apple'
+>>> '/'.join(["apple", "boy"])
+'apple/boy'
+
 class Solution:
     # @param path, a string
     # @return a string
@@ -31,4 +36,8 @@ class Solution:
                 if results != '':
                     results = '/'.join(results.split('/')[:-1])     #以前的方法用了O(n2)。  很不好
         return results if results !='' else '/'
+        
+        
+        
+
 '''

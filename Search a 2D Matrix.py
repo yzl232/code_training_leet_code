@@ -21,8 +21,9 @@ class Solution:
     # @param target, an integer
     # @return a boolean
     def searchMatrix(self, matrix, target):
-        m = len(matrix);     n = len(matrix[0])
-        l = 0; r = m * n - 1
+        assert matrix
+        n = len(matrix[0])
+        l = 0; r = len(matrix) * n - 1
         while l <= r:
             m = (l + r) / 2
             val = matrix[m/n][m%n]
