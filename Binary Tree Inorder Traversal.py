@@ -25,7 +25,7 @@ Note: Recursive solution is trivial, could you do it iteratively?
 class Solution:
     # @param root, a tree node
     # @return a list of integers
-    def inorderTraversal(self, root):
+    def inorderTraversal(self, root):   #因为不断往left down的部分走.     所以要双重循环.
         stack = [];  ret = []
         cur = root
         while True:

@@ -22,12 +22,12 @@ class Solution:
     # @return a boolean
     def searchMatrix(self, matrix, target):
         assert matrix
-        n = len(matrix[0])
-        l = 0; r = len(matrix) * n - 1
+        m = len(matrix);     n = len(matrix[0])
+        l = 0; r = m * n - 1
         while l <= r:
-            m = (l + r) / 2
-            val = matrix[m/n][m%n]
+            mid = (l + r) / 2
+            val = matrix[mid/n][mid%n]
             if val == target: return True
-            elif val > target: r = m-1
-            else: l = m + 1
+            elif val > target: r = mid-1
+            else: l = mid + 1
         return False
