@@ -33,7 +33,8 @@ class Solution:
     # @return an integer
     def minDepth(self, root):
         if not root: return 0
-        self.ret=10**10
+        MAX_INT = 10**10
+        self.ret = MAX_INT
         self.dfs(root, 1)
         return self.ret
 
