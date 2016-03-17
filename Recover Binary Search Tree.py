@@ -15,7 +15,7 @@ confused what "{1,#,2,3}" means? > read more on how binary tree is serialized on
 #         self.right = None
 
 class Solution:       #显然要in order
-    # @param root, a tree node
+    # @param root, a tree node   # http://www.cnblogs.com/zuoyuan/p/3746594.html
     # @return a tree node
     def recoverTree(self, root):
         self.pre = self.n1= self.n2 = None  #pre用来root.val与前面比较
