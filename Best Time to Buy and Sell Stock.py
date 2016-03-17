@@ -10,7 +10,8 @@ class Solution:
     # @param prices, a list of integer
     # @return an integer
     def maxProfit(self, arr):  #和maxiMum subarray, product subaarray一模一样
-        ret=0; minN = 10**10
+        MAXINT = 10**10
+        ret=0; minN = MAXINT
         for x in arr:
             ret = max(ret, x-minN)
             minN = min(x, minN)
