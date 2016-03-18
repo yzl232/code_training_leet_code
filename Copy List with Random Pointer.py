@@ -51,4 +51,34 @@ class Solution:
             if t.next:   t.next = t.next.next     # 1, 2, 3, (4)  .   1=3,  2=4
             cur = cur.next
         return h2
+
+
+
+
+
+# Definition for singly-linked list with a random pointer.
+# class RandomListNode:
+#     def __init__(self, x):
+#         self.label = x
+#         self.next = None
+#         self.random = None
+class Solution:
+    # @param head, a RandomListNode
+    # @return a RandomListNode
+    def copyRandomList(self, head):
+        if not head: return
+        d, p = {None: None}, head
+        while p:
+            d[p] = RandomListNode(p.label)
+            p = p.next
+        h2 = d[head]
+        p = head
+        while p:
+            p1 = d[p]
+            p1.next = d[p.next]
+            p1.random = d[p.random]
+            p = p.next
+        return h2
+
+
 '''
