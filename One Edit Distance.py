@@ -9,11 +9,12 @@ class Solution: #
     def isOneEditDistance(self, s, t):  #
         m = len(s)
         n = len(t)
-        if m<n: return self.isOneEditDistance(t, s)   #只有更短的string才不用跳过到i+1.
-        for i in range(min(m, n)):
-            if s[i] != t[i]:
-                return s[i+1:] == t[i if n<m else i+1:]
-        return abs(m-n)==1
+        if m<n: return self.isOneEditDistance(t, s)
+        for i in range(n):
+            if s[i]!=t[i]:
+                return s[i+1:] == t[ (i+1 if m==n else i):]    #只有更短的string才不用跳过到i+1.
+        return (m-n)==1
+ 
 '''
 class Solution: #
     # @param s, a string
@@ -21,7 +22,7 @@ class Solution: #
     # @return a boolean
     def isOneEditDistance(self, s, t):  #
         m=len(s); n=len(t)
-        for i in range(min(m, n)): 
+        for i in range(min(m, n)):
                 if s[i] != t[i]: return  s[i if m<n else i+1 :]== t[i  if n<m else i+1 :]
         return abs(m-n) == 1
 '''
