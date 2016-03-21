@@ -12,6 +12,12 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 1,1,5 → 1,5,1
 '''
 
+'''
+举个例子就容易写。 687432   =》  找到 6， 和7交换。  =》786432=>723468
+
+
+'''
+# 找下一个更大的.  降序的话,  肯定找不到更大的嘛.
 class Solution:
     # @param num, a list of integer
     # @return a list of integer
