@@ -47,7 +47,7 @@ class LRUCache:
         return -1
 
     def set(self, key, val):
-        if key in self.d:    self.cache.delete(self.d[key])
+        if key in self.d:    self.cache.delete(self.d[key])   # 这部分是类似get的. 先删除, 再插入.
         elif len(self.d) == self.capacity:
             del self.d[self.cache.tail.key] #注意这 里的先后顺序。。。先DEL然后再removelast#######################
             self.cache.delete(self.cache.tail)
