@@ -16,9 +16,9 @@ class Solution:
             for j in range(1, n):
                 if mtx[i][0] ==0 or mtx[0][j]==0:  mtx[i][j] = 0
         for i in range(m):
-            if col0: mtx[i][0] = 0
+            if col0: mtx[i][0] = 0   #和开头的代码是对称的
         for j in range(n):
-            if row0: mtx[0][j] = 0
+            if row0: mtx[0][j] = 0    #和开头的代码是对称的
 
 # 第一行的corner case也成立。 如果本身为0，当然0.
 # 如果本身不是0，看mtx[0][0]标记
