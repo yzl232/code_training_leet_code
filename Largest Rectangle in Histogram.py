@@ -29,7 +29,7 @@ class Solution: #核心在于保证stack的递增的左边界。
         for r in range(len(arr)):
             while lefts and arr[lefts[-1]] > arr[r]:
                 h = arr[lefts.pop()]
-                w = r if not lefts else r-(lefts[-1]+1)
+                w =r - ( 0 if not lefts else lefts[-1]+1 )
                 ret = max(ret, w*h)
             lefts.append(r)
         return ret
