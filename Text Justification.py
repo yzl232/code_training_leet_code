@@ -30,7 +30,7 @@ class Solution:
         ret = []; i=0
         while i<len(words):
             n=l=0      # N words, this line,.    length of line
-            while i+n<len(words) and l+n+len(words[i+n])<=x:   #正好n+1个词。n个空
+            while i+n+1<=len(words) and l+n+len(words[i+n])<=x:   #正好n+1个词。n个空
                 l+=len(words[i+n]);  n+=1
             line = words[i]        #之前i所在的word[i]是属于没有加上的。
             if n!=1:
