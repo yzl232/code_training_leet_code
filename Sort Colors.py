@@ -6,17 +6,26 @@ Here, we will use the integers 0, 1, and 2 to represent the color red, white, an
 Note:
 You are not suppose to use the library's sort function for this problem.
 '''
+'''
+[2, 1, 0]
+return [0, 1, 2]
+
+[1]  return [1]
+'''
+
 
 class Solution:
     # @param A a list of integers
     # @return nothing, sort in place
     def sortColors(self, arr):
-        p2=len(arr)-1; p0=0; i=0
-        while i<=p2:
-            while p2>i and arr[i]==2:   #标号相等的时候，不要swap
+        p2 = len(arr) - 1
+        p0 = 0
+        i = 0
+        while i<= p2:
+            while p2 >= i and arr[i] == 2:
                 arr[i], arr[p2] = arr[p2], arr[i]
-                p2-=1
-            while p0<i and arr[i]==0:
+                p2 -=1
+            while p0<=i and arr[i] == 0:
                 arr[i], arr[p0] = arr[p0], arr[i]
                 p0+=1
             i+=1
