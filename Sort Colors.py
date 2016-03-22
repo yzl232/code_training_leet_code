@@ -21,7 +21,7 @@ class Solution:
         p2 = len(arr) - 1
         p0 = 0
         i = 0
-        while i<= p2:
+        while i<= p2:   #取等号. 因为就算到达了, p2只是保证了p2后面的. a[p2]仍然可能为0
             while p2 >= i and arr[i] == 2:
                 arr[i], arr[p2] = arr[p2], arr[i]
                 p2 -=1
