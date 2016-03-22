@@ -4,17 +4,21 @@ class Solution:
     # RETURN NOTHING, MODIFY matrix IN PLACE.
     def setZeroes(self, mtx):
         if not mtx: return []
-        col0=False;  m=len(mtx); n=len(mtx[0])
+        row0=col0=False;  m=len(mtx); n=len(mtx[0])
         for i in range(m):
-            for j in range(n): #利用第一行，第一列标记
-                if mtx[i][j]==0:
-                    if j==0: col0=True
-                    else: mtx[i][0] = mtx[0][j] = 0
-        for i in range(m-1, -1, -1):
-            for j in range(n-1, -1, -1):  #因为第一行，列做标记。 所以从后往前
-                if j==0:
-                    if col0: mtx[i][0]=0  #这里注意 。 j=0 和j!=0要严格分开。
-                elif mtx[i][0] ==0 or mtx[0][j]==0:  mtx[i][j] = 0
+            if mtx[i][0] == 0:  col0= True
+        for j in range(n):
+            if mtx[0][j] == 0:  row0= True
+        for i in range(1, m):
+            for j in range(1, n): #利用第一行，第一列标记
+                if mtx[i][j]==0:  mtx[i][0] = mtx[0][j] = 0
+        for i in range(1, m):
+            for j in range(1, n):
+                if mtx[i][0] ==0 or mtx[0][j]==0:  mtx[i][j] = 0
+        for i in range(m):
+            if col0: mtx[i][0] = 0
+        for j in range(n):
+            if row0: mtx[0][j] = 0
 
 # 第一行的corner case也成立。 如果本身为0，当然0.
 # 如果本身不是0，看mtx[0][0]标记
