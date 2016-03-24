@@ -7,10 +7,21 @@ Note:
 You may not engage in multiple transactions at the same time (ie, you must sell the stock before you buy again).
 
 '''
+class Solution:
+    # @param prices, a list of integer
+    # @return an integer
+    def maxProfit(self, vals):
+        k=2
+        sell=[0]*(k+1)   # hold 0 stocks
+        buy=[-10**10]*(k+1)   #  hold 1 stocks
+        for x in vals:
+            for j in range(1, k+1):
+                sell[j] = max(sell[j], buy[j]+x)  #最多j次交易卖掉了1张股票的最大值。
+                buy[j] = max(buy[j], sell[j-1]-x)    #最多j次交易买了1张股票的最大值。
+        return sell[-1]
 
 
-
-
+'''
 class Solution:
     # @param prices, a list of integer
     # @return an integer
@@ -23,6 +34,8 @@ class Solution:
             s1 = max(s1, b1+x)   #s1一定
             b1 = max(b1, 0-x)  # b1一定是个负数
         return s2
+'''
+
 
 '''
 class Solution:

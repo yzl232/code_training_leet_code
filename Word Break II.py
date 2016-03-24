@@ -10,6 +10,10 @@ dict = ["cat", "cats", "and", "sand", "dog"].
 A solution is ["cats and dog", "cat sand dog"].
 '''
 
+'''
+本质上是简单的DFS.  check函数是特别优化的部分.
+'''
+
 
 class Solution:
     # @param s, a string

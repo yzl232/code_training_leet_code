@@ -28,20 +28,20 @@ class Solution:
     # @param n,   Maximum number of characters to read (an integer)
     # @return     The number of characters read (an integer)
     def __init__(self):
-        self.p = 0   #上次读到哪里了
-        self.bufsize = 0 # tmpBuf存的总量  If bufsize > 0, that means there is partial data left in buffer
+        self.i = 0   #上次读到哪里了
+        self.tmpN = 0 # tmpBuf存的总量  If bufsize > 0, that means there is partial data left in buffer
         self.tmpBuffer = [None]*4
 
     def read(self, buf, n):
         cnt = 0;
         while cnt<n:      #tmp的作用就是判断是不是4。
-            if self.p==self.bufsize:
-                self.bufsize=read4(self.tmpBuffer)
-                self.p =0
-                if self.bufsize==0: break
-            while cnt<n and self.p<self.bufsize:
-                buf[cnt]=self.tmpBuffer[self.p]
-                cnt+=1;  self.p+=1
+            if self.i==self.tmpN:
+                self.tmpN=read4(self.tmpBuffer)           #变化就是tmpN变成了self.tmpN,  i变成了self.i, 三个都成了self.
+                self.i =0
+                if self.tmpN==0: break
+            while cnt<n and self.i<self.tmpN:
+                buf[cnt]=self.tmpBuffer[self.i]
+                cnt+=1;  self.i+=1
         return cnt
 
 
