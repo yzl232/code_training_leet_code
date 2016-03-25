@@ -22,10 +22,10 @@ class Solution:   #特别需要例子, 不然看着都糊涂.
     def isIsomorphic(self, s, t):
         if len(s) != len(t): return False
         sourceMap, targetMap = {}, {}
-        for x in range(len(s)):
-            source, target = sourceMap.get(t[x]), targetMap.get(s[x])
+        for i in range(len(s)):
+            source, target = sourceMap.get(t[i]), targetMap.get(s[i])
             if not source and not target:
-                sourceMap[t[x]], targetMap[s[x]] = s[x], t[x]
-            elif target != t[x] or source != s[x]:
+                sourceMap[t[i]], targetMap[s[i]] = s[i], t[i]
+            elif target != t[i] or source != s[i]:
                 return False
         return True
