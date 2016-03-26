@@ -1,3 +1,45 @@
+class Trie:  #和以前的做法的区别是以前用_end存的, 现在用Trie Node存的.  没啥区别.
+
+    def __init__(self):
+        self.root = {}
+
+    # @param {string} word
+    # @return {void}
+    # Inserts a word into the trie.
+    def insert(self, word):
+        cur = self.root
+        for ch in word:
+            if ch not in cur:   cur[ch] = {}
+            cur = cur[ch]
+        cur["#"] = "#"
+
+    # @param {string} word
+    # @return {boolean}
+    # Returns if the word is in the trie.
+    def search(self, word):   #正常的话, 要考个DFS. 返回所有的.
+        x = self.retrieve(word)
+        return x!=None and "#" in x
+
+    # @param {string} prefix
+    # @return {boolean}
+    # Returns if there is any word in the trie
+    # that starts with the given prefix.
+    def startsWith(self, prefix):
+        return self.retrieve(prefix)!=None
+
+    def retrieve(self, word):
+        cur = self.root
+        for ch in word:
+            if ch not in cur: return
+            cur = cur[ch]
+        return cur
+
+# Your Trie object will be instantiated and called as such:
+# trie = Trie()
+# trie.insert("somestring")
+# trie.search("key")
+
+'''
 class TrieNode:
     # Initialize your data structure here.
     def __init__(self):
@@ -40,26 +82,12 @@ class Trie:  #和以前的做法的区别是以前用_end存的, 现在用Trie N
             cur = cur.childs[ch]
         return cur
 
-'''
-    def startsWith(self, prefix):
-        self.ret = []
-        self.dfs(self.retrieve(prefix), prefix)
-        return self.ret
-
-    def dfs(self, node, cur):
-        if not node: return
-        if node.isWord: self.ret.append(cur)
-        for ch in node.childs:
-            self.dfs(node.childs[ch], cur+ch)
-
-'''
-
 # Your Trie object will be instantiated and called as such:
 # trie = Trie()
 # trie.insert("somestring")
 # trie.search("key")
 
-'''
+
 # encoding=utf-8
 
 insert(key, value)
