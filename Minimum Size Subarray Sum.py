@@ -32,14 +32,14 @@ class Solution:
 '''
 
 
-'''
+
 1) 给个数组seq， 和一个total，找 if there is a contiguous sequence in seq
 which sums to total.
 
 也是facebook面经的变体。
 
 geeks也有这道题目
-'''
+
 
 class Solution:
     def print0S(self, arr):  #非常好的代码。    cumulative sum
