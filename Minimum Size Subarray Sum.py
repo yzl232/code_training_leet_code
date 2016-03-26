@@ -12,7 +12,7 @@ If you have figured out the O(n) solution, try coding another solution of which 
 '''
 #和谷歌那道著名的cumulative的sum array挺像的。
 #区别：  这个是正数， 大于等于， 用双指针。滑动窗口。  那个是等于， 可以是负数
-
+#以前做过. 搜索sliding  
 class Solution:
     # @param {integer} s
     # @param {integer[]} nums
@@ -28,3 +28,29 @@ class Solution:
                 ret = min(r-l+1, ret)
         if ret==len(arr)+10: return 0
         return ret
+        
+'''
+
+
+'''
+1) 给个数组seq， 和一个total，找 if there is a contiguous sequence in seq
+which sums to total.
+
+也是facebook面经的变体。
+
+geeks也有这道题目
+'''
+
+class Solution:
+    def print0S(self, arr):  #非常好的代码。    cumulative sum
+        d = {0: [-1]}
+        s = 0
+        for i in range(len(arr)):
+            s+=arr[i]
+            if s in d:
+                for start in d[s]:   print arr[start+1:i+1]  #稍作修改
+                d[s].append(i)
+            else:  d[s] = [i]      #key是cumulative sum, value index...
+s = Solution()
+print s.print0S([-1, -3, 4, 5, 4, -2, -2, 0,  4])
+'''
