@@ -23,11 +23,11 @@ Notes:
 class Solution:  # http://www.cnblogs.com/easonliu/p/4531020.html
     # @param {integer[][]} buildings  # float("inf"), float("-inf")
     # @return {integer[][]}   #那就是把左边节点的高度值设成负数，右边节点的高度值是正数，这样我们就不用额外的属性，
-    def getSkyline(self, blds):
+    def getSkyline(self, blds):    # ret: [[x, h]]    heap [[h, r]]
         arr = sorted([(l, -h, r) for l, r, h in blds] + [(r, 0, None) for l, r, h in blds])
         ret, heap = [[0, 0]], [(0, float("inf"))]    # r是正常的排序.  就是h排序相反.嗯.
         for x, h, r in arr:
-            while x >= heap[0][1]:  heapq.heappop(heap)   #当超过了heap最大的节点的右边界.  #不断pop。 知道最大节点右边界大于x
+            while x >= heap[0][1]:  heapq.heappop(heap)   #当超过了heap最大的节点的右边界.  #不断pop。 直到最大节点右边界大于x
             if h:   heapq.heappush(heap, (h, r))
             if ret[-1][1] + heap[0][0]:  ret.append([x, -heap[0][0]]) #不相同高度.  相同高度不管.
         return ret[1:]
