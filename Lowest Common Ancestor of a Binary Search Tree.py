@@ -15,4 +15,4 @@ class Solution(object):
         """
         if root in (None, p, q): return root
         l, r = self.lowestCommonAncestor(root.left, p, q), self.lowestCommonAncestor(root.right, p, q)
-        return root if (l and r) else (l if l else r)
+        return root if (l and r) else (l or r)
