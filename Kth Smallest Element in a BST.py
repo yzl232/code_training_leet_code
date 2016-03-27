@@ -37,15 +37,19 @@ class Solution(object):
 
 class Solution(object):
     def kthSmallest(self, root, k):
-        self.cnt=k;  self.ret = None
-        self.dfs(root)
-        return self.ret
-
-    def dfs(self, root):
-        if not root or self.ret:       return  #已经找到了。 不用管了。
-        self.dfs(root.left)
-        self.cnt-=1
-        if self.cnt==0:   self.ret = root.val
-        self.dfs(root.right)
-
+        """
+        :type root: TreeNode
+        :type k: int
+        :rtype: int
+        """
+        stack = [];  cur = root
+        while True:
+            while cur:
+                stack.append(cur)
+                cur = cur.left
+            if not stack: break
+            cur = stack.pop()
+            k-=1
+            if k==0:  return cur.val
+            cur = cur.right
 '''
