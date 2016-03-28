@@ -32,7 +32,7 @@ class Solution:  #去年做过
         for i in range(len(nums)):
             while q and nums[q[-1]] <= nums[i]:  q.pop()
             q.append(i)
-            if q[0] == i - k:    q.popleft()
+            if q[0] == i - k:    q.popleft()  #保持队列头是最大值, 当最大值过了边界时, 必须pop了.
             if i >= k - 1:    ret.append(nums[q[0]])
         return ret
 #http://bookshadow.com/weblog/2015/07/18/leetcode-sliding-window-maximum/
