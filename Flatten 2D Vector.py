@@ -21,21 +21,20 @@ class Vector2D:
     # Initialize your data structure here.
     # @param {integer[][]} vec2d
     def __init__(self, vec2d):
-        self.col = 0
-        self.row = 0
+        self.c = self.r = 0
         self.vec = vec2d
 
     # @return {integer}
     def next(self):
-        ret = self.vec[self.row][self.col]
-        self.col += 1
+        ret = self.vec[self.r][self.c]
+        self.c += 1
         return ret
 
     # @return {boolean}
     def hasNext(self):
-        while self.row < len(self.vec):
-            if self.col < len(self.vec[self.row]):   return True
-            self.col = 0
-            self.row += 1
+        while self.r < len(self.vec):
+            if self.c < len(self.vec[self.r]):   return True
+            self.c = 0
+            self.r += 1
         return False
 
