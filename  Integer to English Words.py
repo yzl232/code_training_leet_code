@@ -1,3 +1,5 @@
+# encoding=utf-8
+
 '''
  Convert a non-negative integer to its english words representation. Given input is guaranteed to be less than 231 - 1.
 
@@ -13,17 +15,16 @@ Hint:
 '''
 class Solution:
     def numberToWords(self, num):
-        to19 = 'One Two Three Four Five Six Seven Eight Nine Ten Eleven Twelve ' \
-               'Thirteen Fourteen Fifteen Sixteen Seventeen Eighteen Nineteen'.split()
-        tens = 'Twenty Thirty Forty Fifty Sixty Seventy Eighty Ninety'.split()
-        def words(n):
-            if n < 20:
-                return to19[n-1:n]
-            if n < 100:
-                return [tens[n/10-2]] + words(n%10)
-            if n < 1000:
-                return [to19[n/100-1]] + ['Hundred'] + words(n%100)
-            for p, w in enumerate(('Thousand', 'Million', 'Billion'), 1):
-                if n < 1000**(p+1):
-                    return words(n/1000**p) + [w] + words(n%1000**p)
-        return ' '.join(words(num)) or 'Zero'
+        to19 = {0:"", 1: 'One', 2: 'Two', 3: 'Three', 4: 'Four', 5: 'Five', 6: 'Six', 7: 'Seven', 8: 'Eight', 9: 'Nine', 10: 'Ten', 11: 'Eleven', 12: 'Twelve', 13: 'Thirteen', 14: 'Fourteen', 15: 'Fifteen', 16: 'Sixteen', 17: 'Seventeen', 18: 'Eighteen', 19: 'Nineteen'}
+        tens = {20: 'Twenty', 30: 'Thirty', 40: 'Forty', 50: 'Fifty', 60: 'Sixty', 70: 'Seventy', 80: 'Eighty', 90: 'Ninety'}
+        def toWords(n):
+            if n<20: return [to19[n]]
+            if n<100: return [tens[n-n%10]] + toWords(n%10)    #0的部分.    默认为"".   结果为""变成zero.
+            if n < 1000:    return [to19[n/100]] + ['Hundred'] + toWords(n%100)
+            for i, w in enumerate(('Thousand', 'Million', 'Billion'), 1):  # 1000**1, 1000**2, 1000**3
+                if n < 1000**(i+1):    return toWords(n/(1000**i)) + [w] + toWords(n%1000**i)
+        return ' '.join(toWords(num)) or 'Zero'
+
+s = Solution()
+print s.numberToWords(20)
+print s.numberToWords(1234520)
