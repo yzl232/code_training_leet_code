@@ -8,6 +8,18 @@
 '''
 
 #做过。
+
+class Solution:
+    def findPreSuc(self, root, x):
+        if not root: return 
+        ret = root.val;  cur = root
+        while cur:
+            if abs(cur.val - x)<abs(ret-x): ret = cur.val
+            if cur.val == x: return x
+            if cur.val<x:  cur = cur.right
+            else:  cur = cur.left
+        return ret
+'''
 class Solution:
     def findPreSuc(self, root, x):
         self.x = x; self.ret = root
@@ -20,6 +32,9 @@ class Solution:
         if root.val == self.x:      return
         elif root.val>self.x:     self.dfs(root.left)
         else:   self.dfs(root.right)
+'''
+
+
 
 '''
 class Solution:
