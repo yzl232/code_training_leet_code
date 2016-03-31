@@ -10,18 +10,21 @@ Derive your algorithm's runtime complexity.
 '''
 
 class Solution(object):
+    memo = {}
     def canWin(self, s):
-        return any(s[i:i+2] == '++' and not self.canWin(s[:i] + '-' + s[i+2:])
+        if s not in self.memo:
+            self.memo[s] = any(s[i:i+2] == '++' and not self.canWin(s[:i] + '-' + s[i+2:])
+                          for i in range(len(s)))
+        return self.memo[s]
+
+
+
+'''
+
+class Solution(object):
+    def canWin(self, s):
+        return any(s[i:i+2] == '++' and not self.canWin(s[:i] + '--' + s[i+2:])
                    for i in range(len(s)))
                    
                    
-'''
-class Solution(object):
-    _memo = {}
-    def canWin(self, s):
-        memo = self._memo
-        if s not in memo:
-            memo[s] = any(s[i:i+2] == '++' and not self.canWin(s[:i] + '-' + s[i+2:])
-                          for i in range(len(s)))
-        return memo[s]
 '''
