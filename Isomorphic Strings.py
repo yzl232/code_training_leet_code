@@ -20,6 +20,24 @@ class Solution:   #特别需要例子, 不然看着都糊涂.
     # @param {string} t
     # @return {boolean}
     def isIsomorphic(self, s, t):
+        return [s.find(i) for i in s] == [t.find(j) for j in t]
+
+
+'''
+s ="aabb"
+>>> map(s.find, s)
+[0, 0, 2, 2]
+
+相同的字符串都是相同的数字。  
+'''
+
+
+'''
+class Solution:   #特别需要例子, 不然看着都糊涂.
+    # @param {string} s
+    # @param {string} t
+    # @return {boolean}
+    def isIsomorphic(self, s, t):
         if len(s) != len(t): return False
         sourceMap, targetMap = {}, {}
         for i in range(len(s)):
@@ -29,3 +47,5 @@ class Solution:   #特别需要例子, 不然看着都糊涂.
             elif target != t[i] or source != s[i]:
                 return False
         return True
+'''
+
