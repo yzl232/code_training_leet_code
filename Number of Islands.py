@@ -1,3 +1,4 @@
+# encoding=utf-8
 '''
 Given a 2d grid map of '1's (land) and '0's (water), count the number of islands. An island is surrounded by water and is formed by connecting adjacent lands horizontally or vertically. You may assume all four edges of the grid are all surrounded by water.
 
@@ -19,21 +20,15 @@ Example 2:
 
 Answer: 3
 '''
-
-# encoding=utf-8
-'''
- Given a 2D board and a word, find if the word exists in the grid.
-
-The word can be constructed from letters of sequentially adjacent cell, where "adjacent" cells are those horizontally or vertically neighboring. The same letter cell may not be used more than once.
-
-For example,
-Given board =
-
-[
-  ["ABCE"],
-  ["SFCS"],
-  ["ADEE"]
-]
+class Solution(object):
+    def numIslands(self, grid):
+        def sink(i, j):
+            if 0 <= i < len(grid) and 0 <= j < len(grid[i]) and grid[i][j] == '1':
+                grid[i][j] = '#'
+                for r, c in  [(i-1, j), (i+1, j), (i, j-1), (i, j+1)]:  sink(r, c)
+                return 1
+            return 0
+        return sum(sink(i, j) for i in range(len(grid)) for j in range(len(grid[i])))
 
 '''
 class Solution(object):
@@ -57,3 +52,5 @@ class Solution(object):
             if 0<=r<self.m and 0<=c<self.n and board[r][c] == "1":
                 board[r][c] ='#'
                 self.dfs(board, r, c)
+                
+'''
