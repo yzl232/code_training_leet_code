@@ -34,7 +34,7 @@ class Solution:
             self.rets.append(['.' * c + "Q" + '.' * (self.n - c - 1) for c in cur])
             return
         for c in range(self.n):
-            if c not in cur and True not in [abs(rowN - r) == abs(c - cur[r]) for r in  range(len(cur)) ]:
+            if c not in cur and all(abs(rowN - r) != abs(c - cur[r]) for r in  range(len(cur))):  
                 self.dfs(cur + [c],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
 
 
