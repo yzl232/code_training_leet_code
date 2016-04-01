@@ -4,9 +4,9 @@ class Solution(object):
         size = 0
         for x in nums:
             i, j = 0, size
-            while i < j:
+            while i < j:   #我们搜索x。想要更新最小长度x
                 m = (i + j) / 2
-                if x > tails[m]:     i = m + 1
+                if x > tails[m]:     i = m + 1   #x更大，  size肯定比他多1
                 else:       j = m      # 寻找需要更新的地方. x是最小的长度为i+1的ending
             tails[i] = x
             size = max(i + 1, size)
