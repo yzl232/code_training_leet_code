@@ -25,3 +25,16 @@ INF  -1 INF  -1
 
 An application of BFS. The key is to apply appropriate pruning
 '''
+
+class Solution:
+    def wallsAndGates(self, rooms):
+        pre = [(i, j) for i in range(len(rooms)) for j in range(len(rooms[0])) if not rooms[i][j]]
+        INF_INT = 2**31-1
+        while pre:
+            cur = []
+            for i, j in pre:
+                for x, y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
+                    if 0 <= x < len(rooms) and 0 <= y < len(rooms[0]) and rooms[x][y] == INF_INT:   #只影响INT_INT
+                        rooms[x][y] = rooms[i][j] + 1
+                        cur.append((x, y))
+            pre = cur

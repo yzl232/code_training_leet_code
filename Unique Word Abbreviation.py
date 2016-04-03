@@ -30,14 +30,15 @@ isUnique("make") -> true
 
 
 '''
-class Solution:
-    def __init__(self, arr):
+
+class ValidWordAbbr(object):
+    def __init__(self, arr):  #相同的word出现多次, 仍然算是unique. 所以用set.
         self.dt = {}
         for w in arr:
-            k = w[0] + str(len(w)) + w[-1]   #len(w)和len(w)-2之间没有区别。
-            if k not in self.dt: self.dt[k] = 0
-            self.dt[k]+=1
+            k = w[0] + str(len(w)) + w[-1] if len(w)>2 else w  #len(w)和len(w)-2之间没有区别。
+            if k not in self.dt: self.dt[k] = set()
+            self.dt[k].add(w)
 
     def isUnique(self, w):
-        k = w[0] + str(len(w)) + w[-1]
-        return k not in self.dt or lself.dt[k]<=1
+        k = w[0] + str(len(w)) + w[-1] if len(w)>2 else w
+        return k not in self.dt or set([w]) == self.dt[k]
