@@ -44,7 +44,6 @@ class Solution(object):
         last, ret = -1, len(words)
         for i in range(len(words)):
             if words[i] in [word1, word2]:
-                if last != -1 and (words[last] != words[i] or word1==word2): # if current matched word is different from last matched word
-                    ret = min(ret, i-last)
+                if last != -1 and (words[last] != words[i] or word1==word2):   ret = min(ret, i-last)
                 last = i
         return ret
