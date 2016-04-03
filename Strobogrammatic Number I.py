@@ -9,20 +9,19 @@ For example, the numbers "69", "88", and "818" are all strobogrammatic.
 '''
 #以前做过。文件名字叫旋转对称数
 
-
-class Solution:
-    def palin(self, s):
+class Solution(object):
+    def isStrobogrammatic(self, s):
+        """
+        :type num: str
+        :rtype: bool
+        """
         d =set(['69', '96', '00', '11', '88'])
         i=0; j=len(s)-1
         while i<=j:
             if (s[i]+s[j]) not in d: return False
             i+=1; j-=1
         return True
-
-s = Solution()
-print s.palin("818")
-print s.palin("96")
-
+ 
 '''
 class Solution:
     def palin(self, s):

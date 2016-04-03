@@ -11,7 +11,6 @@ Given low = "50", high = "100", return 3. Because 69, 88, and 96 are three strob
 Note:
 Because the range might be a large number, the low and high numbers are represented as string.
 '''
-#以前做过。文件名字叫旋转对称数
 class Solution:
     def findStrobogrammatic(self, n):
         nums = list('018') if n%2 else ['']  #如果n为偶数,  [empty string]
@@ -20,6 +19,12 @@ class Solution:
             nums = [a + x + b for a, b in '00 11 88 69 96'.split()[n<2:] for x in nums]   # [n<2:].  去除"00"
         return nums     #剩下的大于2位的时候, 才考虑增加00. a = b = "0" . 因为初位, 末尾不能加00. 所以剩下要大于2位.
 # 连续的for是正常的先后顺序.  先循环a,b 后x
-s = Solution()
-for i in range(5):
-    print s.findStrobogrammatic(i+1)
+
+    def strobogrammaticInRange(self, low, high):
+        ret = []; cnt=0
+        for i in range(len(low), len(high)+1):
+            ret+=self.findStrobogrammatic(i)
+        for x in ret:
+            if (len(x) == len(low) and x<low) or (len(x)==len(high) and x>high):  continue
+            cnt+=1
+        return cnt
