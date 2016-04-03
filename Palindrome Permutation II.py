@@ -39,6 +39,16 @@ class Solution(object):
             t = arr[:]
             self.dfs(cur+[t.pop(i)], t)
 
+'''
+class Solution(object):
+    def generatePalindromes(self, s):
+        d = collections.Counter(s)
+        m = tuple(k for k, v in d.iteritems() if v % 2)
+        p = ''.join(k*(v/2) for k, v in d.iteritems())
+        return [''.join(i + m + i[::-1]) for i in set(itertools.permutations(p))] if len(m) < 2 else []
+
+'''
+
 s = Solution()
 print s.generatePalindromes("a")
 print s.generatePalindromes("aabbe")

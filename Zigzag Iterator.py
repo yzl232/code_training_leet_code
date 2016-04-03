@@ -23,13 +23,12 @@
 
 '''
 
-#做过。
-
 from collections import  deque
-class FlatIterator:
-    def __init__(self, arrs):
-        self.q= deque([x for x in arrs if x])   #这里必须排除掉空的。
+class ZigzagIterator(object):
 
+    def __init__(self, v1, v2):
+        self.q= deque([x for x in (v1, v2) if x])   #这里必须排除掉空的。
+        
     def hasNext(self):
         return False if not self.q else True
 
@@ -39,7 +38,7 @@ class FlatIterator:
         val = t.pop(0)
         if t:self.q.append(t)       # if t.hasNext()   这句不需要。  因为hasNext 已经判断了
         return val
-
+#做过。
 
 
 

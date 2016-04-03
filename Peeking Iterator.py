@@ -25,7 +25,7 @@ You call next() the final time and it returns 3, the last element. Calling hasNe
 #非常高频的一道题目
 
 # 提前一步
-class IteratorPeek: #代码不长。可以背下
+class PeekingIterator(object):
     def __init__(self, iterator):
         self.iter = iterator
         self.top = self.getTop()
@@ -39,11 +39,10 @@ class IteratorPeek: #代码不长。可以背下
         return ret
 
     def getTop(self):
-        return None if not self.iter.hasNext else self.iter.next()
+        return None if not self.iter.hasNext() else self.iter.next()
 
     def peek(self):
         return self.top
-
 
 '''
 1.写一个Stream的interface, 就是有generic, 有peek(), next(), hasNext(), append()方法. 然后写一个merge List of sorted stream, 就是的k-way merge. 然后因为是generic, 传入参数要包括一个comparator.

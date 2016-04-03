@@ -18,11 +18,23 @@ You need to find the inorder successor and predecessor of a given key. In case t
 
 #其实有类似于binary search的方法。  是iterative的
 #O(logN)实际上就可以做.  找一个，可以logN。类似binary search
-class Solution:
-    def successor(self, root, target):   # binary search 的思想.  binary search val
+
+class Solution(object):
+    def inorderSuccessor(self, root, p):
         ret = None
         while root:
-            if root.val>target:
+            if root.val>p.val:
+                ret = root.val
+                root=root.left
+            else:  root=root.right
+        return ret
+
+'''
+class Solution:
+    def successor(self, root, p):   # binary search 的思想.  binary search val
+        ret = None
+        while root:
+            if root.val>p.val:
                 ret = root.val
                 root=root.left
             else:  root=root.right
@@ -44,7 +56,7 @@ class Solution:
 
 
 
-'''
+
 class Solution:
     def findPreSuc(self, root, val):
         self.suc =self.prev =  None
@@ -79,7 +91,7 @@ def bs(arr, x):
         if m==x: return x
         elif m<x: l=m+1
         else: h=m-1
-'''
+
 
 
 
@@ -100,3 +112,4 @@ class Solution4:
             if not self.pre: self.pre=root.val
             self.pre = max(self.pre, root.val)
         self.dfs(root.right, v)
+'''

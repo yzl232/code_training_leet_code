@@ -8,8 +8,8 @@
 '''
 
 class Solution:
-    def wiggle(self, arr):
+    def wiggleSort(self, arr):
         for i in range(1, len(arr)):
-            if (i&1 and arr[i] < arr[i-1])  or (not (i&1) && arr[i] > arr[i-1]):
+            if (i&1 and arr[i] < arr[i-1])  or (not (i&1) and arr[i] > arr[i-1]):
                 arr[i], arr[i-1] = arr[i-1], arr[i]
         
