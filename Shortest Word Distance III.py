@@ -33,9 +33,14 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 
 '''
 
-
-class Solution:
-    def shortestDistance(self, words, word1, word2):
+class Solution(object):
+    def shortestWordDistance(self, words, word1, word2):
+        """
+        :type words: List[str]
+        :type word1: str
+        :type word2: str
+        :rtype: int
+        """
         last, ret = -1, len(words)
         for i in range(len(words)):
             if words[i] in [word1, word2]:
