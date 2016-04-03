@@ -8,17 +8,21 @@
 '''
 
 #做过。
+# Definition for a binary tree node.
+# class TreeNode(object):
+#     def __init__(self, x):
+#         self.val = x
+#         self.left = None
+#         self.right = None
 
-class Solution:
-    def findPreSuc(self, root, x):
+class Solution(object):
+    def closestValue(self, root, x):
         if not root: return 
         ret = root.val;  cur = root
         while cur:
             if abs(cur.val - x)<abs(ret-x): ret = cur.val
-            if cur.val == x: return x
-            if cur.val<x:  cur = cur.right
-            else:  cur = cur.left
-        return ret
+            cur = cur.right if cur.val<x else cur.left
+        return int(ret)
 '''
 class Solution:
     def findPreSuc(self, root, x):

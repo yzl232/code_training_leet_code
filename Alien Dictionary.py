@@ -24,24 +24,28 @@ Note:
 
 
 
-class Solution:  # build graph有技巧。 必须相邻比较words.
-    def topolgical_sort(self, words):
-        g = {}
+class Solution(object):
+    def alienOrder(self, words):
+        """
+        :type words: List[str]
+        :rtype: str
+        """
+        g = {}; self.cycle = False
         for ch in set(''.join(words)):  g[ch] = set()    #第一步： 为所有的ch建立node
         for i in range(len(words)-1):
             w1 = words[i]; w2 = words[i+1]
             for j in range(min(len(w1), len(w2))):
                 if w1[j] != w2[j]:  #发现了一个edge,  加入graph
                     g[w2[j]].add(w1[j]);   break
-        print g
         self.graph = g
         self.ret,  self.visited = [], {}
         for k in g:  self.dfs(k)
-        return self.ret
+        return '' if self.cycle else self.ret 
 
     def dfs(self, x):
+        if self.cycle: return 
         if x in self.visited:   #已经visit过了
-            if self.visited[x]==False: raise ValueError("cycle")  #发现了一个back edge。
+            if self.visited[x]==False:self.cycle = True  #发现了一个back edge。
             return
         self.visited[x] = False  #这就是与普通dfs的唯一不同。 用False标记
         for k in self.graph[x]:  self.dfs(k)
