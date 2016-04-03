@@ -12,6 +12,7 @@ Given word1 = "makes", word2 = "coding", return 1.
 Note:
 You may assume that word1 does not equal to word2, andword1 and word2 are both in the list.
 '''
+
 class WordDistance:
     def __init__(self, words):
         self.d = {}; self.n = len(words)
@@ -21,11 +22,11 @@ class WordDistance:
 
 #一行就可以。不过复杂度不好      return min(abs(i1 - i2) for i1 in self.dic[word1] for i2 in self.dic[word2])
     def shortest(self, w1, w2):
-        i = j = 0
+        i = j = 0;  x,y = self.d[w1], self.d[w2]
         ret = self.n
-        while i < len(self.d[w1]) and j < len(self.d[w2]):
-            ret = min(ret, abs(self.d[w1][i]-self.d[w2][j]))
-            if self.d[w1][i] < self.d[w2][j]:    i += 1
+        while i < len(x) and j < len(y):
+            ret = min(ret, abs(x[i]-y[j]))
+            if x[i] < y[j]:    i += 1
             else:    j += 1
         return ret
 # Your WordDistance object will be instantiated and called as such:
