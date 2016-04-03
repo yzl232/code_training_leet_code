@@ -22,7 +22,7 @@ class Solution:
 
     def strobogrammaticInRange(self, low, high):
         ret = []; cnt=0
-        for i in range(len(low), len(high)+1):
+        for i in xrange(len(low), len(high)+1):
             ret+=self.findStrobogrammatic(i)
         for x in ret:
             if (len(x) == len(low) and x<low) or (len(x)==len(high) and x>high):  continue
