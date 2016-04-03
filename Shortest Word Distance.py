@@ -15,3 +15,19 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 
 '''
 
+
+
+class Solution(object):
+    def shortestDistance(self, words, word1, word2):# one pass
+        p1 = p2 = -1; ret = len(words)+1
+        for i in range(len(words)):
+            if words[i] == word1:  p1 = i
+            if words[i] == word2: p2 = i
+            if p1!= -1 and p2!=-1:  ret = min(ret, abs(p1-p2))
+        return ret
+'''
+
+class Solution(object):
+    def shortestDistance(self, words, word1, word2):
+        return min(abs(i - j) for i in xrange(len(words)) if words[i] == word1 for j in xrange(len(words)) if words[j] == word2)
+'''
