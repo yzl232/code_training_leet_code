@@ -57,7 +57,27 @@ output:
 : 起，线性走一遍，遇到start +1，end -1. 走的过程中得最大值就是解。
 : 4]
 '''
+# Definition for an interval.
+# class Interval(object):
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
 
+class Solution(object):
+    def minMeetingRooms(self, intervals):
+        """
+        :type intervals: List[Interval]
+        :rtype: int
+        """
+        affairs = [];  cnt = 0; ret = 0
+        for i in intervals:   #其实如果要sort正确，也就是start==end要sort正确时候， 应当 (i[0], -1)，   （i[0], 1）
+            affairs+=[(i.start, 1), (i.end, -1)]
+        affairs.sort()
+        for i in affairs:
+            cnt+=i[-1]
+            ret = max(ret, cnt)
+        return ret
+'''
 class Solution:
     def findNumConference(self, intervals):
         affairs = [];  cnt = 0; ret = 0
@@ -72,7 +92,7 @@ s = Solution()
 print s.findNumConference([(5, 10), (6, 9), (11, 17), (15, 20), (16, 25), (10, 12)  ])
 
 
-'''
+
 
 感觉跟leetcode上面的interval那题很相似，简单一点点。
 // Given a array of pairs where each pair contains the start and end time of
