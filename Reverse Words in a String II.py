@@ -14,19 +14,33 @@ This can be done without any additional space in 2 pass
 '''
 
 class Solution:
-    def reverseWords(self, charArr):
-        self.reverse(charArr, 0, len(charArr)-1)
-        print charArr
-        i=j=0
-        while j<=len(charArr)-1:
-            if  charArr[j] == ' ':
-                self.reverse(charArr, i, j-1)
+    def reverseWords(self, arr):
+        self.reverse(arr, 0, len(arr) - 1)
+        i = 0
+        for j in range(len(arr)):
+            if  arr[j] == ' ':
+                self.reverse(arr, i, j - 1)
                 i = j+1
-            j+=1
+        self.reverse(arr, i, len(arr) - 1)
 
-        return charArr
+    def reverse(self, arr, i, j):
+        while i<j:
+            arr[i], arr[j] = arr[j], arr[i]
+            i+=1;  j-=1
 
-    def reverse(self, charArr, begin, end):
-        while begin<end:
-            charArr[begin], charArr[end] = charArr[end], charArr[begin]
-            begin+=1;  end-=1
+
+'''
+class Solution(object):
+    def reverseWords(self, s):
+        """
+        :type s: a list of 1 length strings (List[str])
+        :rtype: nothing
+        """
+        s.reverse()
+        index = 0
+        for i in range(len(s)):
+            if s[i] == " ":
+                s[index: i] = reversed(s[index: i])
+                index = i + 1
+        s[index: ] = reversed(s[index: ])
+'''
