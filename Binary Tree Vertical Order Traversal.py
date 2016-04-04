@@ -1,50 +1,21 @@
-'''
-Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
 
-If two nodes are in the same row and column, the order should be from left to right.
-
-Examples:
-Given binary tree [3,9,20,null,null,15,7],
-
-    3
-   / \
-  9  20
-    /  \
-   15   7
-
- 
-
-return its vertical order traversal as:
-
-[
-  [9],
-  [3,15],
-  [20],
-  [7]
-]
-
- 
-
-Given binary tree [3,9,20,4,5,2,7],
-
-    _3_
-   /   \
-  9    20
- / \   / \
-4   5 2   7
-
- 
-
-return its vertical order traversal as:
-
-[
-  [4],
-  [9],
-  [3,5,2],
-  [20],
-  [7]
-]
-'''
+class Solution(object):
+    def verticalOrder(self, root):
+        """
+        :type root: TreeNode
+        :rtype: List[List[int]]
+        """
+        if not root: return []
+        pre, d = [(root, 0)], {}   # 除了pre, cur之外
+        while pre:
+            cur = []     #必须用array。 因为是有序的。 并且不会有重复
+            for x, col in pre:
+                if col not in d: d[col] = []
+                d[col].append(x.val)
+                if x.left:  cur.append((x.left, col-1))
+                if x.right:  cur.append((x.right, col+1))
+            pre = cur
+        return [d[k] for k in sorted(d)]
 
 #做过。。
 
@@ -57,23 +28,12 @@ We have a binary tree, suppose like this:
     6     10
    / \   /  \
   4   7 9    12
- / \
-3   5
+ / \    \
+3   5     11
 
-We have to print this binary tree in top-down manner - column wise. Note that, 8, 7 & 9 would be considered in same column. So the required output should be:
-
-3
-4
-6 5
-8 7 9
-10
-12
-
-
-必须是先left, root, right
-
-
-注意8, 7, 9的顺序。 必须用pre order
+如果10在11前面， 就是适合用BFS。   用DFS药加上row变量
+如果11在10前面。 就是适合用DFS。    root, left, right
+本题下面的DFS错误。
 
 '''
 #可以看出，注意8, 7, 9的顺序，  是inorder, root,   left, ，  right
@@ -93,19 +53,7 @@ class Solution:
 #也可以BFS
 '''
 
-class Solution:
-    def levelOrder(self, root):   # pre = cur这行 容易忘。 先写好这行。
-        if not root: return []
-        pre, d = [(root, 0)], {}   # 除了pre, cur之外
-        while pre:
-            cur = []     #必须用array。 因为是有序的。 并且不会有重复
-            for x, col in pre:
-                if col not in d: d[col] = []
-                d[col].append(x.val)
-                if x.left:  cur.append((x.left, -1))
-                if x.right:  cur.append((x.right, 1)
-            pre = cur
-        return [d[k] for k in sorted(d)]
+
 
 '''
 
