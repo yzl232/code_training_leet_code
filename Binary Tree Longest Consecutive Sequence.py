@@ -29,6 +29,7 @@ Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
 
 class Solution:
     def longestConsecutive(self, root):
+        if not root: return 0
         self.ret = 0
         self.dfs(root, 0, root.val)
         return self.ret
