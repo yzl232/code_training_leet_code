@@ -1,3 +1,4 @@
+#最简单的最好的
 class Trie:  #和以前的做法的区别是以前用_end存的, 现在用Trie Node存的.  没啥区别.
 
     def __init__(self):
@@ -100,7 +101,7 @@ has
 
 最简单的方法。
   for a large, scalable trie, nested dictionaries might become cumbersome -- or at least space inefficient
-
+      
 '''
 
 

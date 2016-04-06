@@ -38,5 +38,22 @@ class Solution(object):
 noRoot(node) = curMax(node.left) + curMax(node.right) 
 
 curMax(node) = max( noRoot(node.left)+noRoot(node.right)+node.value, noRoot(node) ).
-'''
+
+
+class Solution(object):
+    def rob(self, root):
+        def dfs(x):
+            if not x: return (0, 0)
+            l, r = dfs(x.left), dfs(x.right)
+            return (l[1] + r[1], max(l[1] + r[1], l[0] + r[0] + x.val))
+        return dfs(root)[1]
+
+        
+
+noRoot(node) = curMax(node.left) + curMax(node.right) 
+
+curMax(node) = max( noRoot(node.left)+noRoot(node.right)+node.value, noRoot(node) ).
+
+#有点像这道题。 geeks: Given a Binary Tree, find size of the Largest Independent Set(LIS)
+
 '''
