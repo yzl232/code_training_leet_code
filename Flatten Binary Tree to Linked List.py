@@ -38,18 +38,16 @@ class Solution:
     # @param root, a tree node  #注意这道题目不是binary search tree  。  是类似heap
     # @return nothing, do it in place  #他的顺序是   pre-Order的顺序。    root, left, right.
     def flatten(self, root):  #我们反过来，就是right, left, root
-        self.head = None
+        self.pre = None
         self.dfs(root)
 
     def dfs(self, root):
         if not root: return
         self.dfs(root.right) #总共三步。 背下
         self.dfs(root.left)
-        root.right = self.head  #右边连上
-        self.head = root    #更新head
+        root.right = self.pre  #右边连上
+        self.pre = root    #pre
         root.left = None  #左置空
-
-
 '''
 假如是binary search tree的形式，应当是：  right,  root, left
 

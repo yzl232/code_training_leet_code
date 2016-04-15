@@ -6,23 +6,21 @@ a = "11"
 b = "1"
 Return "100".
 '''
-#还是老方法最朴素最好了。
+#还是老方法最朴素最好了。  最容易的方法. 最好的方法.
 class Solution:
     # @param a, a string
     # @param b, a string
     # @return a string
     def addBinary(self, a, b):
         la, lb = len(a), len(b)
-        l = max(la, lb)
         if la>lb:  return self.addBinary(b, a)
         a = '0'*(lb-la)+a
         carry =0; ret=''
         for i in range(len(a)-1, -1, -1):
-            s = carry+ord(a[i])-ord('0')+ord(b[i])-ord('0')
+            s = carry+int(a[i])+int(b[i])
             carry, s = s/2, s%2
             ret = str(s)+ret
-        if carry==1: ret = '1'+ret
-        return ret
+        return ret if not carry else '1'+ret
 
 
 '''
