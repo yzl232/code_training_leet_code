@@ -32,16 +32,15 @@ class Solution:
     # @param two ListNodes
     # @return a ListNode
     def mergeTwoLists(self, l1, l2):
-        dummy = ListNode(-1); prev = dummy
+        dummy = cur = ListNode(-1)
         while l1 and l2:   #用了pre。  也用了dummy
             if l1.val > l2.val:
-                prev.next = l2
+                cur.next = l2
                 l2 = l2.next
             else:
-                prev.next = l1
+                cur.next = l1
                 l1 = l1.next
-            prev = prev.next
-        if l1: prev.next = l1
-        if l2: prev.next = l2
+            cur = cur.next
+        cur.next = l1 or l2
         return dummy.next
 '''

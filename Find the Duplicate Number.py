@@ -13,7 +13,6 @@ Note:
 '''
 The main idea is the same with problem Linked List Cycle II,https://leetcode.com/problems/linked-list-cycle-ii/. Use two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only step each time. They must meet the same item when slow==fast. In fact, they meet in a circle, the duplicate number must be the entry point of the circle when visiting the array from nums[0]. Next we just need to find the entry point. We use a point(we can use the fast one before) to visit form begining with one step each time, do the same job to slow. When fast==slow, they meet at the entry point of the circle. The easy understood code is as follows.
 '''
-
 class Solution(object):
     def findDuplicate(self, nums):
         slow = fast = finder = 0#从0开始走。 因为一直不会碰到0.  
@@ -25,3 +24,18 @@ class Solution(object):
                     finder = nums[finder]
                     slow = nums[slow]
                 return finder
+
+
+'''
+如果允许改变array  。 geeks有一种办法。
+class Solution3:  #假定没有负数出现
+    def isCon(self, arr):  #利用index, 以及正负标记. 来check是否重复
+        small = min(arr)
+        if max(arr)-small + 1!=len(arr): return False
+        for i in range(len(arr)):
+            t = abs(arr[i]) - small
+            if arr[t]<0: return False
+            else: arr[t] == -arr[t]
+        return True
+
+'''
