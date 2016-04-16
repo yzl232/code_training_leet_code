@@ -40,16 +40,17 @@ Given below is implementation of above method. For algorithm to build these heap
 
 '''
 
+
 from heapq import *
 
 class MedianFinder:
 
     def __init__(self):
-        self.small, self.big = [], []
+        self.small, self.big = [], []   #small,  Max heap, negative nums;   big, minHeap, 
 
     def addNum(self, num):
-        heappush(self.small, -heappushpop(self.big, num))     #两个都需要比较
-        if len(self.big) < len(self.small):    heappush(self.big, -heappop(self.small))  #总能够保持balanced
+        heappush(self.small, -heappushpop(self.big, num))
+        if len(self.big) < len(self.small):    heappush(self.big, -heappop(self.small))
 
     def findMedian(self):
         if len(self.big) > len(self.small):  return float(self.big[0])   #奇数的时候, 是large更多.
