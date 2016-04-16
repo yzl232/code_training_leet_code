@@ -9,7 +9,7 @@ You may assume no duplicate exists in the array.
 '''
 
 class Solution:
-    # @param A, a list of integers    #7123456     2345671
+    # @param A, a list of integers    #7123456     2345671   1234567   三个例子够了。
     # @param target, an integer to be searched
     # @return an boolean
     def search(self, arr, target):
