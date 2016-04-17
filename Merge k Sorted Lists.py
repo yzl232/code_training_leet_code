@@ -20,3 +20,4 @@ class Solution:
             cur.next = x;  cur = cur.next;
             if x.next: heapq.heappush(h, (x.next.val, x.next))
         return dummy.next
+    #暴力法是nklog(nk).     heap或者merge sort都是nklogk
