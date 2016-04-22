@@ -1,16 +1,13 @@
 #Determine whether an integer is a palindrome. Do this without extra space.
-
 class Solution:
     # @return a boolean
     def isPalindrome(self, x):
         if x<0:return False
-        k = 1
-        while 10*k<=x : k*=10
+        div = 1
+        while x / div >= 10 : div*=10
         while x >0:
-            firstDigit = x/k
-            if firstDigit != x % 10:return False
-            x = (x- firstDigit * k)/10
-            k /= 100
+            if x/div != x % 10:return False
+            x, div = (x%div)/10, div/100
         return True
 
 '''
