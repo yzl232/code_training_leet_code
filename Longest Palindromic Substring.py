@@ -1,3 +1,5 @@
+# encoding=utf-8
+
 '''
 Given a string S, find the longest palindromic substring in S. You may assume that the maximum length of S is 1000, and there exists one unique longest palindromic substring.
 '''
@@ -5,18 +7,16 @@ Given a string S, find the longest palindromic substring in S. You may assume th
 class Solution:  #优势在于space可以为O(1)
     # @return a string
     def expand(self, s, l, r):
-        while l >= 0 and r < len(s) and s[l] == s[r]:
-            l -= 1; r += 1
-        return  (l+1, r-1, r-l-1)  #start, end length
-    def longestPalindrome(self, s):
-        ret =(0, 0, 1)
-        for i in range(len(s)):
-            r1 = self.expand(s, i, i)  #odd
-            if r1[-1]>ret[-1]: ret = r1
-            r2 = self.expand(s, i, i + 1)  #even
-            if r2[-1]>ret[-1]: ret = r2
-        return s[ret[0]:ret[1]+1]
+        while l>=0 and r<len(s) and s[l]==s[r]:
+            l-=1; r+=1
+        self.ret =max(self.ret,  (r-l-1, l+1, r-1))
 
+    def longestPalindrome(self, s):
+        self.ret = (0, 0, 1)
+        for i in range(len(s)):
+            self.expand(s, i, i)
+            self.expand(s, i, i+1)
+        return s[self.ret[1]:self.ret[2]+1]
 
 '''
 class Solution:
@@ -50,7 +50,7 @@ class Solution:   # O(n) solution
         P = [0 for i in range(len(T))]
         for i in range(1, len(T)-1):
             i_mirror = 2*C - i
-            P[i] = min(R-i, P[i_mirror]) if R>i else 0     #min(R-i, 
+            P[i] = min(R-i, P[i_mirror]) if R>i else 0     #min(R-i,
             while T[i+1+P[i]] == T[i-1-P[i]]:  # // Attempt to expand palindrome centered at i
                 P[i] = P[i] + 1
             #If palindrome centered at i expand past R,   adjust center based on expanded palindrome.
