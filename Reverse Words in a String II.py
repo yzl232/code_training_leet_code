@@ -1,27 +1,12 @@
-'''
-Reverse Words in a String II
-
-given s = "the sky is blue", return "blue is sky the".
-
-Similar to Question [6. Reverse Words in a String], but with the following constraints:
-“The input string does not contain leading or trailing spaces and the words are always separated by a single space.”
-Could you do it in-place without allocating extra space?
-
-
-This can be done without any additional space in 2 pass
-1) reverse the string in place
-2) reverse each word of the reversed string.
-'''
-
 class Solution:
     def reverseWords(self, arr):
         self.reverse(arr, 0, len(arr) - 1)
-        i = 0
-        for j in range(len(arr)):
-            if  arr[j] == ' ':
-                self.reverse(arr, i, j - 1)
-                i = j+1
-        self.reverse(arr, i, len(arr) - 1)
+        i = j = 0
+        while j<len(arr):
+            while j+1<len(arr) and arr[j+1]!=" ": j+=1
+            self.reverse(arr, i, j)
+            i = j+2
+            j+=1
 
     def reverse(self, arr, i, j):
         while i<j:
@@ -29,18 +14,19 @@ class Solution:
             i+=1;  j-=1
 
 
+
 '''
-class Solution(object):
+
+#和上面不同。 这个是多个space的情况。 以及边界space的情况
+class Solution:  #O(n) space
     def reverseWords(self, s):
-        """
-        :type s: a list of 1 length strings (List[str])
-        :rtype: nothing
-        """
-        s.reverse()
-        index = 0
-        for i in range(len(s)):
-            if s[i] == " ":
-                s[index: i] = reversed(s[index: i])
-                index = i + 1
-        s[index: ] = reversed(s[index: ])
+        ret = '';   j = len(s)
+        for i in range(len(s)-1, -1, -1):
+            if s[i]==' ': j=i   #找到了一个可能的结尾
+            elif i==0 or s[i-1]==' ':      ret+=s[i:j]+' '   #单词的开始.  意思是现在不是空格。 i-1是空格。 必须加上.  非空格才更新
+        return ret[:-1] if ret else ''
+s = "the sky is    blue    "
+s2 = Solution()
+print s2.reverseWords(s)
+
 '''
