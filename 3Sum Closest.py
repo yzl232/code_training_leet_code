@@ -8,16 +8,15 @@ Given an array S of n integers, find three integers in S such that the sum is cl
 '''
 class Solution:
     # @return an integer
-    def threeSumClosest(self, num, target):
-        num.sort();     ret = ( 0, 10**10)
-        for i in range(len(num)):
-            l = i+1;     r = len(num) - 1
-            if i>0 and num[i] == num[i-1]: continue
+    def threeSumClosest(self, arr, target):
+        arr.sort();     ret = (float('inf'), None)
+        for i in range(len(arr)):
+            if i>0 and arr[i] == arr[i-1]: continue
+            l = i+1;     r = len(arr) - 1
             while l<r:
-                s = num[i] + num[l] + num[r]
-                diff = abs(target-s)
-                if diff<ret[-1]: ret=(s, diff)
+                s = arr[i] + arr[l] + arr[r]
+                ret = min(ret, (abs(s-target), s))
                 if s == target:     return  target
                 elif s<target:     l+=1
                 else:  r -=1
-        return ret[0]
+        return ret[1]
