@@ -1,12 +1,3 @@
-'''
- Given a linked list, swap every two adjacent nodes and return its head.
-
-For example,
-Given 1->2->3->4, you should return the list as 2->1->4->3.
-
-Your algorithm should use only constant space. You may not modify the values in the list, only nodes itself can be changed.
-'''
-
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -20,7 +11,7 @@ class Solution:
     def swapPairs(self, h):
         if not h or not h.next: return h
         n = h.next
-        h.next = self.swapPairs(h.next.next)
+        h.next = self.swapPairs(n.next)   #再次形成类似环的双斜杠.
         n.next = h
         return n
 
@@ -29,8 +20,8 @@ class Solution:
 '''
 class Solution:
     # @param a ListNode
-    # @return a ListNode
-    def swapPairs(self, head):
+    # @return a ListNode   #顺序  pre,  last, cur
+    def swapPairs(self, head):  
         dummy = ListNode(0)
         pre, dummy.next, last = dummy, head, head
         while last and last.next:  #考虑操纵2个node.这是必须的。

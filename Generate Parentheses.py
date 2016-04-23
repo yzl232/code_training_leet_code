@@ -14,7 +14,7 @@ class Solution:
         self.dfs(n, n, '')
         return self.ret
 
-    def dfs(self, l, r, cur):
+    def dfs(self, l, r, cur):   #想象剩下的需要加的括号。
         if l == r == 0:
             self.ret.append(cur)
             return
