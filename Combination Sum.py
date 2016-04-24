@@ -14,6 +14,7 @@ A solution set is:
 [7]
 [2, 2, 3]
 '''
+
 #permutation 一般是  t = c[:].  t.pop(i).   self.dfs
 #combination 一般是  self.dfs(   , c[:])
 #都是 for i in range(c)
@@ -22,18 +23,16 @@ class Solution:
     # @param candidates, a list of integers
     # @param target, integer
     # @return a list of lists of integers
-    def combinationSum(self, c, target):
-        c.sort();       self.ret = []; self.c = c
+    def combinationSum(self, arr, target):
+        arr.sort();       self.ret = []; self.arr = arr
         self.dfs(0, target, [])
         return self.ret
 
-    def dfs(self, n1, target, cur):
+    def dfs(self, st, target, cur):
         if target ==0:
-            if cur in self.ret: return  #这样反而更合适。 考虑 combiantion sum II的关系。
-            self.ret.append(cur)
+            if cur not in self.ret: self.ret.append(cur)  #这样反而更合适。 考虑 combiantion sum II的关系。
             return
-        for i in range(n1, len(self.c)):
-            c = self.c[i]
-            if target>=c:              self.dfs(i, target-c, cur+[c])
-
+        for i in range(st, len(self.arr)):
+            x = self.arr[i]
+            if target>=x:              self.dfs(i, target-x, cur+[x])
 # #if i>0 and self.c[i]==self.c[i-1]: continue   #反正可以无限重复使用。 跳过吧。

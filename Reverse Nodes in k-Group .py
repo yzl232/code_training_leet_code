@@ -25,9 +25,9 @@ class Solution:
     # @param head, a ListNode
     # @param k, an integer
     # @return a ListNode
-    def reverseKGroup(self, head, k):
-        dummy = ListNode(0)
-        dummy.next , cur, i, pre = head, head, 0, dummy
+    def reverseKGroup(self, h, k):
+        dummy = ListNode(0); dummy.next = h
+        cur, i, pre = h, 0, dummy
         while cur:
             i+=1
             if i%k==0:

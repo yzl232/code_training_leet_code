@@ -8,35 +8,31 @@ L: ["foo", "bar"]
 You should return the indices: [0,9].
 (order does not matter).
 '''
-
-
-
-
-
-
 class Solution:
     # @param S, a string
     # @param L, a list of string
     # @return a list of integer
-    def findSubstring(self, s, l):
-        wLen = len(l[0]);ret = []; tCnt={}  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
-        for w in l:
+    def findSubstring(self, s, arr):
+        wLen = len(arr[0])
+        tCnt={}; ret = []  #因为都是相同的长度，所以直接按照该长度来分割成array就好。
+        for w in arr:
             if w not in tCnt: tCnt[w]=0
             tCnt[w]+=1
-        for i in range(wLen):     #所以总复杂度是O(2*n/l*l)=O(n)
-            fdN=0;  fndD={}; l=i
-            for r in range(wLen+i, len(s)+1, wLen):  #len(s)+1,  end可以到len(s)
+        for l in range(wLen):     #所以总复杂度是O(2*n/l*l)=O(n)
+            fdN=0;  fnd={}
+            for r in range(wLen+l, len(s)+1, wLen):  #len(s)+1,  end可以到len(s)
                 w = s[r-wLen :r]
                 if w not in tCnt: continue
-                if w not in fndD or tCnt[w]>fndD[w]: fdN+=1
-                if w not in fndD: fndD[w]=0
-                fndD[w] +=1
-                if fdN==len(l):
-                    w = s[l:l+wLen]
-                    while w not in tCnt or fndD[w] > tCnt[w]:
-                        if w in tCnt: fndD[w]-=1
-                        l+=wLen;   w = s[l:l+wLen]
-                    if len(l)==(r-l)/wLen: ret.append(l)
+                if w not in fnd or tCnt[w]>fnd[w]: fdN+=1
+                if w not in fnd: fnd[w]=0
+                fnd[w] +=1
+                if fdN==len(arr):
+                    w1 = s[l:l+wLen]
+                    while w1 not in tCnt or fnd[w1] > tCnt[w1]:
+                        if w1 in tCnt: fnd[w1]-=1
+                        l+=wLen
+                        w1 = s[l:l+wLen]
+                    if len(arr)==(r-l)/wLen: ret.append(l)
         return ret
 
 #比暴力法快N倍
@@ -57,12 +53,11 @@ class Solution:
                 else:    break
             if listS == []:result.append(start)
         return result
+'''
 
 
 
-
-
-
+'''
 这道题看似比较复杂，其实思路和Longest Substring Without Repeating Characters差不多。因为那些单词是定长的，所以本质上和单一个字符一样。和Longest Substring Without Repeating Characters的区别只在于我们需要维护一个字典，然后保证目前的串包含字典里面的单词有且仅有一次。思路仍然是维护一个窗口，如果当前单词在字典中，则继续移动窗口右端，否则窗口左端可以跳到字符串下一个单词了。假设源字符串的长度为n，字典中单词的长度为l。因为不是一个字符，所以我们需要对源字符串所有长度为l的子串进行判断。做法是i从0到l-1个字符开始，得到开始index分别为i, i+l, i+2*l, ...的长度为l的单词。这样就可以保证判断到所有的满足条件的串。因为每次扫描的时间复杂度是O(2*n/l)(每个单词不会被访问多于两次，一次是窗口右端，一次是窗口左端)，总共扫描l次（i=0, ..., l-1)，所以总复杂度是O(2*n/l*l)=O(n)，是一个线性算法。空间复杂度是字典的大小，即O(m*l)，其中m是字典的单词数量
 '''
 

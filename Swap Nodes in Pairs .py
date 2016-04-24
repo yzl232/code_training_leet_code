@@ -21,16 +21,18 @@ class Solution:
 class Solution:
     # @param a ListNode
     # @return a ListNode   #顺序  pre,  last, cur
-    def swapPairs(self, head):  
+    def swapPairs(self, h):  
         dummy = ListNode(0)
-        pre, dummy.next, last = dummy, head, head
-        while last and last.next:  #考虑操纵2个node.这是必须的。
-            cur = last.next
-            last.next = cur.next
-            cur.next = pre.next
-            pre.next = cur
+        pre, dummy.next, one = dummy, h, h
+        while one and one.next:  #考虑操纵2个node.这是必须的。
+            two = one.next
+            one.next = two.next
+            two.next = pre.next
+            pre.next = two
             #以上连环
-            pre = last       #与reverse linkedlist 区别。  不断更新pre, last
-            last = last.next  #普通的逆转，pre和last不会变的。。
+            pre = one       #与reverse linkedlist 区别。  不断更新pre, last
+            one = one.next  #普通的逆转，pre和last不会变的。。
         return dummy.next
+
+
 '''

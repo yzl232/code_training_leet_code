@@ -2,12 +2,10 @@ class Solution:
     # @param A, a list of integers
     # @return an integer
     def trap(self, arr): # http://yucoding.blogspot.com/2013/05/leetcode-question-111-trapping-rain.html
-        l = 0
-        r = len(arr) - 1
+        l, r =0, len(arr) - 1
         ret = maxL = maxR = 0
         while l<=r:    # 不取等号是因为最后L, R 相等时候, 必定是最高的那根支撑 .  取不取等号无所谓, 必行为0
-            maxL = max(maxL, arr[l])
-            maxR = max(maxR, arr[r])
+            maxL, maxR = max(maxL, arr[l]), max(maxR, arr[r])
             if maxL <= maxR:
                 ret += maxL - arr[l]
                 l+=1
@@ -33,9 +31,8 @@ class Solution:
     # @return an integer
     def trap(self, arr): # http://yucoding.blogspot.com/2013/05/leetcode-question-111-trapping-rain.html
         n = len(arr); ret = 0
-        l = [0 for i in range(n)];  r =l[:]
-        for i in range(1, n-1):    l[i] = max(l[i-1], arr[i-1])
-        for i in range(n-2, 0, -1):    r[i] = max(r[i+1], arr[i+1])
-        for i in range(1, n-1):  ret += max(  min(l[i], r[i])-arr[i],   0)
-        return ret
-'''
+        l = [0]*n;  r = [0]*n
+        for i in range(1, n-1):  l[i] = max(l[i-1], arr[i-1])
+        for i in range(n-2, 0, -1): r[i] = max(r[i+1], arr[i+1])
+        return  sum(max(0,  min(l[i], r[i])-arr[i]) for i in range(1, n-1) )
+        '''

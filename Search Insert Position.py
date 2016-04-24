@@ -9,15 +9,18 @@ Here are few examples.
 [1,3,5,6], 7 → 4
 [1,3,5,6], 0 → 0
 '''
+
 class Solution:
     # @param A, a list of integers
     # @param target, an integer to be inserted
     # @return integer
     def searchInsert(self, arr, target):
         l = 0; h = len(arr) - 1
-        while l <= h:
-            m = (l + h) / 2
+        while l<=h:
+            m = (l+h)/2
             if arr[m] == target: return m
-            elif arr[m] < target: l = m + 1
-            else: h = m - 1
-        return m if target < arr[m] else m + 1  
+            if arr[m] < target: l=m+1
+            else: h=m-1
+        print l, h, m
+        return m if target<arr[m] else m+1
+ #因为 (l+h)/2. m是等于之前的l的.  所以考虑m, m+1.  不考虑m-1

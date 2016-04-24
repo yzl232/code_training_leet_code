@@ -14,8 +14,8 @@ class Solution:
     # @param A, a list of integers
     # @return a boolean
     def canJump(self, arr):
-        canR = 0  # can reach
+        reach = 0
         for i in range(len(arr)):
-            if i>canR: return False
-            canR = max(canR, i+arr[i])
-            if canR>=len(arr)-1:        return True
+            if i>reach: return False
+            reach = max(reach, i + arr[i])
+            if reach>=len(arr)-1: return True

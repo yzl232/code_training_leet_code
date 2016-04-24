@@ -8,16 +8,14 @@ the contiguous subarray [4,−1,2,1] has the largest sum = 6.
 class Solution:
     # @param A, a list of integers
     # @return an integer
-    def maxSubArray(self, a):
-        if not a: raise ValueError
-        ret = maxI = a[0]  # 包含a[i]的max subarray sum
-        for i in range(1, len(a)):
-            maxI = max(maxI + a[i],  a[i])
-            ret = max(ret, maxI)
+    def maxSubArray(self, arr):
+        if not arr: raise ValueError
+        ret = maxN = float('-inf')
+        for x in arr:
+            maxN = max(maxN +x, x)
+            ret = max(ret, maxN)
         return ret
-'''
-#另外这道题目也可以用原来的array作为dp的array>
-#  the subarray ends with i th element.
+''' #  the subarray ends with i th element.    
      #We should ignore the sum of the previous n-1 elements if A[i] is greater than the s[i-1]+A[i]
      # space O(n), time O(n) We can optimize the space to be O(1)
 

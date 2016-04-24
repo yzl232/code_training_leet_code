@@ -18,12 +18,13 @@ Here are some examples. Inputs are in the left-hand column and its corresponding
 
 '''
 # 找下一个更大的.  降序的话,  肯定找不到更大的嘛.
+
 class Solution:
     # @param num, a list of integer
     # @return a list of integer
     def nextPermutation(self, arr):
         n = len(arr) #举个例子就容易写。 687432   =》  找到 6， 和7交换。  =》786432=>723468
-        for i in range(n-1, 0, -1):
+        for i in range(n-1, 0, -1): # search 2次。  O(n).   两个for循环。
             if arr[i]>arr[i-1]:
                 for j in range(n-1, i-1, -1):  #背过中间四行就好
                     if arr[j]>arr[i-1]: break
@@ -35,3 +36,4 @@ class Solution:
                 return arr
         arr.reverse()
         return arr     #是O(n)的 #http://blog.csdn.net/m6830098/article/details/17291259
+

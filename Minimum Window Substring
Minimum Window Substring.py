@@ -12,12 +12,10 @@ If there is no such window in S that covers all characters in T, return the emtp
 
 If there are multiple such windows, you are guaranteed that there will always be only one unique minimum window in S.
 '''
-
-#通用性最好的。
 class Solution:
     # @return a string
     def minWindow(self, s, t):
-        m = len(s); n = len(t); ret = ('', m+1)   #关键是用了2个hashtable。 另外缩减窗口。
+        m = len(s); n = len(t); ret = (m+1, "")   #关键是用了2个hashtable。 另外缩减窗口。
         fdN = 0; tcnt ={}; fndD = {}; l = 0   #到达了长度，就一直尝试缩减窗口
         for x in t:
             if x not in tcnt: tcnt[x]=0
@@ -33,8 +31,8 @@ class Solution:
                 while x not in tcnt or fndD[x] > tcnt[x]:   #这也是和上面那句类似的。 方向相反。
                     if s[l] in tcnt: fndD[s[l]] -=1
                     l +=1; x=s[l]
-                if r - l +1 < ret[-1]:   ret = (s[l: r+1], r-l+1)
-        return ret[0]
+                ret = min (ret, (r-l+1, s[l: r+1]))
+        return ret[1]
 
 
 '''
@@ -85,5 +83,4 @@ class Solution:
 
 
 '''
-
 

@@ -38,3 +38,4 @@ class Solution:
             else:   return False
         while j < n and p[j] == '*':   j +=1
         return  j == n
+# #意外的比较好写。 注意match对应i。 star对应j。

@@ -14,14 +14,14 @@ The minimum number of jumps to reach the last index is 2. (Jump 1 step from inde
 class Solution:
     # @param A, a list of integers
     # @return an integer  #比1只多了几行而已
-    def jump(self, arr):
-            cnt =0;  lastCanR=canR = 0   # can reach
+    def jump(self, arr):        #lastJumpCanReach
+            cnt = 0; last = 0; reach = 0    #多了一个last.  last和reach是类似的.
             for i in range(len(arr)):
-                if i>canR: return -1
-                if i > lastCanR:
-                    lastCanR = canR
+                if i>reach: return -1
+                if i > last:
+                    last = reach
                     cnt += 1
-                canR = max(canR, i+arr[i])
+                reach = max(reach, i + arr[i])
             return cnt
 '''
 class Solution
