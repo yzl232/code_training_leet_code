@@ -23,18 +23,33 @@ Given n = 3, your program should return all 5 unique BST's shown below.
 class Solution:
     # @return a list of tree node
     def generateTrees(self, n):
-        return self.dfs(1, n)
+        return self.dfs(1, n) if n>0 else []
 
     def dfs(self, l, h):
         if l>h: return [None]
         ret = []
         for rootV in range(l, h+1):
-            leftList = self.dfs(l, rootV-1)
-            rightList = self.dfs(rootV+1, h)
-            for i in leftList:
-                for j in rightList:
+            for i in self.dfs(l, rootV-1):
+                for j in self.dfs(rootV+1, h):
                     x = TreeNode(rootV)
                     x.left ,x.right = i, j
                     ret.append(x)
         return ret
+'''  #稍微改一下Treenode定义， 可以变成2行的答案。
+class TreeNode:
+    def __init__(self, x, left=None, right=None):
+        self.val = x
+        self.left = left
+        self.right = right
 
+class Solution:
+    # @return a list of tree node
+    def generateTrees(self, n):
+        return self.dfs(1, n)
+
+    def dfs(self, l, h):
+        if l>h: return [None]
+        return [TreeNode(rootV, x, y) for rootV in range(l, h+1) for x in self.dfs(l, rootV-1) for y in self.dfs(rootV+1, h)]
+
+
+'''

@@ -27,8 +27,7 @@ class Solution:
         dummy = ListNode(0)
         dummy.next = h;  pre = dummy
         for i in range(m-1):   pre = pre.next
-        last = pre.next
-        cur = last.next
+        last, cur= pre.next, pre.next.next
         for i in range(n-m):
             last.next = cur.next
             cur.next = pre.next

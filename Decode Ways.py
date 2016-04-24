@@ -14,40 +14,31 @@ Given encoded message "12", it could be decoded as "AB" (1 2) or "L" (12).
 The number of ways decoding "12" is 2.
 
 '''
+
 class Solution:
     # @param s, a string
     # @return an integer
     def numDecodings(self, s):
         if not s or s[0] == '0' : return 0
-        ppre = pre= cur = 1
+        ppre = pre= 1
         for i in range(1, len(s)):
-            cur = 0
-            if s[i] != '0':  cur+=pre
-            if '10' <= s[i-1]+s[i] <= '26': cur+=ppre
-            ppre, pre = pre, cur
-        return cur
+            ppre, pre = pre, (pre if s[i]!="0" else 0) + (ppre if '10' <= s[i-1]+s[i] <= '26' else 0)
+        return pre
 
 '''
-
 class Solution:
     # @param s, a string
     # @return an integer
 
     def numDecodings(self, s):
         if not s or s[0]=='0': return 0
-        self.d={}
+        self.d={"":1}
         return self.dfs(s)
 
     def dfs(self, s):
-        if len(s)==0:    return 1
-        if s in self.d: return self.d[s]
-        t = 0
-        if s[0]!='0':   t+=self.dfs(s[1:])  #一个非0字符
-        if len(s)>=2 and  '10'<=s[:2]<='26':    t+=self.dfs(s[2:]) #2个字符
-        self.d[s]=t
-        return t
-
-
+        if s not in self.d:
+            self.d[s] = (0 if s[0]=="0" else self.dfs(s[1:])) + (0 if not (len(s)>=2 and  '10'<=s[:2]<='26') else self.dfs(s[2:])) 
+        return self.d[s]
 
 class Solution:
     # @param s, a string

@@ -21,5 +21,4 @@ class Solution:
         for i in [1, 2, 3]:
             if len(s)>=i:
                 ip = s[:i]
-                if 0<=int(ip)<=255 and str(int(ip)) == ip:
-                    self.dfs(n+1, cur + ip + '.', s[i:])
+                if 0<=int(ip)<=255 and str(int(ip)) == ip:   self.dfs(n+1, cur + ip + '.', s[i:])
