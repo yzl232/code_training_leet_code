@@ -21,46 +21,20 @@ Return the formatted lines as:
 
 Note: Each word is guaranteed not to exceed L in length.
 '''
-
 class Solution:
     # @param words, a list of strings
     # @param L, an integer
     # @return a list of strings
     def fullJustify(self, words, x):
-        ret = []; i=0
-        while i<len(words):
-            n=l=0      # N words, this line,.    length of line
-            while i+n+1<=len(words) and l+n+len(words[i+n])<=x:   #正好n+1个词。n个空
+        ret = []; i=0; m = len(words)
+        while i<m:
+            n=l=0; line = words[i] # N words, this line,.    length of line
+            while i+n+1<=m and l+n+len(words[i+n])<=x:   #正好n+1个词。n个空
                 l+=len(words[i+n]);  n+=1
-            line = words[i]        #之前i所在的word[i]是属于没有加上的。
-            if n!=1:
-                spaceN, extra = (x-l)/(n-1), (x-l)%(n-1)
-                for j in range(n-1):  #    #n-1个 。 先空格，后单词。
-                    if i+n==len(words): line+=' '   #最后一行
-                    else: line+=' '*(spaceN+ (1 if j<extra  else  0))
-                    line+=words[i+1+j] #上面这四行代码非常精华。解决了最tricky的部分
-            ret.append(line+' '*(x-len(line))) #补全
+            line+=''.join(" "*( 1 if i+n ==m else ((x-l)/(n-1)+ (j<(x-l)%(n-1)) ) ) + words[i+1+j] for j in range(n-1))
+            ret.append(line+' '*(x-len(line))) #补全     #n-1个 。 先空格，后单词。   #最后一行
             i+=n    #先写这行。容易忘。
         return ret
-
-
-
-'''
-def fullJustify(self, words, maxWidth):
-    res, cur, num_of_letters = [], [], 0
-    for w in words:
-        if num_of_letters + len(w) + len(cur) > maxWidth:
-            for i in range(maxWidth - num_of_letters):
-                cur[i%(len(cur)-1 or 1)] += ' '
-            res.append(''.join(cur))
-            cur, num_of_letters = [], 0
-        cur += [w]
-        num_of_letters += len(w)
-    return res + [' '.join(cur).ljust(maxWidth)]
-
-'''
-
-
 
 '''
 class Solution:

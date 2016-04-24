@@ -2,23 +2,21 @@
 class Solution:
     # @param matrix, a list of lists of integers
     # RETURN NOTHING, MODIFY matrix IN PLACE.
-    def setZeroes(self, mtx):
-        if not mtx: return []
-        row0=col0=False;  m=len(mtx); n=len(mtx[0])
-        for i in range(m):
-            if mtx[i][0] == 0:  col0= True
-        for j in range(n):
-            if mtx[0][j] == 0:  row0= True
+    def setZeroes(self, grid):
+        if not grid: return []
+        m=len(grid); n=len(grid[0])
+        col0= any(grid[i][0] == 0 for i in range(m))
+        row0=any(grid[0][j] == 0 for j in range(n))
         for i in range(1, m):
             for j in range(1, n): #利用第一行，第一列标记
-                if mtx[i][j]==0:  mtx[i][0] = mtx[0][j] = 0
+                if grid[i][j]==0:  grid[i][0] = grid[0][j] = 0
         for i in range(1, m):
             for j in range(1, n):
-                if mtx[i][0] ==0 or mtx[0][j]==0:  mtx[i][j] = 0
+                if grid[i][0] ==0 or grid[0][j]==0:  grid[i][j] = 0
         for i in range(m):
-            if col0: mtx[i][0] = 0   #和开头的代码是对称的
+            if col0: grid[i][0] = 0   #和开头的代码是对称的
         for j in range(n):
-            if row0: mtx[0][j] = 0    #和开头的代码是对称的
+            if row0: grid[0][j] = 0    #和开头的代码是对称的
 
 # 第一行的corner case也成立。 如果本身为0，当然0.
 # 如果本身不是0，看mtx[0][0]标记

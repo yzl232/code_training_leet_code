@@ -12,15 +12,11 @@ return [0, 1, 2]
 
 [1]  return [1]
 '''
-
-
 class Solution:
     # @param A a list of integers
     # @return nothing, sort in place
     def sortColors(self, arr):
-        p2 = len(arr) - 1
-        p0 = 0
-        i = 0
+        i, p0, p2 = 0, 0, len(arr)-1
         while i<= p2:   #取等号. 因为就算到达了, p2只是保证了p2后面的. a[p2]仍然可能为0
             while p2 >= i and arr[i] == 2:
                 arr[i], arr[p2] = arr[p2], arr[i]
