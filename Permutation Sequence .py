@@ -20,10 +20,10 @@ class Solution:
     # @return a string
     def getPermutation(self, n, k):
         total = math.factorial(n)
-        k = k%total-1;  seq = ''
+        k = (k-1)%total;  seq = ''
         digits = [str(i) for i in range(1, n+1)]
-        for i in range(n, 0, -1):  #n>0
-            total = total/i
-            j, k = k/total, k%total
-            seq += digits.pop(j)
+        for x in range(n, 0, -1):  #n>0
+            total /= x
+            i, k = k/total, k%total
+            seq += digits.pop(i)
         return seq

@@ -12,7 +12,6 @@ Given [1,2],[3,5],[6,7],[8,10],[12,16], insert and merge [4,9] in as [1,2],[3,10
 This is because the new interval [4,9] overlaps with [3,5],[6,7],[8,10].
 '''
 
-
 # Definition for an interval.
 # class Interval:
 #     def __init__(self, s=0, e=0):
@@ -25,11 +24,8 @@ class Solution:
     # @return a list of Interval
     def insert(self, intervals, t):
         ret = []
-        for i in intervals:
-            if t.start > i.end:  ret.append(i)
-            elif i.start > t.end:
-                ret.append(t)
-                t = i
-            else:   t = Interval(min(t.start, i.start), max(t.end, i.end))
-        ret.append(t)
-        return ret
+        for i, x in enumerate(intervals):
+            if t.start > x.end:  ret.append(x)
+            elif x.start > t.end:  return ret+[t]+intervals[i:]
+            else:   t = Interval(min(t.start, x.start), max(t.end, x.end))
+        return ret + [t]

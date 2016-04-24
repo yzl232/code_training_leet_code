@@ -9,6 +9,18 @@ For example,
 Given s = "Hello World",
 return 5.
 '''
+
+class Solution:
+    # @param s, a string
+    # @return an integer
+    def lengthOfLastWord(self, s):
+        cnt = 0; j=len(s)-1
+        while j>=0 and s[j] == " ": j-=1
+        while j>=0 and s[j] !=" ":
+            j-=1
+            cnt+=1
+        return cnt
+'''
 class Solution:
     # @param s, a string
     # @return an integer
@@ -16,11 +28,9 @@ class Solution:
         n = len(s); cnt=0
         for i in range(n-1, -1, -1):
             if s[i]!=' ':cnt+=1
-            elif cnt>0: return cnt  #else用的精妙。
+            elif cnt>0: return cnt
         return cnt
-
-#和reverse words in a string II 比较像
-
+'''
 '''
 class Solution:
     def lengthOfLastWord(self, s):
