@@ -30,15 +30,16 @@ class Solution:
         cnt= 1; pre= [start];    dict.add(end)
         while pre:
             cur = []
-            for word in pre:
-                if word == end:     return cnt
-                for i in range(len(word)):
+            for w in pre:
+                if w == end:     return cnt
+                for i in range(len(w)):
                     for x in 'abcdefghijklmnopqrstuvwxyz':
-                        t = word[:i] + x + word[i + 1:]
+                        t = w[:i] + x + w[i + 1:]
                         if t in dict:
                             cur.append(t);  dict.remove(t)
             cnt += 1;   pre = cur
         return 0
+
 '''
 双向bfs会很快
 

@@ -8,6 +8,8 @@ S = "rabbbit", T = "rabbit"
 
 Return 3.
 '''
+
+'''
 class Solution:
     # @return an integer    http://blog.csdn.net/abcbc/article/details/8978146
     #if S[i-1] == T[j-1]:  dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
@@ -22,17 +24,13 @@ class Solution:
             for j in range(1, n+1):
                 dp[i][j] = dp[i-1][j-1] + dp[i-1][j] if s[i-1] == t[j-1] else dp[i-1][j]
         return dp[-1][-1]
-
 '''
-class Solution4:
-    # @return an integer    http://blog.csdn.net/abcbc/article/details/8978146
-    #if S[i-1] == T[j-1]:  dp[i][j] = dp[i-1][j-1] + dp[i-1][j]
-    # else:  dp[i][j] = dp[i-1][j]
-    #  initial:  0 for all    .    dp[i][0] = 1    dp[0][i] = 0 (delete all)   dp[0][0] = 1
+
+class Solution:
+    d = {}
     def numDistinct(self, s, t):
         if not t: return 1
         if not s: return 0
-        ret = self.numDistinct(s[1:], t)
-        if s[0]==t[0]: ret+= self.numDistinct(s[1:], t[1:])
-        return ret
-'''
+        if (s, t) not in self.d:
+            self.d[(s, t)] = self.numDistinct(s[1:], t) + (0 if s[0]!=t[0] else self.numDistinct(s[1:], t[1:]))
+        return self.d[(s, t)]

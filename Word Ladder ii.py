@@ -38,9 +38,10 @@ class Solution:
         for x in self.preW[path[-1]]:
             self.dfs(path+[x])
 
-    def findLadders(self, start, end, dict):
+    def findLadders(self, start, end, dict):  # 实际的测试用例应该是start和end单词都在dict中的
         self.ret, self.preW, pre = [], {x: [] for x in dict}, set([start]);  self.start=start
-        while pre and end not in pre:
+        while pre:
+            if end in pre: break
             for w in pre:   dict.remove(w)   #为甚么放到这里呢？ 如果是end, remove掉了， 就影响结果了。
             cur = set()
             for w in pre:

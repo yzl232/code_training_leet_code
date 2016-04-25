@@ -16,7 +16,6 @@ Note:
 Bonus point if you are able to do this using only O(n) extra space, where n is the total number of rows in the triangle.
 '''
 
-
 class Solution:    #可以做到in-place.  #bottom-up更加简单
     # @param triangle, a list of lists of integers
     # @return an integer
@@ -25,7 +24,7 @@ class Solution:    #可以做到in-place.  #bottom-up更加简单
             for j in range(len(triangle[i])):
                 triangle[i][j] += min(triangle[i+1][j], triangle[i+1][j+1])
         return triangle[0][0]
-
+#从倒数第二行开始， 往上走。
 
 '''
 class Solution:

@@ -21,6 +21,5 @@ class Solution:
         ret = [[1]]
         for i in range(n-1):
             pre = ret[-1]
-            cur = [pre[j]+pre[j+1] for j in range(len(pre)-1)]
-            ret.append([1]+cur+[1])
+            ret.append([1]+[pre[j]+pre[j+1] for j in range(len(pre)-1)]+[1])
         return ret
