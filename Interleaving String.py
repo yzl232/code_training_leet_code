@@ -12,6 +12,17 @@ When s3 = "aadbbbaccc", return false.
 
 '''
 
+
+class Solution:
+    # @return a boolean
+    d= {("", "", ""): True}
+    def isInterleave(self, s1, s2, s3):
+        if (s1, s2, s3) not in self.d:
+            self.d[(s1, s2, s3)] = (s3!="" and s2!="" and s3[0]==s2[0] and self.isInterleave(s1, s2[1:], s3[1:])) or (s3!="" and s1!="" and s3[0]==s1[0] and self.isInterleave(s1[1:], s2, s3[1:]))
+        return self.d[(s1, s2, s3)]
+
+
+'''
 class Solution:
     # @return a boolean
     def isInterleave(self, s1, s2, s3):
@@ -24,9 +35,6 @@ class Solution:
                 if j > 0 and dp[i][j-1]  and s2[j-1] == s3[i+j-1]:   dp[i][j] =True
         return dp[n1][n2]
 
-
-
-'''
 class Solution:
     # @return a boolean
     def isInterleave(self, s1, s2, s3):

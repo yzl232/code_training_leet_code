@@ -15,7 +15,4 @@ class Solution:
     # @param q, a tree node
     # @return a boolean
     def isSameTree(self, p, q):  #和symmitric tree题目一模一样
-        if not p and not q: return  True
-        if not p or not q: return False
-        if p.val != q.val: return False
-        return self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right)
+        return (p==q==None) or (p!=None and q!=None and p.val == q.val and self.isSameTree(p.left, q.left) and self.isSameTree(p.right, q.right))

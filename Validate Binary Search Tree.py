@@ -21,22 +21,20 @@ class Solution:
     # @return a boolean
     def isValidBST(self, root):
         self.ret = True
-        self.dfs(root, -10**10, 10**10)
+        self.dfs(root, float('-inf'), float('inf'))
         return self.ret
 
     def dfs(self, root, l, h):      #BST一定要注意每次left, right同时要更新相应上下界为root.val。
-        if not root: return
+        if not root or not self.ret: return
         if not (l<root.val<h):  self.ret =False
         self.dfs(root.left, l, root.val)
         self.dfs(root.right, root.val, h)
-
-
 '''
 class Solution:
     # @param root, a tree node
     # @return a boolean
     def isValidBST(self, root):
-        return self.dfs(root, -10**10, 10**10)
+        return self.dfs(root, float('-inf'), float('inf'))
 
     def dfs(self, root, l, h):      #BST一定要注意每次left, right同时要更新相应上下界为root.val。
         if not root: return True
