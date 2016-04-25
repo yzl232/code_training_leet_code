@@ -27,6 +27,7 @@ The flattened tree should look like:
 
 '''
 
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -34,20 +35,20 @@ The flattened tree should look like:
 #         self.left = None
 #         self.right = None
 
-class Solution:
+class Solution:  #从图中的4， 3， 2可以看出顺序， 是right , left, root。
     # @param root, a tree node  #注意这道题目不是binary search tree  。  是类似heap
     # @return nothing, do it in place  #他的顺序是   pre-Order的顺序。    root, left, right.
-    def flatten(self, root):  #我们反过来，就是right, left, root
-        self.pre = None
+    def flatten(self, root):   
+        self.h = None
         self.dfs(root)
 
     def dfs(self, root):
         if not root: return
-        self.dfs(root.right) #总共三步。 背下
+        self.dfs(root.right)
         self.dfs(root.left)
-        root.right = self.pre  #右边连上
-        self.pre = root    #pre
-        root.left = None  #左置空
+        root.right, root.left = self.h, None
+        self.h = root
+
 '''
 假如是binary search tree的形式，应当是：  right,  root, left
 

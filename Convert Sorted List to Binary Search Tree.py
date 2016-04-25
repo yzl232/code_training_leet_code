@@ -5,13 +5,6 @@
 #         self.val = x
 #         self.left = None
 #         self.right = None
-#
-# Definition for singly-linked list.
-# class ListNode:
-#     def __init__(self, x):
-#         self.val = x
-#         self.next = None
-
 
 #构造balanced BST。 一律用start 》=end
 

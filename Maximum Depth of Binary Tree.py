@@ -5,6 +5,7 @@ The maximum depth is the number of nodes along the longest path from the root no
 
 
 '''
+
 # Definition for a  binary tree node
 # class TreeNode:
 #     def __init__(self, x):
@@ -16,6 +17,4 @@ class Solution:
     # @param root, a tree node
     # @return an integer
     def maxDepth(self, root):
-        if not root: return 0
-        return max(self.maxDepth(root.left), self.maxDepth(root.right))+1
-        
+        return 0 if not root else max(self.maxDepth(root.left), self.maxDepth(root.right))+1 

@@ -17,10 +17,26 @@ class Solution:
     # @param postorder, a list of integers
     # @return a tree node
     def buildTree(self, inorder, postorder):  #核心在于 1 找rootval。 用pre或者post  2 inorder的index找出root的位置
-        if not inorder: return   #建立tree.    pre order
+        if not inorder: return 
         rootV = postorder[-1]
         lCnt = inorder.index(rootV)
         root = TreeNode(rootV)
         root.left = self.buildTree(inorder[:lCnt], postorder[:lCnt])
         root.right = self.buildTree(inorder[lCnt+1:], postorder[lCnt:-1])
         return root
+'''
+class TreeNode:
+    def __init__(self, val, left = None, right = None):
+        self.val = val
+        self.left = left
+        self.right = right
+
+class Solution:
+    # @param inorder, a list of integers
+    # @param postorder, a list of integers
+    # @return a tree node
+    def buildTree(self, inorder, postorder):  #核心在于 1 找rootval。 用pre或者post  2 inorder的index找出root的位置
+        if not inorder: return 
+        lCnt = inorder.index(postorder[-1])
+        return TreeNode(postorder[-1], self.buildTree(inorder[:lCnt], postorder[:lCnt]),  self.buildTree(inorder[lCnt+1:], postorder[lCnt:-1]))
+'''
