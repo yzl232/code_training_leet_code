@@ -12,6 +12,16 @@ class Solution:
     # @param A, a list of integer
     # @return an integer
     def singleNumber(self, arr):
+        ones =  twos = 0   #more than 2 times.   没错。记录了超过了2次的bit 1
+        for x in arr:  # one r three times  奇数次数的bit位数  # ones&twos:   three times
+            ones, twos = ones^x, twos | (ones&x)  
+            ones, twos=ones& ~(ones&twos), twos & ~(ones&twos)  # remove three times
+        return ones
+'''
+class Solution:
+    # @param A, a list of integer
+    # @return an integer
+    def singleNumber(self, arr):
         ones =  twos = threes = 0
         for x in arr:
             twos |= ones&x        #more than 2 times.   没错。记录了超过了2次的bit 1
@@ -21,7 +31,7 @@ class Solution:
             twos &= ~threes  # remove three times
         return ones
 
-'''
+
 
 class Solution:
     # @param A, a list of integer

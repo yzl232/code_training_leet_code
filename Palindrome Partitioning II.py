@@ -11,18 +11,16 @@ class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-pal
 # O(n2) space, O(n2) time
     # @param s, a string
     # @return an integer
-    def minCut(self, s):
-        n = len(s)
-        dp = [[False]*n for i in range(n)]
-        ret = [i for i in range(n)]
-        for j in range(n):
+    def minCut(self, s):   #双DP。 得到isPal是dp。  ret用ret[i-1]也是dp
+        l = len(s);  ret = [i for i in range(l)]
+        isPal = [[False]*l for i in range(l)]   #l+1也可以。 不用l+1也可以。 不用l+1, 有j - i <= 1足够
+        for j in range(l):
             for i in range(j, -1, -1): # j+1主要是为了保证isPal的正确性
-                 if s[i] == s[j] and (j - i <= 1 or dp[i+1][j-1] == True):    # j是递增 ，已经保证了
-                    dp[i][j] = True
-                    if i== 0:         ret[j] = 0         # when i ==0   .  the whole string [0:j] is a palindrome
-                    else:       ret[j] = min(ret[i-1]+1, ret[j])    #   i~j pal。 i-1
-        return ret[n-1]
-''' #第一种解法是用DFS。 更定不大好。。 然后是我熟悉的那种。 然后是这个O(n) space的解法.  the following one use O(n2) time and O(n) space.  So it is a better one
+                 if s[i] == s[j] and (j - i <= 1 or isPal[i+1][j-1] == True):    # j是递增 ，已经保证了
+                    isPal[i][j] = True
+                    ret[j] =0 if i==0 else min(ret[i-1]+1, ret[j])        # when i ==0   .  the whole string [0:j] is a palindrom          #   i~j pal。 i-1
+        return ret[l-1]
+'''   O(n2) time and O(n) space.  So it is a better one
 class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-palindrome.html
     # @param s, a string
     # @return an integer
@@ -39,5 +37,4 @@ class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-pal
                 minCut[i+j+1] = min(minCut[i+j+1], 1+ minCut[i-j+1])
                 j+=1
         return minCut[n]  #https://oj.leetcode.com/discuss/9476/solution-does-not-need-table-palindrome-right-uses-only-space
-
 '''

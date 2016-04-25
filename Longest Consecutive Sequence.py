@@ -14,15 +14,16 @@ class Solution:
     def longestConsecutive(self, num):
         d = {x:False for x in num} # False means not visited
         ret = 0
-        for x in d:
-            if not d[x]:
-                a = x + 1;  b = x - 1
-                while a in d and not d[a]:
-                    d[a] = True; a += 1
-                while b in d and not d[b]:
-                    d[b] = True; b -= 1
-                ret = max(ret, a-b-1)
+        for i in d:
+            if not d[i]:
+                l=h=i
+                while (l-1) in d and not d[l-1]:
+                    d[l-1] = True; l -= 1
+                while (h+1) in d and not d[h+1]:
+                    d[h+1] = True; h += 1
+                ret = max(ret, h-l+1)
         return ret
+
 #  上面这个简单。  是2 pass
 #  下面这个是one pass. 不过难一些。
 #区别不大。 还是用原来的吧~~

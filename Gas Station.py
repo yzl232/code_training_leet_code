@@ -20,7 +20,9 @@ class Solution:
             total += (gas[i] - cost[i])
             tank += (gas[i] - cost[i])
             if tank < 0:
-                start = i+1
-                tank = 0
-        if total < 0:       return -1  # total的作用。 判断是不是-1
-        return start
+                start = i+1;   tank = 0
+        return -1 if total<0 else start
+
+# If car starts at A and can not reach B. Any station between A and B can not reach B.(B is the first station that A can not reach.)
+
+# Proof For 1st point, if A can't reach B, and there exists C between A & B which can reach B, then A can reach C first, then reach B from C, which is conflict with our init statement: A can't reach B. so, the assume that such C exists is invalid.

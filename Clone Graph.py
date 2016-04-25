@@ -24,6 +24,8 @@ Visually, the graph looks like the following:
          \_/
 
 '''
+
+
 # Definition for a undirected graph node
 # class UndirectedGraphNode:
 #     def __init__(self, x):
@@ -33,47 +35,38 @@ Visually, the graph looks like the following:
 class Solution:
     # @param node, a undirected graph node
     # @return a undirected graph node
-    # @DFS
+    # @DFS   #也是memoization
     def cloneGraph(self, node):
-        self.d = {}
-        if not node: return
+        self.d = {None:None}
         return self.dfs(node)
 
-    def dfs(self, x):
-        if x in self.d:  return self.d[x]
-        y = UndirectedGraphNode(x.label)
-        self.d[x] = y
-        for n in x.neighbors:  y.neighbors.append(self.dfs(n))
-        return y
+    def dfs(self, x):   # 如果允许UndirectedNode(x, neighbors), 可以进一步减少2行。
+        if x not in self.d:
+            self.d[x] = UndirectedGraphNode(x.label)
+            self.d[x].neighbors = [self.dfs(y) for y in x.neighbors]
+        return self.d[x]
 
 '''
 BFS稍微复杂一点点
 
-
-# Definition for a undirected graph node
-# class UndirectedGraphNode:
-#     def __init__(self, x):
-#         self.label = x
-#         self.neighbors = []
-
 class Solution:
     # @param node, a undirected graph node
     # @return a undirected graph node
-    def cloneGraph(self, x):
-        if not x: return
-        y = UndirectedGraphNode(x.label)
-        d, pre = {x: y}, [x]   #d兼具已经visited的作用和map node作用
+    def cloneGraph(self, node):
+        if not node: return
+        nodeB = UndirectedGraphNode(node.label)
+        d, pre = {node: nodeB}, [node]
         while pre:
             cur = []
             for x in pre:
                 for n in x.neighbors:  #每层把它的所有neighbor都加到cur里边去。(如果没在map)
-                    if n not in d:
+                    if n in d:  d[x].neighbors.append(d[n])
+                    else:
                         cur.append(n)
-                        t = UndirectedGraphNode(n.label)
-                        d[n] = t
-                    d[x].neighbors.append(d[n])
+                        d[n] = UndirectedGraphNode(n.label)
+                        d[x].neighbors.append(d[n])
             pre = cur
-        return y
+        return nodeB
 
 
 '''
