@@ -14,17 +14,52 @@ A solution is ["cats and dog", "cat sand dog"].
 本质上是简单的DFS.  check函数是特别优化的部分.
 '''
 
+# encoding=utf-8
+# encoding=utf-8
 
+class Solution:  #   word break和palindrome partition非常像。
+    # @param s, a string
+    # @param dict, a set of string
+    # @return a list of strings
+    def wordBreak(self, s, wordDict):
+        d = {"": ['']}
+        def dfs(x):
+            if x not in d:    d[x] = [x[:i] + (' ' + y if y else "") for i in range(1, len(x) + 1) if x[:i] in wordDict for y in dfs(x[i:])]
+            return d[x]
+        return dfs(s)
+'''
+# encoding=utf-8
+
+class Solution:  #   word break和palindrome partition非常像。
+    # @param s, a string
+    # @param dict, a set of string
+    # @return a list of strings
+    def wordBreak(self, s, wordDict):
+        d = {"": ['']}
+        def dfs(x):
+            if x not in d:
+                d[x] = []
+                for i in range(1, len(x)+1):
+                    if x[:i] in wordDict:
+                        for rest in self.dfs(x[i:]):
+                            d[x].append(x[:i] + (' ' + rest if rest else ""))
+            return d[x]
+        return dfs(s)
+
+s = Solution()
+print s.wordBreak("catsanddog", ["cat", "cats", "and", "sand", "dog"])     
+        
+        
 class Solution:
     # @param s, a string
     # @param dict, a set of string
     # @return a list of strings
-    def check(self, s):    #这一段用memoization比用dp要好。
-        dp = [False for j in range(len(s)+1)]
+    def check(self, s):
+        dp = [False for i in range(len(s)+1)]
         dp[0] = True
-        for j in range(1, len(s)+1):
-            for k in range(j):
-                if dp[k] and s[k:j] in self.dict:    dp[j] = True
+        for i in range(1, len(s)+1):
+            for k in range(i):
+                if dp[k] and s[k:i] in self.dict:    dp[i] = True
         return dp[-1]
 
     def dfs(self, s,  cur):
@@ -39,20 +74,4 @@ class Solution:
         self.ret = []; self.dict = dict
         self.dfs(s, '')
         return self.ret
-
-# 可以用trie预处理
-
-'''
-def wordBreak(self, s, wordDict):
-    memo = {len(s): ['']}
-    def sentences(i):
-        if i not in memo:
-            memo[i] = [s[i:j] + (tail and ' ' + tail)
-                       for j in range(i+1, len(s)+1)
-                       if s[i:j] in wordDict
-                       for tail in sentences(j)]
-        return memo[i]
-    return sentences(0)
-
-
 '''

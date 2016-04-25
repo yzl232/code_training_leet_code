@@ -3,14 +3,13 @@
 
 Return a deep copy of the list.
 '''
+
 # Definition for singly-linked list with a random pointer.
 # class RandomListNode:
 #     def __init__(self, x):
 #         self.label = x
 #         self.next = None
 #         self.random = None
-
-
 class Solution:
     # @param head, a RandomListNode
     # @return a RandomListNode
@@ -22,40 +21,20 @@ class Solution:
             t = RandomListNode(cur.label)
             t.next = cur.next
             cur.next = t
-            cur = t.next
+            cur = cur.next.next
 
         cur = h
         while cur:      # # copy random pointers
             if cur.random: cur.next.random = cur.random.next
             cur = cur.next.next
 
-        cur = h
-        h2 = h.next
-        while cur:  # choose next pointers . decouple the list
-            t = cur.next
-            cur.next = t.next  # Alternating split of a given Singly Linked List
-            if t.next:   t.next = t.next.next     # 举例就好  1, 2, 3, (4)  .   1=3,  2=4,   # 12
-            cur = cur.next
+        cur = h; cur2 = h2 = h.next
+        while cur and cur2:  # choose next pointers . decouple the list
+            cur.next, cur2.next = cur2.next, (cur2.next.next if cur2.next else None)
+            cur, cur2 = cur.next, cur2.next
         return h2
-
 
 '''
-# clone list with random node 用到了
-class Solution:
-    def splitAl(self, h):
-        cur = h
-        h2 = h.next
-        while cur:  # choose next pointers . decouple the list
-            t = cur.next
-            cur.next = t.next
-            if t.next:   t.next = t.next.next     # 1, 2, 3, (4)  .   1=3,  2=4
-            cur = cur.next
-        return h2
-
-
-
-
-
 # Definition for singly-linked list with a random pointer.
 # class RandomListNode:
 #     def __init__(self, x):
@@ -66,19 +45,14 @@ class Solution:
     # @param head, a RandomListNode
     # @return a RandomListNode
     def copyRandomList(self, head):
-        if not head: return
-        d, p = {None: None}, head
-        while p:
-            d[p] = RandomListNode(p.label)
-            p = p.next
-        h2 = d[head]
-        p = head
-        while p:
-            p1 = d[p]
-            p1.next = d[p.next]
-            p1.random = d[p.random]
-            p = p.next
-        return h2
-
-
+        d = {None:None};  x = head
+        while x:
+            d[x] = RandomListNode(x.label)
+            x = x.next
+        x = head
+        while x:
+            d[x].next = d[x.next]
+            d[x].random = d[x.random]
+            x = x.next
+        return d[head]
 '''
