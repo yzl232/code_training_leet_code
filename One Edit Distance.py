@@ -7,6 +7,24 @@ class Solution: #
     # @param t, a string
     # @return a boolean
     def isOneEditDistance(self, s, t):  #
+        m=len(s); n=len(t)
+        for i in range(min(m, n)):
+                if s[i] != t[i]: return  s[i if m<n else i+1 :]== t[i  if n<m else i+1 :]  #
+        return abs(m-n) == 1
+'''
+#aa,  aab
+#aba  aaa
+#aa,   baa
+    观察几个例子， 遇到不等的时候， 除非是比较小的string。 长度相等或者更长的那个， 都是要i+1        
+'''
+
+
+'''
+class Solution: #
+    # @param s, a string
+    # @param t, a string
+    # @return a boolean
+    def isOneEditDistance(self, s, t):  #
         m = len(s)
         n = len(t)
         if m<n: return self.isOneEditDistance(t, s)
@@ -16,16 +34,7 @@ class Solution: #
         return (m-n)==1
  
 '''
-class Solution: #
-    # @param s, a string
-    # @param t, a string
-    # @return a boolean
-    def isOneEditDistance(self, s, t):  #
-        m=len(s); n=len(t)
-        for i in range(min(m, n)):
-                if s[i] != t[i]: return  s[i if m<n else i+1 :]== t[i  if n<m else i+1 :]
-        return abs(m-n) == 1
-'''
+
 
 '''
 #aa,  aab

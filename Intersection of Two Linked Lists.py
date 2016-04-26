@@ -26,14 +26,12 @@ class Solution:
     # @param two ListNodes
     # @return the intersected ListNode
     def getIntersectionNode(self, h1, h2):
-        l1 = self.getCnt(h1)
-        l2 = self.getCnt(h2)
-        diff = abs(l1-l2)
+        l1, l2 = self.getCnt(h1), self.getCnt(h2)
         if l1<l2:  h2, h1 = h1, h2
-        for i in range(diff):    h1 = h1.next
+        for i in range(abs(l1-l2)):    h1 = h1.next
         while h1 and h2:
             if h1==h2: return h1
-            h1 = h1.next;    h2 = h2.next
+            h1, h2 = h1.next, h2.next
 
     def getCnt(self, h):
         cnt = 0
@@ -41,9 +39,6 @@ class Solution:
             h= h.next
             cnt+=1
         return cnt
-
-
-
 
 # 第1种方法更快。 第2种更加简洁。  第二种很难写。 第一种很好写。
 '''
