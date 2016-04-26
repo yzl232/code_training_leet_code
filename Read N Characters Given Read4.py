@@ -16,20 +16,24 @@ The read function will only be called once for each test case.
 # @return an integer
 # def read4(buf):
 
-class Solution:
+class Solution:  #输出是count， 另外要求存n个ch存到buf里面。 count和n不一定相等
     # @param buf, Destination buffer (a list of characters)
     # @param n,   Maximum number of characters to read (an integer)
     # @return     The number of characters read (an integer)
-    def read(self, buf, n):
-        tmpBuf = [None]*4;     cnt = 0
-        while n > cnt:#tmp的作用就是判断是不是4096。
-            tmpN = read4(tmpBuf)
-            if tmpN==0: break
-            i=0
-            while cnt<n and i<tmpN:
-                buf[cnt]=tmpBuf[i]
-                i+=1; cnt+=1
-        return cnt
+    def read(self, buf, n):   #给了个read4,  从stream里面读4个， 存到自变量buf里面
+        buf1 = [None]*4;     i = 0
+        while n > i:#tmp的作用就是判断是不是4096。
+            n1 = read4(buf1)
+            if n1==0: break
+            j=0
+            while i<n and j<n1:
+                buf[i]=buf1[j]
+                j+=1; i+=1
+        return i
+#换了下变量名, 全部对应了.  i,j ,  nm,  
+
+
+    
 '''
 
 

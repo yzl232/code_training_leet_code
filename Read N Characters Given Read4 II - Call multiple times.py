@@ -1,10 +1,5 @@
-# encoding=utf-8
 '''
-
-Read N Characters Given Read4 II - Call multiple times
-Total Accepted: 725 Total Submissions: 4130
-
-The API: int read4(char *buf) reads 4 characters at a time from a file.
+ The API: int read4(char *buf) reads 4 characters at a time from a file.
 
 The return value is the actual number of characters read. For example, it returns 3 if there is only 3 characters left in the file.
 
@@ -12,11 +7,9 @@ By using the read4 API, implement the function int read(char *buf, int n) that r
 
 Note:
 The read function may be called multiple times.
+
+
 '''
-
-
-
-
 
 # The read4 API is already defined for you.
 # @param buf, a list of characters
@@ -27,22 +20,20 @@ class Solution:
     # @param buf, Destination buffer (a list of characters)
     # @param n,   Maximum number of characters to read (an integer)
     # @return     The number of characters read (an integer)
-    def __init__(self):
-        self.i = 0   #上次读到哪里了
-        self.tmpN = 0 # tmpBuf存的总量  If bufsize > 0, that means there is partial data left in buffer
-        self.tmpBuffer = [None]*4
+    def __init__(self):  # tmpBuf存的总量  If bufsize > 0, that means there is partial data left in buffer
+        self.i=self.n = 0   #上次读到哪里了
+        self.buf = [None] * 4
 
     def read(self, buf, n):
-        cnt = 0;
-        while cnt<n:      #tmp的作用就是判断是不是4。
-            if self.i==self.tmpN:
-                self.tmpN=read4(self.tmpBuffer)           #变化就是tmpN变成了self.tmpN,  i变成了self.i, 三个都成了self.
-                self.i =0
-                if self.tmpN==0: break
-            while cnt<n and self.i<self.tmpN:
-                buf[cnt]=self.tmpBuffer[self.i]
-                cnt+=1;  self.i+=1
-        return cnt
+        i = 0
+        while i<n:      #tmp的作用就是判断是不是4。
+            if self.i==self.n:
+                self.n, self.i= read4(self.buf), 0           #变化就是tmpN变成了self.tmpN,  i变成了self.i, 三个都成了self.
+                if self.n==0: break
+            while i<n and self.i<self.n:
+                buf[i]=self.buf[self.i]
+                i+=1;  self.i+=1
+        return i
 
 
 '''
