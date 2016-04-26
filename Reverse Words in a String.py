@@ -6,18 +6,16 @@ Given s = "the sky is blue",.
 return "blue is sky the".
 '''
 
-class Solution:
-    # @param s, a string
-    # @return a string
+class Solution:  #O(n) space
     def reverseWords(self, s):
-        return ' '.join(s.split()[::-1])
-        
-class Solution:
-    # @param s, a string
-    # @return a string
-    def reverseWords(self, s):
-        return ' '.join(s.split()[::-1])
-        # encoding=utf-8
+        ret = '';   j = len(s)
+        for i in range(len(s)-1, -1, -1):
+            if s[i]==' ': j=i   #找到了一个可能的结尾
+            elif i==0 or s[i-1]==' ':      ret+=s[i:j]+' '   #单词的开始.  意思是现在不是空格。 i-1是空格。 必须加上.  非空格才更新
+        return ret[:-1] if ret else ''
+    #    return ' '.join(s.split()[::-1])
+
+
 '''
 Reverse Words in a String II
 
@@ -43,15 +41,15 @@ This can be done without any additional space in 2 pass
 # eh si ecin
 # nice is he
 
-class Solution:
-    def reverseWords(self, arr):
-        self.reverse(arr, 0, len(arr) - 1)
-        i = j = 0
-        while j<len(arr):
-            while j+1<len(arr) and arr[j+1]!=" ": j+=1
-            self.reverse(arr, i, j)
-            i = j+2
-            j+=1
+class Solution:#input is a char array.
+    def reverseWords(self, arr):     #in place
+        i=0
+        for j in range(len(arr)+1):
+            if j==len(arr) or arr[j] == ' ':  #结尾
+                self.reverse(arr, i, j-1)
+                i = j+1 #更新start
+        self.reverse(arr, 0, len(arr)-1)  #逐个reverse。最后整体reverse
+        return arr
 
     def reverse(self, arr, i, j):
         while i<j:

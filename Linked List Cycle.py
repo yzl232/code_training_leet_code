@@ -11,17 +11,21 @@ Follow up:
 Can you solve it without using extra space?
 '''
 
+# Definition for singly-linked list.
+# class ListNode:
+#     def __init__(self, x):
+#         self.val = x
+#         self.next = None
+
 class Solution:
     # @param head, a ListNode
     # @return a boolean
     def hasCycle(self, head):
         fast = slow = head
         while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
-            if fast == slow:return True
+            slow, fast = slow.next, fast.next.next
+            if slow==fast: return True
         return False
-
 '''
 #和decouple的部分很像。  while条件稍有不同。   因为我们要找h2 前面的node来裂开。
 

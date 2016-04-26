@@ -8,11 +8,13 @@ You must do this in-place without altering the nodes' values.
 For example,
 Given {1,2,3,4}, reorder it to {1,4,2,3}. 
 '''
+
 # Definition for singly-linked list.
-# class ListNode:
+# class ListNode(object):
 #     def __init__(self, x):
 #         self.val = x
 #         self.next = None
+
 
 class Solution:
     # @param head, a ListNode
@@ -21,15 +23,14 @@ class Solution:
         if not h or not h.next: return
         fast = slow = h
         while fast and fast.next: # 这里实际上拆成两半不完全对。 不是一半。
-            fast = fast.next.next
-            slow = slow.next
+            fast, slow  = fast.next.next, slow.next
         h2 = slow.next
         slow.next = None
-        h2 = self.reverse(h2)
-        while h and h2:
-            t1 = h.next;  t2 = h2.next
-            h.next = h2;   h2.next = t1
-            h = t1;    h2 = t2
+        h1, h2 =h, self.reverse(h2)
+        while h1 and h2:
+            t1, t2 = h1.next, h2.next
+            h1.next, h2.next = h2, t1
+            h1, h2 = t1 , t2
 
     def reverse(self, head):
         if not head: return

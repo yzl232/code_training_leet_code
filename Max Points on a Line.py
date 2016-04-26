@@ -23,5 +23,5 @@ class Solution:
                     k = 1.0 *  ( arr[i].y - arr[j].y) / (arr[i].x - arr[j].x)
                     if k not in d: d[k]=0
                     d[k]+=1
-            ret = max(ret, same+max(d.values()))
-        return  ret
+            ret = max(ret, max(d.values()) + same)
+        return  ret #总结： 双循环， 考虑斜率， 用hashtable记录k。

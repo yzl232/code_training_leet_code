@@ -4,46 +4,41 @@
 get(key) - Get the value (will always be positive) of the key if the key exists in the cache, otherwise return -1.
 set(key, value) - Set or insert the value if the key is not already present. When the cache reached its capacity, it should invalidate the least recently used item before inserting a new item.
 '''
+
 class ListNode:
     def __init__(self, key, val):
-        self.val = val
-        self.key = key
-        self.next = self.prev = None
+        self.key, self.val = key, val
+        self.next = self.pre = None
 
-class LinkedList:
+class DoubleLinkedList:
     def __init__(self):
-        self.head =self.tail = None
+        self.top =self.tail = None
 
     def insert(self, node):
-        if not self.tail:     self.tail = node
+        if not self.tail:     self.tail = self.top = node
         else:
-            self.head.prev = node   #相互之间，前后逻辑性极强。 可以推导
-            node.next = self.head
-        self.head = node
+            self.top.pre, node.next = node, self.top   #相互之间，前后逻辑性极强。 可以推导
+            self.top = node  
 
     def delete(self, node):
-        if node.prev:     node.prev.next = node.next
-        else:       self.head = node.next
-        if node.next:         node.next.prev = node.prev
-        else:        self.tail = node.prev
+        if node.pre:     node.pre.next = node.next    #右边都是node.next。  假如x， x=
+        else:       self.top = node.next  #比较容易记忆。
+        if node.next:         node.next.pre = node.pre #右边都是node.pre
+        else:        self.tail = node.pre
 
 class LRUCache:
     def __init__(self, capacity):
-        self.cache = LinkedList()
-        self.d = {}
-        self.capacity = capacity
+        self.cache, self.d, self.capacity = DoubleLinkedList(), {}, capacity
 
     def _insert(self, key, val):
-        node = ListNode(key, val)
-        self.cache.insert(node)
-        self.d[key] = node
+        self.d[key] = ListNode(key, val)
+        self.cache.insert(self.d[key])
 
     def get(self, key):
         if key in self.d:
-            val = self.d[key].val
             self.cache.delete(self.d[key])
-            self._insert(key, val)
-            return val
+            self._insert(key, self.d[key].val)    #这里还是创建了新的node来插入. 因为之前删掉的, node.next, pre没有清掉.
+            return self.d[key].val
         return -1
 
     def set(self, key, val):

@@ -1,4 +1,3 @@
-#Sort a linked list using insertion sort.
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -10,7 +9,7 @@ class Solution:
     # @return a ListNode
     def insertionSortList(self, h):  #http://www.cnblogs.com/zuoyuan/p/3700105.html
         if not h:  return
-        dummy = ListNode(0)
+        dummy = ListNode(0)  #本题各种pre.next, cur.next。
         dummy.next = h;   cur = h
         while cur.next:  #因为要对找到的这个节点curr.next比较。 所以循环用curr.next
             if cur.next.val < cur.val:  # looking for the first that is less than the former
@@ -18,6 +17,6 @@ class Solution:
                 while pre.next.val < t.val:     pre = pre.next # find the place to do the    insertion
                 cur.next = t.next# move cur.next
                 t.next = pre.next
-                pre.next = t
+                pre.next = t  #和reverse linkedlist 基本上一样。
             else:   cur = cur.next
         return  dummy.next
