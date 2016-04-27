@@ -24,8 +24,7 @@ class Solution:
     def compareVersion(self, v1, v2):
         s1=v1.split('.'); s2=v2.split('.')
         for i in range(max(len(s1), len(s2))):
-            t1=int(s1[i]) if i<len(s1) else 0
-            t2= int(s2[i]) if i<len(s2) else 0
+            t1, t2=int(s1[i]) if i<len(s1) else 0,  int(s2[i]) if i<len(s2) else 0
             if t1<t2: return -1
             if t1>t2: return 1
         return 0

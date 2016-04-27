@@ -22,5 +22,5 @@ class Solution:
     def titleToNumber(self, s):
         cur = 0  #有点像subset那种iteration.  不断改变自身的recursion
         for ch in s:  #每增加一位。 可能性*6
-            cur = cur*26 + ord(ch)-ord('A') + 1
+            cur = cur*26 + ord(ch)-ord('A') + 1   # 以1为base， 每次加1
         return cur

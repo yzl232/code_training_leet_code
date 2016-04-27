@@ -19,19 +19,15 @@ class Solution:  # http://www.rudy-yuan.net/archives/148/
     # @param s, a string
     # @return a list of strings
     def findRepeatedDnaSequences(self, s):
-        ret = []
-        d = {}
-        map = {'A' : 0b00, 'C' : 0b01, 'G': 0b10, 'T' : 0b11}  # 00, 01, 10, 11
-        sum = 0
+        ret = [];  d = {};  cur = 0
+        bit = {'A' : 0b00, 'C' : 0b01, 'G': 0b10, 'T' : 0b11}  # 00, 01, 10, 11
         for i in range(len(s)):
-            sum = ((sum << 2) + map[s[i]]) & 0xFFFFF  #(sum << 2)不加括号会报错.
+            cur = ((cur << 2) + bit[s[i]]) & 0xFFFFF  #(sum << 2)不加括号会报错.
             if i < 9:    continue
-            if sum not in d: d[sum] = 0
-            d[sum] += 1
-            if d[sum] == 2:  ret.append(s[i - 9 : i + 1])
+            if cur not in d: d[cur] = 0
+            d[cur] += 1
+            if d[cur] == 2:  ret.append(s[i - 9 : i + 1])
         return ret
-
-
 
 '''
 class Solution:
@@ -46,3 +42,4 @@ class Solution:
             d[t] += 1
         return [x for x in d if d[x] > 1]
 '''
+

@@ -6,19 +6,28 @@ Given a list of non-negative integers representing the amount of money of each h
 Credits:
 Special thanks to @ifanchu for adding this problem and creating all test cases. Also thanks to @ts for adding additional test cases.
 '''
+
+class Solution:
+    def rob(self, nums):
+        ppre, pre = 0, 0
+        for x in nums:   ppre, pre = pre, max(ppre + x, pre)
+        return pre
+'''
+    f(0) = nums[0]
+    f(1) = max(num[0], num[1])
+    f(k) = max( f(k-2) + nums[k], f(k-1) )
+'
+
+
 class Solution:
     # @param num, a list of integer
     # @return an integer
     def rob(self, num):
-        size = len(num)
-        odd, even = 0, 0
+        size, odd, even = len(num), 0, 0
         for i in range(size):
-            if i % 2:
-                odd = max(odd + num[i], even)
-            else:
-                even = max(even + num[i], odd)
+            if i % 2:     odd = max(odd + num[i], even)
+            else:   even = max(even + num[i], odd)
         return max(odd, even)
-'''
 class Solution:
     # @param num, a list of integer
     # @return an integer

@@ -24,3 +24,12 @@ class Solution:
             ret |= n&1    
             n >>= 1  #n第一位用掉了, 换第二位.
         return ret
+        
+'''
+     
+
+How to optimize if this function is called multiple times? We can divide an int into 4 bytes, and reverse each byte then combine into an int. For each byte, we can use cache to improve performance.
+
+
+        
+'''

@@ -11,8 +11,16 @@ class Solution:
     # @param n, an integer
     # @return an integer
     def hammingWeight(self, n):
+        cnt=0
+        while n:
+            n&=n-1
+            cnt+=1
+        return cnt
+'''
         ret = 0
         while n:
             ret += n & 1
             n >>= 1
         return ret
+        
+'''

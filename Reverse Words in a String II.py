@@ -1,12 +1,24 @@
+'''
+
+ Given an input string, reverse the string word by word. A word is defined as a sequence of non-space characters.
+
+The input string does not contain leading or trailing spaces and the words are always separated by a single space.
+
+For example,
+Given s = "the sky is blue",
+return "blue is sky the".
+
+Could you do it in-place without allocating extra space? 
+'''
 class Solution:
     def reverseWords(self, arr):
-        self.reverse(arr, 0, len(arr) - 1)
+        self.reverse(arr, 0, len(arr)-1)
         i = j = 0
         while j<len(arr):
-            while j+1<len(arr) and arr[j+1]!=" ": j+=1
+            while j+1<len(arr) and arr[j+1] != " ": j+=1
             self.reverse(arr, i, j)
-            i = j+2
-            j+=1
+            j+=2
+            i=j
 
     def reverse(self, arr, i, j):
         while i<j:

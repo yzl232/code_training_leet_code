@@ -10,9 +10,9 @@ Credits:
 class Solution:
     # @param num, a list of integers
     # @return a string
-    def largestNumber(self, num):
+    def largestNumber(self, num):   #  sort(cmp, reverse, key)
         num = [str(x) for x in num]
-        num.sort(cmp = lambda x, y: cmp(y+x, x+y))
+        num.sort(cmp = lambda x, y: cmp(y+x, x+y))   #大的在前面, 所以就是(y+x, x+y)
         return ''.join(num).lstrip('0') or '0'
 # merge interval用到了key= lambda x: x.start.  
 #这是cmp = lambda x,y : cmp(y+x, x+y)

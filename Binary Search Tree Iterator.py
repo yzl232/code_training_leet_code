@@ -16,7 +16,7 @@ Note: next() and hasNext() should run in average O(1) time and uses O(h) memory,
 #         self.val = x
 #         self.left = None
 #         self.right = None
-
+ # 分拆了binary search tree in order traversal的代码。
 class BSTIterator:
     # @param root, a binary search tree's root node
     def __init__(self, root):
