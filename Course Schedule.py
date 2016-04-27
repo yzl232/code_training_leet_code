@@ -14,26 +14,21 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: bool
         """
-        self.graph =  {i:[] for i in range(numCourses)}
-        self.visited = {}  # visited最开始为空。
-        self.ret = True
+        self.graph =  {i:set() for i in range(numCourses)}
+        self.ret = True; self.visited = {}  # visited最开始为空。 
         for x, y  in arr:
-            if y not in self.graph[x]: self.graph[x].append(y)
+            if y not in self.graph[x]: self.graph[x].add(y)
         for k in self.graph:  self.dfs(k)
         return self.ret
 
     def dfs(self, x):
         if not self.ret: return
         if x in self.visited:   #已经visit过了
-            if self.visited[x]==False:  self.ret = False   #还没visited完又碰见了， 说明有cycle
+            if self.visited[x]==False:  self.ret = False
             return
         self.visited[x] = False  #这就是与普通dfs的唯一不同。 用False标记
         for y in self.graph[x]: self.dfs(y)
         self.visited[x] = True
-s = Solution()
-
-print s.canFinish(4, [[0,1],[3,1],[1,3],[3,2]])
-
 
 
 

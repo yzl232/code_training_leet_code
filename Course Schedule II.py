@@ -27,11 +27,10 @@ class Solution(object):
         :type prerequisites: List[List[int]]
         :rtype: List[int]
         """
-        self.graph =  {i:[] for i in range(numCourses)}
-        self.visited = {}  # visited最开始为空。
-        self.ret = []; self.cycle = False
+        self.graph =  {i:set() for i in range(numCourses)}
+        self.ret = []; self.cycle = False; self.visited = {}  # visited最开始为空。
         for x, y  in arr:
-            if y not in self.graph[x]: self.graph[x].append(y)
+            if y not in self.graph[x]: self.graph[x].add(y)
         for k in self.graph:  self.dfs(k)
         return self.ret if not self.cycle else []
 
@@ -44,4 +43,3 @@ class Solution(object):
         for y in self.graph[x]: self.dfs(y)
         self.visited[x] = True
         self.ret.append(x)
-

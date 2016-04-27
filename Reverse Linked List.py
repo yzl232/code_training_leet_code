@@ -7,15 +7,29 @@
 class Solution:
     # @param {ListNode} head
     # @return {ListNode}
+    def reverseList(self, h):
+        if not h or not h.next: return h
+        h2 = self.reverseList(h.next)
+        h.next.next, h.next =h, None
+        return h2
+#  1=>2=>3=>4
+#      1=>2=>3<=4   return 4
+#     1=>2<=3<=4  return 4
+#     1<=2<=3<=4
+
+'''
+class Solution:
+    # @param {ListNode} head
+    # @return {ListNode}
     def reverseList(self, head):
-        return self.doReverse(head, None)
-    def doReverse(self, h, newH):
-        if not h:
-            return newH
-        next = h.next
-        h.next = newH
-        return self.doReverse(next, h)
-        '''
+        return self.dfs(head, None)
+
+    def dfs(self, h, newH):
+        if not h:   return newH
+        x = h.next;   h.next = newH
+        return self.dfs(x, h)
+
+
 class Solution(object):
     def reverseList(self, h):
         """
@@ -24,11 +38,11 @@ class Solution(object):
         """
         if not h: return
         dummy= ListNode(0); dummy.next=  h
-        last, cur = h, h.next
+        pre, last, cur = dummy, h, h.next
         while cur:  #last一直是最后一个。 不变。
             last.next = cur.next
-            cur.next = dummy.next
-            dummy.next = cur
+            cur.next = pre.next
+            pre.next = cur
             cur = last.next   #四层的封闭连环
         return dummy.next
 '''

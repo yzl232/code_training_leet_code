@@ -20,24 +20,19 @@ Note:
     If the order is invalid, return an empty string.
     There may be multiple valid order of letters, return any one of them is fine.
 '''
-
-
-
-
 class Solution(object):
     def alienOrder(self, words):
         """
         :type words: List[str]
         :rtype: str
         """
-        g = {}; self.cycle = False
+        self.graph = g = {}; self.cycle = False
         for ch in set(''.join(words)):  g[ch] = set()    #第一步： 为所有的ch建立node
         for i in range(len(words)-1):
             w1 = words[i]; w2 = words[i+1]
-            for j in range(min(len(w1), len(w2))):
+            for j in range(min(len(w1), len(w2))):   #注意了， 每2个相邻的词只会产生一个edge。 
                 if w1[j] != w2[j]:  #发现了一个edge,  加入graph
                     g[w2[j]].add(w1[j]);   break
-        self.graph = g
         self.ret,  self.visited = [], {}
         for k in g:  self.dfs(k)
         return '' if self.cycle else self.ret 
@@ -51,7 +46,3 @@ class Solution(object):
         for k in self.graph[x]:  self.dfs(k)
         self.ret.append(x)
         self.visited[x] = True
-
-s = Solution()
-print s.topolgical_sort(["baa", "abcd", "abca", "cab", "cad"])
-print s.topolgical_sort(["caa", "aaa", "aab"])

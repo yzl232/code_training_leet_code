@@ -12,18 +12,21 @@ Example: 19 is a happy number
 
 '''
 
-# http://www.cnblogs.com/grandyang/p/4447233.html
-class Solution:
+class Solution(object):
+    def isHappy(self, n):
+        def getS(y):   return sum(int(x) ** 2 for x in str(y))
+        slow, fast = getS(n), getS(getS(n))
+        while slow != fast:   slow, fast = getS(slow), getS(getS(fast))
+        return slow==1
+#描述与 add digits类似， 但是这个是平方了， 那个没有平方。
+'''
+class Solution: # add digits
     # @param {integer} n
     # @return {boolean}
-    def isHappy(self, x):
-        numSet = set()
-        while x != 1 and x not in numSet:
-            numSet.add(x)
-            s = 0
-            while x:
-                digit = x % 10
-                s += digit * digit
-                x /= 10
-            x = s
-        return x == 1
+    def isHappy(self, n):
+        d = set()
+        while n not in d:  
+            d.add(n)
+            n = sum(int(x) ** 2 for x in str(n))
+        return n==1
+'''
