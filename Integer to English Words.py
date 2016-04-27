@@ -21,7 +21,7 @@ class Solution:
             if n==0: return []
             if n<20: return [to19[n]]
             if n<100: return [tens[n-n%10]] + toWords(n%10)    #0的部分.    默认为"".   结果为""变成zero.
-            if n < 1000:    return toWords(n/100) + ['Hundred'] + toWords(n%100)
+            if n < 1000:    return toWords(n/100) + ['Hundred'] + toWords(n%100)  # 1000**1, 1000**2, 1000**3
             for i, w in enumerate(('Thousand', 'Million', 'Billion'), 1):  # 实际上就是 n<1million, n<1 billiion, n<1 trillion. 三重类似, 略写为1行.
                 if n < 1000**(i+1):    return toWords(n/(1000**i)) + [w] + toWords(n%1000**i)
         return ' '.join(toWords(num)) or 'Zero'
