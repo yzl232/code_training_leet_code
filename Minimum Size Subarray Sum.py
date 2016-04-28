@@ -18,17 +18,14 @@ class Solution:
     # @param {integer[]} nums
     # @return {integer}
     def minSubArrayLen(self, target, arr):
-        ret = len(arr)+10
-        s = 0;  l=0
+        ret = float('inf');   s = 0;  l=0
         for r in range(len(arr)):
             s+=arr[r]
             if s>=target:
                 while s-arr[l]>=target:
                     s-=arr[l];  l+=1
                 ret = min(r-l+1, ret)
-        if ret==len(arr)+10: return 0
-        return ret
-        
+        return ret if ret != float('inf') else 0
 '''
 
 
