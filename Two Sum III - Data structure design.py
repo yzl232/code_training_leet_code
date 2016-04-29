@@ -27,7 +27,26 @@ class TwoSum:
     # @param value, an integer
     # @return a Boolean
     def find(self, val):
+        return any(((val-x) in self.d and (val-x!=x or self.d[x]>1)) for x in self.d)
+
+
+'''
+class TwoSum:
+
+    # initialize your data structure here
+    def __init__(self):
+        self.d = {}    #two sum需要存index。  这里返回True. False即可，存个数。 1个和2个是区别
+
+    # @return nothing
+    def add(self, x):
+        if x not in self.d: self.d[x]=0
+        self.d[x]+=1
+
+    # @param value, an integer
+    # @return a Boolean
+    def find(self, val):
         for x in self.d:
             y = val-x
             if (x==y and self.d[x]>=2) or (x!=y and y in self.d): return True
         return False
+'''
