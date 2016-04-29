@@ -22,16 +22,20 @@ Notes:
 '''
 class Solution:  # http://www.cnblogs.com/easonliu/p/4531020.html
     # @param {integer[][]} buildings  # float("inf"), float("-inf")
-    # @return {integer[][]}   #那就是把左边节点的高度值设成负数，右边节点的高度值是正数，这样我们就不用额外的属性，
+    # @return {integer[][]}      #那就是把左边节点的高度值设成负数，右边节点的高度值是正数，这样我们就不用额外的属性，
     def getSkyline(self, blds):    # ret: [[x, h]]    heap [[h, r]]
         arr = sorted([(l, -h, r) for l, r, h in blds] + [(r, 0, None) for l, r, h in blds])  #r的高度为0， 为了把r排序在l后面。
-        ret, heap = [[0, 0]], [(0, float("inf"))]    # r是正常的排序.  就是h排序相反.嗯.
-        for x, h, r in arr:
+        ret, heap = [[-1, 0]], [(0, float("inf"))]    # r是正常的排序.  就是h排序相反.嗯.
+        for x, h, r in arr:    #(0, float("inf"))，  高度为0，长度无限. (-1, 0), 结果第一个点高度不能等于0.
             while x >= heap[0][1]:  heapq.heappop(heap)   #当超过了heap最大的节点的右边界.  #不断pop。 直到最大节点右边界大于x
-            if r!=None:   heapq.heappush(heap, (h, r))   #只push left。 
-            if ret[-1][1] + heap[0][0]:  ret.append([x, -heap[0][0]]) #不相同高度.  相同高度不管.
+            if r!=None:   heapq.heappush(heap, (h, r))   #只push left。
+            if ret[-1][1]!=-heap[0][0]:  ret.append([x, -heap[0][0]]) #不相同高度.  相同高度不管.
         return ret[1:]
-'''
-s = Solution()
-print s.getSkyline([ [2 ,9, 10], [3, 7, 15], [5, 12, 12]])
-'''
+
+
+#总结.heap总是保存着当前高度. 每次碰到新的x, 检查高度是否变化, 变化就有新的点存入.    类似其他的题目,  r从来不存入.  
+#heap第一项当然存的比较用的高度负数.  第二项存的是r, 判断是否要pop出来.  也就是左边(l, -h, r)的剩余2项.
+# pop的时候, 因为只能pop顶端的.  理论上没办法pop, (当h比较小被top覆盖, r边界却已经到了.)  所以干脆到到了top的r的时候, 一起pop掉.
+
+#s = Solution()
+#print s.getSkyline([ [2 ,9, 10], [3, 7, 15], [5, 12, 12]])
