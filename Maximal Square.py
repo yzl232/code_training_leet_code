@@ -16,7 +16,7 @@ class Solution:
     # @return {integer}
     def maximalSquare(self, matrix):
         if not matrix: return 0
-        m, n, ret = len(matrix), len(matrix[0]), 0
+        m, n = len(matrix), len(matrix[0]);  ret = 0
         dp = [[int(matrix[i][j]) for j in range(n)] for i in range(m)]
         for i in range(m):
             for j in range(n):  # 不是从(1, m), (1, n), 因为ret可能在第一列或第一行.
