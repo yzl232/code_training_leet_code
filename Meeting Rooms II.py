@@ -63,21 +63,24 @@ output:
 #         self.start = s
 #         self.end = e
 
+# Definition for an interval.
+# class Interval(object):
+#     def __init__(self, s=0, e=0):
+#         self.start = s
+#         self.end = e
+
 class Solution(object):
-    def minMeetingRooms(self, intervals):
+    def minMeetingRooms(self, arr):
         """
-        :type intervals: List[Interval]
+        :type arr: List[Interval]
         :rtype: int
         """
-        affairs = [];  cnt = 0; ret = 0
-        for i in intervals:   #其实如果要sort正确，也就是start==end要sort正确时候， 应当 (i[0], -1)，   （i[0], 1）
-            affairs+=[(i.start, 1), (i.end, -1)]
-        affairs.sort()
-        for i in affairs:
+        cnt = 0; ret = 0
+        affairs = sorted([(x.start, 1) for x in arr] + [(x.end, -1) for x in arr])
+        for i in affairs:   #其实如果要sort正确，也就是start==end要sort正确时候， 应当 (i[0], -1)，   （i[0], 1）
             cnt+=i[-1]
             ret = max(ret, cnt)
         return ret
-'''
 class Solution:
     def findNumConference(self, intervals):
         affairs = [];  cnt = 0; ret = 0

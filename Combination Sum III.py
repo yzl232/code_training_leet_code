@@ -23,20 +23,19 @@ Output:
 [[1,2,6], [1,3,5], [2,3,4]]
 
 '''
+
 class Solution:
     # @param {integer} k
     # @param {integer} n
     # @return {integer[][]}
-    def combinationSum3(self, k, n):
-        self.ret = []
-        self.n, self.k = n, k
-        self.dfs(0, 0,   1, [] )
+    def combinationSum3(self, k, target):
+        self.ret = [];  self.k = k
+        self.dfs(target, 1, [] )
         return self.ret
 
-    def dfs(self, cnt, s, start,cur ):
-        if s>self.n: return
-        if cnt==self.k:
-            if s == self.n:   self.ret.append(cur)
+    def dfs(self, target, start,cur ):
+        if target<0: return
+        if len(cur)==self.k:
+            if target==0:   self.ret.append(cur)
             return
-        for x in range(start, 10):
-            self.dfs(cnt+1, s+x, x+1, cur+[x])
+        for x in range(start, 10):   self.dfs(target-x, x+1, cur+[x])   #x+1有点容易写错写成start+1
