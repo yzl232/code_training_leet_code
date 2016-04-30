@@ -7,7 +7,7 @@ Rectangle Area
 Assume that the total area is never beyond the maximum possible value of int.
 
 '''
-
+# inclusion-exclusion principle
 class Solution:
     # @param {integer} A
     # @param {integer} B
@@ -18,6 +18,5 @@ class Solution:
     # @param {integer} G
     # @param {integer} H
     # @return {integer}
-    def computeArea(self, A, B, C, D, E, F, G, H):
-        s = (C - A) * (D - B) + (G - E) * (H - F)
-        return s - max(min(C, G) - max(A, E), 0) * max(min(D, H) - max(B, F), 0)
+    def computeArea(self, a, b, c, d, e, f, g, h):
+        return (c - a) * (d - b) + (g - e) * (h - f) - max(min(c, g) - max(a, e), 0) * max(min(d, h) - max(b, f), 0)
