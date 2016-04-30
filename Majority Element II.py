@@ -1,11 +1,15 @@
 '''
 Given an integer array of size n, find all elements that appear more than ⌊ n/3 ⌋ times. The algorithm should run in linear time and in O(1) space.
 '''
-class Solution(object):
-    def majorityElement(self, nums):
-        ctr = collections.Counter()
-        for n in nums:
-            ctr[n] += 1
-            if len(ctr) == 3:
-                ctr -= collections.Counter(set(ctr))
-        return [n for n in ctr if nums.count(n) > len(nums)/3]
+
+class Solution:
+    def majorityElement(self, arr):
+        if not arr:   return []
+        cnt1, cnt2, x1, x2 = 0, 0, None, None
+        for x in arr:
+            if x == x1:   cnt1 += 1
+            elif x == x2:    cnt2 += 1
+            elif cnt1 == 0:   x1, cnt1 = x, 1
+            elif cnt2 == 0:   x2, cnt2 = x, 1
+            else:    cnt1, cnt2 = cnt1 - 1, cnt2 - 1
+        return [x for x in (x1, x2) if arr.count(x) > len(arr) / 3]

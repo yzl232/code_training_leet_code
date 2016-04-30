@@ -8,6 +8,15 @@ class Solution(object):
     def summaryRanges(self, nums):
         ranges = []
         for x in nums:
-            if not ranges or x > ranges[-1][-1] + 1:  ranges.append([])
-            ranges[-1][1:] = [x]
-        return ['->'.join(map(str, r)) for r in ranges]   # map here:  an array of ints to an array of strings
+            if not ranges or x > ranges[-1][-1] + 1:  ranges.append([x])
+            else: ranges[-1] = [ranges[-1][0], x] 
+        return ['->'.join([str(x) for x in r]) for r in ranges]
+'''
+class Solution(object):
+    def summaryRanges(self, nums):
+        ranges = []
+        for n in nums:
+            if not ranges or n > ranges[-1][-1] + 1:  ranges.append([])
+            ranges[-1][1:] = [n]  #比较巧妙，保证了len为1 或者2.
+        return ['->'.join(map(str, r)) for r in ranges]
+'''

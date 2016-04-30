@@ -10,8 +10,6 @@ What if the BST is modified (insert/delete operations) often and you need to fin
 Hint:
 
     Try to utilize the property of a BST.
-'''
-#in-order traversal 就可以了。 G家。以前做过。
 
 # Definition for a binary tree node.
 # class TreeNode(object):
@@ -27,7 +25,7 @@ class Solution(object):
         return self.ret
 
     def dfs(self, root):
-        if not root or self.ret:       return  #已经找到了。 不用管了。
+        if not root or self.ret!=None:       return  #已经找到了。 不用管了。
         self.dfs(root.left)
         self.cnt-=1
         if self.cnt==0:   self.ret = root.val
@@ -37,19 +35,15 @@ class Solution(object):
 
 class Solution(object):
     def kthSmallest(self, root, k):
-        """
-        :type root: TreeNode
-        :type k: int
-        :rtype: int
-        """
-        stack = [];  cur = root
-        while True:
-            while cur:
-                stack.append(cur)
-                cur = cur.left
-            if not stack: break
-            cur = stack.pop()
-            k-=1
-            if k==0:  return cur.val
-            cur = cur.right
+        self.cnt=k;  self.ret = None
+        self.dfs(root)
+        return self.ret
+
+    def dfs(self, root):
+        if not root or self.ret:       return  #已经找到了。 不用管了。
+        self.dfs(root.left)
+        self.cnt-=1
+        if self.cnt==0:   self.ret = root.val
+        self.dfs(root.right)
+
 '''
