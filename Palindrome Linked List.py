@@ -11,13 +11,12 @@ Could you do it in O(n) time and O(1) space?
 #         self.next = None
 
 class Solution(object):
-    def isPalindrome(self, head):  #  考虑了1->2->3. 发现没有问题
-        if not head: return True
-        fast = slow = head
+    def isPalindrome(self, h1):
+        if not h1: return True
+        fast = slow = h1
         # find the mid node
         while fast and fast.next:
-            fast = fast.next.next
-            slow = slow.next
+            fast, slow = fast.next.next, slow.next
         # reverse the second half
         dummy = ListNode(0); dummy.next = slow;
         pre = dummy; last = slow; cur = slow.next
@@ -26,11 +25,9 @@ class Solution(object):
             cur.next = pre.next
             pre.next = cur
             cur = last.next
-        node = dummy.next
+        h2 = dummy.next
         # compare the first and second half nodes
-        while node: # while node and head:
-            if node.val != head.val:
-                return False
-            node = node.next
-            head = head.next
+        while h2: # while node and head:
+            if h2.val != h1.val:  return False
+            h1, h2 = h1.next, h2.next
         return True

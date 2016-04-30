@@ -27,12 +27,17 @@ class Solution:  #去年做过
     # @param {integer} k
     # @return {integer[]}
     def maxSlidingWindow(self, nums, k):  # 双端队列
-        q = deque()
-        ret = []
+        q = deque(); ret = []
         for i in range(len(nums)):
-            while q and nums[q[-1]] <= nums[i]:  q.pop()
+            while q and nums[q[-1]] <= nums[i]:  q.pop() #全部pop掉，成空， 是可能的。
             q.append(i)
             if q[0] == i - k:    q.popleft()  #保持队列头是最大值, 当最大值过了边界时, 必须pop了.
             if i >= k - 1:    ret.append(nums[q[0]])
         return ret
 #http://bookshadow.com/weblog/2015/07/18/leetcode-sliding-window-maximum/
+'''
+
+当下标i从队尾入队时，顺次弹出队列尾部不大于nums[i]的数组下标（这些被弹出的元素由于新元素的加入而变得没有意义）
+
+deque的队头元素即为当前滑动窗口的最大值
+'''

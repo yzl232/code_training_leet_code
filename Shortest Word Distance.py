@@ -1,14 +1,26 @@
+'''
+Given a list of words and two words word1 and word2, return the shortest distance between these two words in the list.
+
+For example,
+Assume that words = ["practice", "makes", "perfect", "coding", "makes"].
+
+Given word1 = “coding”, word2 = “practice”, return 3.
+Given word1 = "makes", word2 = "coding", return 1.
+
+Note:
+You may assume that word1 does not equal to word2, and word1 and word2 are both in the list. 
+'''
 class Solution:
-    def shortestDistance(self, words, word1, word2):
-        last, ret = -1, len(words)
-        for i in range(len(words)):
-            if words[i] in [word1, word2]:
-                if last != -1 and (words[last] != words[i]): # if current matched word is different from last matched word
-                    ret = min(ret, i-last)
-                last = i
+    def shortestDistance(self, words, w1, w2):
+        pre, ret = None, len(words)
+        for i, x in enumerate(words):
+            if x in [w1, w2]:
+                if pre != None and (words[pre] != x): ret = min(ret, i-pre)   
+                pre = i   # if current matched word is different from last matched word
         return ret
 
 
+#类似题目    Find Index of 0 to be replaced with 1 to get longest continuous sequence of 1s in a binary array
 
 
 #为了与三保持一致, 改用一个pointer

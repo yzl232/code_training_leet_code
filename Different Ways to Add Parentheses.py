@@ -23,31 +23,21 @@ Input: "2*3-4*5"
 Output: [-34, -14, -10, -10, 10]
 
 '''
-
 class Solution(object):
     def diffWaysToCompute(self, s):
-        self.cache = {}
-        return self.dfs(s)
-
-    def dfs(self, s):
-        if s in self.cache: return self.cache[s]
+        return [a+b if c == '+' else (a-b if c == '-' else a*b)
+                for i, c in enumerate(s) if c in '+-*'
+                for a in self.diffWaysToCompute(s[:i])
+                for b in self.diffWaysToCompute(s[i + 1:])] or [int(s)]
+# 类似 [x+y+z for x in range(10) for y in range(10) for z in range(10)]
+'''
+class Solution(object):
+    def diffWaysToCompute(self, s):
         ret = []
         for i, ch in enumerate(s):
             if ch in '+-*':
-                for a in self.dfs(s[:i]):
-                    for b in self.dfs(s[i+1:]):
+                for a in self.diffWaysToCompute(s[:i]):
+                    for b in self.diffWaysToCompute(s[i+1:]):
                         ret.append(a+b if ch == '+' else (a-b if ch == '-' else a*b))
-        self.cache[s] = ret or [int(s)]
-        return self.cache[s]
-'''
-class Solution(object):
-    def diffWaysToCompute(self, input):
-        """
-        :type input: str
-        :rtype: List[int]
-        """
-        return [a+b if c == '+' else a-b if c == '-' else a*b
-            for i, c in enumerate(input) if c in '+-*'
-            for a in self.diffWaysToCompute(input[:i])
-            for b in self.diffWaysToCompute(input[i+1:])] or [int(input)]
+        return  ret or [int(s)]
 '''

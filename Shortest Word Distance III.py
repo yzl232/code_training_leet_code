@@ -34,16 +34,16 @@ You may assume that word1 does not equal to word2, and word1 and word2 are both 
 '''
 
 class Solution(object):
-    def shortestWordDistance(self, words, word1, word2):
+    def shortestWordDistance(self, words, w1, w2):
         """
         :type words: List[str]
-        :type word1: str
-        :type word2: str
+        :type w1: str
+        :type w2: str
         :rtype: int
         """
-        last, ret = -1, len(words)
-        for i in range(len(words)):
-            if words[i] in [word1, word2]:
-                if last != -1 and (words[last] != words[i] or word1==word2):   ret = min(ret, i-last)
-                last = i
+        pre, ret = None, len(words)
+        for i, w in enumerate(words):
+            if w in [w1, w2]:
+                if pre != None and (words[pre] !=w or w1==w2):  ret = min(ret, i-pre)
+                pre = i
         return ret
