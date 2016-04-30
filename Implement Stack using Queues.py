@@ -14,11 +14,11 @@ Notes:
 
 
 '''
-from collections import deque
+
 class Stack:
     # initialize your data structure here.
     def __init__(self):
-        self.q = deque([])
+        self.q = collections.deque([])
 
     # @param x, an integer
     # @return nothing
@@ -37,4 +37,4 @@ class Stack:
 
     # @return an boolean
     def empty(self):
-        return len(self.q) == 0
+        return not self.q

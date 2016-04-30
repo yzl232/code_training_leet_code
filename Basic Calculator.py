@@ -15,13 +15,13 @@ Some examples:
 
 class Solution(object):
     def calculate(self, s):
-        ret, i, signs =0,  0, [1, 1]   # 第一个数字用掉一个1,  另外signs.append(signs[-1] * (-1 if c=="-" else 1))用掉一个1
+        ret, i, signs =0,  0, [1, 1]   # 第一个数字用掉一个1,  另外一个是底，  signs.append(signs[-1] *  里边   sign[-1]用掉一个+1底
         while i < len(s):  # signs.  1代表+号.  -1 代表-号.
             if s[i].isdigit():
                 pre = i
                 while i+1 < len(s) and s[i+1].isdigit():   i += 1
                 ret += signs.pop() * int(s[pre:i+1])   #这里用了乘号,实际上也就是+1或者-1
-            if s[i] in '+-(': signs.append(signs[-1] * (-1 if s[i] =="-" else 1))  #考虑到括号的存在, 都是这个signs[-1] *
+            elif s[i] in '+-(': signs.append(signs[-1] * (-1 if s[i] =="-" else 1))  #考虑到括号的存在, 都是这个signs[-1] *
             elif s[i] == ')':   signs.pop()
             i += 1
         return ret
