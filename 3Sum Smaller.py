@@ -16,17 +16,12 @@ Could you solve it in O(n^2) runtime?
 '''
 
 class Solution:
-    def threeSumSmaller(self, nums, target):
-        nums.sort()
-        count = 0
-        for k in range(len(nums)):
-            i, j = k+1, len(nums)-1
+    def threeSumSmaller(self, arr, x):
+        arr.sort();  cnt = 0
+        for k in range(len(arr)):
+            i, j = k + 1, len(arr) - 1
             while i<j:
-                if nums[i] + nums[j] + nums[k] < target:
-                    count += j-i
-                    i+=1
-                else:
-                    j -= 1
-        return count
-s  =Solution()
-print s.threeSumSmaller( [-2, 0, 1, 3], 2)
+                if arr[i] + arr[j] + arr[k] < x:
+                    cnt += j-i;   i+=1
+                else:   j -= 1
+        return cnt

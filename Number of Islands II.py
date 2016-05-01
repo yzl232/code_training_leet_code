@@ -18,8 +18,8 @@ class Solution:
     def numIslands2(self, m, n, positions):
         parent = {} #各个元素都是二院tuple
         def find(x):
-            while parent[x] != x:  x = parent[x]
-            return x
+            if x!=parent[x]:  parent[x] = find(parent[x])#路径压缩。好！
+            return parent[x]#返回parent[x]。 也就是parent根值
         def union(x, y):
             x, y = find(x), find(y)
             if x == y:    return 0
@@ -33,9 +33,6 @@ class Solution:
                 if y in parent:  count -= union(x, y)
             counts.append(count)
         return counts
-
-s = Solution()
-print s.numIslands2(3, 3, [[0,0], [0,1], [1,2], [2,1]])
 
 
 '''

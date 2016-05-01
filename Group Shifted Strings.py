@@ -29,7 +29,13 @@ Note: For the return value, each inner list's elements must follow the lexicogra
 
 所以"eqdf"和"qcpr"是一组shifted strings。
 '''
-
+class Solution:
+    def groupStrings(self, arr):
+        d = collections.defaultdict(list)
+        for s in arr: #不能-ord("A"), 本题特点-ord(s[0])合适
+            d[tuple((ord(ch) - ord(s[0]) + 26) % 26 for ch in s)].append(s)
+        return [sorted(x) for x in d.values()]
+'''
 class Solution:
     def groupStrings(self, arr):
         d = {}
@@ -37,7 +43,19 @@ class Solution:
             t = tuple((ord(ch) - ord(s[0]) + 26) % 26 for ch in s)
             if t not in d: d[t] = []
             d[t].append(s)
-        return map(sorted, d.values())
+        return [sorted(x) for x in d.values()]
 
 s = Solution()
 print s.groupStrings(["abc", "bcd", "acef", "xyz", "az", "ba", "a", "z"])
+        
+>>> defaultdict(list)
+defaultdict(<type 'list'>, {})
+>>> defaultdict(set)
+defaultdict(<type 'set'>, {})
+>>> defaultdict(dict)
+defaultdict(<type 'dict'>, {})
+>>> defaultdict(int)
+defaultdict(<type 'int'>, {})
+>>> defaultdict(lambda: 1)
+defaultdict(<function <lambda> at 0x10eea7b90>, {})
+'''

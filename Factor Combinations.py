@@ -51,6 +51,33 @@ output:
 
 class Solution:
     def getFactors(self, n):
+        self.rets = []
+        def dfs(n, st, cur):
+            for i in range(st, int(n**0.5)+1):
+                if n % i == 0:
+                    self.rets.append(cur + [i, n / i])  #因为下一层dfs里边, 也是到n**0.5为止不会考虑i本身的.
+                    dfs(n / i, i, cur + [i])
+        dfs(n, 2, [])
+        return self.rets
+
+'''
+class Solution:
+    def getFactors(self, n):
+        self.rets = []
+        self.dfs(2, [], n)
+        return self.rets
+
+    def dfs(self, start, cur, n):
+        if n<1: return 
+        if n==1:
+            if len(cur)>1: self.rets.append(cur)
+            return 
+        for i in range(start, n+1):
+            if n%i==0:   self.dfs(start, cur+[i], n/i)
+
+
+class Solution:
+    def getFactors(self, n):
         def factor(n, i, combi, combis):
             while i * i <= n:
                 if n % i == 0:
@@ -59,3 +86,4 @@ class Solution:
                 i += 1
             return combis
         return factor(n, 2, [], [])
+'''

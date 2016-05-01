@@ -11,20 +11,14 @@ Given low = "50", high = "100", return 3. Because 69, 88, and 96 are three strob
 Note:
 Because the range might be a large number, the low and high numbers are represented as string.
 '''
+
 class Solution:
-    def findStrobogrammatic(self, n):
+    def helper(self, n):
         nums = list('018') if n%2 else ['']  #如果n为偶数,  [empty string]
-        while n>1:  #非得用while.  用for循环搞不定.
-            n-=2   #大概是剩下的位数.     n<2, 只剩下一次扩充机会, 不能加上'00'
-            nums = [a + x + b for a, b in '00 11 88 69 96'.split()[n<2:] for x in nums]   # [n<2:].  去除"00"
-        return nums     #剩下的大于2位的时候, 才考虑增加00. a = b = "0" . 因为初位, 末尾不能加00. 所以剩下要大于2位.
-# 连续的for是正常的先后顺序.  先循环a,b 后x
+        for i in xrange(n/2):    #  i  次数. 每次+2.  有n/2次. 最后一次不能是00.
+            nums = [a + x + b for a, b in '00 11 88 69 96'.split()[i==n/2-1:] for x in nums]
+        return nums
 
     def strobogrammaticInRange(self, low, high):
-        ret = []; cnt=0
-        for i in xrange(len(low), len(high)+1):
-            ret+=self.findStrobogrammatic(i)
-        for x in ret:
-            if (len(x) == len(low) and x<low) or (len(x)==len(high) and x>high):  continue
-            cnt+=1
-        return cnt
+        return sum(1 for i in xrange(len(low), len(high)+1) for x in self.helper(i) if not ((len(x) == len(low) and x<low) or (len(x)==len(high) and x>high)) )  
+#list comprehension 和正常的顺序是一样的。

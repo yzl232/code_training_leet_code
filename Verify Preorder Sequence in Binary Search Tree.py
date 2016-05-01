@@ -10,28 +10,23 @@ Could you do it using only constant space complexity?
 #  pre order 是先降序再升序的.
 class Solution: # https://segmentfault.com/a/1190000003874375
     def verifyPreorder(self, preorder):  # keep pushing till you hit the leftmost leaf
-        stack = []
-        lower = float('-inf')
+        stack = [];   lower = float('-inf')
         for x in preorder:
             if x < lower:    return False
             while stack and x > stack[-1]:    lower = stack.pop()
             stack.append(x)       # 有点理解了. 每次append的都是当前最小的.  lower则是第二小的
         return True
-
-class Solution2:
-    def verifyPreorder(self, preorder):
-        # stack = preorder[:i], reuse preorder as stack
-        lower = float('-inf')
-        i = 0
-        for x in preorder:
-            if x < lower:    return False
-            while i > 0 and x > preorder[i - 1]:
-                lower = preorder[i - 1]
-                i -= 1
-            preorder[i] = x
-            i += 1
-        return True
 '''
+class Solution: # https://segmentfault.com/a/1190000003874375
+    def verifyPreorder(self, preorder):  # keep pushing till you hit the leftmost leaf
+        lower = float('inf');  i=0
+        for x in preorder:  # 用i标记栈顶
+            if x<lower: return False
+            while i>0 and x>preorder[i-1]:
+                lower = preorder[i-1];  i-=1  # 同样的解法，但是复用了数组作为栈，每pop一次相当于i--
+            preorder[i] = x;  i+=1  # push相当于i++
+        return True
+
 To solve above problem, you do not need to construct a Binary Tree from a given pre-order sequence.
 
 The pre-order sequence of binary tree can form a sorted stack. So lets break it in a few “SIMPLE” steps as follows:

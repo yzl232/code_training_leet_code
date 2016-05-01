@@ -34,11 +34,12 @@
 '''
 class Solution:
     def validTree(self, n, edges):
-        self.parent = range(n)
-        return len(edges) == n-1 and all(map(self.union, edges))
-    def find(self, x):
-        return x if self.parent[x] == x else self.find(self.parent[x])
-    def union(self, xy):  #union确定没有环, 再加上n-1的长度确定没
-        x, y = map(self.find, xy)
-        self.parent[x] = y
-        return x != y
+        parent = range(n)
+        def find(x):
+            if x!=parent[x]: parent[x] = find(parent[x])
+            return parent[x]
+        def union( a, b):  #union确定没有环, 再加上n-1的长度确定没
+            x, y = find(a), find(b)
+            parent[x] = y
+            return x != y
+        return n ==len(edges)+ 1 and all(union(a, b) for a, b in edges)

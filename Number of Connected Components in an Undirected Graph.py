@@ -17,7 +17,7 @@ Example 2:
 
 Given n = 5 and edges = [[0, 1], [1, 2], [2, 3], [3, 4]], return 1. 
 '''
-
+#union-find一般是undirected graph用到的。
 class Solution(object):
     def countComponents(self, n, edges):
         p = range(n)
