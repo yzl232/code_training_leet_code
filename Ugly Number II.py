@@ -4,23 +4,18 @@ Design an algorithm to find the kth number such that the only prime factors are 
 '''
 
 #G家最近考过
-
-class Solution: #思想简单。 就是每次比较3， 5， 7的倍数哪个最小。  然后每次更新pointer
-    def primeN(self, n):  #用了3个pointer来记录
-        c3 = c5 = c7 = 0
-        ret = [1]
-        for i in range(n):
-            m = min(ret[c3]*3, ret[c5]*5, ret[c7]*7)
+class Solution(object):
+    def nthUglyNumber(self, n):
+        i2 = i3 = i5 = 0;  ret = [1]
+        for i in range(n-1):
+            m = min(ret[i2]*2, ret[i3]*3, ret[i5]*5)
             ret.append(m)
-            if m == ret[c3]*3: c3+=1
-            if m == ret[c5]*5: c5+=1
-            if m== ret[c7]*7: c7+=1    #print '%d th element, %d, c3:%d, c5:%d, c7: %d' % (i, ret[i], c3, c5, c7)
-            print ret, c3, c5, c7
-        return ret
-
-s = Solution()
-print s.primeN(15)
-
+            if m == ret[i2]*2: i2+=1
+            if m == ret[i3]*3: i3+=1
+            if m == ret[i5]*5: i5+=1  
+        return ret[-1]
+# # 这样子理解, 因为ret已经排好序了, 是最小的了.    下一个ugly number肯定是最小的*2,  *3,  *5.
+#print '%d th element, %d, c3:%d, c5:%d, c7: %d' % (i, ret[i], c3, c5, c7)
 
 '''
 这样子理解, 因为ret已经排好序了, 是最小的了.    下一个ugly number肯定是最小的*2,  *3,  *5.   

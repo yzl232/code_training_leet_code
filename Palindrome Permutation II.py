@@ -14,15 +14,20 @@ Hint:
     If a palindromic permutation exists, we just need to generate the first half of the string.
     To generate all distinct permutations of a (half of) string, use a similar approach from: Permutations II or Next Permutation.
 '''
+class Solution(object):
+    def generatePalindromes(self, s):
+        d = collections.Counter(s)
+        m = [k for k in d if d[k] % 2]
+        s =  ''.join(k*(d[k]/2) for k in d)
+        return [] if len(m)>1 else [''.join(list(x) + m + list(x)[::-1]) for x in set(itertools.permutations(s))]
+'''
 
-import collections
 class Solution(object):
     def generatePalindromes(self, s):
         d = collections.Counter(s)
         mid = [k for k in d if d[k] % 2]
         p = list(''.join(k*(d[k]/2) for k in d))  #出现奇数次的话, 除以2正好
-        permutations = self.permuteUnique(p)
-        return [''.join(i + mid + i[::-1]) for i in permutations] if len(mid) <=1 else []
+        return [''.join(i + mid + i[::-1]) for i in self.permuteUnique(p)] if len(mid) <=1 else []
 
     def permuteUnique(self, arr):
         arr.sort()
@@ -34,21 +39,8 @@ class Solution(object):
         if not arr:
             self.ret.append(cur)
             return
-        for i in range(len(arr)):
+        for i in xrange(len(arr)):
             if i>0 and arr[i] == arr[i-1]: continue
             t = arr[:]
             self.dfs(cur+[t.pop(i)], t)
-
 '''
-class Solution(object):
-    def generatePalindromes(self, s):
-        d = collections.Counter(s)
-        m = tuple(k for k, v in d.iteritems() if v % 2)
-        p = ''.join(k*(v/2) for k, v in d.iteritems())
-        return [''.join(i + m + i[::-1]) for i in set(itertools.permutations(p))] if len(m) < 2 else []
-
-'''
-
-s = Solution()
-print s.generatePalindromes("a")
-print s.generatePalindromes("aabbe")

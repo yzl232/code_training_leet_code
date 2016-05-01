@@ -24,3 +24,19 @@ Hint:
 
 
 '''
+class Solution(object):
+    def closestKValues(self, root, target, k):
+        self.ret = [];  self.k = k
+        self.dfs(root, target)
+        return self.ret
+
+    def dfs(self, root, target):
+        if not root: return 
+        self.dfs(root.left, target)
+        if len(self.ret) == self.k:
+            if abs(target-root.val)<abs(target-self.ret[0]): self.ret.pop(0)
+            else: return 
+        self.ret.append(root.val)
+        self.dfs(root.right, target)
+#头疼O(logN)的。  有这个O(n)就好了。  #这个pop(0)损耗高， 适合用queue.
+#真要碰到了这道题目， 就跳过， 说我做过， 装影帝。。。

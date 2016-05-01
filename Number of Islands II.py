@@ -16,25 +16,19 @@ Given board =
 '''
 class Solution:
     def numIslands2(self, m, n, positions):
-        parent = {} #各个元素都是二院tuple
+        parent = {}; ret = [] #各个元素都是二院tuple
         def find(x):
             if x!=parent[x]:  parent[x] = find(parent[x])#路径压缩。好！
             return parent[x]#返回parent[x]。 也就是parent根值
         def union(x, y):
-            x, y = find(x), find(y)
-            if x == y:    return 0
-            parent[y] = x
-            return 1
-        counts, count = [], 0
+            x, y = find(x), find(y)  #如果已经union过了, 之前就是一起的. 返回0
+            parent[x] = y
+            return 1 if x!=y else 0
         for i, j in positions:
-            x = parent[x] = (i, j)
-            count += 1
-            for y in (i+1, j), (i-1, j), (i, j+1), (i, j-1):
-                if y in parent:  count -= union(x, y)
-            counts.append(count)
-        return counts
-
-
+            x = (i, j); parent[x] =x
+            ret.append((ret[-1] if ret else 0)+1-sum(union(x, y) for y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)] if y in parent))
+        return ret
+# i, j没管边界问题是因为 y in parent已经考虑了边界了。
 '''
 可以优化. 加上path compression和size, 来平衡树
 class Solution:

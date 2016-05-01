@@ -7,7 +7,7 @@ Note that 1 is typically treated as an ugly number.
 '''
 class Solution:
     def isUgly(self, num):
-        if num>0:
-            for p in 2, 3, 5:
-                while num % p == 0:    num /= p
+        if num<=0: return False  # num=0要特别考虑， 不然下面死循环。
+        for p in 2, 3, 5:
+            while num % p == 0:    num /= p
         return num == 1
