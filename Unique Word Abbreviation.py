@@ -31,14 +31,18 @@ isUnique("make") -> true
 
 '''
 
+
 class ValidWordAbbr(object):
     def __init__(self, arr):  #相同的word出现多次, 仍然算是unique. 所以用set.
-        self.dt = {}
+        self.d = {}
         for w in arr:
-            k = w[0] + str(len(w)) + w[-1] if len(w)>2 else w  #len(w)和len(w)-2之间没有区别。
-            if k not in self.dt: self.dt[k] = set()
-            self.dt[k].add(w)
+            k = self.abbr(w)  #len(w)和len(w)-2之间没有区别。
+            if k not in self.d: self.d[k] = set()
+            self.d[k].add(w)
 
     def isUnique(self, w):
-        k = w[0] + str(len(w)) + w[-1] if len(w)>2 else w
-        return k not in self.dt or set([w]) == self.dt[k]
+        k = self.abbr(w)   #本来想写len(self.dt[k])==1 发现错了,  必需考虑word相等. 比如dig, dog都是d1g
+        return k not in self.d or set([w]) == self.d[k]
+
+    def abbr(self, w):
+        return w if len(w)<=2 else w[0] + str(len(w)) + w[-1]

@@ -9,14 +9,15 @@ Follow up:
 Derive your algorithm's runtime complexity.
 '''
 
+
 class Solution(object):
     memo = {}
     def canWin(self, s):
         if s not in self.memo:
             self.memo[s] = any(s[i:i+2] == '++' and not self.canWin(s[:i] + '-' + s[i+2:])
-                          for i in range(len(s)))
+                          for i in range(len(s)-1)) 
         return self.memo[s]
-
+# 不能放在if里面， 不然any()里面可能为空
 
 
 '''

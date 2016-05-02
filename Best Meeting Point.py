@@ -30,12 +30,13 @@
 '''
 
 #如果有障碍用BFS。 
+
+#如果有障碍用BFS。 
 class Solution:
     def minTotalDistance(self, grid):
-        x = [i for i in range(len(grid)) for j in range(len(grid[0])) if grid[i][j]]
-        y = [j for j in range(len(grid[0])) for i in range(len(grid)) if grid[i][j]]
-        return sum(abs(x[len(x)/2]-i)+abs(y[len(y)/2]-j) for i in range(len(grid)) for j in range(len(grid[0])) if grid[i][j])
-
+        m, n = len(grid), len(grid[0])
+        x, y = [i for i in range(m) for j in range(n) if grid[i][j]], [j for j in range(n) for i in range(m) if grid[i][j]]
+        return sum(abs(i-x[len(x)/2])+abs(j-y[len(y)/2]) for i in range(m) for j in range(n) if grid[i][j])
 
 #如果只是找点, 用quick select      .  总体只要O(m)+O(n)
 s = Solution()

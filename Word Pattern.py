@@ -16,14 +16,18 @@ You may assume pattern contains only lowercase letters, and str contains lowerca
 '''
 
 class Solution(object):
-    def wordPattern(self, s, str):
+    def wordPattern(self, p, s):
         """
-        :type pattern: str
-        :type str: str
+        :type pattern: s1
+        :type string: s
         :rtype: bool
         """
-        t = str.split()
-        return [s.find(x) for x in s] == [t.index(x) for x in t]  # map(s.find, s) == map(t.index, t)
+        t = s.split()
+        d1, d2 = {x:i for i, x in enumerate(p)}, {x:i for i, x in enumerate(t)}
+        return [d1[x] for x in p] == [d2[x] for x in t]
+        #return [s1.find(x) for x in s1] == [t.index(x) for x in t]  # map(s.find, s) == map(t.index, t)
+#和这道题一样的。 就是同样的x， 有相同index
+# https://leetcode.com/problems/word-pattern/
         
 '''
 s ="aabb"

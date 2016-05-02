@@ -16,14 +16,13 @@ Note:
 You may assume both s and t have the same length.
 '''
 
-
 class Solution:   #特别需要例子, 不然看着都糊涂.
     # @param {string} s    #每个unique的index代表一个unique的char
     # @param {string} t
     # @return {boolean}    #return [s.find(i) for i in s] == [t.find(j) for j in t]
-    def isIsomorphic(self, s1, s2):
-        d1, d2 = {ch:i for i, ch in enumerate(s1)}, {ch:i for i, ch in enumerate(s1)}
-        return [d1[ch] for ch in s1] == [d2[ch] for ch in s2]
+    def isIsomorphic(self, s, t):
+        d1, d2 = {x:i for i, x in enumerate(s)}, {x:i for i, x in enumerate(t)}
+        return [d1[x] for x in s] == [d2[x] for x in t]
 
 
 '''
