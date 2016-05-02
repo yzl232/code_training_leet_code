@@ -37,6 +37,7 @@ class Solution:
         m, n = len(grid), len(grid[0])
         x, y = [i for i in range(m) for j in range(n) if grid[i][j]], [j for j in range(n) for i in range(m) if grid[i][j]]
         return sum(abs(i-x[len(x)/2])+abs(j-y[len(y)/2]) for i in range(m) for j in range(n) if grid[i][j])
+#  这个顺序, y 是先range(n)再range(m).  必须分开求x, y.    这样避免了排序
 
 #如果只是找点, 用quick select      .  总体只要O(m)+O(n)
 s = Solution()

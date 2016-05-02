@@ -14,16 +14,22 @@ and x = 0, y = 2,
 Return 6.
 '''
 class Solution:  # algorithm runs in O(m log n + n log m)
-    def minArea(self, image, x, y):   #原点在左上角. 和matrix 的index一致的.
-        top = self.search(0, x, lambda i: '1' in image[i])
-        bottom = self.search(x + 1, len(image), lambda i: '1' not in image[i])  #边界+1
-        left = self.search(0, y, lambda j: "1" in [image[i][j] for i in range(top, bottom)])  #直接range(len(image))也一样的.
-        right = self.search(y + 1, len(image[0]), lambda j: "1" not in [image[i][j] for i in range(top, bottom)])    #边界+1
-        return (right - left) * (bottom - top)
+    def minArea(self, grid, x, y):   #原点在左上角. 和matrix 的index一致的.
+        def search(l, h, check):  #该函数返回最靠左的满足check的index
+            while l <= h:
+                m = (l + h) / 2
+                if l==h: return m
+                if check(m):  h = m #满足的话, mid可能是.
+                else:   l = m + 1  #不满足. mid不可能是   #使用len(grid)而非len(grid)-1主要考虑没搜索到时, 且len(grid)-1那行也没有, 边界结果应返回len(grid)-1
+        r1, r2 = search(0, x, lambda i: '1' in grid[i]), search(x + 1, len(grid), lambda i: '1' not in grid[i])  #边界+1
+        c1, c2 = search(0, y, lambda j: "1" in [grid[i][j] for i in range(r1, r2)]), search(y + 1, len(grid[0]), lambda j: "1" not in [grid[i][j] for i in range(r1, r2)])    #边界+1
+        return (c2 - c1) * (r2 - r1)  #直接range(len(image))也一样的.    
+        
+#从图中的例子看， 边界也可以代替0来包围。
+'''
+O(m*n)解法：
+class Solution:  # algorithm runs in O(m log n + n log m)
+    def minArea(self, image, x, y):
+        return sum('1' in r for r in image) * sum('1' in c for c in zip(*image))
 
-    def search(self, i, j, check):
-        while i < j:
-            mid = (i + j) / 2
-            if check(mid):  j = mid #满足的话, mid可能是.
-            else:   i = mid + 1  #不满足. mid不可能是
-        return i
+'''

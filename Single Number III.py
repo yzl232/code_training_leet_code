@@ -16,8 +16,9 @@ class Solution(object):
     def singleNumber(self, arr):
         s = 0; x=y=0
         for i in arr:    s ^=i
-        right1Bit  = s&(~(s-1))
+        right1Bit  = s&(~(s-1))   # s&(-s)
         for i in arr:
             if right1Bit&i:   x^=i
             else: y^=i
         return [x, y]
+# -x = ~x+1      x-1 = -(~x)    ~(x-1) = -x
