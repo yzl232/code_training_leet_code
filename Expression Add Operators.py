@@ -19,17 +19,16 @@ class Solution(object):
     def addOperators(self, s, target):
         self.ret, self.target = [], target
         for i in range(1, len(s)+1):  # prevent "00*" as a number
-            if i == 1 or s[0] != "0": # prevent "00*" as a number
-                self.dfs(s[:i], int(s[:i]), int(s[:i]), s[i:]) # first number in the string
+            if i == 1 or s[0] != "0":  self.dfs(s[:i], s[i:], int(s[:i]), int(s[:i])) # first number in the string
         return self.ret
 
-    def dfs(self, curS, curN, last, s):
+    def dfs(self, curS, s, curN, last):
         if not s:
             if curN == self.target:  self.ret.append(curS)
             return
         for i in range(1, len(s)+1):
             x = s[:i]
             if i == 1 or s[0] != "0": # prevent "00*" as a number
-                self.dfs(curS + "+" + x, curN + int(x), int(x), s[i:])
-                self.dfs(curS + "-" + x, curN - int(x), -int(x), s[i:])
-                self.dfs(curS + "*" + x, curN - last + last * int(x), last * int(x), s[i:])
+                self.dfs(curS + "+" + x, s[i:], curN + int(x), int(x))
+                self.dfs(curS + "-" + x, s[i:], curN - int(x), -int(x))
+                self.dfs(curS + "*" + x, s[i:], curN - last + last * int(x), last * int(x))

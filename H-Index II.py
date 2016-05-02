@@ -7,9 +7,10 @@ class Solution(object):
         n = len(arr);   l, h = 0, n-1
         while l<=h:
             m = (l+h)/2
+            if l==h and arr[m]>=n-m: return n-m
             if arr[m]<n-m: l= m + 1 #没有那么多。 往右靠。
-            else:  h= m-1    #因为m不满足. 所以+1, -1
-        return n-l
+            else:  h= m    #因为m不满足. 所以+1, -1
+        return 0
 
 #类似搜索左边界.  就是搜索满足第一个满足 arr[i]>=n-i
 
@@ -22,4 +23,14 @@ def hIndex(self, citations):
         if citations[i] >= (n-i):
             return n-i
     return 0
+    
+class Solution(object):
+    def hIndex(self, arr):  # sorted  80%考binary search
+        n = len(arr);   l, h = 0, n-1
+        while l<=h:
+            m = (l+h)/2
+            if n-m > arr[m]: l= m + 1 #没有那么多。 往右靠。
+            else:  h= m-1    #因为m不满足. 所以+1, -1
+        return n-l
 '''
+

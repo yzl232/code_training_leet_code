@@ -14,16 +14,13 @@ Note:
 The main idea is the same with problem Linked List Cycle II,https://leetcode.com/problems/linked-list-cycle-ii/. Use two pointers the fast and the slow. The fast one goes forward two steps each time, while the slow one goes only step each time. They must meet the same item when slow==fast. In fact, they meet in a circle, the duplicate number must be the entry point of the circle when visiting the array from nums[0]. Next we just need to find the entry point. We use a point(we can use the fast one before) to visit form begining with one step each time, do the same job to slow. When fast==slow, they meet at the entry point of the circle. The easy understood code is as follows.
 '''
 class Solution(object):
-    def findDuplicate(self, nums):
-        slow = fast = finder = 0#从0开始走。 因为一直不会碰到0.  
-        while True:
-            slow = nums[slow]
-            fast = nums[nums[fast]]
-            if slow == fast:
-                while finder != slow:
-                    finder = nums[finder]
-                    slow = nums[slow]
-                return finder
+    def findDuplicate(self, arr):
+        slow, fast, ret = arr[0], arr[arr[0]], 0#从0开始走。 因为一直不会碰到0.
+        while slow!=fast:
+            slow, fast = arr[slow], arr[arr[fast]]
+        while ret!=slow:
+            slow, ret = arr[slow], arr[ret]
+        return ret
 
 
 '''

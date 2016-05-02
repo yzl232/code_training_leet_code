@@ -23,23 +23,18 @@
 
 '''
 
-from collections import  deque
 class ZigzagIterator(object):
-
     def __init__(self, v1, v2):
-        self.q= deque([x for x in (v1, v2) if x])   #这里必须排除掉空的。
+        self.q= collections.deque([x for x in (v1, v2) if x])   #这里必须排除掉空的。
         
     def hasNext(self):
-        return False if not self.q else True
+        return len(self.q)!=0
 
     def next(self):
         assert self.hasNext()   #以后都可以加一句这个
-        t = self.q.popleft()
-        val = t.pop(0)
-        if t:self.q.append(t)       # if t.hasNext()   这句不需要。  因为hasNext 已经判断了
+        t = self.q.popleft();    val = t.pop(0)
+        if t: self.q.append(t)       # if t.hasNext()   这句不需要。  因为hasNext 已经判断了
         return val
-#做过。
-
 
 
 # encoding=utf-8

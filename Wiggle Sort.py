@@ -7,9 +7,7 @@
 
 '''
 
-class Solution:
+class Solution:  #这是sort.   O(nlogN)  .  O(N)见这里。  http://bookshadow.com/weblog/2015/12/31/leetcode-wiggle-sort-ii/
     def wiggleSort(self, arr):
         for i in range(1, len(arr)):
-            if (i&1 and arr[i] < arr[i-1])  or (not (i&1) and arr[i] > arr[i-1]):
-                arr[i], arr[i-1] = arr[i-1], arr[i]
-        
+            if (i%2 and arr[i] < arr[i-1])  or (not (i%2) and arr[i] > arr[i-1]):  arr[i], arr[i-1] = arr[i-1], arr[i]

@@ -5,6 +5,7 @@ Follow up:
 Can you solve it without using extra space? 
 '''
 
+
 # Definition for singly-linked list.
 # class ListNode:
 #     def __init__(self, x):
@@ -14,12 +15,11 @@ class Solution:  #http://fisherlei.blogspot.com/2013/11/leetcode-linked-list-cyc
     # @param head, a ListNode
     # @return a list node
     def detectCycle(self, head):
-        fast = slow = head
+        fast = slow = ret = head
         while fast and fast.next :
             slow, fast = slow.next, fast.next.next
             if fast == slow:   break
         if not fast or not fast.next: return
-        fast = head
-        while fast!= slow:
-            fast, slow = fast.next, slow.next
-        return fast
+        while ret!= slow:
+            ret, slow = ret.next, slow.next
+        return ret

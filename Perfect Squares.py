@@ -18,19 +18,24 @@ input:   50     ouput :  25, 25
 #G家出现过好几次
 
 #G家题目
-#以前的做法是O(n2)。 有更好的O(n1.5)的做法。
+#以前的做法是O(n2)。 有更好的O(n1.5)的做法。 数学方法是O(sqrt(n))
 
-class Solution:
-    def minNum(self, num):
+class Solution(object):   # 数学方法是O(sqrt(n))
+       def numSquares(self, n):
+            while n%4==0: n/=4
+            if n%8==7: return 4
+            for a in range(int(n**0.5)+1):
+                b = int((n-a*a)**0.5)
+                if a*a+b*b==n:   return (a!=0)+(b!=0)
+            return 3
+'''
+class Solution(object):
+    def numSquares(self, num):
         dp = [i for i in range(num+1)]
         for i in range(2, num+1):
-            dp[i]=min(  1+dp[i-j*j] for j in range(1, int(i**0.5)+1)   )
+            dp[i] = min(1+dp[i-j*j] for j in range(1, int(num**0.5)+1))
         return dp[-1]
-s = Solution()
-print s.minNum(14)
-print s.minNum(50)
-print s.minNum(12)
-print s.minNum(3)
+'''
 
 
 '''

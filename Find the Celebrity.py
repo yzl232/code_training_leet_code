@@ -16,17 +16,19 @@ If A doesn’t know B, then B can’t be celebrity. Discard B, and A may be cele
 
 '''
 
+# The knows API is already defined for you.
+# @param a, person a
+# @param b, person b
+# @return a boolean, whether a knows b
+# def knows(a, b):
+
 class Solution:
     def findCelebrity(self, n):
         x = 0
         for i in xrange(n):
             if knows(x, i):      x = i
-        if any(knows(x, i) for i in xrange(x)) or any(not knows(i, x) for i in xrange(n)): return -1
+        if any(knows(x, i) or not knows(i, x) for i in xrange(n) if i!=x): return -1
         return x
-    
-
-
-
 
 
 

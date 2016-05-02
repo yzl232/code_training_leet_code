@@ -7,6 +7,7 @@ You are given an API bool isBadVersion(version) which will return whether versio
 
 '''
 
+
 # The isBadVersion API is already defined for you.
 # @param version, an integer
 # @return a bool
@@ -20,7 +21,7 @@ class Solution(object):
         """
         l, h = 1, n
         while l<=h:
-            if l==h: return l
             m = (l+h)/2
+            if l==h and isBadVersion(m): return m
             if isBadVersion(m): h=m
             else: l=m+1

@@ -34,16 +34,14 @@ class PeekingIterator(object):
         return self.top!=None
 
     def next(self):
-        ret = self.top   # self. 设置空很关键.
-        self.top = self.getTop()    #提前一步。 注意是自己的iter   #更新一个新的top
-        return ret
+        cur, self.top= self.top, self.getTop()    #提前一步。 注意是自己的iter   #更新一个新的top
+        return cur
 
     def getTop(self):
         return None if not self.iter.hasNext() else self.iter.next()
 
     def peek(self):
         return self.top
-
 '''
 1.写一个Stream的interface, 就是有generic, 有peek(), next(), hasNext(), append()方法. 然后写一个merge List of sorted stream, 就是的k-way merge. 然后因为是generic, 传入参数要包括一个comparator.
 
