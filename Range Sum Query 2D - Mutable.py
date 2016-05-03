@@ -41,11 +41,12 @@ class NumMatrix(object):  # Right
             j = c+1   #每个循环都要重新set
             while j < self.n+1:
                 self.bit[i][j] += diff
-                j += (j & -j)
-            i += (i & -i)
+                j += j & -j
+            i += i & -i
 
     def sumRegion(self, r1, c1, r2, c2):
-        return self.getSum(r2, c2) + self.getSum(r1 - 1, c1 - 1) - self.getSum(r1 - 1, c2) - self.getSum(r2, c1 - 1)
+        c1-=1;  r1-=1 
+        return self.getSum(r2, c2) + self.getSum(r1, c1 ) - self.getSum(r1, c2) - self.getSum(r2, c1)
 
     def getSum(self, r, c):
         ret, i = 0, r+1
@@ -53,8 +54,8 @@ class NumMatrix(object):  # Right
             j = c+1
             while j>0:
                 ret += self.bit[i][j]
-                j -= (j & -j)
-            i -= (i & -i)
+                j -= j & -j
+            i -= i & -i
         return ret
 
 # Your NumMatrix object will be instantiated and called as such:

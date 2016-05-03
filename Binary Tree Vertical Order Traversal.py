@@ -1,11 +1,77 @@
+'''
 
+Given a binary tree, return the vertical order traversal of its nodes' values. (ie, from top to bottom, column by column).
+
+If two nodes are in the same row and column, the order should be from left to right.
+
+Examples:
+
+    Given binary tree [3,9,20,null,null,15,7],
+
+       3
+      /\
+     /  \
+     9  20
+        /\
+       /  \
+      15   7
+
+    return its vertical order traversal as:
+
+    [
+      [9],
+      [3,15],
+      [20],
+      [7]
+    ]
+
+    Given binary tree [3,9,8,4,0,1,7],
+
+         3
+        /\
+       /  \
+       9   8
+      /\  /\
+     /  \/  \
+     4  01   7
+
+    return its vertical order traversal as:
+
+    [
+      [4],
+      [9],
+      [3,0,1],
+      [8],
+      [7]
+    ]
+
+    Given binary tree [3,9,8,4,0,1,7,null,null,null,2,5] (0's right child is 2 and 1's left child is 5),
+
+         3
+        /\
+       /  \
+       9   8
+      /\  /\
+     /  \/  \
+     4  01   7
+        /\
+       /  \
+       5   2
+
+    return its vertical order traversal as:
+
+    [
+      [4],
+      [9,5],
+      [3,0,1],
+      [8,2],
+      [7]
+    ]
+
+
+'''
 class Solution(object):
     def verticalOrder(self, root):
-        """
-        :type root: TreeNode
-        :rtype: List[List[int]]
-        """
-        if not root: return []
         pre, d = [(root, 0)], {}   # 除了pre, cur之外
         while pre:
             cur = []     #必须用array。 因为是有序的。 并且不会有重复
@@ -33,7 +99,21 @@ We have a binary tree, suppose like this:
 
 如果10在11前面， 就是适合用BFS。   用DFS药加上row变量
 如果11在10前面。 就是适合用DFS。    root, left, right
-本题下面的DFS错误。
+用DFS也可以做。 但是用到col, lvl 多次排序比较麻烦。
+
+
+class Solution:
+    def verticalOrder(self, root):
+        self.d = {}  #用hashtable是因为不知道最左边index有多左。
+        self.dfs(root, 0, 0)  #注意下面的sort, 必须按第一个sort. 不能包括root.val. 有很多同一层的.
+        return [[x for lvl,x in sorted(self.d[key], key=lambda x:x[0])] for key in sorted(self.d)]
+
+    def dfs(self, root, col, lvl):
+        if not root: return
+        if col not in self.d:  self.d[col] = [] ##可以看出，注意8, 7, 9的顺序，  是inorder, root,   left, ，  right
+        self.d[col].append((lvl, root.val))
+        self.dfs(root.left, col - 1, lvl+1)
+        self.dfs(root.right, col + 1, lvl+1)
 
 '''
 #可以看出，注意8, 7, 9的顺序，  是inorder, root,   left, ，  right

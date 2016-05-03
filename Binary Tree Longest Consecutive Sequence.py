@@ -26,7 +26,6 @@ Longest consecutive sequence path is 3-4-5, so return 3.
 Longest consecutive sequence path is 2-3,not3-2-1, so return 2.
 '''
 
-
 class Solution:
     def longestConsecutive(self, root):
         self.ret = 0
@@ -44,12 +43,13 @@ class Solution:
 class Solution:
     def longestConsecutive(self, root):
         if not root:    return 0
-        ret = 0;  stack = [(root, 1)]
-        while stack:
-            node, cnt = stack.pop()
-            if node.left:    stack.append((node.left, cnt+1 if node.left.val == node.val + 1 else 1))
-            if node.right:   stack.append((node.right, cnt+1 if node.right.val == node.val + 1 else 1))
-            ret = max(ret, cnt)
+        ret = 0;  pre = [(root, 1)]
+        while pre:
+            cur = []
+            for x, cnt in pre:
+                ret = max(ret, cnt)
+                if x.left:    cur.append((x.left, cnt+1 if x.left.val == x.val + 1 else 1))
+                if x.right:   cur.append((x.right, cnt+1 if x.right.val == x.val + 1 else 1))
+            pre = cur
         return ret
-
 '''

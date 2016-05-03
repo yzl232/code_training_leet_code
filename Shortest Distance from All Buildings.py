@@ -21,6 +21,23 @@ Note:
 There will be at least one building. If it is not possible to build such house according to the above rules, return -1.
 
 '''
+
+class Solution(object):
+    def shortestDistance(self, grid):
+        m, n, self.k = len(grid), len(grid[0]), 0;      dist = [[0] * n for i in xrange(m)]
+        bld = len([self.bfs(i, j, grid, dist) for i in range(m) for j in range(n) if grid[i][j]==1])
+        return min([dist[i][j] for i in range(m) for j in range(n) if grid[i][j] == self.k] or [-1])
+
+    def bfs(self, r, c, grid, dist):
+        pre, step, self.k = [(r, c)], 1, self.k - 1
+        while pre:  #改变值得目的在于节省一个visited
+            cur = []  #只改变过道, 障碍,building都不变的.
+            for x, y in pre:      #都改成了self.k.  等于self.k+1的就是可以走的,继续改.
+                for i, j in ((x + 1, y), (x - 1, y), (x, y + 1), (x, y - 1)):
+                    if 0<= i <len(grid) and 0<=j<len(grid[0]) and grid[i][j]==self.k+1:
+                        cur, dist[i][j], grid[i][j]= cur+[(i, j)], dist[i][j]+step, self.k
+            pre = cur;    step += 1
+'''
 #代码很长。  难倒是没有那么难。 健身房文件。 以前做过。
 #
 
@@ -59,3 +76,4 @@ class Solution:
                         if cntMatrix==None: cntMatrix[r][c]=cnt  #只考虑第一次过去
             pre = cur
         return cntMatrix
+'''

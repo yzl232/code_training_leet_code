@@ -24,13 +24,38 @@ AB = | -1 0 3 | x | 0 0 0 | = | -7 0 3 |
 '''
 
 # encoding=utf-8
+class Solution:  #只存i不存j
+    def multiply(self, a, b):  # 1X3   , 3X1 , 有衔接.
+        cols = [[(r, x) for r, x in enumerate(col) if x] if any(col) else [] for col in zip(*b)]  #col帅选掉了很多计算了.
+        return [[sum(row[j]*x for j, x in col) for col in cols] if any(row) else [0]*len(row) for row in a]
 
-class Solution:
-    def multiply(self, A, B):  # 1X3   , 3X1 , 有衔接.
-        cols = [[(j, x) for j, x in enumerate(col) if x] for col in zip(*B)]
-        return [[sum(row[j]*x for j, x in col if row[j]) for col in cols]  for row in A]
-
-
+'''
+稀疏vector的点乘
+#facebook这道题目。 可以这样。只储存非0的value.    (val, index). sort by index
+class Solution:  #  (val, index).
+    def multip(self, v1, v2):
+        ret =[];  i=j=0
+        while i<len(v1) and j<len(v2):
+            x1, x2 = v1[i][-1], v2[j][-1]
+            if x1==x2:    ret.append(   (v1[i][0]*v2[j][0], x1  )    )
+            elif x1<x2:  i+=1
+            else: j+=1
+        return ret
+'''
+        
+'''
+稀疏vector的点乘
+#facebook这道题目。 可以这样。只储存非0的value.    (val, index). sort by index
+class Solution:  #  (val, index).
+    def multip(self, v1, v2):
+        ret =[];  i=j=0
+        while i<len(v1) and j<len(v2):
+            x1, x2 = v1[i][-1], v2[j][-1]
+            if x1==x2:    ret.append(   (v1[i][0]*v2[j][0], x1  )    )
+            elif x1<x2:  i+=1
+            else: j+=1
+        return ret
+'''
 s = Solution()
 A = [
   [ 1, 0, 0],

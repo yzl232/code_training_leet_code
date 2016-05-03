@@ -13,17 +13,18 @@ Given word = "word", return the following list (order does not matter):
 '''
 
 class Solution(object):
-    def generateAbbreviations(self, word):
-        """
-        :type word: str
-        :rtype: List[str]
-        """
-        ret = []
-        def helper(i, cur, cnt):
-            if i == len(word):
-                ret.append(cur+str(cnt) if cnt>0 else cur)
-                return
-            helper(i + 1, cur, cnt + 1)
-            helper(i + 1, cur +(str(cnt) if cnt>0 else "") +word[i], 0)
-        helper(0, "", 0)
-        return ret
+    def generateAbbreviations(self, s):
+        self.ret = []
+        self.dfs("", 0, s)
+        return self.ret
+    
+    def dfs(self, cur, cnt, s):
+        if not s:
+            self.ret.append(cur+(str(cnt) if cnt>0 else ""))
+            return
+        self.dfs(cur, cnt + 1, s[1:])
+        self.dfs(cur + (str(cnt) if cnt > 0 else "") + s[0], 0, s[1:])  #注意这里加上s[0] . 与完成的还是不同
+##a
+# return ['a', '1']
+##aa
+# return ["1a", "a1", "2", "aa"]
