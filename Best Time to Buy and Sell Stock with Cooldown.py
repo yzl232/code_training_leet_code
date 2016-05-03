@@ -20,14 +20,28 @@ transactions = [buy, sell, cooldown, buy, sell]
 # https://leetcode.com/discuss/79283/4-line-python-solution-52-ms
 class Solution(object):
     def maxProfit(self, prices):
-        notHold, coolDown, hold = 0, 0, float('-inf')
+        noHold, cool, hold = 0, 0, float('-inf')
         for x in prices:
-            hold, notHold, coolDown = max(notHold-x, hold), max(coolDown, notHold), hold+x
+            hold, noHold, cool = max(hold, noHold - x), max(noHold, cool), hold + x
+        return max(noHold, cool, hold)
 '''
 hold =>   cooldown,  hold
-cooldown =>  unhold            cooldown由于冷却的存在, 不能直接买, 变成hold
+cooldown =>  unhold            cooldown由于冷却的存在, 不能直接买, 变成hold.    cooldown是noHold的特殊形式
 unhold =>  unhold,  hold
 
+
+
+The key is 3 states and 5 edges for state transition. 3 states are notHold (stock), hold (stock), and notHold_cooldown. The initial values of the latter two are negative infinity since they are meaningless, i.e. you won't hold stocks at first and there's no cooldown at first. The 5 edges:
+
+hold -----do nothing----->hold
+
+hold -----sell----->notHold_cooldown
+
+notHold -----do nothing -----> notHold
+
+notHold -----buy-----> hold
+
+notHold_cooldown -----do nothing----->notHold
 
 '''
 

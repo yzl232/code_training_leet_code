@@ -15,17 +15,12 @@ Note:
     There are many calls to sumRange function.
 
 '''
-class NumMatrix(object):
-      def __init__(self, matrix):
-          if not matrix:  return
-          n, m = len(matrix), len(matrix[0])
-          self.s = [[0 for j in xrange(m + 1)] for i in xrange(n + 1)]
-          for i in xrange(1, n+1):
-              for j in xrange(1, m+1):
-                  self.s[i][j] = matrix[i - 1][j - 1] + self.s[i][j - 1] + self.s[i - 1][j] - self.s[i - 1][j - 1]
+class NumArray(object):
+    def __init__(self, nums):
+        self.accu = [0]  #考虑为0的时候,  acumu多放一个0比较合适. 
+        for x in nums:    self.accu.append(self.accu[-1] + x)
 
-
-      def sumRegion(self, r1, c1, r2, c2):
-          return self.s[r2+1][c2+1] - self.s[r2+1][c1 ] - self.s[r1][c2+1] + self.s[r1 ][c1 ]  #这一行非得举例子才能写清楚。
+    def sumRange(self, i, j):
+        return self.accu[j + 1] - self.accu[i]
 
  

@@ -27,3 +27,4 @@ class Solution(object):
         bulls = sum(s1[i] == s2[i] for i in range(len(s1)))
         both = sum(min(s1.count(x), s2.count(x)) for x in '0123456789')
         return str(bulls)+'A'+str(both-bulls)+'B'
+#bull, cow都是共同存在。  bull是位置也正确， cow是位置不正确。

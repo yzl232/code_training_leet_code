@@ -27,5 +27,5 @@ class NumMatrix(object):
 
 
       def sumRegion(self, r1, c1, r2, c2):
-          return self.s[r2+1][c2+1] - self.s[r2+1][c1 ] - self.s[r1][c2+1] + self.s[r1 ][c1 ]
-
+          r2+=1;  c2+=1
+          return self.s[r2][c2] - self.s[r2][c1 ] - self.s[r1][c2] + self.s[r1 ][c1 ]

@@ -41,11 +41,6 @@ class Codec:
         self.dfs(root.right)
 
     def deserialize(self, data):
-        """Decodes your encoded data to tree.
-
-        :type data: str
-        :rtype: TreeNode
-        """
         self.vals = iter(data.split())
         return self.helper()
 
@@ -53,8 +48,7 @@ class Codec:
         x = next(self.vals, None)   # if not x: return 
         if x=="#": return
         root = TreeNode(x)
-        root.left = self.helper()
-        root.right = self.helper()
+        root.left, root.right = self.helper(), self.helper()
         return root
 
 # Your Codec object will be instantiated and called as such:

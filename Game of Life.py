@@ -18,22 +18,24 @@ Follow up:
 '''
 
 class Solution(object):
-    def gameOfLife(self, board):
-        """
-        :type board: List[List[int]]
-        :rtype: void Do not return anything, modify board in-place instead.
-        """
-        m, n = len(board), len(board[0])
-        cur = {}
-        trans = {(1, 2):1, (0, 3):1, (1, 3):1}  #很赞. 如果要活着。邻居数目只能是 2<=n<=3.   也就是n=2 or n=3        # (val, cnt) => val
-        for i in range(m):
-            for j in range(n):
-                cnt = sum( board[x][y] for x in [i-1, i, i+1] for y in [j-1, j, j+1] if (i!=x or j!=y) and (0<=x<m and 0<=y<n))
-                val = trans.get(   (board[i][j], cnt)  , 0)
-                cur[(i, j)] = val
+    def gameOfLife(self, board):   #很赞. 如果要活着。邻居数目只能是 2<=n<=3.   也就是n=2 or n=3        # (val, cnt) => val
+        m, n = len(board), len(board[0]);trans = {(1, 2):1, (0, 3):1, (1, 3):1}
+        cur = {(i, j): trans.get((board[i][j], sum( board[x][y] for x in [i-1, i, i+1] for y in [j-1, j, j+1] if (i!=x or j!=y) and (0<=x<m and 0<=y<n))), 0) for i in range(m) for j in range(n) }
         for x,y in cur:  board[x][y] = cur[(x, y)]
 
 '''
+class Solution(object):
+    def gameOfLife(self, board):
+        m, n = len(board), len(board[0]); cur = {}; trans = {(1, 2):1, (0, 3):1, (1, 3):1}
+        for i in range(m): #很赞. 如果要活着。邻居数目只能是 2<=n<=3.   也就是n=2 or n=3        # (val, cnt) => val
+            for j in range(n):
+                cnt = sum( board[x][y] for x in [i-1, i, i+1] for y in [j-1, j, j+1] if (i!=x or j!=y) and (0<=x<m and 0<=y<n))
+                cur[(i, j)] =  trans.get((board[i][j], cnt)  , 0)
+        for x,y in cur:  board[x][y] = cur[(x, y)]
+
+
+
+
 
 # 这个是in-place的方法
 class Solution(object):
@@ -63,16 +65,16 @@ class Solution(object):
         """
         m, n = len(board), len(board[0])
         trans = { (1, 2): 1, (1, 3): 1, (0, 3): 1 }
-        pre = {(i, j):1 for i in range(m) for j in range(n) if board[i][j]==1}  #类似于稀疏矩阵的存储   
-        cur = {}  #没必要搞pre。 
+        pre = {(i, j):1 for i in range(m) for j in range(n) if board[i][j]==1}  #类似于稀疏矩阵的存储
+        cur = {}  #没必要搞pre。
         for r in range(m):
             for c in range(n):
                 cnt = sum(pre.get((x,y), 0)for x in[r-1, r, r+1] for y in [c-1, c, c+1] if x!=r or y!=c)  #不算自己
                 val = pre.get((r,c),  0)
                 if (val, cnt) not in trans: cur[(r,c)]=1
         for r,c in cur: board[r][c] = cur.get((r,c),  0)
-        
-        
+
+
 
 # 这个是in-place的方法
 class Solution(object):
@@ -102,9 +104,9 @@ To solve it in place, we use 2 bits to store 2 states:
 [2nd bit, 1st bit] = [next state, current state]
 
 - 00  dead (next) <- dead (current)
-- 01  dead (next) <- live (current)  
-- 10  live (next) <- dead (current)  
-- 11  live (next) <- live (current) 
+- 01  dead (next) <- live (current)
+- 10  live (next) <- dead (current)
+- 11  live (next) <- live (current)
 
     In the beginning, every cell is either 00 or 01.
     Notice that 1st state is independent of 2nd state.
