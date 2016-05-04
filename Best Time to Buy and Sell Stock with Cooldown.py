@@ -24,6 +24,9 @@ class Solution(object):
         for x in prices:
             hold, noHold, cool = max(hold, noHold - x), max(noHold, cool), hold + x
         return max(noHold, cool, hold)
+    
+#都是max. 初始取最小.    cool, nohold为正数. 初始取0.    hold为负数, 取float("-inf")
+    
 '''
 hold =>   cooldown,  hold
 cooldown =>  unhold            cooldown由于冷却的存在, 不能直接买, 变成hold.    cooldown是noHold的特殊形式

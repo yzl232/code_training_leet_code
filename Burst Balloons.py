@@ -17,3 +17,29 @@ Return 167
    coins =  3*1*5      +  3*5*8    +  1*3*8      + 1*8*1   = 167
 
 '''
+
+class Solution(object):
+    def maxCoins(self, arr):     #正着看, l, i, r相邻.   但是倒着推理, l, i中间可能有爆炸掉了的
+        self.d = {}; arr= [1] + arr + [1]   #爆炸只少掉一个.
+        return self.dfs(0, len(arr) - 1, arr)
+
+    def dfs(self, l, r, arr):
+        if (l, r) not in self.d:
+            self.d[(l, r)] = max([arr[l]*arr[i]*arr[r] + self.dfs(l, i, arr) + self.dfs(i, r, arr) for i in range(l + 1, r)] or [0])
+        return self.d[(l, r)]
+
+'''
+class Solution(object):
+    def maxCoins(self, iNums):
+        nums = [1] + [i for i in iNums if i > 0] + [1]
+        n = len(nums)
+        dp = [[0]*n for _ in xrange(n)]
+
+        for k in xrange(2, n):
+            for left in xrange(0, n - k):
+                right = left + k
+                for i in xrange(left + 1,right):
+                    dp[left][right] = max(dp[left][right],
+                           nums[left] * nums[i] * nums[right] + dp[left][i] + dp[i][right])
+        return dp[0][n - 1]
+'''

@@ -12,21 +12,13 @@ Return "acdb"
 '''
 
 class Solution(object):
-   def removeDuplicateLetters(self, s):
-        for c in sorted(set(s)):   # 贪心.   从最小的ch开始.  如果后面拥有所有的ch, 那么这个chJ就是结果.
+   def removeDuplicateLetters(self, s): #sort把set自动转换成array了.
+        for c in sorted(set(s)):# 贪心.   从最小的ch开始.  如果后面拥有所有的ch, 那么这个chJ就是结果.
             suffix = s[s.index(c):]
-            if set(suffix) == set(s):
-                return c + self.removeDuplicateLetters(suffix.replace(c, ''))
+            if set(suffix) == set(s):  return c + self.removeDuplicateLetters(suffix.replace(c, ''))
         return ''
-
-
-s = Solution()
-print s.removeDuplicateLetters("bcabc")
-print s.removeDuplicateLetters("cbacdcbc")
-print s.removeDuplicateLetters("cbaaaba")
-
 '''
-Given the string s, the greedy choice (i.e., the leftmost letter in the answer) is the smallest s[i], s.t. the suffix s[i .. ] contains all the unique letters. (Note that, when there are more than one smallest s[i]'s, we choose the leftmost one. Why? Simply consider the example: "abcacb".)
+ Given the string s, the greedy choice (i.e., the leftmost letter in the answer) is the smallest s[i], s.t. the suffix s[i .. ] contains all the unique letters. (Note that, when there are more than one smallest s[i]'s, we choose the leftmost one. Why? Simply consider the example: "abcacb".)
 
 After determining the greedy choice s[i], we get a new string s' from s by
 

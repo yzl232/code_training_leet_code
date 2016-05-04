@@ -9,18 +9,16 @@ Note:
 (2) The given numbers in primes are in ascending order.
 (3) 0 < k ≤ 100, 0 < n ≤ 106, 0 < primes[i] < 1000. 
 '''
+
 class Solution(object):
     def nthSuperUglyNumber(self, n, primes):  #用到三个array.   idx,  primes.  ret.
-        d = {x:0 for x in primes}
-        ret = [float('inf')]*n;  ret[0] = 1
+        ret = [1]*n; d = {x:0 for x in primes}
         for i in xrange(1, n):
-            ret[i] = min(ret[idx] * x for x, idx in d.items())
-            for x, idx in d.items():
-                if ret[i] == ret[idx]*x:  d[x]+=1
+            ret[i] = min(ret[j] * x for x, j in d.items())
+            for x, j in d.items():
+                if ret[i] == ret[j]*x:  d[x]+=1
         return ret[-1]
 
-s = Solution()
-print s.nthSuperUglyNumber(9, [3, 5, 7])
 
 #对比一下这个
 '''
@@ -49,3 +47,4 @@ class Solution(object):
             if m== ret[c5]*5: c5+=1    #print '%d th element, %d, c3:%d, c5:%d, c7: %d' % (i, ret[i], c3, c5, c7)
         return ret[-1]
 '''
+

@@ -24,8 +24,7 @@ class Solution(object):
             if a not in d: d[a] = []     #Eulerian Path. 除了起点, 终点.  都是偶数的degree.  Eulerian Circuit, 则全是偶数degree.
             d[a].append(b)    #  当stuck.  那么说明奇数的degree, 发现了一个终点了.
         def helper(x):
-            while x in d and d[x]:
-                helper(d[x].pop())
+            while x in d and d[x]:  helper(d[x].pop())
             ret.append(x)
         helper('JFK')
         return ret[::-1]

@@ -7,18 +7,14 @@ Could you do it without using any loop / recursion?
 
 class Solution(object):
     def isPowerOfThree(self, n):
-        """
-        :type n: int
-        :rtype: bool
-        """
         return n > 0 and 3 ** round(math.log(n,3)) == n
 '''
 class Solution(object):
     def isPowerOfThree(self, n):
-        """
-        :type n: int
-        :rtype: bool
-        """
+        return n==1 or (n%3==0 and n!=0 and self.isPowerOfThree(n/3))
+
+class Solution(object):
+    def isPowerOfThree(self, n):
         if n == 1:
             return True
         if n == 0 or n % 3 > 0:

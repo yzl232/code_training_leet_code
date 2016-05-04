@@ -22,14 +22,32 @@ No such pair of words.
 '''
 
 class Solution(object):
-    def maxProduct(self, words):
-        d = dict(sorted((sum(1 << (ord(c) - 97) for c in set(w)), len(w)) for w in words))  # dict([(1, 2)])      {1: 2}
-        return max([d[k1] * d[k2] for k1 in d for k2 in d if not k1 & k2] or [0])
-        
-        
-        
-# encoding=utf-8
+    def maxProduct(self, words):#  sort   for same Len, e.g. 11101, we want the larger len(word) to max the possibility.
+        d = {sum(1<<(ord(c)-97) for c in set(w)):  len(w) for w in sorted(words, key=lambda x:len(x))}
+        return max([d[k1] * d[k2] for k1 in d for k2 in d if not k1 & k2] or [0])  #O(n2)
+# 可以预处理。 用dp。 2**26 = 67108864，  67 M 不到。 比较小。 可以接受
+#26字母。每个字母存在不存在， 共 2**26 种可能. 每种可能找到最长的长度
+#
 '''
+    因为可以出现的实际上是x中那些为0的bit，我们需要对它取反。 所以最终
+max(length of word * dp[(~x) & ((1 << 26) - 1)]) 为所求   #取最低25位
+
+预处理.
+1.  第一步:  将dp[]  建立.  2**26.      把array遍历一遍, 赋值长度.   没有的长度为0.
+2  第二部.  dp.    
+递推关键部分:    ( set bit 从少到多的递推。)
+ 我自己写的。  dp[x] = max([dp[y]  for y that that remove 1 less set bit from x ] + [dp[x]])
+
+for each x from 1 to 2^26 - 1  (say x has N set bits)
+       for each y that set bits number is N-1:
+            dp[x] = max(dp[x], dp[y])
+            
+3 .               max(length of word * dp[(~x) & ((1 << 26) - 1)]) 为所求   #取最低25位
+
+   
+
+# encoding=utf-8
+
 given a dictionary of wrods,find the pair of word with following property:
 1,the two word don't have same letter.
 2,the multiple of the two word's length is maximum.

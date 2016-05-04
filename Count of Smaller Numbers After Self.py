@@ -20,17 +20,18 @@ Return the array [2, 1, 1, 0]. '''
 
 class Solution:
     def countSmaller(self, nums):
-        def sort(enum):
-            half = len(enum) / 2
-            if half:
-                left, right = sort(enum[:half]), sort(enum[half:])
-                for i in xrange(len(enum)-1, -1, -1):
-                    if not right or left and left[-1][1] > right[-1][1]:
-                        smaller[left[-1][0]] += len(right)
-                        enum[i] = left.pop()
-                    else:
-                        enum[i] = right.pop()
-            return enum
-        smaller = [0] * len(nums)
-        sort(list(enumerate(nums)))
-        return smaller
+        def mSort(arr):
+            if len(arr)<=1: return arr
+            l, r = mSort(arr[:len(arr) / 2]), mSort(arr[len(arr) / 2:])
+            for i in xrange(len(arr)-1, -1, -1):   #merge
+                if not r or (l and l[-1][1] > r[-1][1]):
+                    ret[l[-1][0]] += len(r)# 和inversion一样， 都是加上l, 或r的 右边一部分的长度
+                    arr[i] = l.pop()
+                else:  arr[i] = r.pop()
+            return arr
+        ret = [0] * len(nums)
+        mSort(list(enumerate(nums)))
+        return ret
+#比较tricky的题目。 类似以前count inversion的题目.    但不是总数， 是每个的inversion数目都计算。    而且是计算比自己小的数， 于是必须反向。
+# 可以计算surpass.   处理一下得到。
+#不过会代码长， 还是用stepha你的代码。

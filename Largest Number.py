@@ -16,3 +16,5 @@ class Solution:
         return ''.join(num).lstrip('0') or '0'
 # merge interval用到了key= lambda x: x.start.  
 #这是cmp = lambda x,y : cmp(y+x, x+y)
+
+# 与https://leetcode.com/problems/create-maximum-number/区别。  这个是一个array。 那个是2个array。 那个的array都是digits.这边不一定。

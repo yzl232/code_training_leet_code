@@ -24,20 +24,14 @@ return [9, 8, 9]
 '''
 
 class Solution(object):
-    def maxNumber(self, nums1, nums2, k):
-        def prep(nums, k):
-            drop = len(nums) - k
-            out = []
-            for num in nums:
-                while drop>0 and out and out[-1] < num:   #有点像maximum rectangle。  尽量保持out最大。
-                    out.pop()
-                    drop -= 1
-                out.append(num)
-            return out[:k]
-    
-        def merge(a, b):
-            return [max(a, b).pop(0) for _ in a+b]
-    
-        return max(merge(prep(nums1, i), prep(nums2, k-i))
-                   for i in range(k+1)
-                   if i <= len(nums1) and k-i <= len(nums2))
+    def maxNumber(self, a, b, k):
+        def prep(arr, k):
+            drop = len(arr) - k; ret = []
+            for x in arr:  #很巧妙, 利用了drop = len(arr) - k.  这样从最开始就可以pop了.
+                while drop>0 and ret and ret[-1] < x:
+                    ret.pop(); drop -= 1 # #有点像maximum rectangle。  尽量保持out最大。
+                ret.append(x)
+            return ret[:k]
+        def merge(a, b): return [max(a, b).pop(0) for _ in a+b]
+        return max(merge(prep(a, i), prep(b, k - i)) for i in range(k + 1) if i <= len(a) and k - i <= len(b))
+#突然就解决了rocket fuel的题  

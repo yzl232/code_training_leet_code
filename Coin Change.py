@@ -14,11 +14,8 @@ You may assume that you have an infinite number of each kind of coin.
 '''
 
 class Solution(object):
-    def coinChange(self, coins, amount):
-        MAX = float('inf')
-        dp = [0] + [MAX] * amount
-
-        for i in xrange(1, amount + 1):
-            dp[i] = min([dp[i - c] if i - c >= 0 else MAX for c in coins]) + 1
-
-        return -1 if dp[-1] == MAX else dp[-1]
+    def coinChange(self, coins, x):
+        dp = [0]+x*[float("inf")]
+        for i in range(1, x+1):
+            dp[i] = 1+min([dp[i-c] for c in coins  if i-c>=0] or [float("inf")])
+        return -1 if dp[-1] == float("inf") else dp[-1]

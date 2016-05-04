@@ -29,6 +29,8 @@ class Solution(object):
         if not s: return n >= 3
         return any((i==1 or s[0]!="0") and (x1==None or x2==None or int(s[:i]) == x1 + x2) and self.dfs(s[i:], n + 1, x2, int(s[: i])) for i in range(1, len(s) + 1))
 
+#        return n >= 3 if not s else any((i==1 or s[0]!="0") and (x1==None or x2==None or int(s[:i]) == x1 + x2) and self.dfs(s[i:], n + 1, x2, int(s[: i])) for i in range(1, len(s) + 1))
+
 '''
 
 class Solution(object):
