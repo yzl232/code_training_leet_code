@@ -19,7 +19,7 @@ Another possible reconstruction is ["JFK","SFO","ATL","JFK","ATL","SFO"]. But it
 
 class Solution(object):
     def findItinerary(self, tickets):
-        d, ret ={}, []
+        d, ret ={}, []  #sort.  d里面放更大的值.   因为递归, JFK在最外面了.. 要反一下.      
         for a, b in sorted(tickets)[::-1]:  #题中提到要是最小的lexi order
             if a not in d: d[a] = []     #Eulerian Path. 除了起点, 终点.  都是偶数的degree.  Eulerian Circuit, 则全是偶数degree.
             d[a].append(b)    #  当stuck.  那么说明奇数的degree, 发现了一个终点了.
@@ -29,7 +29,24 @@ class Solution(object):
         helper('JFK')
         return ret[::-1]
 
-'''
+
+'''  不理解的话, 打印下面的, 配合leetcode图, 就明白了
+class Solution(object):
+    def findItinerary(self, tickets):
+        d, ret ={}, []  #sort.    反向. 因为后面用了pop.
+        for a, b in sorted(tickets)[::-1]:  #题中提到要是最小的lexi order
+            if a not in d: d[a] = []     #Eulerian Path. 除了起点, 终点.  都是偶数的degree.  Eulerian Circuit, 则全是偶数degree.
+            d[a].append(b)
+        def helper(x):   #  当stuck.  那么说明奇数的degree, 发现了一个终点了.
+            while x in d and d[x]:
+                print x, d[x], ret
+                helper(d[x].pop())
+            ret.append(x)
+            print ret
+        helper('JFK')
+        return ret[::-1]
+print Solution().findItinerary([["JFK", "A"], ["A", "C"], ["C", "D"], ["D", "B"], ["D", "A"], ["B", "C"], ["C", "JFK"],  ["JFK", "D"]])
+
 欧拉通路（Eulerian path）：
 
 

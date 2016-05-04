@@ -37,7 +37,8 @@ class Solution(object):
 '''
 noRoot(node) = curMax(node.left) + curMax(node.right) 
 
-curMax(node) = max( noRoot(node.left)+noRoot(node.right)+node.value, noRoot(node) ).
+WithRoot(node) = noRoot(node.left)+noRoot(node.right)+node.value
+curMax(node) = max( WithRoot(node) , noRoot(node) ).
 
 
 class Solution(object):

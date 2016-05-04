@@ -16,51 +16,45 @@ The three ranges are : [0, 0], [2, 2], [0, 2] and their respective sums are: -2,
 #挺名字就很适合binary indexed tree.   range sum
 class Solution(object):  #  merge sort
     def countRangeSum(self, nums, lower, upper):
-        first = [0]
-        for num in nums:  first.append(first[-1] + num)
+        accu = [0]
+        for num in nums:  accu.append(accu[-1] + num)
         def mSort(l, h):
             m = (l + h) / 2
             if m == l:  return 0
-            count = mSort(l, m) + mSort(m, h);  i = j = m
-            for left in first[l:m]:
-                while i < h and first[i] - left <  lower: i += 1
-                while j < h and first[j] - left <= upper: j += 1
+            count = mSort(l, m) + mSort(m, h)
+            i = j = m
+            for left in accu[l:m]:
+                while i < h and accu[i] - left <  lower: i += 1
+                while j < h and accu[j] - left <= upper: j += 1
                 count += j - i
-            first[l:h] = sorted(first[l:h])
+            accu[l:h] = sorted(accu[l:h])  # 他这里完全没有merge啊.   
             return count
-        return mSort(0, len(first))
-        
+        return mSort(0, len(accu))
+     
 '''
-class Solution(object):
-    def countRangeSum(self, nums, lower, upper):
-        if not nums:
-            return 0
+def countRangeSum(self, nums, lower, upper):
+    n = len(nums)
+    Sum, BITree = [0] * (n + 1), [0] * (n + 2)
 
-        n = len(nums)
-        if n == 1:
-            return int(lower <= nums[0] <= upper)
+    def count(x):
+        s = 0
+        while x:
+            s += BITree[x]
+            x -= (x & -x)
+        return s
 
-        mid = n >> 1
-        count = sum([
-            self.countRangeSum(array, lower, upper)
-            for array in [nums[:mid], nums[mid:]]
-        ])
+    def update(x):
+        while x <= n + 1:
+            BITree[x] += 1
+            x += (x & -x)
 
-        suffix, prefix = [0] * (mid + 1), [0] * (n - mid + 1)
-        for i in xrange(mid - 1, -1, -1):
-            suffix[i] = suffix[i + 1] + nums[i]
-
-        for i in xrange(mid, n):
-            prefix[i - mid + 1] = prefix[i - mid] + nums[i]
-
-        suffix, prefix = suffix[:-1], sorted(prefix[1:])
-        count += sum([
-            bisect.bisect_right(prefix, upper - s) -
-            bisect.bisect_left(prefix, lower - s)
-            for s in suffix
-        ])
-
-    return count
-
+    for i in range(n):
+        Sum[i + 1] = Sum[i] + nums[i]
+    sortSum, res = sorted(Sum), 0
+    for sum_j in Sum:
+        sum_i_count = count(bisect.bisect_right(sortSum, sum_j - lower)) - count(bisect.bisect_left(sortSum, sum_j - upper))
+        res += sum_i_count
+        update(bisect.bisect_left(sortSum, sum_j) + 1)
+    return res
 
 '''

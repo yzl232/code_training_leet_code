@@ -27,12 +27,11 @@ The longest increasing path is [3, 4, 5, 6]. Moving diagonally is not allowed.
 '''
 
 
-class Solution(object):
+class Solution(object):  #
     def longestIncreasingPath(self, matrix):
         if not matrix: return 0
-        m, n = len(matrix), len(matrix[0]);  dp = [[None] * n for i in xrange(m)]
-        def dfs(i, j):
-            if dp[i][j]==None:    #set dp是不可以省略的
-                dp[i][j] = 1 + max([dfs(x, y) for x,y in [(i-1, j),(i+1, j), (i, j-1), (i, j+1)] if (0<=x<m and 0<=y<n and matrix[i][j]>matrix[x][y])] or [0])
-            return dp[i][j]
+        m, n, d = len(matrix), len(matrix[0]), {}
+        def dfs(i, j):  #熟悉的memoization
+            if (i, j) not in d:  d[(i, j)] = 1 + max([dfs(x, y) for x,y in [(i-1, j),(i+1, j), (i, j-1), (i, j+1)] if (0<=x<m and 0<=y<n and matrix[i][j]>matrix[x][y])] or [0])
+            return d[(i, j)]
         return max(dfs(x, y) for x in xrange(m) for y in xrange(n))

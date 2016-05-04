@@ -16,12 +16,11 @@ Given [5, 4, 3, 2, 1],
 return false. 
 '''
 
-
 class Solution(object):
     def increasingTriplet(self, nums):
-        first = second = float('inf')
+        x1 = x2 = float('inf')
         for x in nums:
-            if x <= first:   first = x   # min so far.  
-            elif x <= second:  second = x   # a little bigger. 
+            if x <= x1:   x1 = x   # min so far.  
+            elif x <= x2:  x2 = x   # a little bigger. 
             else:    return True   
         return False

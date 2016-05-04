@@ -15,12 +15,9 @@ return 1->3->5->2->4->NULL.
 class Solution(object):
     def oddEvenList(self, head):
         if not head: return head
-        odd = oddHead = head
-        even = evenHead = head.next
+        odd = oddH = head;  even = evenH = head.next
         while even and even.next:
-            odd.next = odd.next.next
-            even.next = even.next.next
-            even = even.next
-            odd = odd.next
-        odd.next = evenHead
-        return oddHead
+            odd.next, even.next = odd.next.next, even.next.next
+            even, odd = even.next, odd.next
+        odd.next = evenH
+        return oddH

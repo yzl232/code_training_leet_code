@@ -30,13 +30,11 @@ Example 3:
 Return false
 '''
 
-
-class Solution(object):   #其他inorder, post-order。  slot的变化规律不同。
+class Solution(object):  #和那个meeting的解法一样.    和括号的解法也一样.
     def isValidSerialization(self, preorder):
-        p = preorder.split(',')        #initially we have one empty slot to put the root in it
-        slot = 1
-        for node in p:
-            if slot == 0: return False  #在node之前， 必须要有slot空位才行。
+        p = preorder.split(',');  slot = 1
+        for node in p:  #initially we have one empty slot to put the root in it
+            if slot == 0: return False  #不够了.
             if node == "#":  slot-=1  #  a null node occupies one slot.
-            else: slot+=1  #先占用2个, 再减去一个.  
+            else: slot+=1  #先占用2个, 再减去一个.
         return slot==0

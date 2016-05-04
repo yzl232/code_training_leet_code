@@ -20,16 +20,15 @@ nums = [1, 2, 2], n = 5
 Return 0.
 '''
 
-
 class Solution(object):
-    def minPatches(self, arr, x):
-        i, miss, ret, n = 0, 1, 0, len(arr)    #本身是sorted.  array  
-        while miss <= x:
-            if i < n and arr[i] <= miss:#[0, miss),  可以扩展为[0, miss+num[i]]
+    def minPatches(self, arr, x):  #贪心.   
+        i, miss, cnt = 0, 1, 0    #本身是sorted.  array  
+        while miss <= x:  #arr[i]刚好是miss或者小于miss都可以扩展
+            if i < len(arr) and arr[i] <= miss:#[0, miss),  可以扩展为[0, miss+num[i]]
                 miss += arr[i]; i += 1                  # 因为num[i]<=miss,.  num[i]加上本来的范围  miss. 都可以扩展
             else:
-                miss += miss; ret += 1
-        return ret
+                miss += miss; cnt += 1
+        return cnt
 '''
 Let miss be the smallest sum in [0,n] that we might be missing. Meaning we already know we can build all sums in [0,miss). Then if we have a number num <= miss in the given array, we can add it to those smaller sums to build all sums in [0,miss+num). If we don't, then we must add such a number to the array, and it's best to add miss itself, to maximize the reach.
 
