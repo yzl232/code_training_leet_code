@@ -14,7 +14,7 @@ class Solution:
     # @return a ListNode
     def addTwoNumbers(self, l1, l2):
         carry = 0; dummy = ListNode(0); cur = dummy
-        while l1 or l2:
+        while l1 or l2 or carry:
             s = carry
             if l1:
                 s+=l1.val;  l1=l1.next
@@ -23,7 +23,6 @@ class Solution:
             carry, s= s/10, s%10
             cur.next = ListNode(s)
             cur = cur.next
-        if carry:    cur.next = ListNode(1)
         return dummy.next
 
 '''

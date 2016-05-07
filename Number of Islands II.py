@@ -23,7 +23,7 @@ class Solution:
         def union(x, y):
             x, y = find(x), find(y)  #如果已经union过了, 之前就是一起的. 返回0
             parent[x] = y
-            return 1 if x!=y else 0
+            return x!=y
         for i, j in positions:
             x = (i, j); parent[x] =x
             ret.append((ret[-1] if ret else 0)+1-sum(union(x, y) for y in [(i+1, j), (i-1, j), (i, j+1), (i, j-1)] if y in parent))

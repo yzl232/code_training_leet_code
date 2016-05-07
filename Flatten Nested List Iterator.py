@@ -38,43 +38,37 @@ By calling next repeatedly until hasNext returns false, the order of elements re
 #        Return None if this NestedInteger holds a single integer
 #        :rtype List[NestedInteger]
 #        """
+#这道题目它自己的接口挺奇怪的。
 class NestedIterator(object):
-    def __init__(self, nestedList):
-        ints = []
-        def collect(nestedList):
-            for x in nestedList[::-1]:
-                if x.isInteger():
-                    ints.append(x.getInteger())
-                else:
-                    collect(x.getList())
-        collect(nestedList)
-        self.next = ints.pop
-        self.hasNext = lambda: bool(ints)
+    def __init__(self, arr):
+        self.st = arr[::-1]
+        self.advance()
 
+    def next(self):
+        x = self.st.pop().getInteger()
+        self.advance()
+        return x
 
-# Your NestedIterator object will be instantiated and called as such:
-# i, v = NestedIterator(nestedList), []
-# while i.hasNext(): v.append(i.next())
+    def hasNext(self):
+        return self.st != []
 
+    def advance(self):
+        while self.st and not self.st[-1].isInteger():  self.st = self.st[:-1] + self.st[-1].getList()[::-1]
 
 '''
-
-class DeepIterator: #代码不长。可以背下
+class NestedIterator: #代码不长。可以背下
     def __init__(self, l):
-        self.stack = l[::-1]
+        self.st = l[::-1]
         self.advance()
 
     def advance(self):
-        if self.stack and isinstance(self.stack[-1], list):
-            cur = self.stack.pop()
-            self.stack +=cur[::-1]
-            self.advance()
+        while self.st and isinstance(self.st[-1], list):  self.st = self.st[:-1] + self.st[-1][::-1]
 
     def hasNext(self):
-        return False if not self.stack else True
+        return self.st != []
 
     def next(self):
-        x = self.stack.pop()
+        x = self.st.pop()
         self.advance()
         return x
 '''

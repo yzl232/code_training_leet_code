@@ -14,12 +14,8 @@ Follow up:
 
 
 class Solution(object):
-    def countBits(self, x):
-        """
-        :type x: int
-        :rtype: List[int]
-        """
-        dp = [0]*(x + 1)
-        for i in range(1, x+1):
-            dp[i] = dp[i>>1] + (i&1)
+    def countBits(self, n):
+        dp = [0]*(n + 1)
+        for x in range(1, len(dp)):
+            dp[x] = dp[x>>1] + (x&1)
         return dp

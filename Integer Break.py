@@ -6,19 +6,27 @@ For example, given n = 2, return 1 (2 = 1 + 1); given n = 10, return 36 (10 = 3 
 Note: you may assume that n is not less than 2. 
 '''
 
+
 class Solution(object):
     def integerBreak(self, n):
         if n == 2:  return 1
         if n == 3: return 2
         t = n % 3
-        if t == 0:    return int(math.pow(3,n/3))
-        if t == 1:    return int(math.pow(3,(n-4)/3) * 4)
-        if t == 2:  return int(math.pow(3,(n-2)/3) * 2)
+        if t == 0:    return 3**(n/3)
+        if t == 1:    return 3**((n-4)/3) * 4
+        if t == 2:  return 3 **((n-2)/3) * 2
 '''
+        Edit: Rephrased, maybe that's better:
+        If an optimal product contains a factor f >= 4, then you can replace it with factors 2 and f-2 without losing optimality, as 2*(f-2) = 2f-4 >= f. So you never need a factor greater than or equal to 4, meaning you only need factors 1, 2 and 3 (and 1 is of course wasteful and you'd only use it for n=2 and n=3, where it's needed).
 
-+15 votes
-1,358 views
 
+, as 2*(f-2) = 2f-4 >= f. So you never need a factor greater than or equal to 4, meaning you only need factors 1, 2 and 3 (and 1 is of course wasteful and you'd only use it for n=2 and n=3, where it's needed).
+
+        但是其实 h(2 + 2 + 2) = 8 比 h(3 + 3) = 9 要小，因此在最后结果中我们把所有 2 + 2 + 2 都替换成 3 + 3。这样就能得到最大的分解了。这也告诉我们对于任何一个数我们尽量的先把这个数分解为 3，最后分解不出 3 后在分解出 2。
+ '''
+
+
+'''
 Given a number n lets say we have a possible product P = p1 * p2 * ... pk. Then we notice what would happen if we could break pi up into two more terms lets say one of the terms is 2 we would get the terms pi-2 and 2 so if 2(pi-2) > pi we would get a bigger product and this happens if pi > 4. since there is one other possible number less then 4 that is not 2 aka 3. Likewise for 3 if we instead breakup the one of the terms into pi-3 and 3 we would get a bigger product if 3*(pi-3) > pi which happens if pi > 4.5.
 
 Hence we see that all of the terms in the product must be 2's and 3's. So we now just need to write n = a3 + b2 such that P = (3^a) * (2^b) is maximized. Hence we should favor more 3's then 2's in the product then 2's if possible.
@@ -43,12 +51,11 @@ The above three cover all cases that n can be written as and the Math.pow() func
 (有的同学可能好奇，如果一开始把 9 分解为 2 + 7，会不会得到更好的解呢，实际上不管分解为什么，最后都会只剩下 2 和 3 的组合，因此我们只需要不断地分解出 2 和 3 就好了)
 
 （另外有的同学可能会好奇这样做复杂度应该为O(n)，实际上在代码中我们不是一次乘以一个 3，而是一次性计算有多少个 3 要相乘，在计算 3 的 n 次方时，其实是可以达到O(lgn)的复杂度的，具体可以了解下求幂时的优化）
-        
-        
+
+
         证明是2或者3
         You're making it pretty complicated. Simplifying 2*(f-2) >= f to f >= 4 shows that breaking any factor f >= 4 into factors 2 and f-2 won't hurt the product. There, done :-P
 
-        Edit: Rephrased, maybe that's better:
-        If an optimal product contains a factor f >= 4, then you can replace it with factors 2 and f-2 without losing optimality, as 2*(f-2) = 2f-4 >= f. So you never need a factor greater than or equal to 4, meaning you only need factors 1, 2 and 3 (and 1 is of course wasteful and you'd only use it for n=2 and n=3, where it's needed).
-        
+
+
 '''
