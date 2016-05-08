@@ -26,10 +26,12 @@
 #Double the pipes inside the strings, then use standalone pipes to mark string endings
 class Solution:
     def encode(self, strs):
-        return ''.join(s.replace('|', '||') + 'x|x' for s in strs)  #注意|两边必须有空格.
+        return ''.join(s.replace('|', '||') + 'x|x' for s in strs)  #注意|两边必须有空格.   #可以改成这样
+#        #return ''x|x''.join(s.replace('|', '||') for s in strs)
 
     def decode(self, s):
         return [t.replace('||', '|') for t in s.split('x|x')[:-1]]
+# [t.replace('||', '|') for t in s.split('x|x')]
 
 s =Solution()
 print s.encode(['abc', '|abc'] ), s.decode(s.encode(['abc', '|abc'] ))

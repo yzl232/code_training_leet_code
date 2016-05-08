@@ -8,7 +8,7 @@ class Solution:
     # @param {integer} t
     # @return {boolean}
     def containsNearbyAlmostDuplicate(self, nums, k, t):
-        if t < 0: return False
+        if t < 0: return False   #bucket 
         d = {};   w = t + 1
         for i, x in enumerate(nums):
             if any(y in d and abs(x-d[y])<w  for y in [x/w - 1, x/w, x/w+1]): return True

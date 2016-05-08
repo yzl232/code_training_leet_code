@@ -18,7 +18,7 @@ class Solution:
     # @return a integer
     def calculateMinimumHP(self, mtx):
         m=len(mtx); n=len(mtx[0])
-        dp= [[10**10]*(n+1) for i in range(m+1)]
+        dp= [[float('inf')]*(n+1) for i in range(m+1)]
         dp[m][n-1]=1   #先写 dp[m-1][n-1]=dp[m-1][n-1]=1 . 然后改正加1
         for i in range(m-1, -1, -1):
             for j in range(n-1, -1, -1):

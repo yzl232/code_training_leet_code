@@ -35,6 +35,24 @@ Output: 1
 三个极端例子足够了。
 
 '''
+
+
+
+
+class Solution:
+    # @param num, a list of integer
+    # @return an integer   #2345671      7123456   1234567
+    def findMin(self, arr):  #与arr[h]比较。 看三个极端例子明白了。
+        l, h = 0, len(arr)-1  #2345671, 1234567  和arr[l]无法判断，必须arr[h]
+        while l<=h:   #与arr[h]比较，同时知道rotate情况。1的情况
+            m = (l+h)/2   #观察最小1的动向。 rotate到右边了。 与h比较
+            if l==h: return arr[l]
+            if arr[m]<arr[h]: h = m
+            elif arr[m] == arr[h]: h-=1
+            else: l=m+1
+
+
+'''
 class Solution:
     # @param num, a list of integer
     # @return an integer   #2345671      7123456   1234567
@@ -48,6 +66,7 @@ class Solution:
             elif arr[m] == arr[h]: h-=1
             else: l=m+1
         return ret
+'''
 '''
 class Solution:
     # @param num, a list of integer

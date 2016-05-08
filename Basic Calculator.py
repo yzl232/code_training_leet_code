@@ -27,3 +27,4 @@ class Solution(object):
         return ret
 #对付括号, 比较特别,   signs .  stack 存的是1, -1
 #解法就是从左到右的计算， 考虑括号的因素， +， - 同时由signs决定。
+#每次一个括号， 相当于新的开始， 加上一个最基础的符号。

@@ -10,9 +10,6 @@
     "105", 5 -> ["1*0+5","10-5"]
     "00", 0 -> ["0+0", "0-0", "0*0"]
     "3456237490", 9191 -> []
-
-
-
 '''
 
 class Solution(object):
@@ -32,3 +29,5 @@ class Solution(object):
                 self.dfs(curS + "+" + x, s[i:], curN + int(x), int(x))
                 self.dfs(curS + "-" + x, s[i:], curN - int(x), -int(x))
                 self.dfs(curS + "*" + x, s[i:], curN - last + last * int(x), last * int(x))
+    #有点类似basic calculator II
+    #也很像additive number
