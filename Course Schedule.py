@@ -31,7 +31,7 @@ class Solution(object):
         self.visited[x] = True
 
 
-
+#有向用topological。  无向图用union find
 
 '''
 
