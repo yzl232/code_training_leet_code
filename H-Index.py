@@ -25,18 +25,19 @@ Lets say the array has M numbers. For the purpose of this problem, negative valu
 So, we can count the number of existing values between 1 and M. Then, process the values backwards (M to 1) to find the answer, adding the counts of the values processed so far.
 
 '''
+#couting sort。 类似bucket sort
 #暴力为O(n2)。 sort为O(nlogn) .  这里空间换时间， 为O(n)
 class Solution(object):#和原本array没太大关系 我们建立0~N的cnt  array。 因为结果可能是0~N。
     def hIndex(self, vals):#返回的n是数目， 实际上处于0~n之间。  这样子要大于等于n。 我们忽略负数.
         n = len(vals); curN=0; cnt = [0]*(n+1) #cnt[i] cnt数目。
         for x in vals:  cnt[max(0, min(n, x))] +=1  #大于等于n的视为n  # ignore negative values
-        for i in range(len(cnt)-1, -1, -1):   # 0~n  为了对应cnt array
+        for i in range(n, -1, -1):   # 0~n  为了对应cnt array
             curN +=cnt[i]  #非常巧妙
             if curN>=i:  return i
         return 0          #也可以用counting sort。   然后sort。     
 #返回的值， 都是从n, n-1, ...2, 1, 0
 '''
-排序做法
+排序做法  logN
 def hIndex(self, citations):
     citations.sort()
     n = len(citations)
@@ -45,5 +46,13 @@ def hIndex(self, citations):
             return n-i
     return 0
 
-
+class Solution(object):
+    def hIndex(self, arr):  # sorted  80%考binary search
+        n = len(arr);   l, h = 0, n-1
+        while l<=h:
+            m = (l+h)/2
+            if l==h and arr[m]>=n-m: return n-m
+            if arr[m]<n-m: l= m + 1 #没有那么多。 往右靠。
+            else:  h= m    #因为m不满足. 所以+1, -1
+        return 0
 '''

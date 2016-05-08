@@ -43,7 +43,7 @@ class Solution(object):  #min, max用来验证BST.
         return self.ret
 
     def dfs(self, root):
-        if not root: return (0, float('inf'), float('-inf')) #注意反了， 这是为了应对root没有child的情况
+        if not root: return (0, float('inf'), float('-inf')) #注意反了， 这是为了应对root没有child的情况   max1 < root.val <min2
         (n1, min1, max1), (n2, min2, max2)= self.dfs(root.left), self.dfs(root.right)
         n = n1+1+n2 if max1 < root.val <min2 else float('-inf')
         self.ret = max(self.ret, n)
