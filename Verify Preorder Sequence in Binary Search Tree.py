@@ -12,8 +12,8 @@ class Solution: # https://segmentfault.com/a/1190000003874375
     def verifyPreorder(self, preorder):  # keep pushing till you hit the leftmost leaf
         stack = [];   lower = float('-inf')
         for x in preorder:
-            if x < lower:    return False
-            while stack and x > stack[-1]:    lower = stack.pop()
+            if x < lower:    return False  #又是类似histogram,  maximum sliding window的写法
+            while stack and x > stack[-1]:    lower = stack.pop()  
             stack.append(x)       # 有点理解了. 每次append的都是当前最小的.  lower则是第二小的
         return True
 '''

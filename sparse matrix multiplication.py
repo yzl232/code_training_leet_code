@@ -29,6 +29,8 @@ class Solution:  #只存i不存j
         cols = [[(r, x) for r, x in enumerate(col) if x] if any(col) else [] for col in zip(*b)]  #col帅选掉了很多计算了.
         return [[sum(row[j]*x for j, x in col) for col in cols] if any(row) else [0]*len(row) for row in a]
 
+#需要复习矩阵乘法。 对应的行与对应的列相乘
+
 '''
 稀疏vector的点乘
 #facebook这道题目。 可以这样。只储存非0的value.    (val, index). sort by index

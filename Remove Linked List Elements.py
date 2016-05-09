@@ -23,6 +23,9 @@ class Solution:
             else:    pre = cur
             cur = cur.next
         return dummy.next
+        
+#和Remove Duplicates from Sorted List一模一样啊。
+        
 '''
 class Solution:
     # @param {ListNode} head

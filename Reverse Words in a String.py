@@ -12,7 +12,9 @@ class Solution:  #O(n) space
         for i in range(len(s)-1, -1, -1):
             if s[i]==' ': j=i   #找到了一个可能的结尾
             elif i==0 or s[i-1]==' ':      ret+=s[i:j]+' '   #单词的开始.  意思是现在不是空格。 i-1是空格。 必须加上.  非空格才更新
-        return ret[:-1] if ret else ''
+        return ret.rstrip()
+    #    return ' '.join(s.split()[::-1])
+        #return ret[:-1] if ret else ''
     #    return ' '.join(s.split()[::-1])
 
 

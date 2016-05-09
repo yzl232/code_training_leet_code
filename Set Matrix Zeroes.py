@@ -12,7 +12,7 @@ class Solution:
                 if grid[i][j]==0:  grid[i][0] = grid[0][j] = 0
         for i in range(1, m):
             for j in range(1, n):
-                if grid[i][0] ==0 or grid[0][j]==0:  grid[i][j] = 0
+                if grid[i][0] ==0 or grid[0][j]==0:  grid[i][j] = 0  #和上面对称
         for i in range(m):
             if col0: grid[i][0] = 0   #和开头的代码是对称的
         for j in range(n):

@@ -42,10 +42,24 @@ We say that "rgtae" is a scrambled string of "great".
 
 class Solution:
     # @return a boolean
+    d= {}
+    def isScramble(self, s1, s2):
+        return self.dfs(s1, s2)
+
+    def dfs(self, s1, s2):
+        if s1 == s2: return True
+        if len(s1) != len(s2) or sorted(s1) != sorted(s2): return False
+        if (s1, s2) not in self.d: self.d[(s1, s2)]= any((self.isScramble(s1[:i], s2[:i]) and self.isScramble(s1[i:], s2[i:])) or self.isScramble(s1[:i], s2[len(s1)-i:]) and self.isScramble(s1[i:], s2[:len(s1)-i]) for i in range(1, len(s1)))
+        return self.d[(s1, s2)]
+'''
+class Solution:
+    # @return a boolean
     def isScramble(self, s1, s2):
         if s1 == s2: return True
         if len(s1) != len(s2) or sorted(s1) != sorted(s2): return False
         return any((self.isScramble(s1[:i], s2[:i]) and self.isScramble(s1[i:], s2[i:])) or (self.isScramble(s1[:i], s2[len(s1)-i:]) and self.isScramble(s1[i:], s2[:len(s1)-i]))  for i in range(1, len(s1)))
+'''
+
 '''
 class Solution:
     # @return a boolean

@@ -11,8 +11,7 @@ class Solution:
     def swapPairs(self, h):
         if not h or not h.next: return h
         n = h.next
-        h.next = self.swapPairs(n.next)   #再次形成类似环的双斜杠.
-        n.next = h
+        n.next, h.next = h, self.swapPairs(n.next)   #再次形成类似环的双斜杠.
         return n
 
 

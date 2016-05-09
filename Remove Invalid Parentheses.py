@@ -28,6 +28,26 @@ Examples:
 
 class Solution(object):
     def removeInvalidParentheses(self, s):
+        cur = set([s]); ret = [x for x in cur if self.isValid(x)]      # set("")会返回empty set .   set([""])  OK
+        while not ret:  #实际上是BFS, pre和cur都在下面这行
+            cur = set([x[:i] + x[i+1:] for x in cur for i in range(len(x))])
+            ret = [x for x in cur if self.isValid(x)]
+        return ret
+
+    def isValid(self, s):
+        cnt = 0
+        for c in s:
+            if c == '(':    cnt += 1
+            elif c == ')':   cnt -= 1
+            if cnt < 0:    return False
+        return cnt == 0
+
+
+
+'''
+
+class Solution(object):
+    def removeInvalidParentheses(self, s):
         cur = set([s]);   # set("")会返回empty set .   set([""])  OK
         while True:
             ret = [s for s in cur if self.isValid(s)]
@@ -42,3 +62,4 @@ class Solution(object):
             if cnt < 0:    return False
         return cnt == 0
 
+'''

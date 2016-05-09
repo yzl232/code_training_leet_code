@@ -21,6 +21,5 @@ class Solution:
             if arr[m] == target: return m
             if arr[m] < target: l=m+1
             else: h=m-1
-        print l, h, m
-        return m if target<arr[m] else m+1
- #因为 (l+h)/2. m是等于之前的l的.  所以考虑m, m+1.  不考虑m-1
+        return l
+#较大的l

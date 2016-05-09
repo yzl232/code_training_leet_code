@@ -20,11 +20,8 @@ class Solution:
         if not h or k==0: return h
         l = 1; p = h
         while p.next:
-            p = p.next
-            l+=1
-        step = l- k%l
+            p = p.next; l+=1
         p.next = h   #连成环
-        for i in range(step):   p = p.next
-        h = p.next
-        p.next = None   #找到，断开
+        for i in range(l- k%l):   p = p.next
+        h, p.next = p.next, None   #找到，断开
         return h

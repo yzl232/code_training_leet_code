@@ -21,12 +21,8 @@ class Solution:
         ret = []
         while True:
             if m==0 or n ==0 : return ret
-            if m==1:
-                for i in range(n):   ret.append(matrix[0+k][i+k])
-                return ret
-            if n==1:
-                for i in range(m):    ret.append(matrix[i+k][ 0+k])  #两两对称。可以加速写
-                return ret
+            if m==1:    return ret+[matrix[0+k][i+k] for i in range(n)]
+            if n==1:   return ret + [matrix[i+k][ 0+k] for i in range(m)]   #两两对称。可以加速写
             for j in range(n-1):    ret.append(matrix[0+k][j+k])       #注意到四个的两两对称，可以检查和加速写     #i，n  第2维度
             for i in range(m-1):    ret.append(matrix[i+k][n-1+k])  #i, m 第1维度
             for j in range(n-1, 0, -1):    ret.append(matrix[m-1+k][j+k])   #总有一边是变化的，为i+k。 其他的就好办了
