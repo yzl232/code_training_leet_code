@@ -81,6 +81,7 @@ class Solution(object):
             cnt+=i[-1]
             ret = max(ret, cnt)
         return ret
+'''
 class Solution:
     def findNumConference(self, intervals):
         affairs = [];  cnt = 0; ret = 0
@@ -158,6 +159,8 @@ so print
 
 
 '''
+        
+        '''
 
 class Solution2: #比较难写
     def findNumConference(self, intervals):
@@ -181,3 +184,4 @@ class Solution2: #比较难写
         print pre, '~ infinity', 'have:',0, "user online"
 s = Solution2()
 s.findNumConference([(0,1), (1,3), (0,2)  ])
+'''

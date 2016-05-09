@@ -9,7 +9,7 @@ class Solution: #
     def isOneEditDistance(self, s, t):  #
         m=len(s); n=len(t)
         for i in range(min(m, n)):
-                if s[i] != t[i]: return  s[i if m<n else i+1 :]== t[i  if n<m else i+1 :]  #
+                if s[i] != t[i]: return  s[i+1 if m>=n else i :]== t[i+1  if n>=m else i :]  #
         return abs(m-n) == 1
 '''
 #aa,  aab

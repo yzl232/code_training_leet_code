@@ -21,7 +21,6 @@ There exist two distinct solutions to the 4-queens puzzle:
 '''
 
 
-
 class Solution:
     # @return a list of lists of string
     def solveNQueens(self, n):
@@ -29,13 +28,13 @@ class Solution:
         self.dfs( [],  0)
         return self.rets
 
-    def dfs(self, cur, rowN):
-        if rowN == self.n:
+    def dfs(self, cur, r):
+        if r == self.n:
             self.rets.append(['.' * c + "Q" + '.' * (self.n - c - 1) for c in cur])
             return
         for c in range(self.n):
-            if c not in cur and all(abs(rowN - r) != abs(c - cur[r]) for r in  range(len(cur))):  
-                self.dfs(cur + [c],  rowN + 1)          #row行, 第i列。  j行。cur[j]列
+            if c not in cur and all(abs(r - r1) != abs(c - c1) for r1, c1 in enumerate(cur)):  self.dfs(cur + [c], r + 1) 
+                         #row行, 第i列。  j行。cur[j]列
 
 
 '''

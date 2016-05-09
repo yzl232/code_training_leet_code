@@ -41,10 +41,22 @@ class Solution(object):
         while len(s) > 2:
             leaves = set(x for x in s if len(d[x]) == 1)
             s -= leaves
+            for x in leaves:  d[list(d[x])[0]].remove(x)
+        return list(s)
+'''
+class Solution(object):
+    def findMinHeightTrees(self, n, edges):
+        s = set(range(n));   d = {i:set() for i in s}
+        for u, v in edges:
+            d[u].add(v);   d[v].add(u)
+        while len(s) > 2:
+            leaves = set(x for x in s if len(d[x]) == 1)
+            s -= leaves
             for x in leaves:
                 for y in d[x]:
                     d[y].remove(x)
         return list(s)
+'''
 #              for x in leaves:  d[list(d[x])[0]].remove(x)
 #最多2个。
 # Here is one insight for this problem: the root of MHT is the middle point of the longest path in the tree; 

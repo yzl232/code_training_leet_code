@@ -20,6 +20,17 @@ class Solution(object):
         m = [k for k in d if d[k] % 2]
         s =  ''.join(k*(d[k]/2) for k in d)
         return [] if len(m)>1 else [''.join(list(x) + m + list(x)[::-1]) for x in set(itertools.permutations(s))]
+        
+#下面这个好像可以。
+'''
+class Solution(object):
+    def generatePalindromes(self, s):
+        d = collections.Counter(s)
+        m = ''.join([k for k in d if d[k] % 2])
+        s =  ''.join(k*(d[k]/2) for k in d)
+        return [] if len(m)>1 else [x + m + x[::-1] for x in set(itertools.permutations(s))]
+'''        
+
 '''
 
 class Solution(object):

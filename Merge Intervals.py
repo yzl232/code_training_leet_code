@@ -19,9 +19,8 @@ class Solution: #思路就是排序后，检查前一个有没有重叠。 有�
         if not arr: return []
         arr.sort(key = lambda x: x.start)
         ret = [arr[0]]
-        for i in range(1, len(arr)):
-            cur, pre = arr[i], ret[-1]
-            if cur.start <= pre.end:  pre.end = max(pre.end, cur.end)   #只要更新pre.end就好。都不用真的插入
+        for cur in arr[1:]:
+            if cur.start <= ret[-1].end:  ret[-1].end = max(ret[-1].end, cur.end)   #只要更新ret[-1].end就好。都不用真的插入
             else:   ret.append(cur)
         return ret
 

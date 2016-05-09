@@ -23,12 +23,11 @@ class Solution:  #输出是count， 另外要求存n个ch存到buf里面。 coun
     def read(self, buf, n):   #给了个read4,  从stream里面读4个， 存到自变量buf里面
         buf1 = [None]*4;     i = 0
         while n > i:#tmp的作用就是判断是不是4096。
-            n1 = read4(buf1)
+            n1, i1 = read4(buf1), 0
             if n1==0: break
-            j=0
-            while i<n and j<n1:
-                buf[i]=buf1[j]
-                j+=1; i+=1
+            while i<n and i1<n1:
+                buf[i]=buf1[i1]
+                i1+=1; i+=1
         return i
 #换了下变量名, 全部对应了.  i,j ,  nm,  
 

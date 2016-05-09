@@ -12,7 +12,7 @@
 
 class Solution:
     def minCost(self, costs):
-        pre = [0] * 3
+        pre = [0] * 3   # 当前为某种颜色,  三种颜色最小的总花费
         for x in costs:
             pre = [x[i] + min(pre[:i] + pre[i+1:]) for i in range(3)]   # prev[:i] + prev[i+1:] 产生了新的array
         return min(pre)

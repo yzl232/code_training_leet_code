@@ -27,7 +27,7 @@ class Solution(object):
             if i < len(arr) and arr[i] <= miss:#[0, miss),  可以扩展为[0, miss+num[i]]
                 miss += arr[i]; i += 1                  # 因为num[i]<=miss,.  num[i]加上本来的范围  miss. 都可以扩展
             else:
-                miss += miss; cnt += 1
+                miss += miss; cnt += 1  #i不动
         return cnt
 '''
 Let miss be the smallest sum in [0,n] that we might be missing. Meaning we already know we can build all sums in [0,miss). Then if we have a number num <= miss in the given array, we can add it to those smaller sums to build all sums in [0,miss+num). If we don't, then we must add such a number to the array, and it's best to add miss itself, to maximize the reach.

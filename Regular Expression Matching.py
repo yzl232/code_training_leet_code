@@ -19,24 +19,41 @@ isMatch("ab", ".*") → true
 isMatch("aab", "c*a*b") → true
 '''
 
-# encoding=utf-8
-
 class Solution:
     # @param s, an input string
     # @param p, a pattern string
     # @return a boolean
     def isMatch(self, s, p):
         if s and p and p[-1] not in (s[-1], '*', '.'): return False  #这一行是为了通过leetcode.  其实要删掉
+        self.d = {}
+        return self.dfs(s, p)
+
+    def dfs(self, s, p):
+        if not p: return not s
+        if (s, p) not in self.d:
+            if len(p)>=2 and p[1] == "*":  self.d[(s, p)]= (self.dfs(s, p[2:])) or (s!="" and p[0] in ('.', s[0]) and self.dfs(s[1:], p) )
+            else: self.d[(s, p)]=  s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])
+        return self.d[s, p]
+
+        #http://blog.csdn.net/lifajun90/article/details/10582733
+        #different from https://oj.leetcode.com/problems/wildcard-matching/. Since '*' has different meaning here
+#http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/
+'''
+class Solution:
+    # @param s, an input string
+    # @param p, a pattern string
+    # @return a boolean
+    def isMatch(self, s, p):
+        #if s and p and p[-1] not in (s[-1], '*', '.'): return False  #这一行是为了通过leetcode.  其实要删掉
         return self.dfs(s, p)
 
     def dfs(self, s, p):
         if not p: return not s
         if len(p)>=2 and p[1] == "*": return (self.dfs(s, p[2:])) or (s!="" and p[0] in ('.', s[0]) and self.dfs(s[1:], p) )
         return s!='' and p[0] in ('.', s[0]) and self.dfs(s[1:], p[1:])
+'''
 
-        #http://blog.csdn.net/lifajun90/article/details/10582733
-        #different from https://oj.leetcode.com/problems/wildcard-matching/. Since '*' has different meaning here
-#http://www.programcreek.com/2012/12/leetcode-regular-expression-matching-in-java/
+
 
 
 '''

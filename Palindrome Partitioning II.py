@@ -16,7 +16,7 @@ class Solution: ##http://yucoding.blogspot.com/2013/08/leetcode-question-133-pal
         isPal = [[False]*l for i in range(l)]   #l+1也可以。 不用l+1也可以。 不用l+1, 有j - i <= 1足够
         for j in range(l):
             for i in range(j, -1, -1): # j+1主要是为了保证isPal的正确性
-                 if s[i] == s[j] and (j - i <= 1 or isPal[i+1][j-1] == True):    # j是递增 ，已经保证了
+                 if s[i] == s[j] and (j - i <= 1 or isPal[i+1][j-1]):    # j是递增 ，已经保证了
                     isPal[i][j] = True
                     ret[j] =0 if i==0 else min(ret[i-1]+1, ret[j])        # when i ==0   .  the whole string [0:j] is a palindrom          #   i~j pal。 i-1
         return ret[l-1]

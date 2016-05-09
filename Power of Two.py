@@ -3,4 +3,4 @@ class Solution:
     # @param {integer} n
     # @return {boolean}
     def isPowerOfTwo(self, n):
-        return n > 0 and n & (n - 1) == 0  # rightmost bit
+        return n >=1 and n & (n - 1) == 0  # rightmost bit
