@@ -1,25 +1,13 @@
-'''
- Given an unsorted array of integers, find the length of longest increasing subsequence.
-
-For example,
-Given [10, 9, 2, 5, 3, 7, 101, 18],
-The longest increasing subsequence is [2, 3, 7, 101], therefore the length is 4. Note that there may be more than one LIS combination, it is only necessary for you to return the length.
-
-Your algorithm should run in O(n2) complexity.
-
-Follow up: Could you improve it to O(n log n) time complexity? 
-'''
-
 class Solution(object):
     def lengthOfLIS(self, nums):# O(nlogn)
-        tails = [0] * len(nums);  ret = 0
+        arr = [0] * len(nums);  ret = 0
         for x in nums:  #tail存的是长度i+1. 的subsequence的尾部元素, val最小的那个.
-            l, r = 0, ret   #r=ret比较重要, ret右边是0.   ret = size , 如果size增加, 正好由size-1+1变成size
-            while l < r:   #我们搜索x。想要更新最小长度x
-                m = (l + r) / 2
-                if x > tails[m]:     l = m + 1   #x更大，  size肯定比他多1
-                else:       r = m      # 寻找需要更新的地方. x是最小的长度为i+1的ending
-            tails[l] = x;  ret = max(l + 1, ret)
+            l, h = 0, ret   #r=ret比较重要, ret右边是0.   ret = size , 如果size增加, 正好由size-1+1变成size
+            while l < h:   #我们搜索x。想要更新最小长度x
+                m = (l + h) / 2
+                if arr[m] < x:     l = m + 1   #x更大，  size肯定比他多1
+                else:  h = m      # 寻找需要更新的地方. x是最小的长度为i+1的ending
+            arr[l] = x;  ret = max(l + 1, ret) # tail存的是长度i+1.
         return ret  #通过观察发现， x每次都要update到某个地方的， 要么增加size， 要么减小某个前面的tails[i]
 '''
 class Solution(object):

@@ -20,3 +20,4 @@ class Solution:
             bkt[i] =  (x, x) if not bkt[i] else (min(bkt[i][0], x), max(bkt[i][1], x))
         bkt = [x for x in bkt if x] #极端情况， arr全为1.  bkt长度为[(1, 1)]
         return max([bkt[i][0]-bkt[i-1][1] for i in range(1, len(bkt))] or [0])
+# #bucket sort特点。  array里面元素的difference

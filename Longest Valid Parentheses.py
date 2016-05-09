@@ -17,3 +17,4 @@ class Solution:
                 ret = max(ret, i-stack[-1][0])   # the length of the valid part   #左边界  # 最后一个配不成对的
             else:  stack.append((i, s[i]))
         return  ret
+# histogram 是arr尾部加上国内一个0.  这里是stack首部加一个（-1， “）”）

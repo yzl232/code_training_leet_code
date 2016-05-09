@@ -15,3 +15,4 @@ class Solution:
             d[x/w] = x
             if i >= k: del d[nums[i - k] / w]
         return False
+#bucket sort特点。  array里面元素的difference

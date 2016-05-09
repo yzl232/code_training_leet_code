@@ -20,7 +20,7 @@ class Solution(object):  #以前的accuMulate的是return是否。 这个是最�
         ret, cur, d = 0, 0, {0:-1}               # answer and the accumulative value of nums
         for i in xrange(len(arr)):
             cur += arr[i]
-            if cur not in d:  d[cur] = i 
+            if cur not in d:  d[cur] = i  #求maximum要限定条件更新hashtable。  minimum随时更新。
             if cur-k in d:    ret = max(ret, i-d[cur-k])
         return ret
     #与sliding window区别在于 acumu是等于。   sliding window是大于等于

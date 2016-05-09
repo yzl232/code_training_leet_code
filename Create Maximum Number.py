@@ -29,7 +29,7 @@ class Solution(object):
             drop = len(arr) - k; ret = []
             for x in arr:  #很巧妙, 利用了drop = len(arr) - k.  这样从最开始就可以pop了.
                 while drop>0 and ret and ret[-1] < x:
-                    ret.pop(); drop -= 1 # #有点像maximum rectangle。  尽量保持out最大。
+                    ret.pop(); drop -= 1 # #有点像maximum rectangle。  尽量保持out最大。 #也像next greater number
                 ret.append(x)
             return ret[:k]
         def merge(a, b): return [max(a, b).pop(0) for _ in a+b]
