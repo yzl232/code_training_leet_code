@@ -29,7 +29,7 @@ Example 3:
 "9,#,#,1"
 Return false
 '''
-
+# serializatin容易懂。  sequence难懂。
 class Solution(object):  #和那个meeting的解法一样.    和括号的解法也一样.
     def isValidSerialization(self, preorder):
         p = preorder.split(',');  slot = 1

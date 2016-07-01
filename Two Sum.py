@@ -14,7 +14,7 @@ class Solution:
     def twoSum(self, num, target):
         d = {}
         for i in range(len(num)):
-            if target - num[i] in d: return (d[target - num[i]]+1, i+1)
+            if target - num[i] in d: return (d[target - num[i]], i)
             else: d[num[i]] = i
 
 
