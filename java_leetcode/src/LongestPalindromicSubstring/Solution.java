@@ -1,3 +1,5 @@
+package LongestPalindromicSubstring;
+
 public class Solution {
 	public int len, left, right;
 	public void expand(String s, int l, int r){

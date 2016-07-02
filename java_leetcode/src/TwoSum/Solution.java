@@ -1,4 +1,7 @@
 package TwoSum;
+
+import java.util.HashMap;
+
 public class Solution {
     public int[] twoSum(int[] numbers, int target) {  
         int[] res = new int[2];  

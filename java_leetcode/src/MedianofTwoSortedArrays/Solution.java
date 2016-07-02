@@ -1,3 +1,5 @@
+package MedianofTwoSortedArrays;
+
 import java.util.Arrays;
 
 public class Solution {

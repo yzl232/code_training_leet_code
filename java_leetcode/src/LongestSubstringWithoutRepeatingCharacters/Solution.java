@@ -1,3 +1,5 @@
+package LongestSubstringWithoutRepeatingCharacters;
+
 import java.util.HashMap;
 
 public class Solution {
